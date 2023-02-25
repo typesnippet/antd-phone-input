@@ -1,0 +1,19 @@
+{
+  "name": "antd-phone-input",
+  "version": "0.0.1",
+  "dependencies": {
+    "react-phone-input-2": "^2.13.7"
+  },
+  "peerDependencies": {
+    "antd": "4.x",
+    "react": "17.x",
+    "react-i18next": "11.x",
+    "react-router-dom": "5.x"
+  },
+  "scripts": {
+    "build": "npm run copy && npm run clean && npm run bundle"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  }
+}
