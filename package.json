@@ -1,6 +1,6 @@
 {
   "name": "antd-phone-input",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/antd-phone-input.cjs.js",
   "module": "dist/antd-phone-input.esm.js",
   "types": "dist/antd-phone-input.d.ts",
