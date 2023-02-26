@@ -1,9 +1,11 @@
 {
   "transform": {
-    "^.+\\.(t|j)sx?$": "ts-jest",
-    "^.+\\.less$": "jest-transform-less"
+    "^.+\\.(t|j)sx?$": "ts-jest"
   },
   "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.([jt]sx?)$",
+  "moduleNameMapper": {
+    "^.+\\.((?:c|le|s[ca])ss)$": "identity-obj-proxy"
+  },
   "moduleFileExtensions": [
     "ts",
     "tsx",
