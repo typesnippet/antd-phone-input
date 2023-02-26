@@ -1,0 +1,16 @@
+{
+  "transform": {
+    "^.+\\.(t|j)sx?$": "ts-jest",
+    "^.+\\.less$": "jest-transform-less"
+  },
+  "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.([jt]sx?)$",
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js",
+    "jsx",
+    "json",
+    "node"
+  ],
+  "testEnvironment": "jsdom"
+}
