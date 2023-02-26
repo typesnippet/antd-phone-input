@@ -1,6 +1,6 @@
 {
   "name": "antd-phone-input",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "react-phone-input-2": "^2.13.7"
   },
