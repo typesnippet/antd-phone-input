@@ -7,3 +7,6 @@ package-lock.json
 
 # Build files
 dist/
+
+# Tarballs
+*.tgz
