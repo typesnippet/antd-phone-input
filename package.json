@@ -1,19 +1,43 @@
 {
   "name": "antd-phone-input",
   "version": "0.0.1",
-  "dependencies": {
-    "react-phone-input-2": "^2.13.7"
-  },
-  "peerDependencies": {
-    "antd": "4.x",
-    "react": "17.x",
-    "react-i18next": "11.x",
-    "react-router-dom": "5.x"
-  },
+  "main": "dist/antd-phone-input.cjs.js",
+  "module": "dist/antd-phone-input.esm.js",
+  "types": "dist/antd-phone-input.d.ts",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
   "scripts": {
-    "build": "npm run copy && npm run clean && npm run bundle"
+    "build": "rm -rf dist && rollup -c --configPlugin @rollup/plugin-typescript",
+    "test": "jest --config jestconfig.json"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "license": "MIT",
+  "peerDependencies": {
+    "antd": ">=4",
+    "react": ">=16"
+  },
+  "devDependencies": {
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^28.1.1",
+    "@types/node": "^18.14.1",
+    "@types/react": "^18.0.28",
+    "@types/rollup-plugin-less": "^1.1.2",
+    "antd": "^5.2.2",
+    "jest": "^26.6.3",
+    "jest-environment-jsdom": "^27.5.1",
+    "jest-transform-less": "^1.1.0",
+    "react": "^18.2.0",
+    "rollup": "3.17.2",
+    "rollup-plugin-dts": "^5.2.0",
+    "rollup-plugin-less": "^1.1.3",
+    "ts-jest": "^26.5.5",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "react-phone-input-2": "^2.15.1"
   }
 }

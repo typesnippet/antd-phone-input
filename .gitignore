@@ -4,3 +4,6 @@ package-lock.json
 
 # JetBrains IDE
 .idea/
+
+# Build files
+dist/
