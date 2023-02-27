@@ -35,9 +35,9 @@ const phoneToString = (phone: PhoneInterface) => {
 	return str
 }
 
-const PhoneNumberInput = ({value, onChange, setIsValid}: PhoneNumberInputProps) => {
+const PhoneNumberInput = ({value = {}, onChange, setIsValid}: PhoneNumberInputProps) => {
 	const [currentCode, setCurrentCode] = useState("");
-	const _phoneToString = useMemo(() => phoneToString(value), [value]);
+	const rawPhone = useMemo(() => Object.values(value).map(v => v || '').join(''), [value]);
 
 	/** When phone Number is not valid and form reset, valid state will stay false,
 	 * that's why need to listen value, which will be undefined on form reset */
@@ -79,7 +79,7 @@ const PhoneNumberInput = ({value, onChange, setIsValid}: PhoneNumberInputProps) 
 			masks={masks}
 			enableAreaCodes
 			disableSearchIcon
-			value={_phoneToString}
+			value={rawPhone}
 			inputClass="ant-input"
 			onChange={handleChange}
 		/>
