@@ -3,12 +3,7 @@ import PhoneInput from "react-phone-input-2";
 
 import masks from "./phoneMasks.json";
 import validations from "./validations.json";
-
-type PhoneInterface = {
-	countryCode?: any,
-	areaCode?: any,
-	phoneNumber?: any,
-}
+import {PhoneInterface, PhoneNumberInputProps} from "./types";
 
 type PhoneNumberInputProps = {
 	value?: any,

@@ -2,11 +2,7 @@ import {useCallback, useState} from "react";
 import FormItem from "antd/lib/form/FormItem";
 
 import PhoneNumberInput from "./PhoneNumberInput";
-
-type PhoneNumberFormItemProps = {
-	required?: boolean,
-	name?: string,
-}
+import {PhoneNumberFormItemProps} from "./types";
 
 const PhoneNumberFormItem = ({required = false, name}: PhoneNumberFormItemProps) => {
 	const [isValid, setIsValid] = useState(true);
