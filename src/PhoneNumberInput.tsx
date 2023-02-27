@@ -2,37 +2,15 @@ import {useEffect, useMemo, useState} from "react";
 import PhoneInput from "react-phone-input-2";
 
 import masks from "./phoneMasks.json";
+import timezones from "./timezones.json";
 import validations from "./validations.json";
 import {PhoneInterface, PhoneNumberInputProps} from "./types";
 
-type PhoneNumberInputProps = {
-	value?: any,
-	onChange?: (value: PhoneInterface) => void,
-	setIsValid?: (value: boolean) => void,
-}
+type Timezone = keyof typeof timezones;
 
-const phoneToString = (phone: PhoneInterface) => {
-	const {countryCode, areaCode, phoneNumber} = {...phone};
-	let str = '';
-	if (isNaN(countryCode)) {
-		return str;
-	}
-	str += `+${countryCode}`;
-	if (isNaN(areaCode)) {
-		return str;
-	}
-	str += ` (${areaCode})`;
-	if (typeof phoneNumber !== 'string') {
-		return str;
-	}
-	/** phoneNumber can be both '0..9-0..9' or '0..9' formats */
-	const _phoneNumber = phoneNumber.replaceAll('-', '');
-	// if (!/^\d+$/.test(_phoneNumber) && isNaN(phoneNumber)) {
-	if (!/^\d+$/.test(_phoneNumber) && isNaN(Number(phoneNumber))) {
-		return str;
-	}
-	str += ' ' + _phoneNumber.slice(0, 3) + ' ' + _phoneNumber.slice(3);
-	return str
+const getCountryCode = () => {
+	const timezone: Timezone = Intl.DateTimeFormat().resolvedOptions().timeZone as Timezone;
+	return timezones[timezone].toLowerCase() || "us";
 }
 
 const PhoneNumberInput = ({value = {}, onChange, setIsValid}: PhoneNumberInputProps) => {
@@ -74,7 +52,6 @@ const PhoneNumberInput = ({value = {}, onChange, setIsValid}: PhoneNumberInputPr
 
 	return (
 		<PhoneInput
-			country="us"
 			enableSearch
 			masks={masks}
 			enableAreaCodes
@@ -82,6 +59,7 @@ const PhoneNumberInput = ({value = {}, onChange, setIsValid}: PhoneNumberInputPr
 			value={rawPhone}
 			inputClass="ant-input"
 			onChange={handleChange}
+			country={getCountryCode()}
 		/>
 	)
 }
