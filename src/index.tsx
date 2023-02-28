@@ -1,5 +1,5 @@
 import {ChangeEvent, useMemo, useState} from "react";
-import PhoneInput from "react-phone-input-2";
+import ReactPhoneInput from "react-phone-input-2";
 
 import masks from "./phoneMasks.json";
 import timezones from "./timezones.json";
@@ -37,7 +37,7 @@ const getDefaultISO2Code = () => {
 	return timezones[timezone].toLowerCase() || "us";
 }
 
-const PhoneNumberInput = ({value = {}, onChange: handleChange}: PhoneNumberInputProps) => {
+const PhoneInput = ({value = {}, onChange: handleChange}: PhoneNumberInputProps) => {
 	const [currentCode, setCurrentCode] = useState("");
 	const rawPhone = useMemo(() => Object.values(value).map(v => v || "").join(""), [value]);
 
@@ -70,7 +70,7 @@ const PhoneNumberInput = ({value = {}, onChange: handleChange}: PhoneNumberInput
 	};
 
 	return (
-		<PhoneInput
+		<ReactPhoneInput
 			enableSearch
 			masks={masks}
 			enableAreaCodes
@@ -83,4 +83,4 @@ const PhoneNumberInput = ({value = {}, onChange: handleChange}: PhoneNumberInput
 	)
 }
 
-export default PhoneNumberInput;
+export default PhoneInput;
