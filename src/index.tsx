@@ -18,7 +18,8 @@ type PhoneNumber = {
 	phoneNumber?: string,
 }
 
-type PhoneNumberInputProps = {
+type PhoneInputProps = {
+	size?: "small" | "middle" | "large",
 	value?: PhoneNumber | object,
 	onChange?: (value: PhoneNumber) => void,
 }
@@ -37,9 +38,15 @@ const getDefaultISO2Code = () => {
 	return timezones[timezone].toLowerCase() || "us";
 }
 
-const PhoneInput = ({value = {}, onChange: handleChange}: PhoneNumberInputProps) => {
+const PhoneInput = ({value = {}, size = "middle", onChange: handleChange}: PhoneInputProps) => {
 	const [currentCode, setCurrentCode] = useState("");
+
 	const rawPhone = useMemo(() => Object.values(value).map(v => v || "").join(""), [value]);
+
+	const inputClass = useMemo(() => {
+		const suffix = {small: "sm", middle: "", large: "lg"}[size];
+		return "ant-input" + (suffix ? " ant-input-" + suffix : "");
+	}, [size]);
 
 	const onChange: OnChangeFunction = (value, data, _, formattedValue) => {
 		const code: ISO2Code = data?.countryCode;
@@ -67,7 +74,7 @@ const PhoneInput = ({value = {}, onChange: handleChange}: PhoneNumberInputProps)
 		}
 
 		if (handleChange) handleChange({countryCode, areaCode, phoneNumber});
-	};
+	}
 
 	return (
 		<ReactPhoneInput
@@ -76,7 +83,7 @@ const PhoneInput = ({value = {}, onChange: handleChange}: PhoneNumberInputProps)
 			enableAreaCodes
 			value={rawPhone}
 			disableSearchIcon
-			inputClass="ant-input"
+			inputClass={inputClass}
 			onChange={onChange}
 			country={getDefaultISO2Code()}
 		/>
