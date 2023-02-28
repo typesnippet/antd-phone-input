@@ -1,6 +1,6 @@
 import {render} from "@testing-library/react";
 
-import PhoneNumberInput from "../src";
+import PhoneInput from "../src";
 
 Object.defineProperty(window, "matchMedia", {
 	writable: true,
@@ -18,6 +18,6 @@ Object.defineProperty(window, "matchMedia", {
 
 describe("PhoneNumberInput render", () => {
 	it("renders without crashing", () => {
-		render(<PhoneNumberInput/>)
+		render(<PhoneInput/>)
 	})
 })
