@@ -25,7 +25,7 @@
     "@types/node": "^18.14.1",
     "@types/react": "^18.0.28",
     "@types/rollup-plugin-less": "^1.1.2",
-    "antd": "^5.2.2",
+    "antd": "^4.24.8",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.4.3",
     "jest-environment-jsdom": "^29.4.3",
