@@ -8,6 +8,10 @@ import validations from "./validations.json";
 import "react-phone-input-2/lib/style.css";
 import "./index.less";
 
+type CountryData = {
+	countryCode: ISO2Code,
+}
+
 type PhoneNumber = {
 	countryCode?: number | null,
 	areaCode?: number | null,
@@ -19,8 +23,8 @@ type PhoneNumberInputProps = {
 	onChange?: (value: PhoneNumber) => void,
 }
 
-type OnChangeArgs = {
-	(number: string, phone: PhoneNumber, event: Event, formattedNumber: string): void,
+type OnChangeFunction = {
+	(number: string, data: CountryData, event: Event, formattedNumber: string): void,
 }
 
 type Timezone = keyof typeof timezones;
@@ -28,37 +32,41 @@ type ISO2Code = keyof typeof validations;
 type Event = ChangeEvent<HTMLInputElement>;
 
 const getDefaultISO2Code = () => {
+	/** Returns the default ISO2 code based on the user's timezone */
 	const timezone: Timezone = Intl.DateTimeFormat().resolvedOptions().timeZone as Timezone;
 	return timezones[timezone].toLowerCase() || "us";
 }
 
-const PhoneNumberInput = ({value = {}, onChange}: PhoneNumberInputProps) => {
+const PhoneNumberInput = ({value = {}, onChange: handleChange}: PhoneNumberInputProps) => {
 	const [currentCode, setCurrentCode] = useState("");
 	const rawPhone = useMemo(() => Object.values(value).map(v => v || "").join(""), [value]);
 
-	const handleChange: OnChangeArgs = (number, phone, _, formattedNumber) => {
-		const code: ISO2Code = phone?.countryCode?.toString() as ISO2Code;
+	const onChange: OnChangeFunction = (value, data, _, formattedValue) => {
+		const code: ISO2Code = data?.countryCode;
 		const countryCodePattern = /\+\d+/;
 		const areaCodePattern = /\((\d+)\)/;
 
-		const countryCodeMatch = formattedNumber ? (formattedNumber.match(countryCodePattern) || []) : [];
-		const areaCodeMatch = formattedNumber ? (formattedNumber.match(areaCodePattern) || []) : [];
+		/** Parse the matching partials of the phone number by predefined regex patterns */
+		const countryCodeMatch = formattedValue ? (formattedValue.match(countryCodePattern) || []) : [];
+		const areaCodeMatch = formattedValue ? (formattedValue.match(areaCodePattern) || []) : [];
 
+		/** Convert the parsed values of the country and area codes to integers if values present */
 		const countryCode = countryCodeMatch.length > 0 ? parseInt(countryCodeMatch[0]) : null;
 		const areaCode = areaCodeMatch.length > 1 ? parseInt(areaCodeMatch[1]) : null;
 
+		/** Parse the phone number by removing the country and area codes from the formatted value */
 		const phoneNumberPattern = new RegExp(`^${countryCode}${(areaCode || "")}(\\d+)`);
-		const phoneNumberMatch = number ? (number.match(phoneNumberPattern) || []) : [];
+		const phoneNumberMatch = value ? (value.match(phoneNumberPattern) || []) : [];
 		const phoneNumber = phoneNumberMatch.length > 1 ? phoneNumberMatch[1] : "";
 
+		/** Clear phone number when the country is selected manually */
 		if (currentCode !== undefined && code !== currentCode) {
-			/** Clear phone number when country is changed */
-			if (onChange) onChange({countryCode, areaCode: null, phoneNumber: ""});
+			if (handleChange) handleChange({countryCode, areaCode: null, phoneNumber: ""});
 			setCurrentCode(code);
 			return;
 		}
 
-		if (onChange) onChange({countryCode, areaCode, phoneNumber});
+		if (handleChange) handleChange({countryCode, areaCode, phoneNumber});
 	};
 
 	return (
@@ -69,7 +77,7 @@ const PhoneNumberInput = ({value = {}, onChange}: PhoneNumberInputProps) => {
 			value={rawPhone}
 			disableSearchIcon
 			inputClass="ant-input"
-			onChange={handleChange}
+			onChange={onChange}
 			country={getDefaultISO2Code()}
 		/>
 	)
