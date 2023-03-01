@@ -12,7 +12,7 @@ export interface PhoneNumber {
 
 export interface AntInputProps {
 	size?: "small" | "middle" | "large",
-	value?: PhoneNumber | {},
+	value?: PhoneNumber | object,
 	style?: CSSProperties,
 	className?: string,
 	disabled?: boolean,
