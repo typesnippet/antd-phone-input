@@ -18,6 +18,12 @@ export interface AntInputProps {
 	disabled?: boolean,
 }
 
+export interface AntInputEventsProps {
+	onChange?(value: PhoneNumber, event: ChangeEvent<HTMLInputElement>): void;
+
+	onPressEnter?(event: KeyboardEvent<HTMLInputElement>): void;
+}
+
 export interface ReactPhoneInputProps {
 	inputProps?: InputHTMLAttributes<HTMLInputElement>,
 	searchPlaceholder?: string,
@@ -33,19 +39,15 @@ export interface ReactPhoneInputProps {
 }
 
 export interface ReactPhoneEventsProps {
-	onChange?: (value: PhoneNumber, event: ChangeEvent<HTMLInputElement>) => void;
-
 	onFocus?(event: FocusEvent<HTMLInputElement>, value: PhoneNumber): void;
-
-	onBlur?(event: FocusEvent<HTMLInputElement>, value: PhoneNumber): void;
 
 	onClick?(event: MouseEvent<HTMLInputElement>, value: PhoneNumber): void;
 
-	onMount?(value: PhoneNumber): void;
+	onBlur?(event: FocusEvent<HTMLInputElement>, value: PhoneNumber): void;
 
 	onKeyDown?(event: KeyboardEvent<HTMLInputElement>): void;
 
-	onEnterKeyPress?(event: KeyboardEvent<HTMLInputElement>): void;
+	onMount?(value: PhoneNumber): void;
 }
 
 export interface ReactPhoneOnChange {
@@ -56,7 +58,7 @@ export interface ReactPhoneOnMount {
 	(value: string, event: ChangeEvent<HTMLInputElement>, formattedNumber: string): void;
 }
 
-export interface PhoneInputProps extends AntInputProps, ReactPhoneInputProps, ReactPhoneEventsProps {
+export interface PhoneInputProps extends AntInputProps, AntInputEventsProps, ReactPhoneInputProps, ReactPhoneEventsProps {
 	// TODO add onValidate: https://github.com/ArtyomVancyan/antd-phone-input/issues/19
 	// onValidate?: (value: PhoneNumber) => boolean;
 }

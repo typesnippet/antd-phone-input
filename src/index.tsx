@@ -24,6 +24,7 @@ const PhoneInput = ({
 						className,
 						value = {},
 						size = "middle",
+						onPressEnter = () => null,
 						onMount: handleMount = () => null,
 						onChange: handleChange = () => null,
 						...reactPhoneInputProps
@@ -85,6 +86,7 @@ const PhoneInput = ({
 			{...reactPhoneInputProps}
 			containerStyle={style}
 			containerClass={className}
+			onEnterKeyPress={onPressEnter}
 		/>
 	)
 }
