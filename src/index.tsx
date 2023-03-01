@@ -1,45 +1,36 @@
-import {ChangeEvent, useMemo, useState} from "react";
+import {useMemo, useState} from "react";
 import ReactPhoneInput from "react-phone-input-2";
+
+import {PhoneInputProps, ReactPhoneOnChange, ReactPhoneOnMount} from "./types";
 
 import masks from "./phoneMasks.json";
 import timezones from "./timezones.json";
-import validations from "./validations.json";
 
 import "react-phone-input-2/lib/style.css";
 import "./index.less";
 
-type CountryData = {
-	countryCode: ISO2Code,
-}
-
-type PhoneNumber = {
-	countryCode?: number | null,
-	areaCode?: number | null,
-	phoneNumber?: string,
-}
-
-type PhoneInputProps = {
-	size?: "small" | "middle" | "large",
-	value?: PhoneNumber | object,
-	onChange?: (value: PhoneNumber) => void,
-}
-
-type OnChangeFunction = {
-	(number: string, data: CountryData, event: Event, formattedNumber: string): void,
-}
-
+type ISO2Code = keyof typeof masks;
 type Timezone = keyof typeof timezones;
-type ISO2Code = keyof typeof validations;
-type Event = ChangeEvent<HTMLInputElement>;
 
 const getDefaultISO2Code = () => {
 	/** Returns the default ISO2 code based on the user's timezone */
-	const timezone: Timezone = Intl.DateTimeFormat().resolvedOptions().timeZone as Timezone;
+	const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone as Timezone;
 	return timezones[timezone].toLowerCase() || "us";
 }
 
-const PhoneInput = ({value = {}, size = "middle", onChange: handleChange}: PhoneInputProps) => {
+const PhoneInput = ({
+						style,
+						country,
+						className,
+						value = {},
+						size = "middle",
+						onMount: handleMount = () => null,
+						onChange: handleChange = () => null,
+						...reactPhoneInputProps
+					}: PhoneInputProps) => {
 	const [currentCode, setCurrentCode] = useState("");
+
+	const defaultCountry = useMemo(() => country || getDefaultISO2Code(), [country]);
 
 	const rawPhone = useMemo(() => Object.values(value).map(v => v || "").join(""), [value]);
 
@@ -48,8 +39,8 @@ const PhoneInput = ({value = {}, size = "middle", onChange: handleChange}: Phone
 		return "ant-input" + (suffix ? " ant-input-" + suffix : "");
 	}, [size]);
 
-	const onChange: OnChangeFunction = (value, data, _, formattedValue) => {
-		const code: ISO2Code = data?.countryCode;
+	const onChange: ReactPhoneOnChange = (value, data, event, formattedValue) => {
+		const code = data?.countryCode as ISO2Code;
 		const countryCodePattern = /\+\d+/;
 		const areaCodePattern = /\((\d+)\)/;
 
@@ -68,24 +59,32 @@ const PhoneInput = ({value = {}, size = "middle", onChange: handleChange}: Phone
 
 		/** Clear phone number when the country is selected manually */
 		if (currentCode !== undefined && code !== currentCode) {
-			if (handleChange) handleChange({countryCode, areaCode: null, phoneNumber: ""});
+			handleChange({countryCode, areaCode: null, phoneNumber: ""}, event);
 			setCurrentCode(code);
 			return;
 		}
 
-		if (handleChange) handleChange({countryCode, areaCode, phoneNumber});
+		handleChange({countryCode, areaCode, phoneNumber}, event);
 	}
+
+	const onMount: ReactPhoneOnMount = (_1, _2, _3) => handleMount(value);
 
 	return (
 		<ReactPhoneInput
-			enableSearch
+			/** Static properties for stable functionality */
 			masks={masks}
-			enableAreaCodes
 			value={rawPhone}
+			enableAreaCodes
 			disableSearchIcon
-			inputClass={inputClass}
+			/** Static properties providing dynamic behavior */
+			onMount={onMount}
 			onChange={onChange}
-			country={getDefaultISO2Code()}
+			inputClass={inputClass}
+			country={defaultCountry}
+			/** Dynamic properties for customization */
+			{...reactPhoneInputProps}
+			containerStyle={style}
+			containerClass={className}
 		/>
 	)
 }
