@@ -72,10 +72,10 @@ const PhoneInput = ({
 			/** Clear phone number when the country is selected manually */
 			handleChange({...metadata, areaCode: null, phoneNumber: null}, event);
 			setCurrentCode(code);
+			return;
 		}
 
 		handleChange(metadata, event);
-		return metadata;
 	}
 
 	const onMount: ReactPhoneOnMount = (value, event, formattedNumber) => {
