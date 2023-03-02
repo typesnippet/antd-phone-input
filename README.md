@@ -19,17 +19,41 @@ yarn add antd-phone-input
 
 ## Usage
 
+### Antd 4.x
+
 ```javascript
 import React from "react";
 import PhoneInput from "antd-phone-input";
 import FormItem from "antd/es/form/FormItem";
 
 const Demo = () => {
-  return (
-    <FormItem name="phone">
-      <PhoneInput/>
-    </FormItem>
-  )
+    return (
+        <FormItem name="phone">
+            <PhoneInput enableSearch/>
+        </FormItem>
+    )
+}
+```
+
+### Antd 5.x
+
+```ascii
+v5.x does not have support yet
+this issue is covered in GH-20
+```
+
+## Value
+
+The value of the component is an object containing the parts of a phone number. This format of value gives a wide range
+of opportunities for handling the data in your custom way. For example, you can easily merge the parts of the phone
+number into a single string.
+
+```json
+{
+  "countryCode": 1,
+  "areaCode": 702,
+  "phoneNumber": "1234567",
+  "isoCode": "us"
 }
 ```
 
