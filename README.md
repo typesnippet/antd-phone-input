@@ -6,6 +6,7 @@ Advanced Phone Number Input for [Ant Design](https://github.com/ant-design/ant-d
 [![types](https://img.shields.io/npm/types/antd-phone-input)](https://www.npmjs.com/package/antd-phone-input)
 [![License](https://img.shields.io/npm/l/antd-phone-input)](https://github.com/ArtyomVancyan/antd-phone-input/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
+[![Tests](https://github.com/ArtyomVancyan/antd-phone-input/actions/workflows/tests.yml/badge.svg)](https://github.com/ArtyomVancyan/antd-phone-input/actions/workflows/tests.yml)
 
 ## Install
 
