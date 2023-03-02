@@ -78,7 +78,12 @@ const PhoneInput = ({
 		return metadata;
 	}
 
-	const onMount: ReactPhoneOnMount = (_1, _2, _3) => handleMount(value);
+	const onMount: ReactPhoneOnMount = (value, event, formattedNumber) => {
+		const metadata = parsePhoneNumber(value, {countryCode}, formattedNumber);
+		/** Initiates the existing value when Antd FormItem is used */
+		handleChange(metadata, event);
+		handleMount(metadata);
+	}
 
 	return (
 		<ReactPhoneInput
