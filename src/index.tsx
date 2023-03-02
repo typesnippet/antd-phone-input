@@ -15,7 +15,7 @@ type Timezone = keyof typeof timezones;
 const getDefaultISO2Code = () => {
 	/** Returns the default ISO2 code based on the user's timezone */
 	const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone as Timezone;
-	return (timezones[timezone] as string).toLowerCase() || "us";
+	return (timezones[timezone] || "").toLowerCase() || "us";
 }
 
 const parsePhoneNumber: ParsePhoneNumber = (value, data, formattedNumber) => {
