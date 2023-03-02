@@ -13,7 +13,7 @@ export interface PhoneNumber {
 
 export interface AntInputProps {
 	size?: "small" | "middle" | "large",
-	value?: PhoneNumber | object,
+	value?: PhoneNumber,
 	style?: CSSProperties,
 	className?: string,
 	disabled?: boolean,
@@ -56,7 +56,7 @@ export interface ReactPhoneOnChange {
 }
 
 export interface ReactPhoneOnMount {
-	(value: string, event: ChangeEvent<HTMLInputElement>, formattedNumber: string): void;
+	(value: string, event: ChangeEvent<HTMLInputElement> & CountryData, formattedNumber: string): void;
 }
 
 export interface ParsePhoneNumber {

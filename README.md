@@ -27,11 +27,11 @@ import PhoneInput from "antd-phone-input";
 import FormItem from "antd/es/form/FormItem";
 
 const Demo = () => {
-    return (
-        <FormItem name="phone">
-            <PhoneInput enableSearch/>
-        </FormItem>
-    )
+  return (
+    <FormItem name="phone">
+      <PhoneInput enableSearch/>
+    </FormItem>
+  )
 }
 ```
 

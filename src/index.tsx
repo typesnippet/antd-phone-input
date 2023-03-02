@@ -40,10 +40,10 @@ const parsePhoneNumber: ParsePhoneNumber = (value, data, formattedNumber) => {
 }
 
 const PhoneInput = ({
+						value,
 						style,
 						country,
 						className,
-						value = {},
 						size = "middle",
 						onPressEnter = () => null,
 						onMount: handleMount = () => null,
