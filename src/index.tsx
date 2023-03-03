@@ -1,84 +1,107 @@
-import {ChangeEvent, useMemo, useState} from "react";
+import {useMemo, useState} from "react";
 import ReactPhoneInput from "react-phone-input-2";
+
+import {ParsePhoneNumber, PhoneInputProps, ReactPhoneOnChange, ReactPhoneOnMount} from "./types";
 
 import masks from "./phoneMasks.json";
 import timezones from "./timezones.json";
-import validations from "./validations.json";
 
 import "react-phone-input-2/lib/style.css";
 import "./index.less";
 
-type CountryData = {
-	countryCode: ISO2Code,
-}
-
-type PhoneNumber = {
-	countryCode?: number | null,
-	areaCode?: number | null,
-	phoneNumber?: string,
-}
-
-type PhoneNumberInputProps = {
-	value?: PhoneNumber | object,
-	onChange?: (value: PhoneNumber) => void,
-}
-
-type OnChangeFunction = {
-	(number: string, data: CountryData, event: Event, formattedNumber: string): void,
-}
-
+type ISO2Code = keyof typeof masks;
 type Timezone = keyof typeof timezones;
-type ISO2Code = keyof typeof validations;
-type Event = ChangeEvent<HTMLInputElement>;
 
 const getDefaultISO2Code = () => {
 	/** Returns the default ISO2 code based on the user's timezone */
-	const timezone: Timezone = Intl.DateTimeFormat().resolvedOptions().timeZone as Timezone;
-	return timezones[timezone].toLowerCase() || "us";
+	const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone as Timezone;
+	return (timezones[timezone] || "").toLowerCase() || "us";
 }
 
-const PhoneInput = ({value = {}, onChange: handleChange}: PhoneNumberInputProps) => {
+const parsePhoneNumber: ParsePhoneNumber = (value, data, formattedNumber) => {
+	const isoCode = data?.countryCode;
+	const countryCodePattern = /\+\d+/;
+	const areaCodePattern = /\((\d+)\)/;
+
+	/** Parse the matching partials of the phone number by predefined regex patterns */
+	const countryCodeMatch = formattedNumber ? (formattedNumber.match(countryCodePattern) || []) : [];
+	const areaCodeMatch = formattedNumber ? (formattedNumber.match(areaCodePattern) || []) : [];
+
+	/** Convert the parsed values of the country and area codes to integers if values present */
+	const countryCode = countryCodeMatch.length > 0 ? parseInt(countryCodeMatch[0]) : null;
+	const areaCode = areaCodeMatch.length > 1 ? parseInt(areaCodeMatch[1]) : null;
+
+	/** Parse the phone number by removing the country and area codes from the formatted value */
+	const phoneNumberPattern = new RegExp(`^${countryCode}${(areaCode || "")}(\\d+)`);
+	const phoneNumberMatch = value ? (value.match(phoneNumberPattern) || []) : [];
+	const phoneNumber = phoneNumberMatch.length > 1 ? phoneNumberMatch[1] : null;
+
+	return {countryCode, areaCode, phoneNumber, isoCode};
+}
+
+const PhoneInput = ({
+						value,
+						style,
+						country,
+						className,
+						size = "middle",
+						onPressEnter = () => null,
+						onMount: handleMount = () => null,
+						onChange: handleChange = () => null,
+						...reactPhoneInputProps
+					}: PhoneInputProps) => {
 	const [currentCode, setCurrentCode] = useState("");
-	const rawPhone = useMemo(() => Object.values(value).map(v => v || "").join(""), [value]);
 
-	const onChange: OnChangeFunction = (value, data, _, formattedValue) => {
-		const code: ISO2Code = data?.countryCode;
-		const countryCodePattern = /\+\d+/;
-		const areaCodePattern = /\((\d+)\)/;
+	const countryCode = useMemo(() => country || getDefaultISO2Code(), [country]);
 
-		/** Parse the matching partials of the phone number by predefined regex patterns */
-		const countryCodeMatch = formattedValue ? (formattedValue.match(countryCodePattern) || []) : [];
-		const areaCodeMatch = formattedValue ? (formattedValue.match(areaCodePattern) || []) : [];
+	const rawPhone = useMemo(() => {
+		const {countryCode, areaCode, phoneNumber} = {...value};
+		return [countryCode, areaCode, phoneNumber].map(v => v || "").join("");
+	}, [value]);
 
-		/** Convert the parsed values of the country and area codes to integers if values present */
-		const countryCode = countryCodeMatch.length > 0 ? parseInt(countryCodeMatch[0]) : null;
-		const areaCode = areaCodeMatch.length > 1 ? parseInt(areaCodeMatch[1]) : null;
+	const inputClass = useMemo(() => {
+		const suffix = {small: "sm", middle: "", large: "lg"}[size];
+		return "ant-input" + (suffix ? " ant-input-" + suffix : "");
+	}, [size]);
 
-		/** Parse the phone number by removing the country and area codes from the formatted value */
-		const phoneNumberPattern = new RegExp(`^${countryCode}${(areaCode || "")}(\\d+)`);
-		const phoneNumberMatch = value ? (value.match(phoneNumberPattern) || []) : [];
-		const phoneNumber = phoneNumberMatch.length > 1 ? phoneNumberMatch[1] : "";
+	const onChange: ReactPhoneOnChange = (value, data, event, formattedNumber) => {
+		const metadata = parsePhoneNumber(value, data, formattedNumber);
+		const code = metadata.isoCode as ISO2Code;
 
-		/** Clear phone number when the country is selected manually */
-		if (currentCode !== undefined && code !== currentCode) {
-			if (handleChange) handleChange({countryCode, areaCode: null, phoneNumber: ""});
+		if (code !== currentCode) {
+			/** Clear phone number when the country is selected manually */
+			handleChange({...metadata, areaCode: null, phoneNumber: null}, event);
 			setCurrentCode(code);
 			return;
 		}
 
-		if (handleChange) handleChange({countryCode, areaCode, phoneNumber});
-	};
+		handleChange(metadata, event);
+	}
+
+	const onMount: ReactPhoneOnMount = (rawValue, {countryCode, ...event}, formattedNumber) => {
+		const metadata = parsePhoneNumber(rawValue, {countryCode}, formattedNumber);
+		/** Initiates the existing value when Antd FormItem is used */
+		if (value === undefined) handleChange(metadata, event);
+		handleMount(metadata);
+	}
 
 	return (
 		<ReactPhoneInput
-			enableSearch
+			/** Static properties for stable functionality */
 			masks={masks}
-			enableAreaCodes
 			value={rawPhone}
+			enableAreaCodes
 			disableSearchIcon
-			inputClass="ant-input"
+			/** Static properties providing dynamic behavior */
+			onMount={onMount}
 			onChange={onChange}
-			country={getDefaultISO2Code()}
+			country={countryCode}
+			inputClass={inputClass}
+			/** Dynamic properties for customization */
+			{...reactPhoneInputProps}
+			containerStyle={style}
+			containerClass={className}
+			onEnterKeyPress={onPressEnter}
 		/>
 	)
 }
