@@ -1,5 +1,4 @@
 import dts from "rollup-plugin-dts";
-import less from "rollup-plugin-less";
 import json from "@rollup/plugin-json";
 import postcss from "rollup-plugin-postcss";
 import typescript from "@rollup/plugin-typescript";
@@ -13,9 +12,8 @@ const esmOutput = {file: pkg.module, format: "es"};
 const dtsOutput = {file: pkg.types, format: "es"};
 
 const jsonPlugin = json();
+const cssPlugin = postcss();
 const tsPlugin = typescript();
-const cssPlugin = postcss({exclude: /\.less$/, include: /\.css$/});
-const lessPlugin = less({insert: true, output: false, option: {javascriptEnabled: true}});
 
 const external = [
 	...Object.keys({...pkg.dependencies, ...pkg.peerDependencies}),
@@ -25,7 +23,7 @@ const external = [
 ];
 
 export default [
-	{input, output: cjsOutput, plugins: [tsPlugin, jsonPlugin, cssPlugin, lessPlugin], external},
-	{input, output: esmOutput, plugins: [tsPlugin, jsonPlugin, cssPlugin, lessPlugin], external},
-	{input, output: dtsOutput, plugins: [dts()], external: [/\.(le|c)ss$/]},
+	{input, output: cjsOutput, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
+	{input, output: esmOutput, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
+	{input, output: dtsOutput, plugins: [dts()], external: [/\.css$/]},
 ];

@@ -36,6 +36,15 @@ const Demo = () => {
 }
 ```
 
+For including the styles, you should import them in the main `less` file after importing either the `antd/dist/antd.less` or `antd/dist/antd.dark.less` styles.
+
+```diff
+@import "~antd/dist/antd";
++ @import "~antd-phone-input/dist/style";
+```
+
+![light-dark-screenshots](https://user-images.githubusercontent.com/44609997/222975662-a2726b5f-954f-4a93-ac28-0339b432fa72.png)
+
 ### Antd 5.x
 
 ```ascii
