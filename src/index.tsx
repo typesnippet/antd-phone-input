@@ -7,7 +7,6 @@ import masks from "./phoneMasks.json";
 import timezones from "./timezones.json";
 
 import "react-phone-input-2/lib/style.css";
-import "./index.less";
 
 type ISO2Code = keyof typeof masks;
 type Timezone = keyof typeof timezones;
