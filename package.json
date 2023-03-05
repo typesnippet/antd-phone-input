@@ -31,7 +31,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "rm -rf dist && rollup -c --configPlugin @rollup/plugin-typescript",
+    "build": "rm -rf dist && npm run build:cjs && cp src/*.less dist/",
+    "build:cjs": "rollup -c --configPlugin @rollup/plugin-typescript",
     "test": "jest --config jestconfig.json"
   },
   "license": "MIT",
