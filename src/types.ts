@@ -9,6 +9,7 @@ export interface PhoneNumber {
 	areaCode?: number | null,
 	phoneNumber?: string | null,
 	isoCode?: string,
+	valid?: boolean,
 }
 
 export interface AntInputProps {
@@ -17,9 +18,7 @@ export interface AntInputProps {
 	style?: CSSProperties,
 	className?: string,
 	disabled?: boolean,
-}
 
-export interface AntInputEventsProps {
 	onChange?(value: PhoneNumber, event: ChangeEvent<HTMLInputElement>): void;
 
 	onPressEnter?(event: KeyboardEvent<HTMLInputElement>): void;
@@ -37,9 +36,7 @@ export interface ReactPhoneInputProps {
 	onlyCountries?: string[],
 	excludeCountries?: string[],
 	preferredCountries?: string[],
-}
 
-export interface ReactPhoneEventsProps {
 	onFocus?(event: FocusEvent<HTMLInputElement>, value: PhoneNumber): void;
 
 	onClick?(event: MouseEvent<HTMLInputElement>, value: PhoneNumber): void;
@@ -63,7 +60,9 @@ export interface ParsePhoneNumber {
 	(value: string, data: CountryData, formattedNumber: string): PhoneNumber;
 }
 
-export interface PhoneInputProps extends AntInputProps, AntInputEventsProps, ReactPhoneInputProps, ReactPhoneEventsProps {
-	// TODO add onValidate: https://github.com/ArtyomVancyan/antd-phone-input/issues/19
-	// onValidate?: (value: PhoneNumber) => boolean;
+export interface PhoneInputProps extends AntInputProps, ReactPhoneInputProps {
+	/**
+	 * NOTE: Interfaces of events may differ from the original interfaces
+	 * of dependencies, so be careful and follow the linked documentation.
+	 */
 }
