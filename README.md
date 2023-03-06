@@ -36,7 +36,8 @@ const Demo = () => {
 }
 ```
 
-For including the styles, you should import them in the main `less` file after importing either the `antd/dist/antd.less` or `antd/dist/antd.dark.less` styles.
+For including the styles, you should import them in the main `less` file after importing either
+the `antd/dist/antd.less` or `antd/dist/antd.dark.less` styles.
 
 ```diff
 @import "~antd/dist/antd";
@@ -63,8 +64,29 @@ number into a single string.
   "countryCode": 1,
   "areaCode": 702,
   "phoneNumber": "1234567",
-  "isoCode": "us"
+  "isoCode": "us",
+  "valid": true
 }
+```
+
+## Validation
+
+The `valid` property of the value object shows the real-time validity of the phone number depending on the country. So
+this can be used in a `validator` like this:
+
+```javascript
+const validator = (_, {valid}) => {
+  if (valid) {
+    return Promise.resolve();
+  }
+  return Promise.reject("Invalid phone number");
+}
+
+return (
+  <FormItem rules={[{validator}]}>
+    <PhoneInput/>
+  </FormItem>
+)
 ```
 
 ## Props
