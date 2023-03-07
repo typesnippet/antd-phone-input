@@ -5,6 +5,7 @@ import {ParsePhoneNumber, PhoneInputProps, ReactPhoneOnChange, ReactPhoneOnMount
 
 import masks from "./phoneMasks.json";
 import timezones from "./timezones.json";
+import validations from "./validations.json";
 
 import "react-phone-input-2/lib/style.css";
 
@@ -35,7 +36,14 @@ const parsePhoneNumber: ParsePhoneNumber = (value, data, formattedNumber) => {
 	const phoneNumberMatch = value ? (value.match(phoneNumberPattern) || []) : [];
 	const phoneNumber = phoneNumberMatch.length > 1 ? phoneNumberMatch[1] : null;
 
-	return {countryCode, areaCode, phoneNumber, isoCode};
+	/** Checks if both the area code and phone number length satisfy the validation rules */
+	const rules = validations[isoCode as ISO2Code] || {areaCode: [], phoneNumber: []};
+	const valid = [
+		rules.areaCode.includes((areaCode || "").toString().length),
+		rules.phoneNumber.includes((phoneNumber || "").toString().length),
+	].every(Boolean);
+
+	return {countryCode, areaCode, phoneNumber, isoCode, valid};
 }
 
 const PhoneInput = ({
@@ -79,8 +87,8 @@ const PhoneInput = ({
 
 	const onMount: ReactPhoneOnMount = (rawValue, {countryCode, ...event}, formattedNumber) => {
 		const metadata = parsePhoneNumber(rawValue, {countryCode}, formattedNumber);
-		/** Initiates the existing value when Antd FormItem is used */
-		if (value === undefined) handleChange(metadata, event);
+		/** Initializes the existing value */
+		handleChange(metadata, event);
 		handleMount(metadata);
 	}
 
