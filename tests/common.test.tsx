@@ -84,4 +84,16 @@ describe("Checks the basic rendering and functionality", () => {
 		</Form>);
 		await userEvent.click(screen.getByTestId("button"));
 	})
+
+	it("Checks form with initial value", async () => {
+		render(<Form initialValues={{phone: {countryCode: 1, areaCode: 702}}}>
+			<FormItem name="phone">
+				<PhoneInput/>
+			</FormItem>
+			<Button data-testid="button" htmlType="submit">Submit</Button>
+		</Form>);
+		const input = screen.getByDisplayValue("+1 (702)");
+		await userEvent.type(input, "1234567");
+		assert(input.getAttribute("value") === "+1 (702) 123 4567");
+	})
 })
