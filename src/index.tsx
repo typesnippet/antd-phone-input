@@ -23,15 +23,15 @@ const parsePhoneNumber: ParsePhoneNumber = (value, data, formattedNumber) => {
 	const countryCodePattern = /\+\d+/;
 	const areaCodePattern = /\((\d+)\)/;
 
-	/** Parse the matching partials of the phone number by predefined regex patterns */
+	/** Parses the matching partials of the phone number by predefined regex patterns */
 	const countryCodeMatch = formattedNumber ? (formattedNumber.match(countryCodePattern) || []) : [];
 	const areaCodeMatch = formattedNumber ? (formattedNumber.match(areaCodePattern) || []) : [];
 
-	/** Convert the parsed values of the country and area codes to integers if values present */
+	/** Converts the parsed values of the country and area codes to integers if values present */
 	const countryCode = countryCodeMatch.length > 0 ? parseInt(countryCodeMatch[0]) : null;
 	const areaCode = areaCodeMatch.length > 1 ? parseInt(areaCodeMatch[1]) : null;
 
-	/** Parse the phone number by removing the country and area codes from the formatted value */
+	/** Parses the phone number by removing the country and area codes from the formatted value */
 	const phoneNumberPattern = new RegExp(`^${countryCode}${(areaCode || "")}(\\d+)`);
 	const phoneNumberMatch = value ? (value.match(phoneNumberPattern) || []) : [];
 	const phoneNumber = phoneNumberMatch.length > 1 ? phoneNumberMatch[1] : null;
@@ -76,7 +76,7 @@ const PhoneInput = ({
 		const code = metadata.isoCode as ISO2Code;
 
 		if (code !== currentCode) {
-			/** Clear phone number when the country is selected manually */
+			/** Clears phone number when the country is selected manually */
 			handleChange({...metadata, areaCode: null, phoneNumber: null}, event);
 			setCurrentCode(code);
 			return;
