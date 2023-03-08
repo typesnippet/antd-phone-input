@@ -87,6 +87,8 @@ const PhoneInput = ({
 
 	const onMount: ReactPhoneOnMount = (rawValue, {countryCode, ...event}, formattedNumber) => {
 		const metadata = parsePhoneNumber(rawValue, {countryCode}, formattedNumber);
+		/** Initiates the current country code with the code of initial value */
+		setCurrentCode(metadata.isoCode as ISO2Code);
 		/** Initializes the existing value */
 		handleChange(metadata, event);
 		handleMount(metadata);
