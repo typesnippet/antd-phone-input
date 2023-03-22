@@ -14,7 +14,7 @@
 
 .react-tel-input * {
     box-sizing: border-box;
-    -moz-box-sizing: border-box
+    -moz-box-sizing: border-box;
 }
 
 .react-tel-input .v-hide {
@@ -47,11 +47,11 @@
 }
 
 .react-tel-input input[disabled] + .flag-dropdown:hover {
-    cursor: default
+    cursor: default;
 }
 
 .react-tel-input input[disabled] + .flag-dropdown:hover .selected-flag {
-    background-color: transparent
+    background-color: transparent;
 }
 
 .react-tel-input .selected-flag {
@@ -91,53 +91,53 @@
     width: 100%;
     max-height: 200px;
     overflow-y: scroll;
-    border-radius: 0 0 3px 3px
+    border-radius: 0 0 3px 3px;
 }
 
 .react-tel-input .country-list .flag {
-    display: inline-block
+    display: inline-block;
 }
 
 .react-tel-input .country-list .divider {
     padding-bottom: 5px;
     margin-bottom: 5px;
-    border-bottom: 1px solid #ccc
+    border-bottom: 1px solid #ccc;
 }
 
 .react-tel-input .country-list .country {
-    padding: 7px 9px
+    padding: 7px 9px;
 }
 
 .react-tel-input .country-list .country .dial-code {
-    color: #6b6b6b
+    color: #6b6b6b;
 }
 
 .react-tel-input .country-list .country:hover {
-    background-color: #f1f1f1
+    background-color: #f1f1f1;
 }
 
 .react-tel-input .country-list .country.highlight {
-    background-color: #f1f1f1
+    background-color: #f1f1f1;
 }
 
 .react-tel-input .country-list .flag {
     margin-right: 7px;
-    margin-top: 2px
+    margin-top: 2px;
 }
 
 .react-tel-input .country-list .country-name {
-    margin-right: 6px
+    margin-right: 6px;
 }
 
 .react-tel-input .country-list .search {
     position: sticky;
     top: 0;
     background-color: #fff;
-    padding: 10px 0 6px 10px
+    padding: 10px 0 6px 10px;
 }
 
 .react-tel-input .country-list .search-emoji {
-    font-size: 15px
+    font-size: 15px;
 }
 
 .react-tel-input .country-list .search-box {
@@ -147,7 +147,7 @@
     line-height: 15px;
     margin-left: 6px;
     padding: 3px 8px 5px;
-    outline: none
+    outline: none;
 }
 
 .react-tel-input .country-list .no-entries-message {
