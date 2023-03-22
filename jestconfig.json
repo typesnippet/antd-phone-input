@@ -2,7 +2,7 @@
   "transform": {
     "^.+\\.(t|j)sx?$": "ts-jest"
   },
-  "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.([jt]sx?)$",
+  "testRegex": "/tests/.*\\.test\\.([jt]sx?)$",
   "moduleNameMapper": {
     "^.+\\.((?:c|le|s[ca])ss)$": "identity-obj-proxy"
   },
