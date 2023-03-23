@@ -1,5 +1,6 @@
-import {useContext, useMemo, useState} from "react";
+import {useContext, useEffect, useMemo, useState} from "react";
 import ReactPhoneInput from "react-phone-input-2";
+import theme from "antd/es/theme";
 import genComponentStyleHook from "antd/es/input/style";
 import {FormItemInputContext} from "antd/es/form/context";
 import {getStatusClassNames} from "antd/es/_util/statusUtils";
@@ -60,10 +61,13 @@ const PhoneInput = ({
 						onChange: handleChange = () => null,
 						...reactPhoneInputProps
 					}: PhoneInputProps) => {
-	const prefix = "ant-input";
-	const {status} = useContext(FormItemInputContext);
-	const [_, antCls] = genComponentStyleHook(prefix);
-	const [currentCode, setCurrentCode] = useState("");
+    const inputPrefix = "ant-input";
+    const dropdownPrefix = "ant-dropdown";
+    const {token} = theme.useToken();
+    const {status} = useContext(FormItemInputContext);
+    const [_1, inputCls] = genComponentStyleHook(inputPrefix);
+    const [_2, dropdownCls] = genComponentStyleHook(dropdownPrefix);
+    const [currentCode, setCurrentCode] = useState("");
 
 	const countryCode = useMemo(() => country || getDefaultISO2Code(), [country]);
 
@@ -74,9 +78,11 @@ const PhoneInput = ({
 
 	const inputClass = useMemo(() => {
 		const suffix = {small: "sm", middle: "", large: "lg"}[size];
-		const className = prefix + (suffix ? ` ${prefix}-` + suffix : "");
-		return `${className} ${antCls} ` + getStatusClassNames(prefix, status);
-	}, [antCls, size, status]);
+		const className = inputPrefix + (suffix ? ` ${inputPrefix}-` + suffix : "");
+		return `${className} ${inputCls} ` + getStatusClassNames(inputPrefix, status);
+	}, [inputCls, size, status]);
+
+    const dropdownClass = useMemo(() => dropdownPrefix + " " + dropdownCls, [dropdownCls]);
 
 	const onChange: ReactPhoneOnChange = (value, data, event, formattedNumber) => {
 		const metadata = parsePhoneNumber(value, data, formattedNumber);
@@ -101,6 +107,45 @@ const PhoneInput = ({
 		handleMount(metadata);
 	}
 
+    useEffect(() => {
+        for (let styleSheet of document.styleSheets) {
+			let rule: any;
+            for (rule of styleSheet.cssRules || styleSheet.rules) {
+                if (rule.selectorText === ".react-tel-input .country-list") {
+                    rule.style.boxShadow = token.boxShadow;
+                }
+                if (rule.selectorText === ".react-tel-input .selected-flag") {
+                    rule.style.borderColor = token.colorBorder;
+                }
+                if (rule.selectorText === ".react-tel-input .country-list .search") {
+                    rule.style.backgroundColor = token.colorBgContainer;
+                }
+                if (rule.selectorText === ".react-tel-input .country-list .country") {
+                    rule.style.borderRadius = token.borderRadiusOuter + "px";
+                }
+                if (rule.selectorText === ".react-tel-input .country-list .country-name") {
+                    rule.style.color = token.colorText;
+                }
+                if (rule.selectorText === ".react-tel-input .country-list .country .dial-code") {
+                    rule.style.color = token.colorTextDescription;
+                }
+                if (rule.selectorText === ".react-tel-input .country-list .country:hover") {
+                    rule.style.backgroundColor = token.colorBgTextHover;
+                }
+                if (rule.selectorText === ".react-tel-input .country-list .country.highlight") {
+                    rule.style.backgroundColor = token.colorPrimaryBg;
+                }
+                if (rule.selectorText === `:where(.${inputCls}).ant-input`) {
+                    rule.selectorText += "\n,.react-tel-input .country-list .search-box";
+                }
+                if (rule.selectorText === `:where(.${inputCls}).ant-input:hover`) {
+                    rule.selectorText += "\n,.react-tel-input .country-list .search-box:focus";
+                    rule.selectorText += "\n,.react-tel-input .country-list .search-box:hover";
+                }
+            }
+        }
+    }, [inputCls, token])
+
 	return (
 		<ReactPhoneInput
 			/** Static properties for stable functionality */
@@ -113,6 +158,7 @@ const PhoneInput = ({
 			onChange={onChange}
 			country={countryCode}
 			inputClass={inputClass}
+            dropdownClass={dropdownClass}
 			/** Dynamic properties for customization */
 			{...reactPhoneInputProps}
 			containerStyle={style}
