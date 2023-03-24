@@ -1,8 +1,10 @@
 import {useMemo, useState} from "react";
 import ReactPhoneInput from "react-phone-input-2";
 
-import {getDefaultISO2Code, masks, parsePhoneNumber} from "./utils";
-import {PhoneInputProps, ReactPhoneOnChange, ReactPhoneOnMount} from "./types";
+import {getDefaultISO2Code, masks, parsePhoneNumber} from "../utils";
+import {PhoneInputProps, ReactPhoneOnChange, ReactPhoneOnMount} from "../types";
+
+import "../style5.css";
 
 type ISO2Code = keyof typeof masks;
 

@@ -6,7 +6,10 @@ package-lock.json
 .idea/
 
 # Build files
-dist/
+Input4
+Input5
+style.less
+style5.css
 
 # Tarballs
 *.tgz

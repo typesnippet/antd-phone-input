@@ -1,17 +1,16 @@
 import {useContext, useEffect, useMemo, useState} from "react";
 import ReactPhoneInput from "react-phone-input-2";
+import theme from "antd/lib/theme";
+import genComponentStyleHook from "antd/lib/input/style";
+import {FormItemInputContext} from "antd/lib/form/context";
+import {getStatusClassNames} from "antd/lib/_util/statusUtils";
 
-import {getDefaultISO2Code, masks, parsePhoneNumber} from "./utils";
-import {PhoneInputProps, ReactPhoneOnChange, ReactPhoneOnMount} from "./types";
+import {getDefaultISO2Code, masks, parsePhoneNumber} from "../utils";
+import {PhoneInputProps, ReactPhoneOnChange, ReactPhoneOnMount} from "../types";
+
+import "../style5.css";
 
 type ISO2Code = keyof typeof masks;
-
-let theme: any, genComponentStyleHook: any, FormItemInputContext: any, getStatusClassNames: any;
-const libraryRoot = "antd/es";
-theme = import(libraryRoot + "/theme").then(m => theme = m.default);
-genComponentStyleHook = import(libraryRoot + "/input/style").then(m => genComponentStyleHook = m.default);
-FormItemInputContext = import(libraryRoot + "/form/context").then(m => FormItemInputContext = m.FormItemInputContext);
-getStatusClassNames = import(libraryRoot + "/_util/statusUtils").then(m => getStatusClassNames = m.getStatusClassNames);
 
 const PhoneInput = ({
 						value,

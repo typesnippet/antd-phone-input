@@ -23,16 +23,38 @@
     "type": "git",
     "url": "https://github.com/ArtyomVancyan/antd-phone-input"
   },
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "exports": {
+    "./Input4": {
+      "import": "./Input4/index.esm.js",
+      "require": "./Input4/index.cjs.js",
+      "types": {
+        "default": "./Input4/index.d.ts"
+      }
+    },
+    "./Input5": {
+      "import": "./Input5/index.esm.js",
+      "require": "./Input5/index.cjs.js",
+      "types": {
+        "default": "./Input5/index.d.ts"
+      }
+    },
+    "./style": {
+      "default": "./style.less"
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
-    "dist",
-    "LICENSE"
+    "Input4",
+    "Input5",
+    "style5.css",
+    "style.less",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
-    "build": "rm -rf dist && npm run build:cjs && cp src/*.less src/*.css dist/",
-    "build:cjs": "rollup -c --configPlugin @rollup/plugin-typescript",
+    "build": "npm run build:clean && npm run build:rollup && cp src/*.less src/*.css .",
+    "build:rollup": "rollup -c --configPlugin @rollup/plugin-typescript",
+    "build:clean": "rm -r Input4 Input5 style5.css style.less || true",
     "test": "jest --config jestconfig.json"
   },
   "license": "MIT",
