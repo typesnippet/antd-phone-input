@@ -6,10 +6,8 @@ package-lock.json
 .idea/
 
 # Build files
-Input4
-Input5
-style.less
-style5.css
+legacy/
+index*
 
 # Tarballs
 *.tgz

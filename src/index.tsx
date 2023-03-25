@@ -5,10 +5,10 @@ import genComponentStyleHook from "antd/lib/input/style";
 import {FormItemInputContext} from "antd/lib/form/context";
 import {getStatusClassNames} from "antd/lib/_util/statusUtils";
 
-import {getDefaultISO2Code, masks, parsePhoneNumber} from "../utils";
-import {PhoneInputProps, ReactPhoneOnChange, ReactPhoneOnMount} from "../types";
+import {getDefaultISO2Code, masks, parsePhoneNumber} from "./utils";
+import {PhoneInputProps, ReactPhoneOnChange, ReactPhoneOnMount} from "./types";
 
-import "../style5.css";
+import "./style5.css";
 
 type ISO2Code = keyof typeof masks;
 

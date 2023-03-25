@@ -1,5 +1,5 @@
 {
-  "version": "0.1.3",
+  "version": "0.1.4",
   "name": "antd-phone-input",
   "description": "Advanced Phone Number Input for Ant Design",
   "keywords": [
@@ -24,37 +24,35 @@
     "url": "https://github.com/ArtyomVancyan/antd-phone-input"
   },
   "exports": {
-    "./Input4": {
-      "import": "./Input4/index.esm.js",
-      "require": "./Input4/index.cjs.js",
+    ".": {
+      "import": "./index.esm.js",
+      "require": "./index.cjs.js",
       "types": {
-        "default": "./Input4/index.d.ts"
+        "default": "./index.d.ts"
       }
     },
-    "./Input5": {
-      "import": "./Input5/index.esm.js",
-      "require": "./Input5/index.cjs.js",
+    "./legacy": {
+      "import": "./legacy/index.esm.js",
+      "require": "./legacy/index.cjs.js",
       "types": {
-        "default": "./Input5/index.d.ts"
+        "default": "./legacy/index.d.ts"
       }
     },
-    "./style": {
-      "default": "./style.less"
+    "./legacy/style": {
+      "default": "./legacy/style.less"
     },
     "./package.json": "./package.json"
   },
   "files": [
-    "Input4",
-    "Input5",
-    "style5.css",
-    "style.less",
+    "index*",
+    "legacy",
     "LICENSE",
     "README.md"
   ],
   "scripts": {
-    "build": "npm run build:clean && npm run build:rollup && cp src/*.less src/*.css .",
+    "build": "npm run build:clean && npm run build:rollup && cp src/legacy/*.less legacy",
     "build:rollup": "rollup -c --configPlugin @rollup/plugin-typescript",
-    "build:clean": "rm -r Input4 Input5 style5.css style.less || true",
+    "build:clean": "rm -r legacy index* || true",
     "test": "jest --config jestconfig.json"
   },
   "license": "MIT",
