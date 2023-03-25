@@ -17,6 +17,7 @@ const PhoneInput = ({
 						onPressEnter = () => null,
 						onMount: handleMount = () => null,
 						onChange: handleChange = () => null,
+						inputClass: inputClassProxy,
 						...reactPhoneInputProps
 					}: PhoneInputProps) => {
 	const [currentCode, setCurrentCode] = useState("");
@@ -30,8 +31,9 @@ const PhoneInput = ({
 
 	const inputClass = useMemo(() => {
 		const suffix = {small: "sm", middle: "", large: "lg"}[size];
-		return "ant-input" + (suffix ? " ant-input-" + suffix : "");
-	}, [size]);
+		const className = "ant-input" + (suffix ? " ant-input-" + suffix : "");
+		return inputClassProxy ? `${className} ${inputClassProxy}` : className;
+	}, [inputClassProxy, size]);
 
 	const onChange: ReactPhoneOnChange = (value, data, event, formattedNumber) => {
 		const metadata = parsePhoneNumber(value, data, formattedNumber);

@@ -1,73 +1,23 @@
-import {useContext, useEffect, useMemo, useState} from "react";
-import ReactPhoneInput from "react-phone-input-2";
+import {useContext, useEffect, useMemo} from "react";
 import theme from "antd/lib/theme";
 import genComponentStyleHook from "antd/lib/input/style";
 import {FormItemInputContext} from "antd/lib/form/context";
 import {getStatusClassNames} from "antd/lib/_util/statusUtils";
 
-import {getDefaultISO2Code, masks, parsePhoneNumber} from "./utils";
-import {PhoneInputProps, ReactPhoneOnChange, ReactPhoneOnMount} from "./types";
+import InputLegacy from "./legacy";
+import {PhoneInputProps} from "./types";
 
-import "./style5.css";
-
-type ISO2Code = keyof typeof masks;
-
-const PhoneInput = ({
-						value,
-						style,
-						country,
-						className,
-						size = "middle",
-						onPressEnter = () => null,
-						onMount: handleMount = () => null,
-						onChange: handleChange = () => null,
-						...reactPhoneInputProps
-					}: PhoneInputProps) => {
-	const inputPrefix = "ant-input";
-	const dropdownPrefix = "ant-dropdown";
+const PhoneInput = (InputLegacyProps: PhoneInputProps) => {
 	const {token} = theme.useToken();
 	const {status}: any = useContext(FormItemInputContext);
-	const [_1, inputCls] = genComponentStyleHook(inputPrefix);
-	const [_2, dropdownCls] = genComponentStyleHook(dropdownPrefix);
-	const [currentCode, setCurrentCode] = useState("");
-
-	const countryCode = useMemo(() => country || getDefaultISO2Code(), [country]);
-
-	const rawPhone = useMemo(() => {
-		const {countryCode, areaCode, phoneNumber} = {...value};
-		return [countryCode, areaCode, phoneNumber].map(v => v || "").join("");
-	}, [value]);
+	const [_1, inputCls] = genComponentStyleHook("ant-input");
+	const [_2, dropdownCls] = genComponentStyleHook("ant-dropdown");
 
 	const inputClass = useMemo(() => {
-		const suffix = {small: "sm", middle: "", large: "lg"}[size];
-		const className = inputPrefix + (suffix ? ` ${inputPrefix}-` + suffix : "");
-		return `${className} ${inputCls} ` + getStatusClassNames(inputPrefix, status);
-	}, [inputCls, size, status]);
+		return `${inputCls} ` + getStatusClassNames("ant-input", status);
+	}, [inputCls, status]);
 
-	const dropdownClass = useMemo(() => dropdownPrefix + " " + dropdownCls, [dropdownCls]);
-
-	const onChange: ReactPhoneOnChange = (value, data, event, formattedNumber) => {
-		const metadata = parsePhoneNumber(value, data, formattedNumber);
-		const code = metadata.isoCode as ISO2Code;
-
-		if (code !== currentCode) {
-			/** Clears phone number when the country is selected manually */
-			handleChange({...metadata, areaCode: null, phoneNumber: null}, event);
-			setCurrentCode(code);
-			return;
-		}
-
-		handleChange(metadata, event);
-	}
-
-	const onMount: ReactPhoneOnMount = (rawValue, {countryCode, ...event}, formattedNumber) => {
-		const metadata = parsePhoneNumber(rawValue, {countryCode}, formattedNumber);
-		/** Initiates the current country code with the code of initial value */
-		setCurrentCode(metadata.isoCode as ISO2Code);
-		/** Initializes the existing value */
-		handleChange(metadata, event);
-		handleMount(metadata);
-	}
+	const dropdownClass = useMemo(() => "ant-dropdown " + dropdownCls, [dropdownCls]);
 
 	useEffect(() => {
 		for (let styleSheet of document.styleSheets) {
@@ -109,23 +59,10 @@ const PhoneInput = ({
 	}, [inputCls, token])
 
 	return (
-		<ReactPhoneInput
-			/** Static properties for stable functionality */
-			masks={masks}
-			value={rawPhone}
-			enableAreaCodes
-			disableSearchIcon
-			/** Static properties providing dynamic behavior */
-			onMount={onMount}
-			onChange={onChange}
-			country={countryCode}
+		<InputLegacy
+			{...InputLegacyProps}
 			inputClass={inputClass}
 			dropdownClass={dropdownClass}
-			/** Dynamic properties for customization */
-			{...reactPhoneInputProps}
-			containerStyle={style}
-			containerClass={className}
-			onEnterKeyPress={onPressEnter}
 		/>
 	)
 }
