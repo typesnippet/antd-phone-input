@@ -61,6 +61,7 @@
     "react": ">=16"
   },
   "devDependencies": {
+    "@rollup/plugin-alias": "^4.0.3",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-typescript": "^11.0.0",
     "@testing-library/react": "^14.0.0",

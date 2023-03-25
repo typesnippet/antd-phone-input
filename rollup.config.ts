@@ -1,5 +1,6 @@
 import dts from "rollup-plugin-dts";
 import json from "@rollup/plugin-json";
+import alias from "@rollup/plugin-alias";
 import postcss from "rollup-plugin-postcss";
 import typescript from "@rollup/plugin-typescript";
 import {readFileSync} from "fs";
@@ -18,18 +19,19 @@ const dtsInput5 = {file: "index.d.ts", format: "es"};
 const jsonPlugin = json();
 const cssPlugin = postcss();
 const tsPlugin = typescript();
+const aliasPlugin = alias({entries: {"antd/lib": "antd/es"}});
 
 const external = [
 	...Object.keys({...pkg.dependencies, ...pkg.peerDependencies}),
 	/^react($|\/)/,
-	/^antd($|\/)/,
+	/^antd($|\/es\/)/,
 ];
 
 export default [
 	{input: input4, output: cjsInput4, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
 	{input: input4, output: esmInput4, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
 	{input: input4, output: dtsInput4, plugins: [dts()], external: [/\.css$/]},
-	{input: input5, output: cjsInput5, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
-	{input: input5, output: esmInput5, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
+	{input: input5, output: cjsInput5, plugins: [tsPlugin, jsonPlugin, cssPlugin, aliasPlugin], external},
+	{input: input5, output: esmInput5, plugins: [tsPlugin, jsonPlugin, cssPlugin, aliasPlugin], external},
 	{input: input5, output: dtsInput5, plugins: [dts()], external: [/\.css$/]},
 ];
