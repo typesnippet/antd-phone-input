@@ -23,14 +23,13 @@ const external = [
 	...Object.keys({...pkg.dependencies, ...pkg.peerDependencies}),
 	/^react($|\/)/,
 	/^antd($|\/)/,
-	/\.css$/,
 ];
 
 export default [
 	{input: input4, output: cjsInput4, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
 	{input: input4, output: esmInput4, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
-	{input: input4, output: dtsInput4, plugins: [dts()], external},
+	{input: input4, output: dtsInput4, plugins: [dts()], external: [/\.css$/]},
 	{input: input5, output: cjsInput5, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
 	{input: input5, output: esmInput5, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
-	{input: input5, output: dtsInput5, plugins: [dts()], external},
+	{input: input5, output: dtsInput5, plugins: [dts()], external: [/\.css$/]},
 ];
