@@ -37,7 +37,7 @@
 }
 
 .react-tel-input .flag-dropdown.open {
-    z-index: 2;
+    z-index: 3;
     border: none;
     background-color: transparent;
 }
