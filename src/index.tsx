@@ -7,7 +7,7 @@ import {getStatusClassNames} from "antd/lib/_util/statusUtils";
 import InputLegacy from "./legacy";
 import {PhoneInputProps} from "./types";
 
-const PhoneInput = (InputLegacyProps: PhoneInputProps) => {
+const PhoneInput = (inputLegacyProps: PhoneInputProps) => {
 	const {token} = theme.useToken();
 	const {status}: any = useContext(FormItemInputContext);
 	const [_1, inputCls] = genComponentStyleHook("ant-input");
@@ -20,6 +20,7 @@ const PhoneInput = (InputLegacyProps: PhoneInputProps) => {
 	const dropdownClass = useMemo(() => "ant-dropdown " + dropdownCls, [dropdownCls]);
 
 	useEffect(() => {
+		/** Load antd 5.x styles dynamically observing the theme change */
 		for (let styleSheet of document.styleSheets) {
 			let rule: any;
 			for (rule of styleSheet.cssRules || styleSheet.rules) {
@@ -62,7 +63,7 @@ const PhoneInput = (InputLegacyProps: PhoneInputProps) => {
 
 	return (
 		<InputLegacy
-			{...InputLegacyProps}
+			{...inputLegacyProps}
 			inputClass={inputClass}
 			dropdownClass={dropdownClass}
 		/>
