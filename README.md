@@ -1,12 +1,16 @@
 # antd-phone-input
 
-Advanced Phone Number Input for [Ant Design](https://github.com/ant-design/ant-design).
-
 [![npm](https://img.shields.io/npm/v/antd-phone-input)](https://www.npmjs.com/package/antd-phone-input)
+[![antd](https://img.shields.io/badge/antd-3.x%20%7C%204.x%20%7C%205.x-blue)](https://github.com/ant-design/ant-design)
 [![types](https://img.shields.io/npm/types/antd-phone-input)](https://www.npmjs.com/package/antd-phone-input)
 [![License](https://img.shields.io/npm/l/antd-phone-input)](https://github.com/ArtyomVancyan/antd-phone-input/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
 [![Tests](https://github.com/ArtyomVancyan/antd-phone-input/actions/workflows/tests.yml/badge.svg)](https://github.com/ArtyomVancyan/antd-phone-input/actions/workflows/tests.yml)
+
+Advanced phone input component for [Ant Design](https://github.com/ant-design/ant-design) that provides support for all
+countries and is compatible with [`antd`](https://github.com/ant-design/ant-design) 3 and higher versions. It has
+built-in support for area codes and provides validation to ensure that the entered numbers are valid. This open-source
+project is designed to simplify the process of collecting phone numbers from users.
 
 ## Install
 
@@ -20,12 +24,17 @@ yarn add antd-phone-input
 
 ## Usage
 
-### Antd 4.x
+As mentioned above, this component is compatible with `3.x`, `4.x`, and after
+the [v0.1.4](https://github.com/ArtyomVancyan/antd-phone-input/releases/tag/v0.1.4) release, `5.x` versions of Ant
+Design. The latest one does not require any additional actions for loading the styles as it
+uses [`cssinjs`](https://github.com/ant-design/cssinjs) ecosystem.
+
+### Antd 5.x
 
 ```javascript
 import React from "react";
-import PhoneInput from "antd-phone-input";
 import FormItem from "antd/es/form/FormItem";
+import PhoneInput from "antd-phone-input";
 
 const Demo = () => {
   return (
@@ -36,22 +45,25 @@ const Demo = () => {
 }
 ```
 
+![latest](https://user-images.githubusercontent.com/44609997/227775101-72b03e76-52bc-421d-8e75-a03c9d0d6d08.png)
+
+### Antd 4.x and older
+
+For `4.x` and older versions, you should use the `legacy` endpoint.
+
+```javascript
+import PhoneInput from "antd-phone-input/legacy";
+```
+
 For including the styles, you should import them in the main `less` file after importing either
 the `antd/dist/antd.less` or `antd/dist/antd.dark.less` styles.
 
 ```diff
 @import "~antd/dist/antd";
-+ @import "~antd-phone-input/dist/style";
++ @import "~antd-phone-input/legacy/style";
 ```
 
-![light-dark-screenshots](https://user-images.githubusercontent.com/44609997/222975662-a2726b5f-954f-4a93-ac28-0339b432fa72.png)
-
-### Antd 5.x
-
-```ascii
-v5.x does not have support yet
-this issue is covered in GH-20
-```
+![legacy](https://user-images.githubusercontent.com/44609997/227775155-9e22bc63-2148-4714-ba8a-9bb4e44c0128.png)
 
 ## Value
 

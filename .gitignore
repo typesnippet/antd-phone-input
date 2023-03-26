@@ -6,7 +6,8 @@ package-lock.json
 .idea/
 
 # Build files
-dist/
+legacy/
+index*
 
 # Tarballs
 *.tgz

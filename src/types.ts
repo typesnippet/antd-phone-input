@@ -28,6 +28,8 @@ export interface ReactPhoneInputProps {
 	inputProps?: InputHTMLAttributes<HTMLInputElement>,
 	searchPlaceholder?: string,
 	searchNotFound?: string,
+	dropdownClass?: string,
+	inputClass?: string,
 	placeholder?: string,
 	enableSearch?: boolean,
 	disableDropdown?: boolean,

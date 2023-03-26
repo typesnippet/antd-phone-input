@@ -1,29 +1,37 @@
 import dts from "rollup-plugin-dts";
 import json from "@rollup/plugin-json";
+import alias from "@rollup/plugin-alias";
 import postcss from "rollup-plugin-postcss";
 import typescript from "@rollup/plugin-typescript";
 import {readFileSync} from "fs";
 
 const pkg = JSON.parse(readFileSync("./package.json") as unknown as string);
 
-const input = "src/index.tsx";
-const cjsOutput = {file: pkg.main, format: "cjs", exports: "auto"};
-const esmOutput = {file: pkg.module, format: "es"};
-const dtsOutput = {file: pkg.types, format: "es"};
+const input4 = "src/legacy/index.tsx";
+const input5 = "src/index.tsx";
+const cjsInput4 = {file: "legacy/index.cjs.js", format: "cjs", exports: "auto"};
+const esmInput4 = {file: "legacy/index.esm.js", format: "es"};
+const dtsInput4 = {file: "legacy/index.d.ts", format: "es"};
+const cjsInput5 = {file: "index.cjs.js", format: "cjs", exports: "auto"};
+const esmInput5 = {file: "index.esm.js", format: "es"};
+const dtsInput5 = {file: "index.d.ts", format: "es"};
 
 const jsonPlugin = json();
 const cssPlugin = postcss();
 const tsPlugin = typescript();
+const aliasPlugin = alias({entries: {"antd/lib": "antd/es"}});
 
 const external = [
 	...Object.keys({...pkg.dependencies, ...pkg.peerDependencies}),
 	/^react($|\/)/,
-	/^antd($|\/)/,
-	/\.css$/,
+	/^antd($|\/es\/)/,
 ];
 
 export default [
-	{input, output: cjsOutput, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
-	{input, output: esmOutput, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
-	{input, output: dtsOutput, plugins: [dts()], external: [/\.css$/]},
+	{input: input4, output: cjsInput4, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
+	{input: input4, output: esmInput4, plugins: [tsPlugin, jsonPlugin, cssPlugin], external},
+	{input: input4, output: dtsInput4, plugins: [dts()], external: [/\.css$/]},
+	{input: input5, output: cjsInput5, plugins: [tsPlugin, jsonPlugin, cssPlugin, aliasPlugin], external},
+	{input: input5, output: esmInput5, plugins: [tsPlugin, jsonPlugin, cssPlugin, aliasPlugin], external},
+	{input: input5, output: dtsInput5, plugins: [dts()], external: [/\.css$/]},
 ];
