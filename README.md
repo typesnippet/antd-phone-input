@@ -45,6 +45,8 @@ const Demo = () => {
 }
 ```
 
+![latest](https://user-images.githubusercontent.com/44609997/227775101-72b03e76-52bc-421d-8e75-a03c9d0d6d08.png)
+
 ### Antd 4.x and older
 
 For `4.x` and older versions, you should use the `legacy` endpoint.
@@ -61,7 +63,7 @@ the `antd/dist/antd.less` or `antd/dist/antd.dark.less` styles.
 + @import "~antd-phone-input/legacy/style";
 ```
 
-![light-dark-screenshots](https://user-images.githubusercontent.com/44609997/222975662-a2726b5f-954f-4a93-ac28-0339b432fa72.png)
+![legacy](https://user-images.githubusercontent.com/44609997/227775155-9e22bc63-2148-4714-ba8a-9bb4e44c0128.png)
 
 ## Value
 
