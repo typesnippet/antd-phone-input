@@ -25,12 +25,13 @@ const PhoneInput = (InputLegacyProps: PhoneInputProps) => {
 			for (rule of styleSheet.cssRules || styleSheet.rules) {
 				if (rule.selectorText === ".react-tel-input .country-list") {
 					rule.style.boxShadow = token.boxShadow;
+					rule.style.backgroundColor = token.colorBgElevated;
 				}
 				if (rule.selectorText === ".react-tel-input .selected-flag") {
 					rule.style.borderColor = token.colorBorder;
 				}
 				if (rule.selectorText === ".react-tel-input .country-list .search") {
-					rule.style.backgroundColor = token.colorBgContainer;
+					rule.style.backgroundColor = token.colorBgElevated;
 				}
 				if (rule.selectorText === ".react-tel-input .country-list .country") {
 					rule.style.borderRadius = token.borderRadiusOuter + "px";
@@ -49,6 +50,7 @@ const PhoneInput = (InputLegacyProps: PhoneInputProps) => {
 				}
 				if (rule.selectorText === `:where(.${inputCls}).ant-input`) {
 					rule.selectorText += "\n,.react-tel-input .country-list .search-box";
+                    rule.style.backgroundColor = token.colorBgElevated;
 				}
 				if (rule.selectorText === `:where(.${inputCls}).ant-input:hover`) {
 					rule.selectorText += "\n,.react-tel-input .country-list .search-box:focus";
