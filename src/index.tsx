@@ -21,9 +21,9 @@ const PhoneInput = (inputLegacyProps: PhoneInputProps) => {
 
 	useEffect(() => {
 		/** Load antd 5.x styles dynamically observing the theme change */
-		for (let styleSheet of document.styleSheets) {
+		for (let styleSheet of document?.styleSheets || []) {
 			let rule: any;
-			for (rule of styleSheet.cssRules || styleSheet.rules) {
+			for (rule of styleSheet?.cssRules || styleSheet?.rules || []) {
 				if (rule.selectorText === ".react-tel-input .country-list") {
 					rule.style.boxShadow = token.boxShadow;
 					rule.style.backgroundColor = token.colorBgElevated;
