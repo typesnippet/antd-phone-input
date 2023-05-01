@@ -1,7 +1,7 @@
 {
   "version": "0.1.6",
   "name": "antd-phone-input",
-  "description": "Advanced Phone Number Input for Ant Design",
+  "description": "Advanced, highly customizable phone input component for Ant Design.",
   "keywords": [
     "ant",
     "antd",
@@ -10,9 +10,10 @@
     "input",
     "number",
     "design",
+    "advanced",
     "component",
-    "components",
-    "phone-input",
+    "ant-design",
+    "customizable",
     "phone-number"
   ],
   "homepage": "https://github.com/ArtyomVancyan/antd-phone-input",
