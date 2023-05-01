@@ -1,16 +1,16 @@
-# antd-phone-input
+# Antd Phone Input
 
 [![npm](https://img.shields.io/npm/v/antd-phone-input)](https://www.npmjs.com/package/antd-phone-input)
-[![antd](https://img.shields.io/badge/antd-3.x%20%7C%204.x%20%7C%205.x-blue)](https://github.com/ant-design/ant-design)
+[![antd](https://img.shields.io/badge/antd-4.x%20%7C%205.x-blue)](https://github.com/ant-design/ant-design)
 [![types](https://img.shields.io/npm/types/antd-phone-input)](https://www.npmjs.com/package/antd-phone-input)
 [![License](https://img.shields.io/npm/l/antd-phone-input)](https://github.com/ArtyomVancyan/antd-phone-input/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
 [![Tests](https://github.com/ArtyomVancyan/antd-phone-input/actions/workflows/tests.yml/badge.svg)](https://github.com/ArtyomVancyan/antd-phone-input/actions/workflows/tests.yml)
 
 Advanced phone input component for [Ant Design](https://github.com/ant-design/ant-design) that provides support for all
-countries and is compatible with [`antd`](https://github.com/ant-design/ant-design) 3 and higher versions. It has
-built-in support for area codes and provides validation to ensure that the entered numbers are valid. This open-source
-project is designed to simplify the process of collecting phone numbers from users.
+countries and is compatible with [`antd`](https://github.com/ant-design/ant-design) 4 and 5 versions. It has built-in
+support for area codes and provides validation to ensure that the entered numbers are valid. This open-source project
+is designed to simplify the process of collecting phone numbers from users.
 
 ## Install
 
@@ -24,10 +24,8 @@ yarn add antd-phone-input
 
 ## Usage
 
-As mentioned above, this component is compatible with `3.x`, `4.x`, and after
-the [v0.1.4](https://github.com/ArtyomVancyan/antd-phone-input/releases/tag/v0.1.4) release, `5.x` versions of Ant
-Design. The latest one does not require any additional actions for loading the styles as it
-uses [`cssinjs`](https://github.com/ant-design/cssinjs) ecosystem.
+The latest version does not require any additional actions for loading the styles as it uses
+the [`cssinjs`](https://github.com/ant-design/cssinjs) ecosystem.
 
 ### Antd 5.x
 
@@ -47,9 +45,9 @@ const Demo = () => {
 
 ![latest](https://user-images.githubusercontent.com/44609997/227775101-72b03e76-52bc-421d-8e75-a03c9d0d6d08.png)
 
-### Antd 4.x and older
+### Antd 4.x
 
-For `4.x` and older versions, you should use the `legacy` endpoint.
+For `4.x` versions, you should use the `legacy` endpoint.
 
 ```javascript
 import PhoneInput from "antd-phone-input/legacy";
