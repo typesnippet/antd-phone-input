@@ -12,7 +12,7 @@ countries and is compatible with [`antd`](https://github.com/ant-design/ant-desi
 support for area codes and provides validation to ensure that the entered numbers are valid. This open-source project
 is designed to simplify the process of collecting phone numbers from users.
 
-## Install
+## Installation
 
 ```shell
 npm i antd-phone-input
