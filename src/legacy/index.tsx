@@ -22,14 +22,20 @@ const parsePhoneNumber: ParsePhoneNumber = (value, data, formattedNumber) => {
 	const isoCode = data?.countryCode;
 	const countryCodePattern = /\+\d+/;
 	const areaCodePattern = /\((\d+)\)/;
+	const dialCodePattern = /^\+[\d\s]+\([\d\s]+\)/;
 
 	/** Parses the matching partials of the phone number by predefined regex patterns */
 	const countryCodeMatch = formattedNumber ? (formattedNumber.match(countryCodePattern) || []) : [];
 	const areaCodeMatch = formattedNumber ? (formattedNumber.match(areaCodePattern) || []) : [];
+	const dialCodeMatch = formattedNumber ? (formattedNumber.match(dialCodePattern) || []) : [];
 
 	/** Converts the parsed values of the country and area codes to integers if values present */
 	const countryCode = countryCodeMatch.length > 0 ? parseInt(countryCodeMatch[0]) : null;
 	const areaCode = areaCodeMatch.length > 1 ? parseInt(areaCodeMatch[1]) : null;
+
+	/** Obtaining the dial code for comparing to the existing one - if the country mask contains an area code */
+	const dialCode = dialCodeMatch.length > 0 ? dialCodeMatch[0].replaceAll(/[+\s()]/g, "") : null;
+	const dialChanged = dialCode !== data?.dialCode;
 
 	/** Parses the phone number by removing the country and area codes from the formatted value */
 	const phoneNumberPattern = new RegExp(`^${countryCode}${(areaCode || "")}(\\d+)`);
@@ -43,7 +49,7 @@ const parsePhoneNumber: ParsePhoneNumber = (value, data, formattedNumber) => {
 		rules.phoneNumber.includes((phoneNumber || "").toString().length),
 	].every(Boolean);
 
-	return {countryCode, areaCode, phoneNumber, isoCode, valid};
+	return {countryCode, areaCode, phoneNumber, isoCode, valid, dialChanged};
 }
 
 const PhoneInput = ({
@@ -74,21 +80,22 @@ const PhoneInput = ({
 	}, [inputClassProxy, size]);
 
 	const onChange: ReactPhoneOnChange = (value, data, event, formattedNumber) => {
-		const metadata = parsePhoneNumber(value, data, formattedNumber);
+		const {dialChanged, ...metadata} = parsePhoneNumber(value, data, formattedNumber);
 		const code = metadata.isoCode as ISO2Code;
 
 		if (code !== currentCode) {
 			/** Clears phone number when the country is selected manually */
-			handleChange({...metadata, areaCode: null, phoneNumber: null}, event);
+			metadata.areaCode = dialChanged ? null : metadata.areaCode;
+			metadata.phoneNumber = null;
+			metadata.valid = false;
 			setCurrentCode(code);
-			return;
 		}
 
 		handleChange(metadata, event);
 	}
 
 	const onMount: ReactPhoneOnMount = (rawValue, {countryCode, ...event}, formattedNumber) => {
-		const metadata = parsePhoneNumber(rawValue, {countryCode}, formattedNumber);
+		const {dialChanged, ...metadata} = parsePhoneNumber(rawValue, {countryCode}, formattedNumber);
 		/** Initiates the current country code with the code of initial value */
 		setCurrentCode(metadata.isoCode as ISO2Code);
 		/** Initializes the existing value */
