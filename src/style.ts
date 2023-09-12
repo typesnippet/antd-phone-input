@@ -1,5 +1,5 @@
 import {GlobalToken} from "antd/lib/theme/interface";
-import {genBasicInputStyle, initInputToken, InputToken} from "antd/lib/input/style";
+import {genBasicInputStyle, initInputToken} from "antd/lib/input/style";
 
 export default (token: GlobalToken) => ({
 	".react-tel-input": {
@@ -8,7 +8,7 @@ export default (token: GlobalToken) => ({
 			backgroundColor: token.colorBgElevated,
 			".country-name": {color: token.colorText},
 			".search": {backgroundColor: token.colorBgElevated},
-			".search-box": genBasicInputStyle(initInputToken(token) as InputToken),
+			".search-box": genBasicInputStyle(initInputToken(token) as any),
 			".country": {
 				borderRadius: token.borderRadiusOuter,
 				".dial-code": {color: token.colorTextDescription},
