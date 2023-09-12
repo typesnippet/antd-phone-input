@@ -26,34 +26,33 @@
   },
   "exports": {
     ".": {
-      "import": "./index.esm.js",
-      "require": "./index.cjs.js",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
       "types": {
-        "default": "./index.d.ts"
+        "default": "./dist/index.d.ts"
       }
     },
     "./legacy": {
-      "import": "./legacy/index.esm.js",
-      "require": "./legacy/index.cjs.js",
+      "import": "./dist/legacy/index.esm.js",
+      "require": "./dist/legacy/index.cjs.js",
       "types": {
-        "default": "./legacy/index.d.ts"
+        "default": "./dist/legacy/index.d.ts"
       }
     },
     "./legacy/style": {
-      "default": "./legacy/style.less"
+      "default": "./dist/legacy/style.less"
     },
     "./package.json": "./package.json"
   },
   "files": [
-    "index*",
-    "legacy",
+    "dist",
     "LICENSE",
     "README.md"
   ],
   "scripts": {
-    "build": "npm run build:clean && npm run build:rollup && cp src/legacy/*.less legacy",
+    "build": "npm run build:clean && npm run build:rollup && cp src/legacy/*.less dist/legacy",
     "build:rollup": "rollup -c --configPlugin @rollup/plugin-typescript",
-    "build:clean": "rm -r legacy index* || true",
+    "build:clean": "rm -r dist || true",
     "test": "jest --config jestconfig.json"
   },
   "license": "MIT",

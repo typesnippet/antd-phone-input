@@ -9,12 +9,12 @@ const pkg = JSON.parse(readFileSync("./package.json") as unknown as string);
 
 const input4 = "src/legacy/index.tsx";
 const input5 = "src/index.tsx";
-const cjsInput4 = {file: "legacy/index.cjs.js", format: "cjs", exports: "auto"};
-const esmInput4 = {file: "legacy/index.esm.js", format: "es"};
-const dtsInput4 = {file: "legacy/index.d.ts", format: "es"};
-const cjsInput5 = {file: "index.cjs.js", format: "cjs", exports: "auto"};
-const esmInput5 = {file: "index.esm.js", format: "es"};
-const dtsInput5 = {file: "index.d.ts", format: "es"};
+const cjsInput4 = {file: "dist/legacy/index.cjs.js", format: "cjs", exports: "auto"};
+const esmInput4 = {file: "dist/legacy/index.esm.js", format: "es"};
+const dtsInput4 = {file: "dist/legacy/index.d.ts", format: "es"};
+const cjsInput5 = {file: "dist/index.cjs.js", format: "cjs", exports: "auto"};
+const esmInput5 = {file: "dist/index.esm.js", format: "es"};
+const dtsInput5 = {file: "dist/index.d.ts", format: "es"};
 
 const stringifier = (root: any, builder: any) => {
 	/** Include the CSS rules describing the flags after the main styles */
