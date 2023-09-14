@@ -1,7 +1,7 @@
-import {useMemo, useState} from "react";
+import {useCallback, useMemo, useState} from "react";
 import ReactPhoneInput from "react-phone-input-2";
 
-import {ParsePhoneNumber, PhoneInputProps, ReactPhoneOnChange, ReactPhoneOnMount} from "../types";
+import {ParsePhoneNumber, PhoneInputProps, PhoneNumber, ReactPhoneOnChange, ReactPhoneOnMount} from "../types";
 
 import "./style5.css";
 
@@ -12,10 +12,28 @@ import validations from "./validations.json";
 type ISO2Code = keyof typeof masks;
 type Timezone = keyof typeof timezones;
 
+let loaded = true;
+let checked = false;
+let initialized = false;
+
 const getDefaultISO2Code = () => {
 	/** Returns the default ISO2 code based on the user's timezone */
 	const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone as Timezone;
 	return (timezones[timezone] || "").toLowerCase() || "us";
+}
+
+const checkValidity = (metadata: PhoneNumber) => {
+	/** Checks if both the area code and phone number length satisfy the validation rules */
+	const rules = validations[metadata.isoCode as ISO2Code] || {areaCode: [], phoneNumber: []};
+	const isValid = !initialized || [
+		rules.areaCode.includes((metadata.areaCode || "").toString().length),
+		rules.phoneNumber.includes((metadata.phoneNumber || "").toString().length),
+	].every(Boolean);
+	if (checked) initialized = true;
+	if (loaded) initialized = true;
+	else checked = true;
+	loaded = false;
+	return isValid;
 }
 
 const parsePhoneNumber: ParsePhoneNumber = (value, data, formattedNumber) => {
@@ -42,14 +60,7 @@ const parsePhoneNumber: ParsePhoneNumber = (value, data, formattedNumber) => {
 	const phoneNumberMatch = value ? (value.match(phoneNumberPattern) || []) : [];
 	const phoneNumber = phoneNumberMatch.length > 1 ? phoneNumberMatch[1] : null;
 
-	/** Checks if both the area code and phone number length satisfy the validation rules */
-	const rules = validations[isoCode as ISO2Code] || {areaCode: [], phoneNumber: []};
-	const valid = [
-		rules.areaCode.includes((areaCode || "").toString().length),
-		rules.phoneNumber.includes((phoneNumber || "").toString().length),
-	].every(Boolean);
-
-	return {countryCode, areaCode, phoneNumber, isoCode, valid, dialChanged};
+	return {countryCode, areaCode, phoneNumber, isoCode, dialChanged};
 }
 
 const PhoneInput = ({
@@ -79,7 +90,7 @@ const PhoneInput = ({
 		return inputClassProxy ? `${className} ${inputClassProxy}` : className;
 	}, [inputClassProxy, size]);
 
-	const onChange: ReactPhoneOnChange = (value, data, event, formattedNumber) => {
+	const onChange: ReactPhoneOnChange = useCallback((value, data, event, formattedNumber) => {
 		const {dialChanged, ...metadata} = parsePhoneNumber(value, data, formattedNumber);
 		const code = metadata.isoCode as ISO2Code;
 
@@ -92,16 +103,26 @@ const PhoneInput = ({
 		}
 
 		handleChange(metadata, event);
-	}
+	}, [currentCode, handleChange]);
 
-	const onMount: ReactPhoneOnMount = (rawValue, {countryCode, ...event}, formattedNumber) => {
+	const onMount: ReactPhoneOnMount = useCallback((rawValue, {countryCode, ...event}, formattedNumber) => {
 		const {dialChanged, ...metadata} = parsePhoneNumber(rawValue, {countryCode}, formattedNumber);
-		/** Initiates the current country code with the code of initial value */
+		/** Initializes the existing value and computes the validity based on being touched */
+		handleChange({
+			...metadata, get valid() {
+				return checkValidity(metadata);
+			}
+		}, event);
+		handleMount({
+			...metadata, get valid() {
+				return checkValidity(metadata);
+			}
+		});
+		/** Sets the current country code to the code of the initial value */
 		setCurrentCode(metadata.isoCode as ISO2Code);
-		/** Initializes the existing value */
-		handleChange(metadata, event);
-		handleMount(metadata);
-	}
+		initialized = false;
+		checked = false;
+	}, [handleChange, handleMount]);
 
 	return (
 		<ReactPhoneInput
