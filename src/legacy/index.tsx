@@ -13,7 +13,6 @@ type ISO2Code = keyof typeof masks;
 type Timezone = keyof typeof timezones;
 
 let loaded = true;
-let checked = false;
 let initialized = false;
 
 const getDefaultISO2Code = () => {
@@ -25,13 +24,11 @@ const getDefaultISO2Code = () => {
 const checkValidity = (metadata: PhoneNumber) => {
 	/** Checks if both the area code and phone number length satisfy the validation rules */
 	const rules = validations[metadata.isoCode as ISO2Code] || {areaCode: [], phoneNumber: []};
-	const isValid = !initialized || [
+	const isValid = (loaded || initialized) ? [
 		rules.areaCode.includes((metadata.areaCode || "").toString().length),
 		rules.phoneNumber.includes((metadata.phoneNumber || "").toString().length),
-	].every(Boolean);
-	if (checked) initialized = true;
-	if (loaded) initialized = true;
-	else checked = true;
+	].every(Boolean) : !initialized;
+	initialized = true;
 	loaded = false;
 	return isValid;
 }
@@ -60,7 +57,8 @@ const parsePhoneNumber: ParsePhoneNumber = (value, data, formattedNumber) => {
 	const phoneNumberMatch = value ? (value.match(phoneNumberPattern) || []) : [];
 	const phoneNumber = phoneNumberMatch.length > 1 ? phoneNumberMatch[1] : null;
 
-	return {countryCode, areaCode, phoneNumber, isoCode, dialChanged};
+	const metadata = {countryCode, areaCode, phoneNumber, isoCode, dialChanged};
+	return {...metadata, valid: () => checkValidity(metadata)};
 }
 
 const PhoneInput = ({
@@ -98,7 +96,7 @@ const PhoneInput = ({
 			/** Clears phone number when the country is selected manually */
 			metadata.areaCode = dialChanged ? null : metadata.areaCode;
 			metadata.phoneNumber = null;
-			metadata.valid = false;
+			metadata.valid = () => false;
 			setCurrentCode(code);
 		}
 
@@ -107,21 +105,12 @@ const PhoneInput = ({
 
 	const onMount: ReactPhoneOnMount = useCallback((rawValue, {countryCode, ...event}, formattedNumber) => {
 		const {dialChanged, ...metadata} = parsePhoneNumber(rawValue, {countryCode}, formattedNumber);
-		/** Initializes the existing value and computes the validity based on being touched */
-		handleChange({
-			...metadata, get valid() {
-				return checkValidity(metadata);
-			}
-		}, event);
-		handleMount({
-			...metadata, get valid() {
-				return checkValidity(metadata);
-			}
-		});
+		/** Initializes the existing value */
+		handleChange(metadata, event);
+		handleMount(metadata);
 		/** Sets the current country code to the code of the initial value */
 		setCurrentCode(metadata.isoCode as ISO2Code);
 		initialized = false;
-		checked = false;
 	}, [handleChange, handleMount]);
 
 	return (
