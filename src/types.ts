@@ -10,8 +10,9 @@ export interface PhoneNumber {
 	areaCode?: number | null,
 	phoneNumber?: string | null,
 	isoCode?: string,
-	valid?: boolean,
 	dialChanged?: boolean,
+
+	valid?(): boolean,
 }
 
 export interface AntInputProps {
