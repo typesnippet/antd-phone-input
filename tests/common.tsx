@@ -17,26 +17,26 @@ Object.defineProperty(window, "matchMedia", {
 })
 
 export default function commonTests(PhoneInput: any, Form: any, FormItem: any, Button: any) {
-	describe("Checks the basic rendering and functionality", () => {
-		it("Renders without crashing", () => {
+	describe("Checking the basic rendering and functionality", () => {
+		it("Rendering without crashing", () => {
 			render(<PhoneInput/>);
 		})
 
-		it("Renders with an initial value", () => {
+		it("Rendering with an initial value", () => {
 			render(<PhoneInput
 				onMount={(value: any) => {
 					assert(value.countryCode === 1);
 					assert(value.areaCode === 702);
 					assert(value.phoneNumber === "1234567");
 					assert(value.isoCode === "us");
-					assert(value.valid === true);
+					assert(value.valid() === true);
 				}}
 				value={{countryCode: 1, areaCode: 702, phoneNumber: "1234567"}}
 			/>);
 			assert(screen.getByDisplayValue("+1 (702) 123 4567"));
 		})
 
-		it("Checks the component on user input", async () => {
+		it("Checking the component on user input", async () => {
 			render(<PhoneInput
 				onChange={(value: any) => {
 					assert(value.isoCode === "us");
@@ -48,7 +48,7 @@ export default function commonTests(PhoneInput: any, Form: any, FormItem: any, B
 			assert(input.getAttribute("value") === "+1 (702) 123 4567");
 		})
 
-		it("Uses the input with FormItem", async () => {
+		it("Using the input with FormItem", async () => {
 			render(<Form onFinish={({phone}: any) => {
 				assert(phone.countryCode === 1);
 				assert(phone.areaCode === 702);
@@ -66,11 +66,11 @@ export default function commonTests(PhoneInput: any, Form: any, FormItem: any, B
 			screen.getByTestId("button").click();
 		})
 
-		it("Checks input validation with FormItem", async () => {
+		it("Checking input validation with FormItem", async () => {
 			render(<Form initialValues={{phone: {countryCode: 1, areaCode: 702, phoneNumber: "1234567"}}}>
 				<FormItem name="phone" rules={[{
 					validator: (_: any, {valid}: any) => {
-						assert(valid === true);
+						assert(valid() === true);
 						return Promise.resolve();
 					}
 				}]}>
@@ -81,7 +81,7 @@ export default function commonTests(PhoneInput: any, Form: any, FormItem: any, B
 			await userEvent.click(screen.getByTestId("button"));
 		})
 
-		it("Checks form with initial value", async () => {
+		it("Checking form with initial value", async () => {
 			render(<Form initialValues={{phone: {countryCode: 1, areaCode: 702}}}>
 				<FormItem name="phone">
 					<PhoneInput/>
