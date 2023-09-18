@@ -3,11 +3,12 @@ import ReactPhoneInput from "react-phone-input-2";
 
 import {ParsePhoneNumber, PhoneInputProps, PhoneNumber, ReactPhoneOnChange, ReactPhoneOnMount} from "../types";
 
-import "./style5.css";
-
+import {styleInject} from "../style";
 import masks from "./phoneMasks.json";
 import timezones from "./timezones.json";
 import validations from "./validations.json";
+
+styleInject("style5.css");
 
 type ISO2Code = keyof typeof masks;
 type Timezone = keyof typeof timezones;

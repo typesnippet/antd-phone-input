@@ -1,6 +1,19 @@
 import {GlobalToken} from "antd/lib/theme/interface";
 import {genBasicInputStyle, initInputToken} from "antd/lib/input/style";
 
+export const styleInject = (cssText: string) => {
+	const style = document.createElement("style");
+	style.setAttribute("type", "text/css");
+
+	if ((style as any).styleSheet) {
+		(style as any).styleSheet.cssText = cssText;
+	} else {
+		style.appendChild(document.createTextNode(cssText));
+	}
+
+	document.head.appendChild(style);
+}
+
 export default (token: GlobalToken) => ({
 	".react-tel-input": {
 		".country-list": {
