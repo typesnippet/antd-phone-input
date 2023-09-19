@@ -67,14 +67,10 @@
     "README.md"
   ],
   "scripts": {
-    "rename": "bash -c 'for file in $1*.js; do if [[ \"${file%.js}\" =~ ^[^.]*$ ]]; then mv \"$file\" \"${file%.js}.$0.js\"; fi; done' ",
-    "refactor": "find . legacy -maxdepth 1 \\( -name '*.ts' -o -name '*.js' \\) -type f -exec sed -i 's/antd\\/lib/antd\\/es/g' {} +",
-    "build": "npm run build:clean && npm run build:cjs && npm run build:dts && npm run build:less && npm run build:css && npm run refactor",
-    "build:css": "find legacy -maxdepth 1 -name '*.js' -type f | xargs -I {} sh -c \"sed -i 's/style5.css/$(sed -e ':a' -e 'N' -e '$!ba' -e 's/\\n//g' -e 's/ \\+/ /g' ./legacy/style5.css)/g' {}\"",
-    "build:less": "bash -c 'cp src/legacy/*.{le,c}ss legacy'",
-    "build:clean": "rm -r legacy index* style* types* || true",
-    "build:cjs": "tsc --module commonjs && npm run rename -- cjs && npm run rename -- cjs legacy/",
-    "build:dts": "tsc --declaration",
+    "rename": "bash -c 'for file in $1*.js; do if [[ \"${file%.js}\" =~ ^[^.]*$ ]]; then mv \"$file\" \"${file%.js}.$0.js\"; fi; done'",
+    "compile": "tsc --module commonjs && npm run rename -- cjs && npm run rename -- cjs legacy/ && tsc --declaration",
+    "build": "npm run compile && tsx scripts/prepare-styles.ts",
+    "prebuild": "rm -r legacy index* style* types* || true",
     "test": "jest --config jestconfig.json"
   },
   "license": "MIT",
@@ -94,6 +90,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "ts-jest": "^29.1.1",
     "tslib": "^2.6.2",
+    "tsx": "^3.12.10",
     "typescript": "^5.2.2"
   },
   "dependencies": {

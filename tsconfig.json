@@ -23,6 +23,7 @@
     "rollup.config.ts",
     "node_modules",
     "examples",
+    "scripts",
     "tests",
     "dist"
   ]
