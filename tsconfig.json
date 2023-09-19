@@ -20,7 +20,6 @@
     "experimentalDecorators": true
   },
   "exclude": [
-    "rollup.config.ts",
     "node_modules",
     "examples",
     "scripts",
