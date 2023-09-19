@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "lib": [
+      "esnext"
+    ]
+  }
+}
