@@ -13,6 +13,7 @@ styleInject("style5.css");
 type ISO2Code = keyof typeof masks;
 type Timezone = keyof typeof timezones;
 
+let rCounter = -1;
 let loaded = true;
 let initialized = false;
 
@@ -25,12 +26,13 @@ const getDefaultISO2Code = () => {
 const checkValidity = (metadata: PhoneNumber) => {
 	/** Checks if both the area code and phone number length satisfy the validation rules */
 	const rules = validations[metadata.isoCode as ISO2Code] || {areaCode: [], phoneNumber: []};
-	const isValid = (loaded || initialized) ? [
+	const isValid = rCounter === 1 || ((loaded || initialized) ? [
 		rules.areaCode.includes((metadata.areaCode || "").toString().length),
 		rules.phoneNumber.includes((metadata.phoneNumber || "").toString().length),
-	].every(Boolean) : !initialized;
+	].every(Boolean) : !initialized);
 	initialized = true;
 	loaded = false;
+	rCounter = 0;
 	return isValid;
 }
 
@@ -111,6 +113,7 @@ const PhoneInput = ({
 		handleMount(metadata);
 		/** Sets the current country code to the code of the initial value */
 		setCurrentCode(metadata.isoCode as ISO2Code);
+		if (loaded && !initialized) rCounter += 1;
 		initialized = false;
 	}, [handleChange, handleMount]);
 
