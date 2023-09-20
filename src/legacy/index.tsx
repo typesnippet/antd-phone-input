@@ -1,4 +1,4 @@
-import {useCallback, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import ReactPhoneInput from "react-phone-input-2";
 
 import {CountryData, PhoneInputProps, PhoneNumber, ReactPhoneOnChange, ReactPhoneOnMount} from "../types";
@@ -10,30 +10,15 @@ import validations from "./validations.json";
 
 styleInject("style5.css");
 
+let browserLoaded = true;
+
 type ISO2Code = keyof typeof masks;
 type Timezone = keyof typeof timezones;
-
-let rCounter = -1;
-let loaded = true;
-let initialized = false;
 
 const getDefaultISO2Code = () => {
 	/** Returns the default ISO2 code based on the user's timezone */
 	const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone as Timezone;
 	return (timezones[timezone] || "").toLowerCase() || "us";
-}
-
-const checkValidity = (metadata: PhoneNumber) => {
-	/** Checks if both the area code and phone number length satisfy the validation rules */
-	const rules = validations[metadata.isoCode as ISO2Code] || {areaCode: [], phoneNumber: []};
-	const isValid = rCounter === 1 || ((loaded || initialized) ? [
-		rules.areaCode.includes((metadata.areaCode || "").toString().length),
-		rules.phoneNumber.includes((metadata.phoneNumber || "").toString().length),
-	].every(Boolean) : !initialized);
-	initialized = true;
-	loaded = false;
-	rCounter = 0;
-	return isValid;
 }
 
 const parsePhoneNumber = (value: string, data: CountryData, formattedNumber: string): PhoneNumber => {
@@ -60,8 +45,7 @@ const parsePhoneNumber = (value: string, data: CountryData, formattedNumber: str
 	const phoneNumberMatch = value ? (value.match(phoneNumberPattern) || []) : [];
 	const phoneNumber = phoneNumberMatch.length > 1 ? phoneNumberMatch[1] : null;
 
-	const metadata = {countryCode, areaCode, phoneNumber, isoCode, dialChanged};
-	return {...metadata, valid: () => checkValidity(metadata)};
+	return {countryCode, areaCode, phoneNumber, isoCode, dialChanged};
 }
 
 const PhoneInput = ({
@@ -76,6 +60,9 @@ const PhoneInput = ({
 						inputClass: inputClassProxy,
 						...reactPhoneInputProps
 					}: PhoneInputProps) => {
+	const loaded = useRef(browserLoaded);
+	const reset = useRef(false);
+	const initialized = useRef(false);
 	const [currentCode, setCurrentCode] = useState("");
 
 	const countryCode = useMemo(() => country || getDefaultISO2Code(), [country]);
@@ -91,6 +78,19 @@ const PhoneInput = ({
 		return inputClassProxy ? `${className} ${inputClassProxy}` : className;
 	}, [inputClassProxy, size]);
 
+	const checkValidity = (metadata: PhoneNumber) => {
+		/** Checks if both the area code and phone number length satisfy the validation rules */
+		const rules = validations[metadata.isoCode as ISO2Code] || {areaCode: [], phoneNumber: []};
+		const isValid = reset.current || ((loaded.current || initialized.current) ? [
+			rules.areaCode.includes((metadata.areaCode || "").toString().length),
+			rules.phoneNumber.includes((metadata.phoneNumber || "").toString().length),
+		].every(Boolean) : !initialized.current);
+		initialized.current = true;
+		loaded.current = false;
+		reset.current = false;
+		return isValid;
+	}
+
 	const onChange: ReactPhoneOnChange = useCallback((value, data, event, formattedNumber) => {
 		const {dialChanged, ...metadata} = parsePhoneNumber(value, data, formattedNumber);
 		const code = metadata.isoCode as ISO2Code;
@@ -99,23 +99,29 @@ const PhoneInput = ({
 			/** Clears phone number when the country is selected manually */
 			metadata.areaCode = dialChanged ? null : metadata.areaCode;
 			metadata.phoneNumber = null;
-			metadata.valid = () => false;
 			setCurrentCode(code);
 		}
 
-		handleChange(metadata, event);
+		handleChange({...metadata, valid: () => checkValidity(metadata)}, event);
 	}, [currentCode, handleChange]);
 
 	const onMount: ReactPhoneOnMount = useCallback((rawValue, {countryCode, ...event}, formattedNumber) => {
 		const {dialChanged, ...metadata} = parsePhoneNumber(rawValue, {countryCode}, formattedNumber);
 		/** Initializes the existing value */
-		handleChange(metadata, event);
-		handleMount(metadata);
+		handleChange({...metadata, valid: () => checkValidity(metadata)}, event);
+		handleMount({...metadata, valid: () => checkValidity(metadata)});
 		/** Sets the current country code to the code of the initial value */
 		setCurrentCode(metadata.isoCode as ISO2Code);
-		if (loaded && !initialized) rCounter += 1;
-		initialized = false;
+		if (loaded.current && !initialized.current) reset.current = true;
+		initialized.current = false;
 	}, [handleChange, handleMount]);
+
+	useEffect(() => {
+		reset.current = !browserLoaded;
+		return () => {
+			browserLoaded = false;
+		}
+	}, []);
 
 	return (
 		<ReactPhoneInput
