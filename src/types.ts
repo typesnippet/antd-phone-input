@@ -61,10 +61,6 @@ export interface ReactPhoneOnMount {
 	(value: string, event: ChangeEvent<HTMLInputElement> & CountryData, formattedNumber: string): void;
 }
 
-export interface ParsePhoneNumber {
-	(value: string, data: CountryData, formattedNumber: string): PhoneNumber;
-}
-
 export interface PhoneInputProps extends AntInputProps, ReactPhoneInputProps {
 	/**
 	 * NOTE: Interfaces of events may differ from the original interfaces

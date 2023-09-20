@@ -1,7 +1,7 @@
 import {useCallback, useMemo, useState} from "react";
 import ReactPhoneInput from "react-phone-input-2";
 
-import {ParsePhoneNumber, PhoneInputProps, PhoneNumber, ReactPhoneOnChange, ReactPhoneOnMount} from "../types";
+import {CountryData, PhoneInputProps, PhoneNumber, ReactPhoneOnChange, ReactPhoneOnMount} from "../types";
 
 import {styleInject} from "../style";
 import masks from "./phoneMasks.json";
@@ -34,7 +34,7 @@ const checkValidity = (metadata: PhoneNumber) => {
 	return isValid;
 }
 
-const parsePhoneNumber: ParsePhoneNumber = (value, data, formattedNumber) => {
+const parsePhoneNumber = (value: string, data: CountryData, formattedNumber: string): PhoneNumber => {
 	const isoCode = data?.countryCode;
 	const countryCodePattern = /\+\d+/;
 	const areaCodePattern = /\((\d+)\)/;
