@@ -46,13 +46,6 @@
         "default": "./types.d.ts"
       }
     },
-    "./style": {
-      "import": "./style.js",
-      "require": "./style.cjs.js",
-      "types": {
-        "default": "./style.d.ts"
-      }
-    },
     "./legacy/style": {
       "default": "./legacy/style.less"
     },

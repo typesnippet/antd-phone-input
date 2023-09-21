@@ -3,7 +3,7 @@ import ReactPhoneInput from "react-phone-input-2";
 
 import {CountryData, PhoneInputProps, PhoneNumber, ReactPhoneOnChange, ReactPhoneOnMount} from "../types";
 
-import {styleInject} from "../style";
+import styleInject from "./style";
 import masks from "./phoneMasks.json";
 import timezones from "./timezones.json";
 import validations from "./validations.json";
