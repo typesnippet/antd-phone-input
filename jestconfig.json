@@ -6,6 +6,9 @@
   "moduleNameMapper": {
     "^.+\\.((?:c|le|s[ca])ss)$": "identity-obj-proxy"
   },
+  "modulePathIgnorePatterns": [
+    "<rootDir>/examples"
+  ],
   "moduleFileExtensions": [
     "ts",
     "tsx",
