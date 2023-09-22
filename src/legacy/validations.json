@@ -129,7 +129,7 @@
   "mt": {"areaCode": [4], "phoneNumber": [4]},
   "mu": {"areaCode": [3], "phoneNumber": [4]},
   "mv": {"areaCode": [3], "phoneNumber": [4]},
-  "mz": {"areaCode": [2], "phoneNumber": [6]},
+  "mz": {"areaCode": [2], "phoneNumber": [6, 7]},
   "na": {"areaCode": [2], "phoneNumber": [7]},
   "nc": {"areaCode": [2], "phoneNumber": [4]},
   "ne": {"areaCode": [2], "phoneNumber": [6]},

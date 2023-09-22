@@ -11,12 +11,22 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [ 16.x, 18.x, 20.x ]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/
+
       - name: Install dependencies
-        run: yarn && yarn install
+        run: npm install
 
       - name: Run tests
-        run: yarn test
+        run: npm test

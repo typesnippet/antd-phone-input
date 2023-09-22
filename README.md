@@ -69,24 +69,24 @@ The value of the component is an object containing the parts of a phone number. 
 of opportunities for handling the data in your custom way. For example, you can easily merge the parts of the phone
 number into a single string.
 
-```json
+```javascript
 {
-  "countryCode": 1,
-  "areaCode": 702,
-  "phoneNumber": "1234567",
-  "isoCode": "us",
-  "valid": true
+  countryCode: 1,
+  areaCode: 702,
+  phoneNumber: "1234567",
+  isoCode: "us",
+  valid: function valid()
 }
 ```
 
 ## Validation
 
-The `valid` property of the value object shows the real-time validity of the phone number depending on the country. So
+The `valid` function of the value object returns the validity of the phone number depending on the selected country. So
 this can be used in a `validator` like this:
 
 ```javascript
 const validator = (_, {valid}) => {
-  if (valid) {
+  if (valid()) {
     return Promise.resolve();
   }
   return Promise.reject("Invalid phone number");
@@ -104,7 +104,7 @@ return (
 | Property           | Description                                                                                                                     | Type                |
 |--------------------|---------------------------------------------------------------------------------------------------------------------------------|---------------------|
 | size               | Either `large`, `middle` or `small`. Default value is `middle`. See at ant [docs][antInputProps] for more.                      | string              |
-| value              | An object containing the parts of phone number. E.g. `value={{countryCode: 1, areaCode: 702, phoneNumber: "1234567"}}`.         | object              |
+| value              | An object containing the parts of phone number. E.g. `value={{countryCode: 1, areaCode: 702, phoneNumber: "1234567"}}`.         | [object](#value)    |
 | style              | Applies CSS styles to the container element.                                                                                    | CSSProperties       |
 | className          | The value will be assigned to the container element.                                                                            | string              |
 | disabled           | Disables the whole input component.                                                                                             | boolean             |

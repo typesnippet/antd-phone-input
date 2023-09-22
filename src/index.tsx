@@ -1,10 +1,9 @@
 import {useContext, useMemo} from "react";
-import useToken from "antd/lib/theme/useToken";
 import genComponentStyleHook from "antd/lib/input/style";
 import {ConfigContext} from "antd/lib/config-provider";
-import {useStyleRegister} from "antd/lib/theme/internal";
 import {FormItemInputContext} from "antd/lib/form/context";
 import {getStatusClassNames} from "antd/lib/_util/statusUtils";
+import {useStyleRegister, useToken} from "antd/lib/theme/internal";
 
 import InputLegacy from "./legacy";
 import genPhoneInputStyle from "./style";

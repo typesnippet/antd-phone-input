@@ -10,8 +10,9 @@ export interface PhoneNumber {
 	areaCode?: number | null,
 	phoneNumber?: string | null,
 	isoCode?: string,
-	valid?: boolean,
 	dialChanged?: boolean,
+
+	valid?(): boolean,
 }
 
 export interface AntInputProps {
@@ -58,10 +59,6 @@ export interface ReactPhoneOnChange {
 
 export interface ReactPhoneOnMount {
 	(value: string, event: ChangeEvent<HTMLInputElement> & CountryData, formattedNumber: string): void;
-}
-
-export interface ParsePhoneNumber {
-	(value: string, data: CountryData, formattedNumber: string): PhoneNumber;
 }
 
 export interface PhoneInputProps extends AntInputProps, ReactPhoneInputProps {
