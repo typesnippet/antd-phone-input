@@ -16,7 +16,7 @@ const PhoneInput = (inputLegacyProps: PhoneInputProps) => {
 	const dropdownPrefixCls = getPrefixCls("dropdown");
 	const [_1, inputCls] = genComponentStyleHook(inputPrefixCls);
 	const [_2, dropdownCls] = genComponentStyleHook(dropdownPrefixCls);
-	const [theme, token, _3] = useToken();
+	const [theme, token] = useToken();
 
 	const inputClass = useMemo(() => {
 		return `${inputCls} ` + getStatusClassNames(inputPrefixCls, status);
