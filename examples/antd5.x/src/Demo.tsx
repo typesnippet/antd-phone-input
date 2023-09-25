@@ -34,7 +34,7 @@ const Demo = () => {
 		<ConfigProvider
 			theme={{algorithm: algorithm === "defaultAlgorithm" ? theme.defaultAlgorithm : theme.darkAlgorithm}}>
 			<Card style={{height: "100%", borderRadius: 0, border: "none"}} bodyStyle={{padding: 0}}>
-				<div className="m-5" style={{margin: 20, maxWidth: 400}}>
+				<div style={{margin: 20, maxWidth: 400}}>
 					{value && (
 						<pre style={{
 							background: algorithm === "defaultAlgorithm" ? "#efefef" : "#1f1f1f",
