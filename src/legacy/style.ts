@@ -1,20 +1,18 @@
 export default (cssText: string) => {
-	window.addEventListener("load", () => {
-		/** Resolve the overlap issue of the CSS rules when using Bootstrap */
-		for (const styleSheet of Array.from(document.styleSheets)) {
-			try {
-				for (const rule of Array.from(styleSheet.cssRules || styleSheet.rules)) {
-					if (rule instanceof CSSStyleRule) {
-						rule.selectorText = rule.selectorText.replace(
-							/^\.form-control(?=:|$)/,
-							".form-control:not(.ant-input)",
-						)
-					}
+	/** Resolve the overlap issue of the CSS rules when using Bootstrap */
+	for (const styleSheet of Array.from(document.styleSheets)) {
+		try {
+			for (const rule of Array.from(styleSheet.cssRules || styleSheet.rules)) {
+				if (rule instanceof CSSStyleRule) {
+					rule.selectorText = rule.selectorText.replace(
+						/^\.form-control(?=:|$)/,
+						".form-control:not(.ant-input)",
+					)
 				}
-			} catch (e) {
 			}
+		} catch (e) {
 		}
-	})
+	}
 
 	/** Inject the given `cssText` in the document head */
 	const style = document.createElement("style");
