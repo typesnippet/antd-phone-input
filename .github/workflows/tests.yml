@@ -37,7 +37,7 @@ jobs:
 
     strategy:
       matrix:
-        env: [ antd_v424, antd_v520, antd_v530, antd_v540, antd_v550, antd_v560, antd_v570, antd_v580, antd_v590 ]
+        env: [ antd_v424, antd_v510, antd_v520, antd_v530, antd_v540, antd_v550, antd_v560, antd_v570, antd_v580, antd_v590 ]
 
     steps:
       - name: Checkout
