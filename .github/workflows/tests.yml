@@ -30,3 +30,36 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Tox
+        run: |
+          pip install --upgrade pip
+          pip install tox tox-gh-actions
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          registry-url: https://registry.npmjs.org/
+
+      - name: Build and Package
+        run: |
+          npm install
+          npm run build
+          npm pack
+
+      - name: Run tests
+        run: tox
