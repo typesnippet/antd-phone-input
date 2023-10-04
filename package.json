@@ -64,7 +64,7 @@
     "compile": "tsc --module commonjs && npm run rename -- cjs && npm run rename -- cjs legacy/ && tsc --declaration",
     "build": "npm run compile && tsx scripts/prepare-styles.ts",
     "prebuild": "rm -r legacy index* style* types* || true",
-    "tox": "tsx scripts/prepare-package.ts && tox",
+    "postpack": "tsx scripts/prepare-package.ts",
     "test": "jest --config jestconfig.json"
   },
   "license": "MIT",
