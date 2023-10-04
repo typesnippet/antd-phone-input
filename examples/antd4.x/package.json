@@ -16,7 +16,8 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "start": "craco start"
+    "start": "craco start",
+    "build": "craco build"
   },
   "eslintConfig": {
     "extends": [

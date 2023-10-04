@@ -30,3 +30,38 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        env: [ antd_v424, antd_v510, antd_v520, antd_v530, antd_v540, antd_v550, antd_v560, antd_v570, antd_v580, antd_v590 ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+
+      - name: Install Tox
+        run: |
+          pip install --upgrade pip
+          pip install tox tox-gh-actions
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          registry-url: https://registry.npmjs.org/
+
+      - name: Build and Package
+        run: |
+          npm install
+          npm run build
+          npm pack
+
+      - name: Run Tox
+        run: tox -e ${{ matrix.env }}

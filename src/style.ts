@@ -1,6 +1,8 @@
 import {mergeToken} from "antd/lib/theme/internal";
 import * as inputHelper from "antd/lib/input/style";
 
+const inputStyle = inputHelper as any;
+
 export default (token: any) => ({
 	".react-tel-input": {
 		".country-list": {
@@ -10,8 +12,8 @@ export default (token: any) => ({
 			".search": {backgroundColor: token.colorBgElevated},
 			".search-box": inputHelper.genBasicInputStyle(
 				mergeToken(
-					((inputHelper as any).initInputToken || (() => ({})))(token),
-					((inputHelper as any).initComponentToken || (() => ({})))(token),
+					("initInputToken" in inputStyle ? inputStyle.initInputToken : (() => ({})))(token),
+					("initComponentToken" in inputStyle ? inputStyle.initComponentToken : (() => ({})))(token),
 				)
 			),
 			".country": {
