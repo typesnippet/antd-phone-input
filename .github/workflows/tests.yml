@@ -41,8 +41,6 @@ jobs:
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
 
       - name: Install Tox
         run: |
@@ -51,15 +49,10 @@ jobs:
 
       - name: Set up Node
         uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-          registry-url: https://registry.npmjs.org/
 
       - name: Build and Package
         run: |
           npm install
           npm run build
           npm pack
-
-      - name: Run tests
-        run: tox
+          npm run tox
