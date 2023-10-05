@@ -101,31 +101,31 @@ return (
 
 ## Props
 
-| Property           | Description                                                                                                                     | Type                |
-|--------------------|---------------------------------------------------------------------------------------------------------------------------------|---------------------|
-| size               | Either `large`, `middle` or `small`. Default value is `middle`. See at ant [docs][antInputProps] for more.                      | string              |
-| value              | An object containing the parts of phone number. E.g. `value={{countryCode: 1, areaCode: 702, phoneNumber: "1234567"}}`.         | [object](#value)    |
-| style              | Applies CSS styles to the container element.                                                                                    | CSSProperties       |
-| className          | The value will be assigned to the container element.                                                                            | string              |
-| disabled           | Disables the whole input component.                                                                                             | boolean             |
-| enableSearch       | Enables search in the country selection dropdown menu. Default value is `false`.                                                | boolean             |
-| disableDropdown    | Disables the manual country selection through the dropdown menu.                                                                | boolean             |
-| inputProps         | [HTML properties of input][htmlInputProps] to pass into the input.  E.g. `inputProps={{autoFocus: true}}`.                      | InputHTMLAttributes |
-| searchPlaceholder  | The value is shown if `enableSearch` is `true`. Default value is `search`.                                                      | string              |
-| searchNotFound     | The value is shown if `enableSearch` is `true` and the query does not match any country. Default value is `No entries to show`. | string              |
-| placeholder        | Custom placeholder. Default placeholder is `1 (702) 123-4567`.                                                                  | string              |
-| country            | Country code to be selected by default. By default, it will show the flag of the user's country.                                | string              |
-| regions            | Show only the countries of the specified regions. See the list of [available regions][reactPhoneRegions].                       | string[]            |
-| onlyCountries      | Country codes to be included in the list. E.g. `onlyCountries={['us', 'ca', 'uk']}`.                                            | string[]            |
-| excludeCountries   | Country codes to be excluded from the list of countries. E.g. `excludeCountries={['us', 'ca', 'uk']}`.                          | string[]            |
-| preferredCountries | Country codes to be at the top of the list. E.g. `preferredCountries={['us', 'ca', 'uk']}`.                                     | string[]            |
-| onChange           | Callback when the user is inputting. See at ant [docs][antInputProps] for more.                                                 | function(value, e)  |
-| onPressEnter       | The callback function that is triggered when <kbd>Enter</kbd> key is pressed.                                                   | function(e)         |
-| onFocus            | The callback is triggered when the input element is focused.                                                                    | function(e, value)  |
-| onClick            | The callback is triggered when the user clicks on the input element.                                                            | function(e, value)  |
-| onBlur             | The callback is triggered when the input element gets blurred or unfocused.                                                     | function(e, value)  |
-| onKeyDown          | The callback is triggered when any key is pressed down.                                                                         | function(e)         |
-| onMount            | The callback is triggered once the component gets mounted.                                                                      | function(e)         |
+| Property           | Description                                                                                                                                                                 | Type                      |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| size               | Either `large`, `middle` or `small`. Default value is `middle`. See at ant [docs][antInputProps] for more.                                                                  | string                    |
+| value              | An object containing a parsed phone number or the raw number. This also applies to the `initialValue` property of [Form.Item](https://ant.design/components/form#formitem). | [object](#value) / string |
+| style              | Applies CSS styles to the container element.                                                                                                                                | CSSProperties             |
+| className          | The value will be assigned to the container element.                                                                                                                        | string                    |
+| disabled           | Disables the whole input component.                                                                                                                                         | boolean                   |
+| enableSearch       | Enables search in the country selection dropdown menu. Default value is `false`.                                                                                            | boolean                   |
+| disableDropdown    | Disables the manual country selection through the dropdown menu.                                                                                                            | boolean                   |
+| inputProps         | [HTML properties of input][htmlInputProps] to pass into the input.  E.g. `inputProps={{autoFocus: true}}`.                                                                  | InputHTMLAttributes       |
+| searchPlaceholder  | The value is shown if `enableSearch` is `true`. Default value is `search`.                                                                                                  | string                    |
+| searchNotFound     | The value is shown if `enableSearch` is `true` and the query does not match any country. Default value is `No entries to show`.                                             | string                    |
+| placeholder        | Custom placeholder. Default placeholder is `1 (702) 123-4567`.                                                                                                              | string                    |
+| country            | Country code to be selected by default. By default, it will show the flag of the user's country.                                                                            | string                    |
+| regions            | Show only the countries of the specified regions. See the list of [available regions][reactPhoneRegions].                                                                   | string[]                  |
+| onlyCountries      | Country codes to be included in the list. E.g. `onlyCountries={['us', 'ca', 'uk']}`.                                                                                        | string[]                  |
+| excludeCountries   | Country codes to be excluded from the list of countries. E.g. `excludeCountries={['us', 'ca', 'uk']}`.                                                                      | string[]                  |
+| preferredCountries | Country codes to be at the top of the list. E.g. `preferredCountries={['us', 'ca', 'uk']}`.                                                                                 | string[]                  |
+| onChange           | Callback when the user is inputting. See at ant [docs][antInputProps] for more.                                                                                             | function(value, e)        |
+| onPressEnter       | The callback function that is triggered when <kbd>Enter</kbd> key is pressed.                                                                                               | function(e)               |
+| onFocus            | The callback is triggered when the input element is focused.                                                                                                                | function(e, value)        |
+| onClick            | The callback is triggered when the user clicks on the input element.                                                                                                        | function(e, value)        |
+| onBlur             | The callback is triggered when the input element gets blurred or unfocused.                                                                                                 | function(e, value)        |
+| onKeyDown          | The callback is triggered when any key is pressed down.                                                                                                                     | function(e)               |
+| onMount            | The callback is triggered once the component gets mounted.                                                                                                                  | function(e)               |
 
 ## Contribute
 
