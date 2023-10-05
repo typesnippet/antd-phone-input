@@ -68,8 +68,9 @@ const PhoneInput = ({
 	const countryCode = useMemo(() => country || getDefaultISO2Code(), [country]);
 
 	const rawPhone = useMemo(() => {
+		if (typeof value === "string") return value;
 		const {countryCode, areaCode, phoneNumber} = {...value};
-		return [countryCode, areaCode, phoneNumber].map(v => v || "").join("");
+		return [countryCode, areaCode, phoneNumber].filter(Boolean).join("");
 	}, [value]);
 
 	const inputClass = useMemo(() => {
