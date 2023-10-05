@@ -24,6 +24,11 @@ export default function commonTests(PhoneInput: any, Form: any, FormItem: any, B
 			render(<PhoneInput/>);
 		})
 
+		it("Rendering with strict raw value", () => {
+			render(<PhoneInput value="17021234567"/>);
+			assert(screen.getByDisplayValue("+1 (702) 123 4567"));
+		})
+
 		it("Rendering with an initial value", () => {
 			render(<PhoneInput
 				onMount={(value: any) => {
@@ -35,6 +40,15 @@ export default function commonTests(PhoneInput: any, Form: any, FormItem: any, B
 				}}
 				value={{countryCode: 1, areaCode: 702, phoneNumber: "1234567"}}
 			/>);
+			assert(screen.getByDisplayValue("+1 (702) 123 4567"));
+		})
+
+		it("Rendering with a raw initial value", () => {
+			render(<Form initialValues={{phone: "17021234567"}}>
+				<FormItem name="phone">
+					<PhoneInput/>
+				</FormItem>
+			</Form>);
 			assert(screen.getByDisplayValue("+1 (702) 123 4567"));
 		})
 
