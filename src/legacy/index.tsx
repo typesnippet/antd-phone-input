@@ -6,7 +6,7 @@ import {CountryData, PhoneInputProps, PhoneNumber, ReactPhoneOnChange, ReactPhon
 import styleInject from "./style";
 import masks from "./phoneMasks.json";
 import timezones from "./timezones.json";
-import validations from "./validations.json";
+import {validationPatterns} from "./validation";
 
 styleInject("style5.css");
 
@@ -80,12 +80,10 @@ const PhoneInput = ({
 	}, [inputClassProxy, size]);
 
 	const checkValidity = (metadata: PhoneNumber) => {
-		/** Checks if both the area code and phone number length satisfy the validation rules */
-		const rules = validations[metadata.isoCode as ISO2Code] || {areaCode: [], phoneNumber: []};
-		const isValid = reset.current || ((loaded.current || initialized.current) ? [
-			rules.areaCode.includes((metadata.areaCode || "").toString().length),
-			rules.phoneNumber.includes((metadata.phoneNumber || "").toString().length),
-		].every(Boolean) : !initialized.current);
+		/** Checks if both the area code and phone number length satisfy the validation pattern */
+		const pattern = validationPatterns[(metadata.isoCode as ISO2Code)] || /^$/;
+		const isValid = reset.current || ((loaded.current || initialized.current) ? pattern.test([
+			metadata.areaCode, metadata.phoneNumber].filter(Boolean).join("")) : !initialized.current);
 		initialized.current = true;
 		loaded.current = false;
 		reset.current = false;
