@@ -3,6 +3,9 @@ name: Update Validation Patterns
 on:
   schedule:
     - cron: "*/5 * * * *"
+  push:
+    branches:
+      - improve-validation
 
 jobs:
   update:
