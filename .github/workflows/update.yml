@@ -1,0 +1,34 @@
+name: Update Validation Patterns
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Fetch third-party metadata
+        run: |
+          curl -o metadata.xml https://raw.githubusercontent.com/daviddrysdale/python-phonenumbers/dev/resources/PhoneNumberMetadata.xml
+
+      - name: Compare metadata
+        id: compare
+        run: |
+          cmp -s resources/metadata.xml metadata.xml || echo "::set-output name=differs::true"
+
+      - name: Create Pull Request
+        if: steps.compare.outputs.differs == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          reviewers: ArtyomVancyan
+          branch-suffix: short-commit-hash
+          branch: update-validation-patterns
+          title: Update the validation patterns
+          commit-message: Update the validation patterns
+          body: This PR updates the validation patterns i.e. metadata.xml to keep the repository up-to-date with the upstream changes.
