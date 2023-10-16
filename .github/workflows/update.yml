@@ -12,21 +12,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Setup Python
+        uses: actions/setup-python@v3
+
       - name: Fetch third-party metadata
         run: |
-          curl -o metadata.xml https://raw.githubusercontent.com/daviddrysdale/python-phonenumbers/dev/resources/PhoneNumberMetadata.xml
+          curl -o resources/metadata.xml https://raw.githubusercontent.com/daviddrysdale/python-phonenumbers/dev/resources/PhoneNumberMetadata.xml
+
+      - name: Update metadata
+        run: |
+          python scripts/prepare-metadata
 
       - name: Compare metadata
         id: compare
         run: |
-          cmp -s resources/metadata.xml metadata.xml || echo "::set-output name=differs::true"
+          git diff --exit-code resources/metadata.xml || echo "::set-output name=differs::true"
 
       - name: Create Pull Request
         if: steps.compare.outputs.differs == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GH_TOKEN }}
-          reviewers: ArtyomVancyan
           branch-suffix: short-commit-hash
           branch: update-validation-patterns
           title: Update the validation patterns
