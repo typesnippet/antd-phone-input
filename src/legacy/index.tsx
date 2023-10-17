@@ -80,12 +80,10 @@ const PhoneInput = ({
 	}, [inputClassProxy, size]);
 
 	const checkValidity = (metadata: PhoneNumber) => {
-		/** Checks if both the area code and phone number length satisfy the validation rules */
-		const rules = validations[metadata.isoCode as ISO2Code] || {areaCode: [], phoneNumber: []};
-		const isValid = reset.current || ((loaded.current || initialized.current) ? [
-			rules.areaCode.includes((metadata.areaCode || "").toString().length),
-			rules.phoneNumber.includes((metadata.phoneNumber || "").toString().length),
-		].every(Boolean) : !initialized.current);
+		/** Checks if both the area code and phone number match the validation pattern */
+		const pattern = new RegExp((validations as any)[metadata.isoCode as ISO2Code]);
+		const isValid = reset.current || ((loaded.current || initialized.current) ? pattern.test([
+			metadata.areaCode, metadata.phoneNumber].filter(Boolean).join("")) : !initialized.current);
 		initialized.current = true;
 		loaded.current = false;
 		reset.current = false;

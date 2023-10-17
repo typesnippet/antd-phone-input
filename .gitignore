@@ -6,10 +6,15 @@ package-lock.json
 .idea/
 
 # Build files
-legacy/
-index*
+./legacy/
+./index*
 
 !examples/**/index*
+
+# Pycache
+__pycache__/
+*.py[cod]
+*$py.class
 
 # Tarballs
 *.tgz
