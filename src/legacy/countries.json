@@ -1,2742 +1,3978 @@
 [
   [
-    "ad",
-    "376",
-    "Andorra"
-  ],
-  [
-    "ae",
-    "971",
-    "United Arab Emirates"
-  ],
-  [
     "af",
+    "Afghanistan",
     "93",
-    "Afghanistan"
-  ],
-  [
-    "ag",
-    "1268",
-    "Antigua and Barbuda"
+    "93",
+    "+93 (..) ... ...."
   ],
   [
     "al",
+    "Albania",
     "355",
-    "Albania"
-  ],
-  [
-    "am",
-    "374",
-    "Armenia"
-  ],
-  [
-    "ao",
-    "244",
-    "Angola"
-  ],
-  [
-    "ar",
-    "54",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "5411",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54221",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54223",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54261",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54264",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "542652",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54280",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "542905",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54291",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "542920",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "542966",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54299",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54341",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54342",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54343",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54351",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54376",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54379",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54381",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "543833",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54385",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54387",
-    "Argentina"
-  ],
-  [
-    "ar",
-    "54388",
-    "Argentina"
-  ],
-  [
-    "at",
-    "43",
-    "Austria"
-  ],
-  [
-    "au",
-    "61",
-    "Australia"
-  ],
-  [
-    "au",
-    "612",
-    "Australia"
-  ],
-  [
-    "au",
-    "613",
-    "Australia"
-  ],
-  [
-    "au",
-    "614",
-    "Australia"
-  ],
-  [
-    "au",
-    "617",
-    "Australia"
-  ],
-  [
-    "au",
-    "618",
-    "Australia"
-  ],
-  [
-    "au",
-    "6102",
-    "Australia"
-  ],
-  [
-    "au",
-    "6103",
-    "Australia"
-  ],
-  [
-    "au",
-    "6104",
-    "Australia"
-  ],
-  [
-    "au",
-    "6107",
-    "Australia"
-  ],
-  [
-    "au",
-    "6108",
-    "Australia"
-  ],
-  [
-    "aw",
-    "297",
-    "Aruba"
-  ],
-  [
-    "az",
-    "994",
-    "Azerbaijan"
-  ],
-  [
-    "ba",
-    "387",
-    "Bosnia and Herzegovina"
-  ],
-  [
-    "bb",
-    "1246",
-    "Barbados"
-  ],
-  [
-    "bd",
-    "880",
-    "Bangladesh"
-  ],
-  [
-    "be",
-    "32",
-    "Belgium"
-  ],
-  [
-    "bf",
-    "226",
-    "Burkina Faso"
-  ],
-  [
-    "bg",
-    "359",
-    "Bulgaria"
-  ],
-  [
-    "bh",
-    "973",
-    "Bahrain"
-  ],
-  [
-    "bi",
-    "257",
-    "Burundi"
-  ],
-  [
-    "bj",
-    "229",
-    "Benin"
-  ],
-  [
-    "bn",
-    "673",
-    "Brunei"
-  ],
-  [
-    "bo",
-    "591",
-    "Bolivia"
-  ],
-  [
-    "br",
-    "55",
-    "Brazil"
-  ],
-  [
-    "bs",
-    "1242",
-    "Bahamas"
-  ],
-  [
-    "bt",
-    "975",
-    "Bhutan"
-  ],
-  [
-    "bw",
-    "267",
-    "Botswana"
-  ],
-  [
-    "by",
-    "375",
-    "Belarus"
-  ],
-  [
-    "bz",
-    "501",
-    "Belize"
-  ],
-  [
-    "ca",
-    "1204",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1226",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1236",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1249",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1250",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1289",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1306",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1343",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1365",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1387",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1403",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1416",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1418",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1431",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1437",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1438",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1450",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1506",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1514",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1519",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1548",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1579",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1581",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1587",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1604",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1613",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1639",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1647",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1672",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1705",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1709",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1742",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1778",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1780",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1782",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1807",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1819",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1825",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1867",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1873",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1902",
-    "Canada"
-  ],
-  [
-    "ca",
-    "1905",
-    "Canada"
-  ],
-  [
-    "cd",
-    "243",
-    "Congo"
-  ],
-  [
-    "cf",
-    "236",
-    "Central African Republic"
-  ],
-  [
-    "cg",
-    "242",
-    "Congo"
-  ],
-  [
-    "ch",
-    "41",
-    "Switzerland"
-  ],
-  [
-    "ci",
-    "225",
-    "C\u00f4te d\u2019Ivoire"
-  ],
-  [
-    "cl",
-    "56",
-    "Chile"
-  ],
-  [
-    "cm",
-    "237",
-    "Cameroon"
-  ],
-  [
-    "cn",
-    "86",
-    "China"
-  ],
-  [
-    "co",
-    "57",
-    "Colombia"
-  ],
-  [
-    "cr",
-    "506",
-    "Costa Rica"
-  ],
-  [
-    "cu",
-    "53",
-    "Cuba"
-  ],
-  [
-    "cv",
-    "238",
-    "Cape Verde"
-  ],
-  [
-    "cw",
-    "599",
-    "Cura\u00e7ao"
-  ],
-  [
-    "cy",
-    "357",
-    "Cyprus"
-  ],
-  [
-    "cz",
-    "420",
-    "Czech Republic"
-  ],
-  [
-    "de",
-    "49",
-    "Germany"
-  ],
-  [
-    "dj",
-    "253",
-    "Djibouti"
-  ],
-  [
-    "dk",
-    "45",
-    "Denmark"
-  ],
-  [
-    "dm",
-    "1767",
-    "Dominica"
-  ],
-  [
-    "do",
-    "1809",
-    "Dominican Republic"
-  ],
-  [
-    "do",
-    "1829",
-    "Dominican Republic"
-  ],
-  [
-    "do",
-    "1849",
-    "Dominican Republic"
+    "355",
+    "+355 (...) ... ..."
   ],
   [
     "dz",
+    "Algeria",
     "213",
-    "Algeria"
+    "213",
+    "+213 (..) ... ...."
   ],
   [
-    "ec",
-    "593",
-    "Ecuador"
+    "as",
+    "American Samoa",
+    "1684",
+    "1684",
+    "+1 (684) ...."
   ],
   [
-    "ee",
-    "372",
-    "Estonia"
+    "ad",
+    "Andorra",
+    "376",
+    "376",
+    "+376 (...) ..."
   ],
   [
-    "eg",
-    "20",
-    "Egypt"
+    "ao",
+    "Angola",
+    "244",
+    "244",
+    "+244 (...) ... ..."
   ],
   [
-    "er",
-    "291",
-    "Eritrea"
+    "ai",
+    "Anguilla",
+    "1264",
+    "1264",
+    "+1 (264) ...."
   ],
   [
-    "es",
-    "34",
-    "Spain"
+    "ag",
+    "Antigua and Barbuda",
+    "1268",
+    "1268",
+    "+1 (268) ...."
   ],
   [
-    "et",
-    "251",
-    "Ethiopia"
+    "ar",
+    "Argentina",
+    "54",
+    "5411",
+    "+54 (11.) ... ...."
   ],
   [
-    "fi",
-    "358",
-    "Finland"
+    "ar",
+    "Argentina",
+    "54",
+    "54221",
+    "+54 (221) ... ...."
   ],
   [
-    "fj",
-    "679",
-    "Fiji"
+    "ar",
+    "Argentina",
+    "54",
+    "54223",
+    "+54 (223) ... ...."
   ],
   [
-    "fm",
-    "691",
-    "Micronesia"
+    "ar",
+    "Argentina",
+    "54",
+    "54261",
+    "+54 (261) ... ...."
   ],
   [
-    "fr",
-    "33",
-    "France"
+    "ar",
+    "Argentina",
+    "54",
+    "54264",
+    "+54 (264) ... ...."
   ],
   [
-    "ga",
-    "241",
-    "Gabon"
+    "ar",
+    "Argentina",
+    "54",
+    "542652",
+    "+54 (265) 2.. ...."
   ],
   [
-    "gb",
-    "44",
-    "United Kingdom"
+    "ar",
+    "Argentina",
+    "54",
+    "54280",
+    "+54 (280) ... ...."
   ],
   [
-    "gd",
-    "1473",
-    "Grenada"
+    "ar",
+    "Argentina",
+    "54",
+    "542905",
+    "+54 (290) 5.. ...."
   ],
   [
-    "ge",
-    "995",
-    "Georgia"
+    "ar",
+    "Argentina",
+    "54",
+    "54291",
+    "+54 (291) ... ...."
   ],
   [
-    "gf",
-    "594",
-    "French Guiana"
+    "ar",
+    "Argentina",
+    "54",
+    "542920",
+    "+54 (292) 0.. ...."
   ],
   [
-    "gh",
-    "233",
-    "Ghana"
+    "ar",
+    "Argentina",
+    "54",
+    "542966",
+    "+54 (296) 6.. ...."
   ],
   [
-    "gm",
-    "220",
-    "Gambia"
+    "ar",
+    "Argentina",
+    "54",
+    "54299",
+    "+54 (299) ... ...."
   ],
   [
-    "gn",
-    "224",
-    "Guinea"
+    "ar",
+    "Argentina",
+    "54",
+    "54341",
+    "+54 (341) ... ...."
   ],
   [
-    "gp",
-    "590",
-    "Guadeloupe"
+    "ar",
+    "Argentina",
+    "54",
+    "54342",
+    "+54 (342) ... ...."
   ],
   [
-    "gq",
-    "240",
-    "Equatorial Guinea"
+    "ar",
+    "Argentina",
+    "54",
+    "54343",
+    "+54 (343) ... ...."
   ],
   [
-    "gr",
-    "30",
-    "Greece"
+    "ar",
+    "Argentina",
+    "54",
+    "54351",
+    "+54 (351) ... ...."
   ],
   [
-    "gt",
-    "502",
-    "Guatemala"
+    "ar",
+    "Argentina",
+    "54",
+    "54376",
+    "+54 (376) ... ...."
   ],
   [
-    "gu",
-    "1671",
-    "Guam"
+    "ar",
+    "Argentina",
+    "54",
+    "54379",
+    "+54 (379) ... ...."
   ],
   [
-    "gw",
-    "245",
-    "Guinea-Bissau"
+    "ar",
+    "Argentina",
+    "54",
+    "54381",
+    "+54 (381) ... ...."
   ],
   [
-    "gy",
-    "592",
-    "Guyana"
+    "ar",
+    "Argentina",
+    "54",
+    "543833",
+    "+54 (383) 3.. ...."
   ],
   [
-    "hk",
-    "852",
-    "Hong Kong"
+    "ar",
+    "Argentina",
+    "54",
+    "54385",
+    "+54 (385) ... ...."
   ],
   [
-    "hn",
-    "504",
-    "Honduras"
+    "ar",
+    "Argentina",
+    "54",
+    "54387",
+    "+54 (387) ... ...."
   ],
   [
-    "hr",
-    "385",
-    "Croatia"
+    "ar",
+    "Argentina",
+    "54",
+    "54388",
+    "+54 (388) ... ...."
   ],
   [
-    "ht",
-    "509",
-    "Haiti"
+    "am",
+    "Armenia",
+    "374",
+    "374",
+    "+374 (..) ... ..."
   ],
   [
-    "hu",
-    "36",
-    "Hungary"
+    "aw",
+    "Aruba",
+    "297",
+    "297",
+    "+297 (...) ...."
   ],
   [
-    "id",
-    "62",
-    "Indonesia"
+    "au",
+    "Australia",
+    "61",
+    "612",
+    "+61 (2) .... ...."
   ],
   [
-    "ie",
-    "353",
-    "Ireland"
+    "au",
+    "Australia",
+    "61",
+    "613",
+    "+61 (3) .... ...."
   ],
   [
-    "il",
-    "972",
-    "Israel"
+    "au",
+    "Australia",
+    "61",
+    "614",
+    "+61 (4) .... ...."
   ],
   [
-    "in",
-    "91",
-    "India"
+    "au",
+    "Australia",
+    "61",
+    "617",
+    "+61 (7) .... ...."
+  ],
+  [
+    "au",
+    "Australia",
+    "61",
+    "618",
+    "+61 (8) .... ...."
+  ],
+  [
+    "au",
+    "Australia",
+    "61",
+    "6102",
+    "+61 (0) 2... ...."
+  ],
+  [
+    "au",
+    "Australia",
+    "61",
+    "6103",
+    "+61 (0) 3... ...."
+  ],
+  [
+    "au",
+    "Australia",
+    "61",
+    "6104",
+    "+61 (0) 4... ...."
+  ],
+  [
+    "au",
+    "Australia",
+    "61",
+    "6107",
+    "+61 (0) 7... ...."
+  ],
+  [
+    "au",
+    "Australia",
+    "61",
+    "6108",
+    "+61 (0) 8... ...."
+  ],
+  [
+    "at",
+    "Austria",
+    "43",
+    "43",
+    "+43 (...) ... ...."
+  ],
+  [
+    "az",
+    "Azerbaijan",
+    "994",
+    "994",
+    "+994 (..) ... .. .."
+  ],
+  [
+    "bs",
+    "Bahamas",
+    "1242",
+    "1242",
+    "+1 (242) ...."
+  ],
+  [
+    "bh",
+    "Bahrain",
+    "973",
+    "973",
+    "+973 (....) ...."
+  ],
+  [
+    "bd",
+    "Bangladesh",
+    "880",
+    "880",
+    "+880 (..) ... ..."
+  ],
+  [
+    "bb",
+    "Barbados",
+    "1246",
+    "1246",
+    "+1 (246) ...."
+  ],
+  [
+    "by",
+    "Belarus",
+    "375",
+    "375",
+    "+375 (..) ... .. .."
+  ],
+  [
+    "be",
+    "Belgium",
+    "32",
+    "32",
+    "+32 (...) ... ..."
+  ],
+  [
+    "bz",
+    "Belize",
+    "501",
+    "501",
+    "+501 (...) ...."
+  ],
+  [
+    "bj",
+    "Benin",
+    "229",
+    "229",
+    "+229 (..) .. ...."
+  ],
+  [
+    "bm",
+    "Bermuda",
+    "1441",
+    "1441",
+    "+1 (441) ...."
+  ],
+  [
+    "bt",
+    "Bhutan",
+    "975",
+    "975",
+    "+975 (.) ... ..."
+  ],
+  [
+    "bo",
+    "Bolivia",
+    "591",
+    "591",
+    "+591 (.) ... ...."
+  ],
+  [
+    "ba",
+    "Bosnia and Herzegovina",
+    "387",
+    "387",
+    "+387 (..) ....."
+  ],
+  [
+    "bw",
+    "Botswana",
+    "267",
+    "267",
+    "+267 (..) ... ..."
+  ],
+  [
+    "br",
+    "Brazil",
+    "55",
+    "55",
+    "+55 (..) .... ...."
   ],
   [
     "io",
+    "British Indian Ocean Territory",
     "246",
-    "British Indian Ocean Territory"
+    "246",
+    "+246 (...) ...."
   ],
   [
-    "iq",
-    "964",
-    "Iraq"
+    "vg",
+    "British Virgin Islands",
+    "1284",
+    "1284",
+    "+1 (284) ...."
   ],
   [
-    "ir",
-    "98",
-    "Iran"
+    "bn",
+    "Brunei",
+    "673",
+    "673",
+    "+673 (...) ...."
   ],
   [
-    "is",
-    "354",
-    "Iceland"
+    "bg",
+    "Bulgaria",
+    "359",
+    "359",
+    "+359 (...) ... ..."
   ],
   [
-    "jm",
-    "1876",
-    "Jamaica"
+    "bf",
+    "Burkina Faso",
+    "226",
+    "226",
+    "+226 (..) .. ...."
   ],
   [
-    "jo",
-    "962",
-    "Jordan"
-  ],
-  [
-    "jp",
-    "81",
-    "Japan"
-  ],
-  [
-    "ke",
-    "254",
-    "Kenya"
-  ],
-  [
-    "kg",
-    "996",
-    "Kyrgyzstan"
+    "bi",
+    "Burundi",
+    "257",
+    "257",
+    "+257 (..) .. ...."
   ],
   [
     "kh",
+    "Cambodia",
     "855",
-    "Cambodia"
+    "855",
+    "+855 (..) ... ..."
   ],
   [
-    "ki",
-    "686",
-    "Kiribati"
+    "cm",
+    "Cameroon",
+    "237",
+    "237",
+    "+237 (....) ...."
   ],
   [
-    "km",
-    "269",
-    "Comoros"
+    "ca",
+    "Canada",
+    "1204",
+    "1204",
+    "+1 (204) ... ...."
   ],
   [
-    "kn",
-    "1869",
-    "Saint Kitts and Nevis"
+    "ca",
+    "Canada",
+    "1226",
+    "1226",
+    "+1 (226) ... ...."
   ],
   [
-    "kp",
-    "850",
-    "North Korea"
+    "ca",
+    "Canada",
+    "1236",
+    "1236",
+    "+1 (236) ... ...."
   ],
   [
-    "kr",
-    "82",
-    "South Korea"
+    "ca",
+    "Canada",
+    "1249",
+    "1249",
+    "+1 (249) ... ...."
   ],
   [
-    "kw",
-    "965",
-    "Kuwait"
+    "ca",
+    "Canada",
+    "1250",
+    "1250",
+    "+1 (250) ... ...."
   ],
   [
-    "kz",
-    "7310",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1289",
+    "1289",
+    "+1 (289) ... ...."
   ],
   [
-    "kz",
-    "7311",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1306",
+    "1306",
+    "+1 (306) ... ...."
   ],
   [
-    "kz",
-    "7312",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1343",
+    "1343",
+    "+1 (343) ... ...."
   ],
   [
-    "kz",
-    "7313",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1365",
+    "1365",
+    "+1 (365) ... ...."
   ],
   [
-    "kz",
-    "7315",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1387",
+    "1387",
+    "+1 (387) ... ...."
   ],
   [
-    "kz",
-    "7318",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1403",
+    "1403",
+    "+1 (403) ... ...."
   ],
   [
-    "kz",
-    "7321",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1416",
+    "1416",
+    "+1 (416) ... ...."
   ],
   [
-    "kz",
-    "7324",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1418",
+    "1418",
+    "+1 (418) ... ...."
   ],
   [
-    "kz",
-    "7325",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1431",
+    "1431",
+    "+1 (431) ... ...."
   ],
   [
-    "kz",
-    "7326",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1437",
+    "1437",
+    "+1 (437) ... ...."
   ],
   [
-    "kz",
-    "7327",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1438",
+    "1438",
+    "+1 (438) ... ...."
   ],
   [
-    "kz",
-    "7336",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1450",
+    "1450",
+    "+1 (450) ... ...."
   ],
   [
-    "kz",
-    "77172",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1506",
+    "1506",
+    "+1 (506) ... ...."
   ],
   [
-    "kz",
-    "773622",
-    "Kazakhstan"
+    "ca",
+    "Canada",
+    "1514",
+    "1514",
+    "+1 (514) ... ...."
   ],
   [
-    "la",
-    "856",
-    "Laos"
+    "ca",
+    "Canada",
+    "1519",
+    "1519",
+    "+1 (519) ... ...."
   ],
   [
-    "lb",
-    "961",
-    "Lebanon"
+    "ca",
+    "Canada",
+    "1548",
+    "1548",
+    "+1 (548) ... ...."
   ],
   [
-    "lc",
-    "1758",
-    "Saint Lucia"
+    "ca",
+    "Canada",
+    "1579",
+    "1579",
+    "+1 (579) ... ...."
   ],
   [
-    "li",
-    "423",
-    "Liechtenstein"
+    "ca",
+    "Canada",
+    "1581",
+    "1581",
+    "+1 (581) ... ...."
   ],
   [
-    "lk",
-    "94",
-    "Sri Lanka"
+    "ca",
+    "Canada",
+    "1587",
+    "1587",
+    "+1 (587) ... ...."
   ],
   [
-    "lr",
-    "231",
-    "Liberia"
+    "ca",
+    "Canada",
+    "1604",
+    "1604",
+    "+1 (604) ... ...."
   ],
   [
-    "ls",
-    "266",
-    "Lesotho"
+    "ca",
+    "Canada",
+    "1613",
+    "1613",
+    "+1 (613) ... ...."
   ],
   [
-    "lt",
-    "370",
-    "Lithuania"
+    "ca",
+    "Canada",
+    "1639",
+    "1639",
+    "+1 (639) ... ...."
   ],
   [
-    "lu",
-    "352",
-    "Luxembourg"
+    "ca",
+    "Canada",
+    "1647",
+    "1647",
+    "+1 (647) ... ...."
   ],
   [
-    "lv",
-    "371",
-    "Latvia"
+    "ca",
+    "Canada",
+    "1672",
+    "1672",
+    "+1 (672) ... ...."
   ],
   [
-    "ly",
-    "218",
-    "Libya"
+    "ca",
+    "Canada",
+    "1705",
+    "1705",
+    "+1 (705) ... ...."
   ],
   [
-    "ma",
-    "212",
-    "Morocco"
+    "ca",
+    "Canada",
+    "1709",
+    "1709",
+    "+1 (709) ... ...."
   ],
   [
-    "mc",
-    "377",
-    "Monaco"
+    "ca",
+    "Canada",
+    "1742",
+    "1742",
+    "+1 (742) ... ...."
   ],
   [
-    "md",
-    "373",
-    "Moldova"
+    "ca",
+    "Canada",
+    "1778",
+    "1778",
+    "+1 (778) ... ...."
   ],
   [
-    "me",
-    "382",
-    "Montenegro"
+    "ca",
+    "Canada",
+    "1780",
+    "1780",
+    "+1 (780) ... ...."
   ],
   [
-    "mg",
-    "261",
-    "Madagascar"
+    "ca",
+    "Canada",
+    "1782",
+    "1782",
+    "+1 (782) ... ...."
   ],
   [
-    "mh",
-    "692",
-    "Marshall Islands"
+    "ca",
+    "Canada",
+    "1807",
+    "1807",
+    "+1 (807) ... ...."
   ],
   [
-    "mk",
-    "389",
-    "Macedonia"
+    "ca",
+    "Canada",
+    "1819",
+    "1819",
+    "+1 (819) ... ...."
   ],
   [
-    "ml",
-    "223",
-    "Mali"
+    "ca",
+    "Canada",
+    "1825",
+    "1825",
+    "+1 (825) ... ...."
   ],
   [
-    "mm",
-    "95",
-    "Myanmar"
+    "ca",
+    "Canada",
+    "1867",
+    "1867",
+    "+1 (867) ... ...."
   ],
   [
-    "mn",
-    "976",
-    "Mongolia"
+    "ca",
+    "Canada",
+    "1873",
+    "1873",
+    "+1 (873) ... ...."
   ],
   [
-    "mo",
-    "853",
-    "Macau"
+    "ca",
+    "Canada",
+    "1902",
+    "1902",
+    "+1 (902) ... ...."
   ],
   [
-    "mq",
-    "596",
-    "Martinique"
+    "ca",
+    "Canada",
+    "1905",
+    "1905",
+    "+1 (905) ... ...."
   ],
   [
-    "mr",
-    "222",
-    "Mauritania"
+    "cv",
+    "Cape Verde",
+    "238",
+    "238",
+    "+238 (...) .. .."
   ],
   [
-    "mt",
-    "356",
-    "Malta"
+    "bq",
+    "Caribbean Netherlands",
+    "599",
+    "599",
+    "+599 (...) .... ...."
   ],
   [
-    "mu",
-    "230",
-    "Mauritius"
+    "ky",
+    "Cayman Islands",
+    "1345",
+    "1345",
+    "+1 (345) ...."
   ],
   [
-    "mv",
-    "960",
-    "Maldives"
-  ],
-  [
-    "mw",
-    "265",
-    "Malawi"
-  ],
-  [
-    "mx",
-    "52",
-    "Mexico"
-  ],
-  [
-    "mx",
-    "5255",
-    "Mexico"
-  ],
-  [
-    "mx",
-    "5281",
-    "Mexico"
-  ],
-  [
-    "mx",
-    "5233",
-    "Mexico"
-  ],
-  [
-    "mx",
-    "52656",
-    "Mexico"
-  ],
-  [
-    "mx",
-    "52664",
-    "Mexico"
-  ],
-  [
-    "mx",
-    "52998",
-    "Mexico"
-  ],
-  [
-    "mx",
-    "52774",
-    "Mexico"
-  ],
-  [
-    "mx",
-    "52229",
-    "Mexico"
-  ],
-  [
-    "my",
-    "60",
-    "Malaysia"
-  ],
-  [
-    "mz",
-    "258",
-    "Mozambique"
-  ],
-  [
-    "na",
-    "264",
-    "Namibia"
-  ],
-  [
-    "nc",
-    "687",
-    "New Caledonia"
-  ],
-  [
-    "ne",
-    "227",
-    "Niger"
-  ],
-  [
-    "ng",
-    "234",
-    "Nigeria"
-  ],
-  [
-    "ni",
-    "505",
-    "Nicaragua"
-  ],
-  [
-    "nl",
-    "31",
-    "Netherlands"
-  ],
-  [
-    "no",
-    "47",
-    "Norway"
-  ],
-  [
-    "np",
-    "977",
-    "Nepal"
-  ],
-  [
-    "nr",
-    "674",
-    "Nauru"
-  ],
-  [
-    "nz",
-    "64",
-    "New Zealand"
-  ],
-  [
-    "om",
-    "968",
-    "Oman"
-  ],
-  [
-    "pa",
-    "507",
-    "Panama"
-  ],
-  [
-    "pe",
-    "51",
-    "Peru"
-  ],
-  [
-    "pf",
-    "689",
-    "French Polynesia"
-  ],
-  [
-    "pg",
-    "675",
-    "Papua New Guinea"
-  ],
-  [
-    "ph",
-    "63",
-    "Philippines"
-  ],
-  [
-    "pk",
-    "92",
-    "Pakistan"
-  ],
-  [
-    "pl",
-    "48",
-    "Poland"
-  ],
-  [
-    "pr",
-    "1787",
-    "Puerto Rico"
-  ],
-  [
-    "pr",
-    "1939",
-    "Puerto Rico"
-  ],
-  [
-    "ps",
-    "970",
-    "Palestine"
-  ],
-  [
-    "pt",
-    "351",
-    "Portugal"
-  ],
-  [
-    "pw",
-    "680",
-    "Palau"
-  ],
-  [
-    "py",
-    "595",
-    "Paraguay"
-  ],
-  [
-    "qa",
-    "974",
-    "Qatar"
-  ],
-  [
-    "re",
-    "262",
-    "R\u00e9union"
-  ],
-  [
-    "ro",
-    "40",
-    "Romania"
-  ],
-  [
-    "rs",
-    "381",
-    "Serbia"
-  ],
-  [
-    "ru",
-    "7",
-    "Russia"
-  ],
-  [
-    "rw",
-    "250",
-    "Rwanda"
-  ],
-  [
-    "sa",
-    "966",
-    "Saudi Arabia"
-  ],
-  [
-    "sb",
-    "677",
-    "Solomon Islands"
-  ],
-  [
-    "sc",
-    "248",
-    "Seychelles"
-  ],
-  [
-    "sd",
-    "249",
-    "Sudan"
-  ],
-  [
-    "se",
-    "46",
-    "Sweden"
-  ],
-  [
-    "sg",
-    "65",
-    "Singapore"
-  ],
-  [
-    "si",
-    "386",
-    "Slovenia"
-  ],
-  [
-    "sk",
-    "421",
-    "Slovakia"
-  ],
-  [
-    "sl",
-    "232",
-    "Sierra Leone"
-  ],
-  [
-    "sm",
-    "378",
-    "San Marino"
-  ],
-  [
-    "sn",
-    "221",
-    "Senegal"
-  ],
-  [
-    "so",
-    "252",
-    "Somalia"
-  ],
-  [
-    "sr",
-    "597",
-    "Suriname"
-  ],
-  [
-    "ss",
-    "211",
-    "South Sudan"
-  ],
-  [
-    "st",
-    "239",
-    "S\u00e3o Tom\u00e9 and Pr\u00edncipe"
-  ],
-  [
-    "sv",
-    "503",
-    "El Salvador"
-  ],
-  [
-    "sy",
-    "963",
-    "Syria"
-  ],
-  [
-    "sz",
-    "268",
-    "Swaziland"
+    "cf",
+    "Central African Republic",
+    "236",
+    "236",
+    "+236 (..) .. ...."
   ],
   [
     "td",
+    "Chad",
     "235",
-    "Chad"
+    "235",
+    "+235 (..) .. .. .."
   ],
   [
-    "tg",
-    "228",
-    "Togo"
+    "cl",
+    "Chile",
+    "56",
+    "56",
+    "+56 (.) .... ...."
   ],
   [
-    "th",
-    "66",
-    "Thailand"
+    "cn",
+    "China",
+    "86",
+    "86",
+    "+86 (..) ..... ....."
   ],
   [
-    "tj",
-    "992",
-    "Tajikistan"
+    "co",
+    "Colombia",
+    "57",
+    "57",
+    "+57 (...) ... ...."
   ],
   [
-    "tl",
-    "670",
-    "Timor-Leste"
+    "km",
+    "Comoros",
+    "269",
+    "269",
+    "+269 (..) ....."
   ],
   [
-    "tm",
-    "993",
-    "Turkmenistan"
+    "cd",
+    "Congo",
+    "243",
+    "243",
+    "+243 (...) ... ..."
   ],
   [
-    "tn",
-    "216",
-    "Tunisia"
+    "cg",
+    "Congo",
+    "242",
+    "242",
+    "+242 (..) ... ...."
   ],
   [
-    "to",
-    "676",
-    "Tonga"
+    "ck",
+    "Cook Islands",
+    "682",
+    "682",
+    "+682 (..) ..."
   ],
   [
-    "tr",
-    "90",
-    "Turkey"
+    "cr",
+    "Costa Rica",
+    "506",
+    "506",
+    "+506 (....) ...."
   ],
   [
-    "tt",
-    "1868",
-    "Trinidad and Tobago"
+    "hr",
+    "Croatia",
+    "385",
+    "385",
+    "+385 (..) ... ..."
   ],
   [
-    "tv",
-    "688",
-    "Tuvalu"
+    "cu",
+    "Cuba",
+    "53",
+    "53",
+    "+53 (.) ... ...."
   ],
   [
-    "tw",
-    "886",
-    "Taiwan"
+    "cw",
+    "Cura\u00e7ao",
+    "599",
+    "599",
+    "+599 (...) ...."
   ],
   [
-    "tz",
-    "255",
-    "Tanzania"
+    "cy",
+    "Cyprus",
+    "357",
+    "357",
+    "+357 (..) ... ..."
   ],
   [
-    "ua",
-    "380",
-    "Ukraine"
+    "cz",
+    "Czech Republic",
+    "420",
+    "420",
+    "+420 (...) ... ..."
   ],
   [
-    "ug",
-    "256",
-    "Uganda"
+    "ci",
+    "C\u00f4te d\u2019Ivoire",
+    "225",
+    "225",
+    "+225 (..) ... ..."
   ],
   [
-    "us",
-    "1",
-    "United States"
+    "dk",
+    "Denmark",
+    "45",
+    "45",
+    "+45 (..) .. .. .."
   ],
   [
-    "us",
-    "1907",
-    "United States"
+    "dj",
+    "Djibouti",
+    "253",
+    "253",
+    "+253 (..) .. .. .."
   ],
   [
-    "us",
-    "1205",
-    "United States"
+    "dm",
+    "Dominica",
+    "1767",
+    "1767",
+    "+1 (767) ...."
   ],
   [
-    "us",
-    "1251",
-    "United States"
+    "do",
+    "Dominican Republic",
+    "1809",
+    "1809",
+    "+1 (809) ...."
   ],
   [
-    "us",
-    "1256",
-    "United States"
+    "do",
+    "Dominican Republic",
+    "1829",
+    "1829",
+    "+1 (829) ...."
   ],
   [
-    "us",
-    "1334",
-    "United States"
+    "do",
+    "Dominican Republic",
+    "1849",
+    "1849",
+    "+1 (849) ...."
   ],
   [
-    "us",
-    "1479",
-    "United States"
+    "ec",
+    "Ecuador",
+    "593",
+    "593",
+    "+593 (..) ... ...."
   ],
   [
-    "us",
-    "1501",
-    "United States"
+    "eg",
+    "Egypt",
+    "20",
+    "20",
+    "+20 (...) ... ...."
   ],
   [
-    "us",
-    "1870",
-    "United States"
+    "sv",
+    "El Salvador",
+    "503",
+    "503",
+    "+503 (..) .. ...."
   ],
   [
-    "us",
-    "1480",
-    "United States"
+    "gq",
+    "Equatorial Guinea",
+    "240",
+    "240",
+    "+240 (..) ... ...."
   ],
   [
-    "us",
-    "1520",
-    "United States"
+    "er",
+    "Eritrea",
+    "291",
+    "291",
+    "+291 (.) ... ..."
   ],
   [
-    "us",
-    "1602",
-    "United States"
+    "ee",
+    "Estonia",
+    "372",
+    "372",
+    "+372 (....) ...."
   ],
   [
-    "us",
-    "1623",
-    "United States"
+    "et",
+    "Ethiopia",
+    "251",
+    "251",
+    "+251 (..) ... ...."
   ],
   [
-    "us",
-    "1928",
-    "United States"
+    "fk",
+    "Falkland Islands",
+    "500",
+    "500",
+    "+500 ....."
   ],
   [
-    "us",
-    "1209",
-    "United States"
+    "fo",
+    "Faroe Islands",
+    "298",
+    "298",
+    "+298 (...) ..."
   ],
   [
-    "us",
-    "1213",
-    "United States"
+    "fj",
+    "Fiji",
+    "679",
+    "679",
+    "+679 (..) ....."
   ],
   [
-    "us",
-    "1310",
-    "United States"
+    "fi",
+    "Finland",
+    "358",
+    "358",
+    "+358 (...) ... .. .."
   ],
   [
-    "us",
-    "1323",
-    "United States"
+    "fr",
+    "France",
+    "33",
+    "33",
+    "+33 (...) ... ...."
   ],
   [
-    "us",
-    "1408",
-    "United States"
+    "gf",
+    "French Guiana",
+    "594",
+    "594",
+    "+594 (.....) ...."
   ],
   [
-    "us",
-    "1415",
-    "United States"
+    "pf",
+    "French Polynesia",
+    "689",
+    "689",
+    "+689 (..) .. .."
   ],
   [
-    "us",
-    "1510",
-    "United States"
+    "ga",
+    "Gabon",
+    "241",
+    "241",
+    "+241 (.) .. .. .."
   ],
   [
-    "us",
-    "1530",
-    "United States"
+    "gm",
+    "Gambia",
+    "220",
+    "220",
+    "+220 (...) .. .."
   ],
   [
-    "us",
-    "1559",
-    "United States"
+    "ge",
+    "Georgia",
+    "995",
+    "995",
+    "+995 (...) ... ..."
   ],
   [
-    "us",
-    "1562",
-    "United States"
+    "de",
+    "Germany",
+    "49",
+    "49",
+    "+49 (....) ... ...."
   ],
   [
-    "us",
-    "1619",
-    "United States"
+    "gh",
+    "Ghana",
+    "233",
+    "233",
+    "+233 (...) ... ..."
   ],
   [
-    "us",
-    "1626",
-    "United States"
+    "gi",
+    "Gibraltar",
+    "350",
+    "350",
+    "+350 (...) ....."
   ],
   [
-    "us",
-    "1650",
-    "United States"
+    "gr",
+    "Greece",
+    "30",
+    "30",
+    "+30 (...) ... ...."
   ],
   [
-    "us",
-    "1661",
-    "United States"
+    "gl",
+    "Greenland",
+    "299",
+    "299",
+    "+299 (..) .. .."
   ],
   [
-    "us",
-    "1707",
-    "United States"
+    "gd",
+    "Grenada",
+    "1473",
+    "1473",
+    "+1 (473) ...."
   ],
   [
-    "us",
-    "1714",
-    "United States"
+    "gp",
+    "Guadeloupe",
+    "590",
+    "590",
+    "+590 (...) ... ...."
   ],
   [
-    "us",
-    "1760",
-    "United States"
+    "gu",
+    "Guam",
+    "1671",
+    "1671",
+    "+1 (671) ...."
   ],
   [
-    "us",
-    "1805",
-    "United States"
+    "gt",
+    "Guatemala",
+    "502",
+    "502",
+    "+502 (.) ... ...."
   ],
   [
-    "us",
-    "1818",
-    "United States"
+    "gn",
+    "Guinea",
+    "224",
+    "224",
+    "+224 (..) ... ..."
   ],
   [
-    "us",
-    "1831",
-    "United States"
+    "gw",
+    "Guinea-Bissau",
+    "245",
+    "245",
+    "+245 (.) ......"
   ],
   [
-    "us",
-    "1858",
-    "United States"
+    "gy",
+    "Guyana",
+    "592",
+    "592",
+    "+592 (...) ...."
   ],
   [
-    "us",
-    "1909",
-    "United States"
+    "ht",
+    "Haiti",
+    "509",
+    "509",
+    "+509 (..) .. ...."
   ],
   [
-    "us",
-    "1916",
-    "United States"
+    "hn",
+    "Honduras",
+    "504",
+    "504",
+    "+504 (....) ...."
   ],
   [
-    "us",
-    "1925",
-    "United States"
+    "hk",
+    "Hong Kong",
+    "852",
+    "852",
+    "+852 (....) ...."
   ],
   [
-    "us",
-    "1949",
-    "United States"
+    "hu",
+    "Hungary",
+    "36",
+    "36",
+    "+36 (...) ... ..."
   ],
   [
-    "us",
-    "1951",
-    "United States"
+    "is",
+    "Iceland",
+    "354",
+    "354",
+    "+354 (...) ...."
   ],
   [
-    "us",
-    "1303",
-    "United States"
+    "in",
+    "India",
+    "91",
+    "91",
+    "+91 (....) ... ..."
   ],
   [
-    "us",
-    "1719",
-    "United States"
+    "id",
+    "Indonesia",
+    "62",
+    "62",
+    "+62 (..) ... ...."
   ],
   [
-    "us",
-    "1970",
-    "United States"
+    "ir",
+    "Iran",
+    "98",
+    "98",
+    "+98 (...) ... ...."
   ],
   [
-    "us",
-    "1203",
-    "United States"
+    "iq",
+    "Iraq",
+    "964",
+    "964",
+    "+964 (...) ... ...."
   ],
   [
-    "us",
-    "1860",
-    "United States"
+    "ie",
+    "Ireland",
+    "353",
+    "353",
+    "+353 (...) ... ..."
   ],
   [
-    "us",
-    "1202",
-    "United States"
+    "il",
+    "Israel",
+    "972",
+    "972",
+    "+972 (..) ... ...."
   ],
   [
-    "us",
-    "1302",
-    "United States"
-  ],
-  [
-    "us",
-    "1239",
-    "United States"
-  ],
-  [
-    "us",
-    "1305",
-    "United States"
-  ],
-  [
-    "us",
-    "1321",
-    "United States"
-  ],
-  [
-    "us",
-    "1352",
-    "United States"
-  ],
-  [
-    "us",
-    "1386",
-    "United States"
-  ],
-  [
-    "us",
-    "1407",
-    "United States"
-  ],
-  [
-    "us",
-    "1561",
-    "United States"
-  ],
-  [
-    "us",
-    "1727",
-    "United States"
-  ],
-  [
-    "us",
-    "1772",
-    "United States"
-  ],
-  [
-    "us",
-    "1813",
-    "United States"
-  ],
-  [
-    "us",
-    "1850",
-    "United States"
-  ],
-  [
-    "us",
-    "1863",
-    "United States"
-  ],
-  [
-    "us",
-    "1904",
-    "United States"
-  ],
-  [
-    "us",
-    "1941",
-    "United States"
-  ],
-  [
-    "us",
-    "1954",
-    "United States"
-  ],
-  [
-    "us",
-    "1229",
-    "United States"
-  ],
-  [
-    "us",
-    "1404",
-    "United States"
-  ],
-  [
-    "us",
-    "1478",
-    "United States"
-  ],
-  [
-    "us",
-    "1706",
-    "United States"
-  ],
-  [
-    "us",
-    "1770",
-    "United States"
-  ],
-  [
-    "us",
-    "1912",
-    "United States"
-  ],
-  [
-    "us",
-    "1808",
-    "United States"
-  ],
-  [
-    "us",
-    "1319",
-    "United States"
-  ],
-  [
-    "us",
-    "1515",
-    "United States"
-  ],
-  [
-    "us",
-    "1563",
-    "United States"
-  ],
-  [
-    "us",
-    "1641",
-    "United States"
-  ],
-  [
-    "us",
-    "1712",
-    "United States"
-  ],
-  [
-    "us",
-    "1208",
-    "United States"
-  ],
-  [
-    "us",
-    "1217",
-    "United States"
-  ],
-  [
-    "us",
-    "1309",
-    "United States"
-  ],
-  [
-    "us",
-    "1312",
-    "United States"
-  ],
-  [
-    "us",
-    "1618",
-    "United States"
-  ],
-  [
-    "us",
-    "1630",
-    "United States"
-  ],
-  [
-    "us",
-    "1708",
-    "United States"
-  ],
-  [
-    "us",
-    "1773",
-    "United States"
-  ],
-  [
-    "us",
-    "1815",
-    "United States"
-  ],
-  [
-    "us",
-    "1847",
-    "United States"
-  ],
-  [
-    "us",
-    "1219",
-    "United States"
-  ],
-  [
-    "us",
-    "1260",
-    "United States"
-  ],
-  [
-    "us",
-    "1317",
-    "United States"
-  ],
-  [
-    "us",
-    "1574",
-    "United States"
-  ],
-  [
-    "us",
-    "1765",
-    "United States"
-  ],
-  [
-    "us",
-    "1812",
-    "United States"
-  ],
-  [
-    "us",
-    "1316",
-    "United States"
-  ],
-  [
-    "us",
-    "1620",
-    "United States"
-  ],
-  [
-    "us",
-    "1785",
-    "United States"
-  ],
-  [
-    "us",
-    "1913",
-    "United States"
-  ],
-  [
-    "us",
-    "1270",
-    "United States"
-  ],
-  [
-    "us",
-    "1502",
-    "United States"
-  ],
-  [
-    "us",
-    "1606",
-    "United States"
-  ],
-  [
-    "us",
-    "1859",
-    "United States"
-  ],
-  [
-    "us",
-    "1225",
-    "United States"
-  ],
-  [
-    "us",
-    "1318",
-    "United States"
-  ],
-  [
-    "us",
-    "1337",
-    "United States"
-  ],
-  [
-    "us",
-    "1504",
-    "United States"
-  ],
-  [
-    "us",
-    "1985",
-    "United States"
-  ],
-  [
-    "us",
-    "1413",
-    "United States"
-  ],
-  [
-    "us",
-    "1508",
-    "United States"
-  ],
-  [
-    "us",
-    "1617",
-    "United States"
-  ],
-  [
-    "us",
-    "1781",
-    "United States"
-  ],
-  [
-    "us",
-    "1978",
-    "United States"
-  ],
-  [
-    "us",
-    "1301",
-    "United States"
-  ],
-  [
-    "us",
-    "1410",
-    "United States"
-  ],
-  [
-    "us",
-    "1207",
-    "United States"
-  ],
-  [
-    "us",
-    "1231",
-    "United States"
-  ],
-  [
-    "us",
-    "1248",
-    "United States"
-  ],
-  [
-    "us",
-    "1269",
-    "United States"
-  ],
-  [
-    "us",
-    "1313",
-    "United States"
-  ],
-  [
-    "us",
-    "1517",
-    "United States"
-  ],
-  [
-    "us",
-    "1586",
-    "United States"
-  ],
-  [
-    "us",
-    "1616",
-    "United States"
-  ],
-  [
-    "us",
-    "1734",
-    "United States"
-  ],
-  [
-    "us",
-    "1810",
-    "United States"
-  ],
-  [
-    "us",
-    "1906",
-    "United States"
-  ],
-  [
-    "us",
-    "1989",
-    "United States"
-  ],
-  [
-    "us",
-    "1218",
-    "United States"
-  ],
-  [
-    "us",
-    "1320",
-    "United States"
-  ],
-  [
-    "us",
-    "1507",
-    "United States"
-  ],
-  [
-    "us",
-    "1612",
-    "United States"
-  ],
-  [
-    "us",
-    "1651",
-    "United States"
-  ],
-  [
-    "us",
-    "1763",
-    "United States"
-  ],
-  [
-    "us",
-    "1952",
-    "United States"
-  ],
-  [
-    "us",
-    "1314",
-    "United States"
-  ],
-  [
-    "us",
-    "1417",
-    "United States"
-  ],
-  [
-    "us",
-    "1573",
-    "United States"
-  ],
-  [
-    "us",
-    "1636",
-    "United States"
-  ],
-  [
-    "us",
-    "1660",
-    "United States"
-  ],
-  [
-    "us",
-    "1816",
-    "United States"
-  ],
-  [
-    "us",
-    "1228",
-    "United States"
-  ],
-  [
-    "us",
-    "1601",
-    "United States"
-  ],
-  [
-    "us",
-    "1662",
-    "United States"
-  ],
-  [
-    "us",
-    "1406",
-    "United States"
-  ],
-  [
-    "us",
-    "1252",
-    "United States"
-  ],
-  [
-    "us",
-    "1336",
-    "United States"
-  ],
-  [
-    "us",
-    "1704",
-    "United States"
-  ],
-  [
-    "us",
-    "1828",
-    "United States"
-  ],
-  [
-    "us",
-    "1910",
-    "United States"
-  ],
-  [
-    "us",
-    "1919",
-    "United States"
-  ],
-  [
-    "us",
-    "1701",
-    "United States"
-  ],
-  [
-    "us",
-    "1308",
-    "United States"
-  ],
-  [
-    "us",
-    "1402",
-    "United States"
-  ],
-  [
-    "us",
-    "1603",
-    "United States"
-  ],
-  [
-    "us",
-    "1201",
-    "United States"
-  ],
-  [
-    "us",
-    "1609",
-    "United States"
-  ],
-  [
-    "us",
-    "1732",
-    "United States"
-  ],
-  [
-    "us",
-    "1856",
-    "United States"
-  ],
-  [
-    "us",
-    "1908",
-    "United States"
-  ],
-  [
-    "us",
-    "1973",
-    "United States"
-  ],
-  [
-    "us",
-    "1505",
-    "United States"
-  ],
-  [
-    "us",
-    "1575",
-    "United States"
-  ],
-  [
-    "us",
-    "1702",
-    "United States"
-  ],
-  [
-    "us",
-    "1775",
-    "United States"
-  ],
-  [
-    "us",
-    "1212",
-    "United States"
-  ],
-  [
-    "us",
-    "1315",
-    "United States"
-  ],
-  [
-    "us",
-    "1516",
-    "United States"
-  ],
-  [
-    "us",
-    "1518",
-    "United States"
-  ],
-  [
-    "us",
-    "1585",
-    "United States"
-  ],
-  [
-    "us",
-    "1607",
-    "United States"
-  ],
-  [
-    "us",
-    "1631",
-    "United States"
-  ],
-  [
-    "us",
-    "1716",
-    "United States"
-  ],
-  [
-    "us",
-    "1718",
-    "United States"
-  ],
-  [
-    "us",
-    "1845",
-    "United States"
-  ],
-  [
-    "us",
-    "1914",
-    "United States"
-  ],
-  [
-    "us",
-    "1216",
-    "United States"
-  ],
-  [
-    "us",
-    "1330",
-    "United States"
-  ],
-  [
-    "us",
-    "1419",
-    "United States"
-  ],
-  [
-    "us",
-    "1440",
-    "United States"
-  ],
-  [
-    "us",
-    "1513",
-    "United States"
-  ],
-  [
-    "us",
-    "1614",
-    "United States"
-  ],
-  [
-    "us",
-    "1740",
-    "United States"
-  ],
-  [
-    "us",
-    "1937",
-    "United States"
-  ],
-  [
-    "us",
-    "1405",
-    "United States"
-  ],
-  [
-    "us",
-    "1580",
-    "United States"
-  ],
-  [
-    "us",
-    "1918",
-    "United States"
-  ],
-  [
-    "us",
-    "1503",
-    "United States"
-  ],
-  [
-    "us",
-    "1541",
-    "United States"
-  ],
-  [
-    "us",
-    "1215",
-    "United States"
-  ],
-  [
-    "us",
-    "1412",
-    "United States"
-  ],
-  [
-    "us",
-    "1570",
-    "United States"
-  ],
-  [
-    "us",
-    "1610",
-    "United States"
-  ],
-  [
-    "us",
-    "1717",
-    "United States"
-  ],
-  [
-    "us",
-    "1724",
-    "United States"
-  ],
-  [
-    "us",
-    "1814",
-    "United States"
-  ],
-  [
-    "us",
-    "1401",
-    "United States"
-  ],
-  [
-    "us",
-    "1803",
-    "United States"
-  ],
-  [
-    "us",
-    "1843",
-    "United States"
-  ],
-  [
-    "us",
-    "1864",
-    "United States"
-  ],
-  [
-    "us",
-    "1605",
-    "United States"
-  ],
-  [
-    "us",
-    "1423",
-    "United States"
-  ],
-  [
-    "us",
-    "1615",
-    "United States"
-  ],
-  [
-    "us",
-    "1731",
-    "United States"
-  ],
-  [
-    "us",
-    "1865",
-    "United States"
-  ],
-  [
-    "us",
-    "1901",
-    "United States"
-  ],
-  [
-    "us",
-    "1931",
-    "United States"
-  ],
-  [
-    "us",
-    "1210",
-    "United States"
-  ],
-  [
-    "us",
-    "1214",
-    "United States"
-  ],
-  [
-    "us",
-    "1254",
-    "United States"
-  ],
-  [
-    "us",
-    "1281",
-    "United States"
-  ],
-  [
-    "us",
-    "1325",
-    "United States"
-  ],
-  [
-    "us",
-    "1361",
-    "United States"
-  ],
-  [
-    "us",
-    "1409",
-    "United States"
-  ],
-  [
-    "us",
-    "1432",
-    "United States"
-  ],
-  [
-    "us",
-    "1512",
-    "United States"
-  ],
-  [
-    "us",
-    "1713",
-    "United States"
-  ],
-  [
-    "us",
-    "1806",
-    "United States"
-  ],
-  [
-    "us",
-    "1817",
-    "United States"
-  ],
-  [
-    "us",
-    "1830",
-    "United States"
-  ],
-  [
-    "us",
-    "1903",
-    "United States"
-  ],
-  [
-    "us",
-    "1915",
-    "United States"
-  ],
-  [
-    "us",
-    "1936",
-    "United States"
-  ],
-  [
-    "us",
-    "1940",
-    "United States"
-  ],
-  [
-    "us",
-    "1956",
-    "United States"
-  ],
-  [
-    "us",
-    "1972",
-    "United States"
-  ],
-  [
-    "us",
-    "1979",
-    "United States"
-  ],
-  [
-    "us",
-    "1435",
-    "United States"
-  ],
-  [
-    "us",
-    "1801",
-    "United States"
-  ],
-  [
-    "us",
-    "1276",
-    "United States"
-  ],
-  [
-    "us",
-    "1434",
-    "United States"
-  ],
-  [
-    "us",
-    "1540",
-    "United States"
-  ],
-  [
-    "us",
-    "1703",
-    "United States"
-  ],
-  [
-    "us",
-    "1757",
-    "United States"
-  ],
-  [
-    "us",
-    "1804",
-    "United States"
-  ],
-  [
-    "us",
-    "1802",
-    "United States"
-  ],
-  [
-    "us",
-    "1206",
-    "United States"
-  ],
-  [
-    "us",
-    "1253",
-    "United States"
-  ],
-  [
-    "us",
-    "1360",
-    "United States"
-  ],
-  [
-    "us",
-    "1425",
-    "United States"
-  ],
-  [
-    "us",
-    "1509",
-    "United States"
-  ],
-  [
-    "us",
-    "1262",
-    "United States"
-  ],
-  [
-    "us",
-    "1414",
-    "United States"
-  ],
-  [
-    "us",
-    "1608",
-    "United States"
-  ],
-  [
-    "us",
-    "1715",
-    "United States"
-  ],
-  [
-    "us",
-    "1920",
-    "United States"
-  ],
-  [
-    "us",
-    "1304",
-    "United States"
-  ],
-  [
-    "us",
-    "1307",
-    "United States"
-  ],
-  [
-    "uy",
-    "598",
-    "Uruguay"
-  ],
-  [
-    "uz",
-    "998",
-    "Uzbekistan"
-  ],
-  [
-    "va",
+    "it",
+    "Italy",
     "39",
-    "Vatican City"
+    "39",
+    "+39 (...) .... ..."
   ],
   [
-    "vc",
-    "1784",
-    "Saint Vincent and the Grenadines"
+    "jm",
+    "Jamaica",
+    "1876",
+    "1876",
+    "+1 (876) ...."
   ],
   [
-    "ve",
-    "58",
-    "Venezuela"
+    "jp",
+    "Japan",
+    "81",
+    "81",
+    "+81 (..) .... ...."
   ],
   [
-    "vn",
-    "84",
-    "Vietnam"
+    "je",
+    "Jersey",
+    "44",
+    "44",
+    "+44 (..) .... ...."
   ],
   [
-    "vu",
-    "678",
-    "Vanuatu"
+    "jo",
+    "Jordan",
+    "962",
+    "962",
+    "+962 (.) .... ...."
   ],
   [
-    "ws",
-    "685",
-    "Samoa"
+    "kz",
+    "Kazakhstan",
+    "7310",
+    "7310",
+    "+7 (310) ... .. .."
+  ],
+  [
+    "kz",
+    "Kazakhstan",
+    "7311",
+    "7311",
+    "+7 (311) ... .. .."
+  ],
+  [
+    "kz",
+    "Kazakhstan",
+    "7312",
+    "7312",
+    "+7 (312) ... .. .."
+  ],
+  [
+    "kz",
+    "Kazakhstan",
+    "7313",
+    "7313",
+    "+7 (313) ... .. .."
+  ],
+  [
+    "kz",
+    "Kazakhstan",
+    "7315",
+    "7315",
+    "+7 (315) ... .. .."
+  ],
+  [
+    "kz",
+    "Kazakhstan",
+    "7318",
+    "7318",
+    "+7 (318) ... .. .."
+  ],
+  [
+    "kz",
+    "Kazakhstan",
+    "7321",
+    "7321",
+    "+7 (321) ... .. .."
+  ],
+  [
+    "kz",
+    "Kazakhstan",
+    "7324",
+    "7324",
+    "+7 (324) ... .. .."
+  ],
+  [
+    "kz",
+    "Kazakhstan",
+    "7325",
+    "7325",
+    "+7 (325) ... .. .."
+  ],
+  [
+    "kz",
+    "Kazakhstan",
+    "7326",
+    "7326",
+    "+7 (326) ... .. .."
+  ],
+  [
+    "kz",
+    "Kazakhstan",
+    "7327",
+    "7327",
+    "+7 (327) ... .. .."
+  ],
+  [
+    "kz",
+    "Kazakhstan",
+    "7336",
+    "7336",
+    "+7 (336) ... .. .."
+  ],
+  [
+    "kz",
+    "Kazakhstan",
+    "77172",
+    "77172",
+    "+7 (717) 2.. .. .."
+  ],
+  [
+    "kz",
+    "Kazakhstan",
+    "773622",
+    "773622",
+    "+7 (736) 22. .. .."
+  ],
+  [
+    "ke",
+    "Kenya",
+    "254",
+    "254",
+    "+254 (...) ......"
+  ],
+  [
+    "ki",
+    "Kiribati",
+    "686",
+    "686",
+    "+686 (..) ..."
   ],
   [
     "xk",
+    "Kosovo",
     "383",
-    "Kosovo"
+    "383",
+    "+383 (...) .... ...."
   ],
   [
-    "ye",
-    "967",
-    "Yemen"
+    "kw",
+    "Kuwait",
+    "965",
+    "965",
+    "+965 (....) ...."
+  ],
+  [
+    "kg",
+    "Kyrgyzstan",
+    "996",
+    "996",
+    "+996 (...) ... ..."
+  ],
+  [
+    "la",
+    "Laos",
+    "856",
+    "856",
+    "+856 (..) ... ..."
+  ],
+  [
+    "lv",
+    "Latvia",
+    "371",
+    "371",
+    "+371 (..) ... ..."
+  ],
+  [
+    "lb",
+    "Lebanon",
+    "961",
+    "961",
+    "+961 (..) ... ..."
+  ],
+  [
+    "ls",
+    "Lesotho",
+    "266",
+    "266",
+    "+266 (.) ... ...."
+  ],
+  [
+    "lr",
+    "Liberia",
+    "231",
+    "231",
+    "+231 (..) ... ..."
+  ],
+  [
+    "ly",
+    "Libya",
+    "218",
+    "218",
+    "+218 (..) ... ...."
+  ],
+  [
+    "li",
+    "Liechtenstein",
+    "423",
+    "423",
+    "+423 (...) ... ...."
+  ],
+  [
+    "lt",
+    "Lithuania",
+    "370",
+    "370",
+    "+370 (...) .. ..."
+  ],
+  [
+    "lu",
+    "Luxembourg",
+    "352",
+    "352",
+    "+352 (...) ... ..."
+  ],
+  [
+    "mo",
+    "Macau",
+    "853",
+    "853",
+    "+853 (....) ...."
+  ],
+  [
+    "mk",
+    "Macedonia",
+    "389",
+    "389",
+    "+389 (..) ... ..."
+  ],
+  [
+    "mg",
+    "Madagascar",
+    "261",
+    "261",
+    "+261 (..) .. ....."
+  ],
+  [
+    "mw",
+    "Malawi",
+    "265",
+    "265",
+    "+265 (.) .... ...."
+  ],
+  [
+    "my",
+    "Malaysia",
+    "60",
+    "60",
+    "+60 (...) ... ...."
+  ],
+  [
+    "mv",
+    "Maldives",
+    "960",
+    "960",
+    "+960 (...) ...."
+  ],
+  [
+    "ml",
+    "Mali",
+    "223",
+    "223",
+    "+223 (..) .. ...."
+  ],
+  [
+    "mt",
+    "Malta",
+    "356",
+    "356",
+    "+356 (....) ...."
+  ],
+  [
+    "mh",
+    "Marshall Islands",
+    "692",
+    "692",
+    "+692 (...) ...."
+  ],
+  [
+    "mq",
+    "Martinique",
+    "596",
+    "596",
+    "+596 (...) .. .. .."
+  ],
+  [
+    "mr",
+    "Mauritania",
+    "222",
+    "222",
+    "+222 (..) .. ...."
+  ],
+  [
+    "mu",
+    "Mauritius",
+    "230",
+    "230",
+    "+230 (...) ...."
+  ],
+  [
+    "mx",
+    "Mexico",
+    "52",
+    "5255",
+    "+52 (55.) ... ...."
+  ],
+  [
+    "mx",
+    "Mexico",
+    "52",
+    "5281",
+    "+52 (81.) ... ...."
+  ],
+  [
+    "mx",
+    "Mexico",
+    "52",
+    "5233",
+    "+52 (33.) ... ...."
+  ],
+  [
+    "mx",
+    "Mexico",
+    "52",
+    "52656",
+    "+52 (656) ... ...."
+  ],
+  [
+    "mx",
+    "Mexico",
+    "52",
+    "52664",
+    "+52 (664) ... ...."
+  ],
+  [
+    "mx",
+    "Mexico",
+    "52",
+    "52998",
+    "+52 (998) ... ...."
+  ],
+  [
+    "mx",
+    "Mexico",
+    "52",
+    "52774",
+    "+52 (774) ... ...."
+  ],
+  [
+    "mx",
+    "Mexico",
+    "52",
+    "52229",
+    "+52 (229) ... ...."
+  ],
+  [
+    "fm",
+    "Micronesia",
+    "691",
+    "691",
+    "+691 (...) ...."
+  ],
+  [
+    "md",
+    "Moldova",
+    "373",
+    "373",
+    "+373 (....) ...."
+  ],
+  [
+    "mc",
+    "Monaco",
+    "377",
+    "377",
+    "+377 (...) ... ..."
+  ],
+  [
+    "mn",
+    "Mongolia",
+    "976",
+    "976",
+    "+976 (..) .. ...."
+  ],
+  [
+    "me",
+    "Montenegro",
+    "382",
+    "382",
+    "+382 (..) ... ..."
+  ],
+  [
+    "ms",
+    "Montserrat",
+    "1664",
+    "1664",
+    "+1 (664) ...."
+  ],
+  [
+    "ma",
+    "Morocco",
+    "212",
+    "212",
+    "+212 (..) .... ..."
+  ],
+  [
+    "mz",
+    "Mozambique",
+    "258",
+    "258",
+    "+258 (..) ... ...."
+  ],
+  [
+    "mm",
+    "Myanmar",
+    "95",
+    "95",
+    "+95 (..) ... ..."
+  ],
+  [
+    "na",
+    "Namibia",
+    "264",
+    "264",
+    "+264 (..) ... ...."
+  ],
+  [
+    "nr",
+    "Nauru",
+    "674",
+    "674",
+    "+674 (...) ...."
+  ],
+  [
+    "np",
+    "Nepal",
+    "977",
+    "977",
+    "+977 (..) ... ..."
+  ],
+  [
+    "nl",
+    "Netherlands",
+    "31",
+    "31",
+    "+31 (..) ... ...."
+  ],
+  [
+    "nc",
+    "New Caledonia",
+    "687",
+    "687",
+    "+687 (..) ...."
+  ],
+  [
+    "nz",
+    "New Zealand",
+    "64",
+    "64",
+    "+64 (...) ... ...."
+  ],
+  [
+    "ni",
+    "Nicaragua",
+    "505",
+    "505",
+    "+505 (....) ...."
+  ],
+  [
+    "ne",
+    "Niger",
+    "227",
+    "227",
+    "+227 (..) .. ...."
+  ],
+  [
+    "ng",
+    "Nigeria",
+    "234",
+    "234",
+    "+234 (...) ... ...."
+  ],
+  [
+    "nu",
+    "Niue",
+    "683",
+    "683",
+    "+683 ...."
+  ],
+  [
+    "nf",
+    "Norfolk Island",
+    "672",
+    "672",
+    "+672 (..) ..."
+  ],
+  [
+    "kp",
+    "North Korea",
+    "850",
+    "850",
+    "+850 (...) .... ........"
+  ],
+  [
+    "mp",
+    "Northern Mariana Islands",
+    "1670",
+    "1670",
+    "+1 (670) ...."
+  ],
+  [
+    "no",
+    "Norway",
+    "47",
+    "47",
+    "+47 (...) .. ..."
+  ],
+  [
+    "om",
+    "Oman",
+    "968",
+    "968",
+    "+968 (..) ... ..."
+  ],
+  [
+    "pk",
+    "Pakistan",
+    "92",
+    "92",
+    "+92 (...) ... ...."
+  ],
+  [
+    "pw",
+    "Palau",
+    "680",
+    "680",
+    "+680 (...) ...."
+  ],
+  [
+    "ps",
+    "Palestine",
+    "970",
+    "970",
+    "+970 (..) ... ...."
+  ],
+  [
+    "pa",
+    "Panama",
+    "507",
+    "507",
+    "+507 (...) ...."
+  ],
+  [
+    "pg",
+    "Papua New Guinea",
+    "675",
+    "675",
+    "+675 (...) .. ..."
+  ],
+  [
+    "py",
+    "Paraguay",
+    "595",
+    "595",
+    "+595 (...) ... ..."
+  ],
+  [
+    "pe",
+    "Peru",
+    "51",
+    "51",
+    "+51 (...) ... ..."
+  ],
+  [
+    "ph",
+    "Philippines",
+    "63",
+    "63",
+    "+63 (...) ... ...."
+  ],
+  [
+    "pl",
+    "Poland",
+    "48",
+    "48",
+    "+48 (...) ... ..."
+  ],
+  [
+    "pt",
+    "Portugal",
+    "351",
+    "351",
+    "+351 (..) ... ...."
+  ],
+  [
+    "pr",
+    "Puerto Rico",
+    "1787",
+    "1787",
+    "+1 (787) ... ...."
+  ],
+  [
+    "pr",
+    "Puerto Rico",
+    "1939",
+    "1939",
+    "+1 (939) ... ...."
+  ],
+  [
+    "qa",
+    "Qatar",
+    "974",
+    "974",
+    "+974 (....) ...."
+  ],
+  [
+    "ro",
+    "Romania",
+    "40",
+    "40",
+    "+40 (..) ... ...."
+  ],
+  [
+    "ru",
+    "Russia",
+    "7",
+    "7",
+    "+7 (...) ... .. .."
+  ],
+  [
+    "rw",
+    "Rwanda",
+    "250",
+    "250",
+    "+250 (...) ... ..."
+  ],
+  [
+    "re",
+    "R\u00e9union",
+    "262",
+    "262",
+    "+262 (.....) ...."
+  ],
+  [
+    "kn",
+    "Saint Kitts and Nevis",
+    "1869",
+    "1869",
+    "+1 (869) ...."
+  ],
+  [
+    "lc",
+    "Saint Lucia",
+    "1758",
+    "1758",
+    "+1 (758) ...."
+  ],
+  [
+    "vc",
+    "Saint Vincent and the Grenadines",
+    "1784",
+    "1784",
+    "+1 (784) ...."
+  ],
+  [
+    "ws",
+    "Samoa",
+    "685",
+    "685",
+    "+685 (..) ...."
+  ],
+  [
+    "sm",
+    "San Marino",
+    "378",
+    "378",
+    "+378 (....) ......"
+  ],
+  [
+    "sa",
+    "Saudi Arabia",
+    "966",
+    "966",
+    "+966 (.) .... ...."
+  ],
+  [
+    "sn",
+    "Senegal",
+    "221",
+    "221",
+    "+221 (..) ... ...."
+  ],
+  [
+    "rs",
+    "Serbia",
+    "381",
+    "381",
+    "+381 (..) ... ...."
+  ],
+  [
+    "sc",
+    "Seychelles",
+    "248",
+    "248",
+    "+248 (.) ... ..."
+  ],
+  [
+    "sl",
+    "Sierra Leone",
+    "232",
+    "232",
+    "+232 (..) ......"
+  ],
+  [
+    "sg",
+    "Singapore",
+    "65",
+    "65",
+    "+65 (....) ...."
+  ],
+  [
+    "sx",
+    "Sint Maarten",
+    "1721",
+    "1721",
+    "+1 (721) ...."
+  ],
+  [
+    "sk",
+    "Slovakia",
+    "421",
+    "421",
+    "+421 (...) ... ..."
+  ],
+  [
+    "si",
+    "Slovenia",
+    "386",
+    "386",
+    "+386 (..) ... ..."
+  ],
+  [
+    "sb",
+    "Solomon Islands",
+    "677",
+    "677",
+    "+677 (...) ...."
+  ],
+  [
+    "so",
+    "Somalia",
+    "252",
+    "252",
+    "+252 (..) ... ..."
   ],
   [
     "za",
+    "South Africa",
     "27",
-    "South Africa"
+    "27",
+    "+27 (..) ... ...."
+  ],
+  [
+    "kr",
+    "South Korea",
+    "82",
+    "82",
+    "+82 (..) .... ....."
+  ],
+  [
+    "ss",
+    "South Sudan",
+    "211",
+    "211",
+    "+211 (..) ... ...."
+  ],
+  [
+    "es",
+    "Spain",
+    "34",
+    "34",
+    "+34 (...) ... ..."
+  ],
+  [
+    "lk",
+    "Sri Lanka",
+    "94",
+    "94",
+    "+94 (..) ... ...."
+  ],
+  [
+    "sh",
+    "St. Helena",
+    "290",
+    "290",
+    "+290 ...."
+  ],
+  [
+    "pm",
+    "St. Pierre & Miquelon",
+    "508",
+    "508",
+    "+508 (...) ... ..."
+  ],
+  [
+    "sd",
+    "Sudan",
+    "249",
+    "249",
+    "+249 (..) ... ...."
+  ],
+  [
+    "sr",
+    "Suriname",
+    "597",
+    "597",
+    "+597 (...) ...."
+  ],
+  [
+    "sz",
+    "Swaziland",
+    "268",
+    "268",
+    "+268 (..) .. ...."
+  ],
+  [
+    "se",
+    "Sweden",
+    "46",
+    "46",
+    "+46 (..) ... ...."
+  ],
+  [
+    "ch",
+    "Switzerland",
+    "41",
+    "41",
+    "+41 (..) ... ...."
+  ],
+  [
+    "sy",
+    "Syria",
+    "963",
+    "963",
+    "+963 (..) .... ..."
+  ],
+  [
+    "st",
+    "S\u00e3o Tom\u00e9 and Pr\u00edncipe",
+    "239",
+    "239",
+    "+239 (..) ....."
+  ],
+  [
+    "tw",
+    "Taiwan",
+    "886",
+    "886",
+    "+886 (.) .... ...."
+  ],
+  [
+    "tj",
+    "Tajikistan",
+    "992",
+    "992",
+    "+992 (..) ... ...."
+  ],
+  [
+    "tz",
+    "Tanzania",
+    "255",
+    "255",
+    "+255 (..) ... ...."
+  ],
+  [
+    "th",
+    "Thailand",
+    "66",
+    "66",
+    "+66 (..) ... ...."
+  ],
+  [
+    "tl",
+    "Timor-Leste",
+    "670",
+    "670",
+    "+670 (...) ....."
+  ],
+  [
+    "tg",
+    "Togo",
+    "228",
+    "228",
+    "+228 (..) ... ..."
+  ],
+  [
+    "tk",
+    "Tokelau",
+    "690",
+    "690",
+    "+690 ...."
+  ],
+  [
+    "to",
+    "Tonga",
+    "676",
+    "676",
+    "+676 ....."
+  ],
+  [
+    "tt",
+    "Trinidad and Tobago",
+    "1868",
+    "1868",
+    "+1 (868) ...."
+  ],
+  [
+    "tn",
+    "Tunisia",
+    "216",
+    "216",
+    "+216 (..) ... ..."
+  ],
+  [
+    "tr",
+    "Turkey",
+    "90",
+    "90",
+    "+90 (...) ... ...."
+  ],
+  [
+    "tm",
+    "Turkmenistan",
+    "993",
+    "993",
+    "+993 (.) ... ...."
+  ],
+  [
+    "tc",
+    "Turks & Caicos Islands",
+    "1649",
+    "1649",
+    "+1 (649) ...."
+  ],
+  [
+    "tv",
+    "Tuvalu",
+    "688",
+    "688",
+    "+688 ......"
+  ],
+  [
+    "vi",
+    "U.S. Virgin Islands",
+    "1340",
+    "1340",
+    "+1 (340) ...."
+  ],
+  [
+    "ug",
+    "Uganda",
+    "256",
+    "256",
+    "+256 (...) ... ..."
+  ],
+  [
+    "ua",
+    "Ukraine",
+    "380",
+    "380",
+    "+380 (..) ... .. .."
+  ],
+  [
+    "ae",
+    "United Arab Emirates",
+    "971",
+    "971",
+    "+971 (..) ... ...."
+  ],
+  [
+    "gb",
+    "United Kingdom",
+    "44",
+    "44",
+    "+44 (..) .... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1907",
+    "+1 (907) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1205",
+    "+1 (205) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1251",
+    "+1 (251) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1256",
+    "+1 (256) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1334",
+    "+1 (334) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1479",
+    "+1 (479) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1501",
+    "+1 (501) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1870",
+    "+1 (870) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1480",
+    "+1 (480) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1520",
+    "+1 (520) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1602",
+    "+1 (602) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1623",
+    "+1 (623) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1928",
+    "+1 (928) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1209",
+    "+1 (209) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1213",
+    "+1 (213) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1310",
+    "+1 (310) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1323",
+    "+1 (323) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1408",
+    "+1 (408) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1415",
+    "+1 (415) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1510",
+    "+1 (510) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1530",
+    "+1 (530) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1559",
+    "+1 (559) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1562",
+    "+1 (562) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1619",
+    "+1 (619) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1626",
+    "+1 (626) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1650",
+    "+1 (650) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1661",
+    "+1 (661) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1707",
+    "+1 (707) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1714",
+    "+1 (714) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1760",
+    "+1 (760) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1805",
+    "+1 (805) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1818",
+    "+1 (818) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1831",
+    "+1 (831) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1858",
+    "+1 (858) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1909",
+    "+1 (909) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1916",
+    "+1 (916) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1925",
+    "+1 (925) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1949",
+    "+1 (949) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1951",
+    "+1 (951) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1303",
+    "+1 (303) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1719",
+    "+1 (719) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1970",
+    "+1 (970) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1203",
+    "+1 (203) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1860",
+    "+1 (860) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1202",
+    "+1 (202) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1302",
+    "+1 (302) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1239",
+    "+1 (239) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1305",
+    "+1 (305) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1321",
+    "+1 (321) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1352",
+    "+1 (352) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1386",
+    "+1 (386) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1407",
+    "+1 (407) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1561",
+    "+1 (561) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1727",
+    "+1 (727) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1772",
+    "+1 (772) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1813",
+    "+1 (813) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1850",
+    "+1 (850) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1863",
+    "+1 (863) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1904",
+    "+1 (904) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1941",
+    "+1 (941) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1954",
+    "+1 (954) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1229",
+    "+1 (229) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1404",
+    "+1 (404) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1478",
+    "+1 (478) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1706",
+    "+1 (706) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1770",
+    "+1 (770) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1912",
+    "+1 (912) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1808",
+    "+1 (808) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1319",
+    "+1 (319) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1515",
+    "+1 (515) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1563",
+    "+1 (563) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1641",
+    "+1 (641) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1712",
+    "+1 (712) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1208",
+    "+1 (208) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1217",
+    "+1 (217) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1309",
+    "+1 (309) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1312",
+    "+1 (312) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1618",
+    "+1 (618) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1630",
+    "+1 (630) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1708",
+    "+1 (708) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1773",
+    "+1 (773) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1815",
+    "+1 (815) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1847",
+    "+1 (847) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1219",
+    "+1 (219) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1260",
+    "+1 (260) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1317",
+    "+1 (317) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1574",
+    "+1 (574) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1765",
+    "+1 (765) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1812",
+    "+1 (812) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1316",
+    "+1 (316) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1620",
+    "+1 (620) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1785",
+    "+1 (785) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1913",
+    "+1 (913) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1270",
+    "+1 (270) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1502",
+    "+1 (502) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1606",
+    "+1 (606) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1859",
+    "+1 (859) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1225",
+    "+1 (225) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1318",
+    "+1 (318) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1337",
+    "+1 (337) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1504",
+    "+1 (504) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1985",
+    "+1 (985) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1413",
+    "+1 (413) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1508",
+    "+1 (508) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1617",
+    "+1 (617) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1781",
+    "+1 (781) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1978",
+    "+1 (978) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1301",
+    "+1 (301) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1410",
+    "+1 (410) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1207",
+    "+1 (207) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1231",
+    "+1 (231) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1248",
+    "+1 (248) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1269",
+    "+1 (269) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1313",
+    "+1 (313) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1517",
+    "+1 (517) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1586",
+    "+1 (586) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1616",
+    "+1 (616) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1734",
+    "+1 (734) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1810",
+    "+1 (810) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1906",
+    "+1 (906) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1989",
+    "+1 (989) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1218",
+    "+1 (218) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1320",
+    "+1 (320) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1507",
+    "+1 (507) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1612",
+    "+1 (612) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1651",
+    "+1 (651) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1763",
+    "+1 (763) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1952",
+    "+1 (952) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1314",
+    "+1 (314) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1417",
+    "+1 (417) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1573",
+    "+1 (573) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1636",
+    "+1 (636) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1660",
+    "+1 (660) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1816",
+    "+1 (816) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1228",
+    "+1 (228) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1601",
+    "+1 (601) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1662",
+    "+1 (662) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1406",
+    "+1 (406) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1252",
+    "+1 (252) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1336",
+    "+1 (336) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1704",
+    "+1 (704) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1828",
+    "+1 (828) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1910",
+    "+1 (910) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1919",
+    "+1 (919) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1701",
+    "+1 (701) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1308",
+    "+1 (308) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1402",
+    "+1 (402) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1603",
+    "+1 (603) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1201",
+    "+1 (201) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1609",
+    "+1 (609) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1732",
+    "+1 (732) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1856",
+    "+1 (856) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1908",
+    "+1 (908) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1973",
+    "+1 (973) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1505",
+    "+1 (505) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1575",
+    "+1 (575) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1702",
+    "+1 (702) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1775",
+    "+1 (775) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1212",
+    "+1 (212) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1315",
+    "+1 (315) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1516",
+    "+1 (516) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1518",
+    "+1 (518) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1585",
+    "+1 (585) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1607",
+    "+1 (607) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1631",
+    "+1 (631) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1716",
+    "+1 (716) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1718",
+    "+1 (718) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1845",
+    "+1 (845) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1914",
+    "+1 (914) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1216",
+    "+1 (216) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1330",
+    "+1 (330) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1419",
+    "+1 (419) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1440",
+    "+1 (440) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1513",
+    "+1 (513) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1614",
+    "+1 (614) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1740",
+    "+1 (740) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1937",
+    "+1 (937) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1405",
+    "+1 (405) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1580",
+    "+1 (580) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1918",
+    "+1 (918) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1503",
+    "+1 (503) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1541",
+    "+1 (541) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1215",
+    "+1 (215) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1412",
+    "+1 (412) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1570",
+    "+1 (570) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1610",
+    "+1 (610) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1717",
+    "+1 (717) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1724",
+    "+1 (724) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1814",
+    "+1 (814) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1401",
+    "+1 (401) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1803",
+    "+1 (803) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1843",
+    "+1 (843) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1864",
+    "+1 (864) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1605",
+    "+1 (605) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1423",
+    "+1 (423) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1615",
+    "+1 (615) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1731",
+    "+1 (731) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1865",
+    "+1 (865) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1901",
+    "+1 (901) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1931",
+    "+1 (931) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1210",
+    "+1 (210) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1214",
+    "+1 (214) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1254",
+    "+1 (254) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1281",
+    "+1 (281) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1325",
+    "+1 (325) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1361",
+    "+1 (361) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1409",
+    "+1 (409) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1432",
+    "+1 (432) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1512",
+    "+1 (512) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1713",
+    "+1 (713) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1806",
+    "+1 (806) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1817",
+    "+1 (817) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1830",
+    "+1 (830) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1903",
+    "+1 (903) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1915",
+    "+1 (915) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1936",
+    "+1 (936) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1940",
+    "+1 (940) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1956",
+    "+1 (956) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1972",
+    "+1 (972) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1979",
+    "+1 (979) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1435",
+    "+1 (435) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1801",
+    "+1 (801) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1276",
+    "+1 (276) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1434",
+    "+1 (434) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1540",
+    "+1 (540) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1703",
+    "+1 (703) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1757",
+    "+1 (757) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1804",
+    "+1 (804) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1802",
+    "+1 (802) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1206",
+    "+1 (206) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1253",
+    "+1 (253) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1360",
+    "+1 (360) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1425",
+    "+1 (425) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1509",
+    "+1 (509) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1262",
+    "+1 (262) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1414",
+    "+1 (414) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1608",
+    "+1 (608) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1715",
+    "+1 (715) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1920",
+    "+1 (920) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1304",
+    "+1 (304) ... ...."
+  ],
+  [
+    "us",
+    "United States",
+    "1",
+    "1307",
+    "+1 (307) ... ...."
+  ],
+  [
+    "uy",
+    "Uruguay",
+    "598",
+    "598",
+    "+598 (.) ... .. .."
+  ],
+  [
+    "uz",
+    "Uzbekistan",
+    "998",
+    "998",
+    "+998 (..) ... ...."
+  ],
+  [
+    "vu",
+    "Vanuatu",
+    "678",
+    "678",
+    "+678 (..) ....."
+  ],
+  [
+    "va",
+    "Vatican City",
+    "39",
+    "39",
+    "+39 (.) ... ....."
+  ],
+  [
+    "ve",
+    "Venezuela",
+    "58",
+    "58",
+    "+58 (...) ... ...."
+  ],
+  [
+    "vn",
+    "Vietnam",
+    "84",
+    "84",
+    "+84 (...) .... ..."
+  ],
+  [
+    "wf",
+    "Wallis & Futuna",
+    "681",
+    "681",
+    "+681 (..) ...."
+  ],
+  [
+    "ye",
+    "Yemen",
+    "967",
+    "967",
+    "+967 (...) ... ..."
   ],
   [
     "zm",
+    "Zambia",
     "260",
-    "Zambia"
+    "260",
+    "+260 (..) ... ...."
   ],
   [
     "zw",
+    "Zimbabwe",
     "263",
-    "Zimbabwe"
+    "263",
+    "+263 (.) ......"
   ]
 ]
