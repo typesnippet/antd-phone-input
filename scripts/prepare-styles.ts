@@ -5,7 +5,7 @@ import process from "node:child_process";
 const exec = (command: string) => util.promisify(process.exec)(command);
 
 (async () => {
-	await exec("bash -c 'cp src/legacy/*.{le,c}ss legacy'");
+	await exec("bash -c 'cp src/legacy/*.css legacy'");
 
 	const style = fs.readFileSync("node_modules/react-phone-input-2/lib/style.css");
 	const regex = /(\.react-tel-input)\s\.flag.+\1\s*\.\w{2}\b\s*\{[^{}]*}/;

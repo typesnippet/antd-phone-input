@@ -46,9 +46,6 @@
         "default": "./types.d.ts"
       }
     },
-    "./legacy/style": {
-      "default": "./legacy/style.less"
-    },
     "./package.json": "./package.json"
   },
   "files": [
