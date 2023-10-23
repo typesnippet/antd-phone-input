@@ -1,11 +1,12 @@
-import {useCallback, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import Select from "antd/lib/select";
 import Input from "antd/lib/input";
+
+import {PhoneInputProps} from "../types";
 
 import styleInject from "./style";
 import timezones from "./timezones.json";
 import countries from "./countries.json";
-import {PhoneInputProps} from "../types";
 
 styleInject("style5.css");
 
@@ -48,25 +49,39 @@ const getDefaultISO2Code = () => {
 // }
 
 const PhoneInput = ({
-						value: defaultValue,
+						value: initialValue = "",
 						// style,
-						country,
+						country = getDefaultISO2Code(),
 						// className,
 						// size = "middle",
-						// onPressEnter = () => null,
+						onPressEnter = () => null,
 						// onMount: handleMount = () => null,
 						// onChange: handleChange = () => null,
 						// inputClass: inputClassProxy,
 						// ...reactPhoneInputProps
 					}: PhoneInputProps) => {
-	const defaultCountry = country || getDefaultISO2Code();
-	const defaultDialCode = countries.find(([isoCode]) => isoCode === defaultCountry)?.[3];
+	const defaultValue = typeof initialValue === "string" ? initialValue.replaceAll(/\D/g, "") : [initialValue?.countryCode, initialValue?.areaCode, initialValue?.phoneNumber].filter(Boolean).join("");
+	const defaultMetadata = countries.find(([_1, _2, _3, dial]) => defaultValue.startsWith(dial)) || countries.find(([iso]) => iso === country);
+	// const defaultCountry = defaultMetadata?.[0];
+	const defaultDialCode = defaultMetadata?.[3];
+	const defaultPhoneMask = defaultMetadata?.[4];
+
+	// console.log(defaultCountry, country)
 
 	let back = false;
+	const [initiated, setInitiated] = useState(false);
 	const [value, setValue] = useState<string>(defaultValue as string);
 	const [minWidth, setMinWidth] = useState(0);
-	const [dialCode, setDialCode] = useState(defaultDialCode);
-	const [pattern, setPattern] = useState("+. (...) ... ....");
+	const [pattern, setPattern] = useState(defaultPhoneMask || "");
+
+	const metadata = useMemo(() => {
+		const rawValue = value.replaceAll(/\D/g, "");
+		return countries.find(([_1, _2, _3, dial]) => rawValue.startsWith(dial));
+	}, [value])
+
+	const selectValue = useMemo(() => {
+		return metadata ? metadata[0] + metadata[3] : defaultDialCode;
+	}, [defaultDialCode, metadata])
 
 	const prev = useMemo(() => (j => Array.from(pattern, (c, i) => slots.has(c) ? j = i + 1 : j))(0), [pattern])
 
@@ -79,7 +94,10 @@ const PhoneInput = ({
 
 	const onBlur = useCallback(({target}: any) => target.value === pattern && setValue(""), [pattern])
 
-	const onKeyDown = (e: any) => back = e.key === "Backspace"
+	const onKeyDown = (e: any) => {
+		if (e.key === "Enter") onPressEnter(e);
+		else back = e.key === "Backspace";
+	}
 
 	const format = ({target}: any) => {
 		const [i, j] = [target.selectionStart, target.selectionEnd].map((i: any) => {
@@ -91,6 +109,12 @@ const PhoneInput = ({
 		target.setSelectionRange(i, j);
 		back = false;
 	}
+
+	useEffect(() => {
+		if (initiated) return;
+		setValue(displayFormat(clean(value).join("")));
+		setInitiated(true);
+	}, [clean, initiated, value])
 
 	// const countryCode = useMemo(() => {
 	// 	return countries.find(([_, dial]) => dialCode === dial)?.[0];
@@ -137,28 +161,29 @@ const PhoneInput = ({
 
 	const countriesSelect = useMemo(() => (
 		<Select
-			value={dialCode}
+			value={selectValue}
 			suffixIcon={null}
-			onSelect={(dial, {key: mask}) => {
-				setDialCode(dial);
+			onSelect={(_, {key: mask}) => {
+				setInitiated(false);
 				setPattern(mask);
+				setValue("");
 			}}
 			optionLabelProp="label"
 			dropdownStyle={{minWidth}}
 		>
-			{countries.map(([isoCode, countryName, _, dialCode, mask]) => (
+			{countries.map(([iso, name, _, dial, mask]) => (
 				<Select.Option
 					key={mask}
-					value={dialCode}
-					label={<div className={`flag ${isoCode}`}/>}
+					value={iso + dial}
+					label={<div className={`flag ${iso}`}/>}
 					children={<div className="ant-phone-input-select-item">
-						<div className={`flag ${isoCode}`}/>
-						{countryName}&nbsp;{displayFormat(mask)}
+						<div className={`flag ${iso}`}/>
+						{name}&nbsp;{displayFormat(mask)}
 					</div>}
 				/>
 			))}
 		</Select>
-	), [dialCode, minWidth])
+	), [selectValue, minWidth])
 
 	return (
 		<div ref={node => setMinWidth(node?.offsetWidth || 0)}>
@@ -177,12 +202,7 @@ const PhoneInput = ({
 				// 	console.log(e.target.value);
 				// 	setValue(e.target.value);
 				// }}
-				// country={countryCode}
-				// inputClass={inputClass}
 				/** Dynamic properties for customization */
-				// {...reactPhoneInputProps}
-				// containerStyle={style}
-				// containerClass={className}
 				// onEnterKeyPress={onPressEnter}
 			/>
 		</div>
