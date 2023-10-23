@@ -1,12 +1,13 @@
-import {useCallback, useEffect, useMemo, useState} from "react";
+import {ChangeEvent, useCallback, useEffect, useMemo, useState} from "react";
 import Select from "antd/lib/select";
 import Input from "antd/lib/input";
 
-import {PhoneInputProps} from "../types";
+import {PhoneInputProps, PhoneNumber} from "../types";
 
 import styleInject from "./style";
 import timezones from "./timezones.json";
 import countries from "./countries.json";
+import validations from "./validations.json";
 
 styleInject("style5.css");
 
@@ -16,37 +17,44 @@ const displayFormat = (value: string) => {
 	return value.replace(/[.\s\D]+$/, "").replace(/(\(\d+)$/, "$1)");
 }
 
+const cleanInput = (input: any, pattern: string) => {
+	input = input.match(/\d/g) || [];
+	return Array.from(pattern, c => input[0] === c || slots.has(c) ? input.shift() || c : c);
+}
+
+const checkValidity = (metadata: PhoneNumber) => {
+	// TODO: Update masks - create a script for preparing the masks (like it is done for validations)
+	/** Checks if both the area code and phone number match the validation pattern */
+	const pattern = new RegExp((validations as any)[metadata.isoCode as keyof typeof validations]);
+	return pattern.test([metadata.areaCode, metadata.phoneNumber].filter(Boolean).join(""));
+}
+
 const getDefaultISO2Code = () => {
 	/** Returns the default ISO2 code, based on the user's timezone */
 	return (timezones[Intl.DateTimeFormat().resolvedOptions().timeZone as keyof typeof timezones] || "") || "us";
 }
 
-// const parsePhoneNumber = (value: string, data: CountryData, formattedNumber: string): PhoneNumber => {
-// 	const isoCode = data?.countryCode;
-// 	const countryCodePattern = /\+\d+/;
-// 	const areaCodePattern = /\((\d+)\)/;
-// 	const dialCodePattern = /^\+[\d\s]+\([\d\s]+\)/;
-//
-// 	/** Parses the matching partials of the phone number by predefined regex patterns */
-// 	const countryCodeMatch = formattedNumber ? (formattedNumber.match(countryCodePattern) || []) : [];
-// 	const areaCodeMatch = formattedNumber ? (formattedNumber.match(areaCodePattern) || []) : [];
-// 	const dialCodeMatch = formattedNumber ? (formattedNumber.match(dialCodePattern) || []) : [];
-//
-// 	/** Converts the parsed values of the country and area codes to integers if values present */
-// 	const countryCode = countryCodeMatch.length > 0 ? parseInt(countryCodeMatch[0]) : null;
-// 	const areaCode = areaCodeMatch.length > 1 ? parseInt(areaCodeMatch[1]) : null;
-//
-// 	/** Obtaining the dial code for comparing to the existing one - if the country mask contains an area code */
-// 	const dialCode = dialCodeMatch.length > 0 ? dialCodeMatch[0].replaceAll(/[+\s()]/g, "") : null;
-// 	const dialChanged = dialCode !== data?.dialCode;
-//
-// 	/** Parses the phone number by removing the country and area codes from the formatted value */
-// 	const phoneNumberPattern = new RegExp(`^${countryCode}${(areaCode || "")}(\\d+)`);
-// 	const phoneNumberMatch = value ? (value.match(phoneNumberPattern) || []) : [];
-// 	const phoneNumber = phoneNumberMatch.length > 1 ? phoneNumberMatch[1] : null;
-//
-// 	return {countryCode, areaCode, phoneNumber, isoCode, dialChanged};
-// }
+const parsePhoneNumber = (formattedNumber: string): PhoneNumber => {
+	const value = formattedNumber.replaceAll(/\D/g, "");
+	const isoCode = countries.find((country) => value.startsWith(country[3]))?.[0];
+	const countryCodePattern = /\+\d+/;
+	const areaCodePattern = /\((\d+)\)/;
+
+	/** Parses the matching partials of the phone number by predefined regex patterns */
+	const countryCodeMatch = formattedNumber ? (formattedNumber.match(countryCodePattern) || []) : [];
+	const areaCodeMatch = formattedNumber ? (formattedNumber.match(areaCodePattern) || []) : [];
+
+	/** Converts the parsed values of the country and area codes to integers if values present */
+	const countryCode = countryCodeMatch.length > 0 ? parseInt(countryCodeMatch[0]) : null;
+	const areaCode = areaCodeMatch.length > 1 ? parseInt(areaCodeMatch[1]) : null;
+
+	/** Parses the phone number by removing the country and area codes from the formatted value */
+	const phoneNumberPattern = new RegExp(`^${countryCode}${(areaCode || "")}(\\d+)`);
+	const phoneNumberMatch = value ? (value.match(phoneNumberPattern) || []) : [];
+	const phoneNumber = phoneNumberMatch.length > 1 ? phoneNumberMatch[1] : null;
+
+	return {countryCode, areaCode, phoneNumber, isoCode};
+}
 
 const PhoneInput = ({
 						value: initialValue = "",
@@ -55,18 +63,15 @@ const PhoneInput = ({
 						// className,
 						// size = "middle",
 						onPressEnter = () => null,
-						// onMount: handleMount = () => null,
-						// onChange: handleChange = () => null,
+						onMount: handleMount = () => null,
+						onChange: handleChange = () => null,
 						// inputClass: inputClassProxy,
 						// ...reactPhoneInputProps
 					}: PhoneInputProps) => {
 	const defaultValue = typeof initialValue === "string" ? initialValue.replaceAll(/\D/g, "") : [initialValue?.countryCode, initialValue?.areaCode, initialValue?.phoneNumber].filter(Boolean).join("");
 	const defaultMetadata = countries.find(([_1, _2, _3, dial]) => defaultValue.startsWith(dial)) || countries.find(([iso]) => iso === country);
-	// const defaultCountry = defaultMetadata?.[0];
 	const defaultDialCode = defaultMetadata?.[3];
 	const defaultPhoneMask = defaultMetadata?.[4];
-
-	// console.log(defaultCountry, country)
 
 	let back = false;
 	const [initiated, setInitiated] = useState(false);
@@ -87,10 +92,7 @@ const PhoneInput = ({
 
 	const first = useMemo(() => [...pattern].findIndex(c => slots.has(c)), [pattern])
 
-	const clean = useCallback((input: any) => {
-		input = input.match(/\d/g) || [];
-		return Array.from(pattern, c => input[0] === c || slots.has(c) ? input.shift() || c : c);
-	}, [pattern])
+	const clean = useCallback((input: any) => cleanInput(input, pattern), [pattern])
 
 	const onBlur = useCallback(({target}: any) => target.value === pattern && setValue(""), [pattern])
 
@@ -112,41 +114,22 @@ const PhoneInput = ({
 
 	useEffect(() => {
 		if (initiated) return;
-		setValue(displayFormat(clean(value).join("")));
 		setInitiated(true);
-	}, [clean, initiated, value])
+		const formattedNumber = displayFormat(clean(value).join(""));
+		const phoneMetadata = parsePhoneNumber(formattedNumber);
+		handleMount({...phoneMetadata, valid: () => checkValidity(phoneMetadata)});
+		handleChange({
+			...phoneMetadata,
+			valid: () => checkValidity(phoneMetadata)
+		}, {} as ChangeEvent<HTMLInputElement>);
+		setValue(formattedNumber);
+	}, [clean, handleChange, handleMount, initiated, value])
 
-	// const countryCode = useMemo(() => {
-	// 	return countries.find(([_, dial]) => dialCode === dial)?.[0];
-	// }, [dialCode])
-	//
-	// console.log(countryCode);
-
-	// const checkValidity = (metadata: PhoneNumber) => {
-	// 	// TODO: Update masks - create a script for preparing the masks (like it is done for validations)
-	// 	/** Checks if both the area code and phone number match the validation pattern */
-	// 	const pattern = new RegExp((validations as any)[metadata.isoCode as ISO2Code]);
-	// 	const isValid = reset.current || ((loaded.current || initialized.current) ? pattern.test([
-	// 		metadata.areaCode, metadata.phoneNumber].filter(Boolean).join("")) : !initialized.current);
-	// 	initialized.current = true;
-	// 	loaded.current = false;
-	// 	reset.current = false;
-	// 	return isValid;
-	// }
-
-	// const onChange: ReactPhoneOnChange = useCallback((value, data, event, formattedNumber) => {
-	// 	const {dialChanged, ...metadata} = parsePhoneNumber(value, data, formattedNumber);
-	// 	const code = metadata.isoCode as ISO2Code;
-	//
-	// 	if (code !== currentCode) {
-	// 		/** Clears phone number when the country is selected manually */
-	// 		metadata.areaCode = dialChanged ? null : metadata.areaCode;
-	// 		metadata.phoneNumber = null;
-	// 		setCurrentCode(code);
-	// 	}
-	//
-	// 	handleChange({...metadata, valid: () => checkValidity(metadata)}, event);
-	// }, [currentCode, handleChange]);
+	const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+		const formattedNumber = displayFormat(clean(value).join(""));
+		const phoneMetadata = parsePhoneNumber(formattedNumber);
+		handleChange({...phoneMetadata, valid: () => checkValidity(phoneMetadata)}, event);
+	}, [clean, handleChange, value]);
 
 	// const onMount: ReactPhoneOnMount = useCallback((rawValue, {countryCode, ...event}, formattedNumber) => {
 	// 	const {dialChanged, ...metadata} = parsePhoneNumber(rawValue, {countryCode}, formattedNumber);
@@ -164,9 +147,8 @@ const PhoneInput = ({
 			value={selectValue}
 			suffixIcon={null}
 			onSelect={(_, {key: mask}) => {
-				setInitiated(false);
+				setValue(displayFormat(cleanInput(mask, mask).join("")));
 				setPattern(mask);
-				setValue("");
 			}}
 			optionLabelProp="label"
 			dropdownStyle={{minWidth}}
@@ -194,6 +176,7 @@ const PhoneInput = ({
 				onBlur={onBlur}
 				onInput={format}
 				onFocus={format}
+				onChange={onChange}
 				onKeyDown={onKeyDown}
 				addonBefore={countriesSelect}
 				/** Static properties providing dynamic behavior */
