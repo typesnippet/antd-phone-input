@@ -59,15 +59,15 @@ export default function commonTests(PhoneInput: any, Form: any, FormItem: any, B
 				}}
 				country="us"
 			/>);
-			const input = screen.getByDisplayValue("+1");
-			await userEvent.type(input, "702123456789");
-			assert(input.getAttribute("value") === "+1 (702) 123 4567");
+			const input = screen.getByDisplayValue("+1 (907)");
+			await userEvent.type(input, "123456789");
+			assert(input.getAttribute("value") === "+1 (907) 123 4567");
 		})
 
 		it("Using the input with FormItem", async () => {
 			render(<Form onFinish={({phone}: any) => {
 				assert(phone.countryCode === 1);
-				assert(phone.areaCode === 702);
+				assert(phone.areaCode === 907);
 				assert(phone.phoneNumber === "1234567");
 				assert(phone.isoCode === "us");
 			}}>
@@ -76,9 +76,9 @@ export default function commonTests(PhoneInput: any, Form: any, FormItem: any, B
 				</FormItem>
 				<Button data-testid="button" htmlType="submit">Submit</Button>
 			</Form>);
-			const input = screen.getByDisplayValue("+1");
-			await userEvent.type(input, "702123456789");
-			assert(input.getAttribute("value") === "+1 (702) 123 4567");
+			const input = screen.getByDisplayValue("+1 (907)");
+			await userEvent.type(input, "123456789");
+			assert(input.getAttribute("value") === "+1 (907) 123 4567");
 			screen.getByTestId("button").click();
 		})
 
