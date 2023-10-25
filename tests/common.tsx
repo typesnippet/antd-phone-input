@@ -168,11 +168,11 @@ export default function commonTests(PhoneInput: any, Form: any, FormItem: any, B
 			</Form>);
 
 			const form = screen.getByTestId("form");
-			const input = screen.getByDisplayValue("+1");
+			const input = screen.getByDisplayValue("+1 (907)");
 			const submit = screen.getByTestId("submit");
 			const reset = screen.getByTestId("reset");
 
-			await userEvent.type(input, "70212345");
+			await userEvent.type(input, "12345");
 			await act(async () => {
 				await new Promise(r => setTimeout(r, 100));
 			})
