@@ -4,7 +4,15 @@
     align-items: center;
 }
 
-.ant-input-group-addon * {
+.ant-phone-input-wrapper .ant-select-selector {
+    border: none !important;
+}
+
+.ant-phone-input-wrapper .ant-select-selection-item {
+    padding: 0 !important;
+}
+
+.ant-phone-input-wrapper .ant-input-group-addon * {
     display: flex;
     align-items: center;
     justify-content: center;
