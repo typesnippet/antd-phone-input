@@ -23,7 +23,6 @@ const cleanInput = (input: any, pattern: string) => {
 }
 
 const checkValidity = (metadata: PhoneNumber) => {
-	// TODO: Update masks - create a script for preparing the masks (like it is done for validations)
 	/** Checks if both the area code and phone number match the validation pattern */
 	const pattern = new RegExp((validations as any)[metadata.isoCode as keyof typeof validations]);
 	return pattern.test([metadata.areaCode, metadata.phoneNumber].filter(Boolean).join(""));
@@ -58,15 +57,10 @@ const parsePhoneNumber = (formattedNumber: string): PhoneNumber => {
 
 const PhoneInput = ({
 						value: initialValue = "",
-						// style,
 						country = getDefaultISO2Code(),
-						// className,
-						// size = "middle",
-						onPressEnter = () => null,
 						onMount: handleMount = () => null,
 						onChange: handleChange = () => null,
-						// inputClass: inputClassProxy,
-						// ...reactPhoneInputProps
+						...antInputProps
 					}: PhoneInputProps) => {
 	const defaultValue = typeof initialValue === "string" ? initialValue.replaceAll(/\D/g, "") : [initialValue?.countryCode, initialValue?.areaCode, initialValue?.phoneNumber].filter(Boolean).join("");
 	const defaultMetadata = countries.find(([_1, _2, _3, dial]) => defaultValue.startsWith(dial)) || countries.find(([iso]) => iso === country);
@@ -96,10 +90,7 @@ const PhoneInput = ({
 
 	const onBlur = useCallback(({target}: any) => target.value === pattern && setValue(""), [pattern])
 
-	const onKeyDown = (e: any) => {
-		if (e.key === "Enter") onPressEnter(e);
-		else back = e.key === "Backspace";
-	}
+	const onKeyDown = (e: any) => back = e.key === "Backspace";
 
 	const format = ({target}: any) => {
 		const [i, j] = [target.selectionStart, target.selectionEnd].map((i: any) => {
@@ -126,21 +117,10 @@ const PhoneInput = ({
 	}, [clean, handleChange, handleMount, initiated, value])
 
 	const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-		const formattedNumber = displayFormat(clean(value).join(""));
+		const formattedNumber = displayFormat(clean(event.target.value).join(""));
 		const phoneMetadata = parsePhoneNumber(formattedNumber);
 		handleChange({...phoneMetadata, valid: () => checkValidity(phoneMetadata)}, event);
-	}, [clean, handleChange, value]);
-
-	// const onMount: ReactPhoneOnMount = useCallback((rawValue, {countryCode, ...event}, formattedNumber) => {
-	// 	const {dialChanged, ...metadata} = parsePhoneNumber(rawValue, {countryCode}, formattedNumber);
-	// 	/** Initializes the existing value */
-	// 	handleChange({...metadata, valid: () => checkValidity(metadata)}, event);
-	// 	handleMount({...metadata, valid: () => checkValidity(metadata)});
-	// 	/** Sets the current country code to the code of the initial value */
-	// 	setCurrentCode(metadata.isoCode as ISO2Code);
-	// 	if (loaded.current && !initialized.current) reset.current = true;
-	// 	initialized.current = false;
-	// }, [handleChange, handleMount]);
+	}, [clean, handleChange]);
 
 	const countriesSelect = useMemo(() => (
 		<Select
@@ -170,7 +150,6 @@ const PhoneInput = ({
 	return (
 		<div ref={node => setMinWidth(node?.offsetWidth || 0)}>
 			<Input
-				/** Static properties for stable functionality */
 				inputMode="tel"
 				value={value}
 				onBlur={onBlur}
@@ -179,14 +158,7 @@ const PhoneInput = ({
 				onChange={onChange}
 				onKeyDown={onKeyDown}
 				addonBefore={countriesSelect}
-				/** Static properties providing dynamic behavior */
-				// onMount={onMount}
-				// onChange={(e) => {
-				// 	console.log(e.target.value);
-				// 	setValue(e.target.value);
-				// }}
-				/** Dynamic properties for customization */
-				// onEnterKeyPress={onPressEnter}
+				{...antInputProps}
 			/>
 		</div>
 	)
