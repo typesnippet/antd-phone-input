@@ -32,13 +32,6 @@
         "default": "./index.d.ts"
       }
     },
-    "./legacy": {
-      "import": "./legacy/index.js",
-      "require": "./legacy/index.cjs.js",
-      "types": {
-        "default": "./legacy/index.d.ts"
-      }
-    },
     "./types": {
       "import": "./types.js",
       "require": "./types.cjs.js",
@@ -46,21 +39,28 @@
         "default": "./types.d.ts"
       }
     },
+    "./styles": {
+      "import": "./styles.js",
+      "require": "./styles.cjs.js",
+      "types": {
+        "default": "./styles.d.ts"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [
     "index*",
-    "style*",
     "types*",
-    "legacy",
+    "styles*",
     "LICENSE",
+    "metadata",
     "README.md"
   ],
   "scripts": {
-    "rename": "bash -c 'for file in $1*.js; do if [[ \"${file%.js}\" =~ ^[^.]*$ ]]; then mv \"$file\" \"${file%.js}.$0.js\"; fi; done'",
-    "compile": "tsc --module commonjs && npm run rename -- cjs && npm run rename -- cjs legacy/ && tsc --declaration",
-    "build": "npm run compile && tsx scripts/prepare-styles.ts",
-    "prebuild": "rm -r legacy index* style* types* || true",
+    "rename": "bash -c 'for file in *.js; do mv $file \"${file%.js}.$0.js\"; done'",
+    "build": "tsc --module commonjs && npm run rename -- cjs && tsc --declaration",
+    "prebuild": "rm -r metadata index* types* styles* || true",
+    "postbuild": "tsx scripts/prepare-styles.ts",
     "postpack": "tsx scripts/prepare-package.ts",
     "test": "jest --config jestconfig.json"
   },
