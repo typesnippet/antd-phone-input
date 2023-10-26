@@ -2,6 +2,8 @@ import assert from "assert";
 import userEvent from "@testing-library/user-event";
 import {act, render, screen} from "@testing-library/react";
 
+import PhoneInput from "../src";
+
 Object.defineProperty(window, "matchMedia", {
 	writable: true,
 	value: jest.fn().mockImplementation(query => ({
@@ -16,7 +18,7 @@ Object.defineProperty(window, "matchMedia", {
 	})),
 })
 
-export default function commonTests(PhoneInput: any, Form: any, FormItem: any, Button: any) {
+export default function commonTests(Form: any, FormItem: any, Button: any) {
 	console.warn = jest.fn();
 
 	describe("Checking the basic rendering and functionality", () => {
