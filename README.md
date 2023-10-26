@@ -115,7 +115,6 @@ return (
 | searchNotFound     | The value is shown if `enableSearch` is `true` and the query does not match any country. Default value is `No entries to show`.                                             | string                    |
 | placeholder        | Custom placeholder. Default placeholder is `1 (702) 123-4567`.                                                                                                              | string                    |
 | country            | Country code to be selected by default. By default, it will show the flag of the user's country.                                                                            | string                    |
-| regions            | Show only the countries of the specified regions. See the list of [available regions][reactPhoneRegions].                                                                   | string[]                  |
 | onlyCountries      | Country codes to be included in the list. E.g. `onlyCountries={['us', 'ca', 'uk']}`.                                                                                        | string[]                  |
 | excludeCountries   | Country codes to be excluded from the list of countries. E.g. `excludeCountries={['us', 'ca', 'uk']}`.                                                                      | string[]                  |
 | preferredCountries | Country codes to be at the top of the list. E.g. `preferredCountries={['us', 'ca', 'uk']}`.                                                                                 | string[]                  |
@@ -137,7 +136,5 @@ don't forget to add tests for your changes.
 Copyright (C) 2023 Artyom Vancyan. [MIT](LICENSE)
 
 [antInputProps]:https://ant.design/components/input#input
-
-[reactPhoneRegions]:https://github.com/bl00mber/react-phone-input-2#regions
 
 [htmlInputProps]:https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes

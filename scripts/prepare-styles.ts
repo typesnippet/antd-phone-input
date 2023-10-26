@@ -7,11 +7,7 @@ const exec = (command: string) => util.promisify(process.exec)(command);
 (async () => {
 	await exec("bash -c 'cp src/legacy/*.css legacy'");
 
-	const style = fs.readFileSync("node_modules/react-phone-input-2/lib/style.css");
-	const regex = /(\.react-tel-input)\s\.flag.+\1\s*\.\w{2}\b\s*\{[^{}]*}/;
-	const flags = "\n" + (style.toString().match(regex) || [""])[0];
-
-	let styles = fs.readFileSync("./legacy/style5.css", "utf8") + flags;
+	let styles = fs.readFileSync("./legacy/style5.css", "utf8");
 	styles = styles.replaceAll(/\/\*\*.*?\*\/[\n\s]*/gs, "");
 	styles = styles.replaceAll(/\B[^{}]*?\{[\s\n]}/g, "");
 	styles = styles.replaceAll(/\//g, "\\\/");
