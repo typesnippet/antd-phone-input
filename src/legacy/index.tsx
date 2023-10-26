@@ -1,4 +1,4 @@
-import {ChangeEvent, useCallback, useEffect, useMemo, useState} from "react";
+import {ChangeEvent, KeyboardEvent, useCallback, useEffect, useMemo, useState} from "react";
 import Select from "antd/lib/select";
 import Input from "antd/lib/input";
 
@@ -12,6 +12,17 @@ import validations from "./validations.json";
 styleInject("style5.css");
 
 const slots = new Set(".");
+
+const getMetadata = (rawValue: string) => {
+	return countries.find((country) => rawValue.startsWith(country[3]));
+}
+
+const getRawValue = (value: PhoneNumber | string) => {
+	if (typeof value === "string") {
+		return value.replaceAll(/\D/g, "");
+	}
+	return [value?.countryCode, value?.areaCode, value?.phoneNumber].filter(Boolean).join("");
+}
 
 const displayFormat = (value: string) => {
 	return value.replace(/[.\s\D]+$/, "").replace(/(\(\d+)$/, "$1)");
@@ -34,8 +45,8 @@ const getDefaultISO2Code = () => {
 }
 
 const parsePhoneNumber = (formattedNumber: string): PhoneNumber => {
-	const value = formattedNumber.replaceAll(/\D/g, "");
-	const isoCode = countries.find((country) => value.startsWith(country[3]))?.[0];
+	const value = getRawValue(formattedNumber);
+	const isoCode = getMetadata(value)?.[0];
 	const countryCodePattern = /\+\d+/;
 	const areaCodePattern = /\((\d+)\)/;
 
@@ -58,12 +69,16 @@ const parsePhoneNumber = (formattedNumber: string): PhoneNumber => {
 const PhoneInput = ({
 						value: initialValue = "",
 						country = getDefaultISO2Code(),
+						onBlur: handleBlur = () => null,
 						onMount: handleMount = () => null,
+						onInput: handleInput = () => null,
+						onFocus: handleFocus = () => null,
 						onChange: handleChange = () => null,
+						onKeyDown: handleKeyDown = () => null,
 						...antInputProps
 					}: PhoneInputProps) => {
-	const defaultValue = typeof initialValue === "string" ? initialValue.replaceAll(/\D/g, "") : [initialValue?.countryCode, initialValue?.areaCode, initialValue?.phoneNumber].filter(Boolean).join("");
-	const defaultMetadata = countries.find(([_1, _2, _3, dial]) => defaultValue.startsWith(dial)) || countries.find(([iso]) => iso === country);
+	const defaultValue = getRawValue(initialValue);
+	const defaultMetadata = getMetadata(defaultValue) || countries.find(([iso]) => iso === country);
 	const defaultDialCode = defaultMetadata?.[3];
 	const defaultPhoneMask = defaultMetadata?.[4];
 
@@ -74,33 +89,57 @@ const PhoneInput = ({
 	const [pattern, setPattern] = useState(defaultPhoneMask || "");
 
 	const metadata = useMemo(() => {
-		const rawValue = value.replaceAll(/\D/g, "");
-		return countries.find(([_1, _2, _3, dial]) => rawValue.startsWith(dial));
+		return getMetadata(getRawValue(value));
 	}, [value])
+
+	const first = useMemo(() => {
+		return [...pattern].findIndex(c => slots.has(c));
+	}, [pattern])
+
+	const prev = useMemo(() => {
+		return (j => Array.from(pattern, (c, i) => slots.has(c) ? j = i + 1 : j))(0);
+	}, [pattern])
 
 	const selectValue = useMemo(() => {
 		return metadata ? metadata[0] + metadata[3] : defaultDialCode;
 	}, [defaultDialCode, metadata])
 
-	const prev = useMemo(() => (j => Array.from(pattern, (c, i) => slots.has(c) ? j = i + 1 : j))(0), [pattern])
-
-	const first = useMemo(() => [...pattern].findIndex(c => slots.has(c)), [pattern])
-
 	const clean = useCallback((input: any) => cleanInput(input, pattern), [pattern])
 
-	const onBlur = useCallback(({target}: any) => target.value === pattern && setValue(""), [pattern])
-
-	const onKeyDown = (e: any) => back = e.key === "Backspace";
-
-	const format = ({target}: any) => {
+	const format = ({target}: ChangeEvent<HTMLInputElement>) => {
 		const [i, j] = [target.selectionStart, target.selectionEnd].map((i: any) => {
 			i = clean(target.value.slice(0, i)).findIndex(c => slots.has(c));
 			return i < 0 ? prev[prev.length - 1] : back ? prev[i - 1] || first : i;
 		});
 		target.value = displayFormat(clean(target.value).join(""));
-		setValue(target.value);
 		target.setSelectionRange(i, j);
+		setValue(target.value);
 		back = false;
+	}
+
+	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const phoneMetadata = parsePhoneNumber(displayFormat(clean(event.target.value).join("")));
+		handleChange({...phoneMetadata, valid: () => checkValidity(phoneMetadata)}, event);
+	}
+
+	const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+		back = event.key === "Backspace";
+		handleKeyDown(event);
+	}
+
+	const onBlur = (event: ChangeEvent<HTMLInputElement>) => {
+		if (event.target.value === pattern) setValue("");
+		handleBlur(event);
+	}
+
+	const onInput = (event: ChangeEvent<HTMLInputElement>) => {
+		handleInput(event);
+		format(event);
+	}
+
+	const onFocus = (event: ChangeEvent<HTMLInputElement>) => {
+		handleFocus(event);
+		format(event);
 	}
 
 	useEffect(() => {
@@ -115,12 +154,6 @@ const PhoneInput = ({
 		}, {} as ChangeEvent<HTMLInputElement>);
 		setValue(formattedNumber);
 	}, [clean, handleChange, handleMount, initiated, value])
-
-	const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-		const formattedNumber = displayFormat(clean(event.target.value).join(""));
-		const phoneMetadata = parsePhoneNumber(formattedNumber);
-		handleChange({...phoneMetadata, valid: () => checkValidity(phoneMetadata)}, event);
-	}, [clean, handleChange]);
 
 	const countriesSelect = useMemo(() => (
 		<Select
@@ -148,13 +181,14 @@ const PhoneInput = ({
 	), [selectValue, minWidth])
 
 	return (
-		<div ref={node => setMinWidth(node?.offsetWidth || 0)}>
+		<div className="ant-phone-input-wrapper"
+			 ref={node => setMinWidth(node?.offsetWidth || 0)}>
 			<Input
 				inputMode="tel"
 				value={value}
 				onBlur={onBlur}
-				onInput={format}
-				onFocus={format}
+				onInput={onInput}
+				onFocus={onFocus}
 				onChange={onChange}
 				onKeyDown={onKeyDown}
 				addonBefore={countriesSelect}
