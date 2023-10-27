@@ -2,6 +2,7 @@
   "compilerOptions": {
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": [
       "esnext"
