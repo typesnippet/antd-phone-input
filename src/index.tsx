@@ -1,4 +1,4 @@
-import {ChangeEvent, KeyboardEvent, useCallback, useEffect, useMemo, useState} from "react";
+import {ChangeEvent, KeyboardEvent, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import Select from "antd/lib/select";
 import Input from "antd/lib/input";
 
@@ -69,7 +69,6 @@ const parsePhoneNumber = (formattedNumber: string): PhoneNumber => {
 const PhoneInput = ({
 						value: initialValue = "",
 						country = getDefaultISO2Code(),
-						onBlur: handleBlur = () => null,
 						onMount: handleMount = () => null,
 						onInput: handleInput = () => null,
 						onFocus: handleFocus = () => null,
@@ -82,8 +81,8 @@ const PhoneInput = ({
 	const defaultDialCode = defaultMetadata?.[3];
 	const defaultPhoneMask = defaultMetadata?.[4];
 
-	let back = false;
-	const [initiated, setInitiated] = useState(false);
+	const backRef = useRef(false);
+	const initiatedRef = useRef(false);
 	const [value, setValue] = useState<string>(defaultValue as string);
 	const [minWidth, setMinWidth] = useState(0);
 	const [pattern, setPattern] = useState(defaultPhoneMask || "");
@@ -106,45 +105,40 @@ const PhoneInput = ({
 
 	const clean = useCallback((input: any) => cleanInput(input, pattern), [pattern])
 
-	const format = ({target}: ChangeEvent<HTMLInputElement>) => {
+	const format = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {
 		const [i, j] = [target.selectionStart, target.selectionEnd].map((i: any) => {
 			i = clean(target.value.slice(0, i)).findIndex(c => slots.has(c));
-			return i < 0 ? prev[prev.length - 1] : back ? prev[i - 1] || first : i;
+			return i < 0 ? prev[prev.length - 1] : backRef.current ? prev[i - 1] || first : i;
 		});
 		target.value = displayFormat(clean(target.value).join(""));
 		target.setSelectionRange(i, j);
+		backRef.current = false;
 		setValue(target.value);
-		back = false;
-	}
+	}, [clean, first, prev])
 
-	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+	const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
+		backRef.current = event.key === "Backspace";
+		handleKeyDown(event);
+	}, [handleKeyDown])
+
+	const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		const phoneMetadata = parsePhoneNumber(displayFormat(clean(event.target.value).join("")));
 		handleChange({...phoneMetadata, valid: () => checkValidity(phoneMetadata)}, event);
-	}
+	}, [clean, handleChange])
 
-	const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-		back = event.key === "Backspace";
-		handleKeyDown(event);
-	}
-
-	const onBlur = (event: ChangeEvent<HTMLInputElement>) => {
-		if (event.target.value === pattern) setValue("");
-		handleBlur(event);
-	}
-
-	const onInput = (event: ChangeEvent<HTMLInputElement>) => {
+	const onInput = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		handleInput(event);
 		format(event);
-	}
+	}, [format, handleInput])
 
-	const onFocus = (event: ChangeEvent<HTMLInputElement>) => {
+	const onFocus = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		handleFocus(event);
 		format(event);
-	}
+	}, [format, handleFocus])
 
 	useEffect(() => {
-		if (initiated) return;
-		setInitiated(true);
+		if (initiatedRef.current) return;
+		initiatedRef.current = true;
 		const formattedNumber = displayFormat(clean(value).join(""));
 		const phoneMetadata = parsePhoneNumber(formattedNumber);
 		handleMount({...phoneMetadata, valid: () => checkValidity(phoneMetadata)});
@@ -153,7 +147,7 @@ const PhoneInput = ({
 			valid: () => checkValidity(phoneMetadata)
 		}, {} as ChangeEvent<HTMLInputElement>);
 		setValue(formattedNumber);
-	}, [clean, handleChange, handleMount, initiated, value])
+	}, [clean, handleChange, handleMount, value])
 
 	const countriesSelect = useMemo(() => (
 		<Select
@@ -186,7 +180,6 @@ const PhoneInput = ({
 			<Input
 				inputMode="tel"
 				value={value}
-				onBlur={onBlur}
 				onInput={onInput}
 				onFocus={onFocus}
 				onChange={onChange}

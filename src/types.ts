@@ -34,8 +34,6 @@ export interface PhoneInputProps extends Omit<InputProps, "value" | "onChange"> 
 
 	onMount?(value: PhoneNumber): void;
 
-	onBlur?(event: ChangeEvent<HTMLInputElement>): void;
-
 	onFocus?(event: ChangeEvent<HTMLInputElement>): void;
 
 	onInput?(event: ChangeEvent<HTMLInputElement>): void;
