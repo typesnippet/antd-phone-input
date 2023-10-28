@@ -24,6 +24,12 @@ const getRawValue = (value: PhoneNumber | string) => {
 	return [value?.countryCode, value?.areaCode, value?.phoneNumber].filter(Boolean).join("");
 }
 
+const filterCountries = (query: string) => {
+	return countries.filter(([_1, name, _2, dial]) => {
+		return name.toLowerCase().startsWith(query.toLowerCase()) || dial.includes(query);
+	});
+}
+
 const displayFormat = (value: string) => {
 	return value.replace(/[.\s\D]+$/, "").replace(/(\(\d+)$/, "$1)");
 }
@@ -69,6 +75,9 @@ const parsePhoneNumber = (formattedNumber: string): PhoneNumber => {
 const PhoneInput = ({
 						value: initialValue = "",
 						country = getDefaultISO2Code(),
+						enableSearch = false,
+						searchNotFound = "No country found",
+						searchPlaceholder = "Search country",
 						onMount: handleMount = () => null,
 						onInput: handleInput = () => null,
 						onFocus: handleFocus = () => null,
@@ -83,6 +92,7 @@ const PhoneInput = ({
 
 	const backRef = useRef(false);
 	const initiatedRef = useRef(false);
+	const [query, setQuery] = useState<string>("");
 	const [value, setValue] = useState<string>(defaultValue as string);
 	const [minWidth, setMinWidth] = useState(0);
 	const [pattern, setPattern] = useState(defaultPhoneMask || "");
@@ -151,16 +161,28 @@ const PhoneInput = ({
 
 	const countriesSelect = useMemo(() => (
 		<Select
-			value={selectValue}
 			suffixIcon={null}
+			value={selectValue}
 			onSelect={(_, {key: mask}) => {
 				setValue(displayFormat(cleanInput(mask, mask).join("")));
 				setPattern(mask);
 			}}
 			optionLabelProp="label"
 			dropdownStyle={{minWidth}}
+			notFoundContent={searchNotFound}
+			dropdownRender={(menu) => (
+				<div className="ant-phone-input-search-wrapper">
+					{enableSearch && (
+						<Input
+							placeholder={searchPlaceholder}
+							onInput={({target}: any) => setQuery(target.value)}
+						/>
+					)}
+					{menu}
+				</div>
+			)}
 		>
-			{countries.map(([iso, name, _, dial, mask]) => (
+			{filterCountries(query).map(([iso, name, _, dial, mask]) => (
 				<Select.Option
 					key={mask}
 					value={iso + dial}
@@ -172,7 +194,7 @@ const PhoneInput = ({
 				/>
 			))}
 		</Select>
-	), [selectValue, minWidth])
+	), [selectValue, minWidth, searchNotFound, query, enableSearch, searchPlaceholder])
 
 	return (
 		<div className="ant-phone-input-wrapper"

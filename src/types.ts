@@ -1,4 +1,4 @@
-import {ChangeEvent, InputHTMLAttributes, KeyboardEvent} from "react";
+import {ChangeEvent, KeyboardEvent} from "react";
 import {InputProps} from "antd/lib/input";
 
 export interface PhoneNumber {
@@ -11,13 +11,7 @@ export interface PhoneNumber {
 }
 
 export interface ReactPhoneInputProps {
-	inputProps?: InputHTMLAttributes<HTMLInputElement>,
-	searchPlaceholder?: string,
-	searchNotFound?: string,
-	dropdownClass?: string,
-	enableSearch?: boolean,
 	disableDropdown?: boolean,
-	country?: string,
 	onlyCountries?: string[],
 	excludeCountries?: string[],
 	preferredCountries?: string[],
@@ -30,7 +24,14 @@ export interface PhoneInputProps extends Omit<InputProps, "value" | "onChange"> 
 	 */
 
 	value?: PhoneNumber | string;
+
 	country?: string;
+
+	enableSearch?: boolean;
+
+	searchNotFound?: string;
+
+	searchPlaceholder?: string;
 
 	onMount?(value: PhoneNumber): void;
 
