@@ -24,12 +24,6 @@ const getRawValue = (value: PhoneNumber | string) => {
 	return [value?.countryCode, value?.areaCode, value?.phoneNumber].filter(Boolean).join("");
 }
 
-const filterCountries = (query: string) => {
-	return countries.filter(([_1, name, _2, dial]) => {
-		return name.toLowerCase().startsWith(query.toLowerCase()) || dial.includes(query);
-	});
-}
-
 const displayFormat = (value: string) => {
 	return value.replace(/[.\s\D]+$/, "").replace(/(\(\d+)$/, "$1)");
 }
@@ -76,6 +70,10 @@ const PhoneInput = ({
 						value: initialValue = "",
 						country = getDefaultISO2Code(),
 						enableSearch = false,
+						disableDropdown = false,
+						onlyCountries = [],
+						excludeCountries = [],
+						preferredCountries = [],
 						searchNotFound = "No country found",
 						searchPlaceholder = "Search country",
 						onMount: handleMount = () => null,
@@ -112,6 +110,25 @@ const PhoneInput = ({
 	const selectValue = useMemo(() => {
 		return metadata ? metadata[0] + metadata[3] : defaultDialCode;
 	}, [defaultDialCode, metadata])
+
+	const countriesOnly = useMemo(() => {
+		const allowList = onlyCountries.length > 0 ? onlyCountries : countries.map(([iso]) => iso);
+		return countries.map(([iso]) => iso).filter((iso) => {
+			return allowList.includes(iso) && !excludeCountries.includes(iso);
+		});
+	}, [onlyCountries, excludeCountries])
+
+	const countriesList = useMemo(() => {
+		const filteredCountries = countries.filter(([iso, name, _1, dial]) => {
+			return countriesOnly.includes(iso) && (
+				name.toLowerCase().startsWith(query.toLowerCase()) || dial.includes(query)
+			);
+		});
+		return [
+			...filteredCountries.filter(([iso]) => preferredCountries.includes(iso)),
+			...filteredCountries.filter(([iso]) => !preferredCountries.includes(iso)),
+		];
+	}, [countriesOnly, preferredCountries, query])
 
 	const clean = useCallback((input: any) => cleanInput(input, pattern), [pattern])
 
@@ -163,6 +180,7 @@ const PhoneInput = ({
 		<Select
 			suffixIcon={null}
 			value={selectValue}
+			open={disableDropdown ? false : undefined}
 			onSelect={(_, {key: mask}) => {
 				setValue(displayFormat(cleanInput(mask, mask).join("")));
 				setPattern(mask);
@@ -182,7 +200,7 @@ const PhoneInput = ({
 				</div>
 			)}
 		>
-			{filterCountries(query).map(([iso, name, _, dial, mask]) => (
+			{countriesList.map(([iso, name, _, dial, mask]) => (
 				<Select.Option
 					key={mask}
 					value={iso + dial}
@@ -194,7 +212,7 @@ const PhoneInput = ({
 				/>
 			))}
 		</Select>
-	), [selectValue, minWidth, searchNotFound, query, enableSearch, searchPlaceholder])
+	), [selectValue, disableDropdown, minWidth, searchNotFound, countriesList, enableSearch, searchPlaceholder])
 
 	return (
 		<div className="ant-phone-input-wrapper"

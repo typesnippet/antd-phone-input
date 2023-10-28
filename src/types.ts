@@ -10,13 +10,6 @@ export interface PhoneNumber {
 	valid?(): boolean;
 }
 
-export interface ReactPhoneInputProps {
-	disableDropdown?: boolean,
-	onlyCountries?: string[],
-	excludeCountries?: string[],
-	preferredCountries?: string[],
-}
-
 export interface PhoneInputProps extends Omit<InputProps, "value" | "onChange"> {
 	/**
 	 * NOTE: Interfaces of events may differ from the original interfaces
@@ -32,6 +25,14 @@ export interface PhoneInputProps extends Omit<InputProps, "value" | "onChange"> 
 	searchNotFound?: string;
 
 	searchPlaceholder?: string;
+
+	disableDropdown?: boolean;
+
+	onlyCountries?: string[];
+
+	excludeCountries?: string[];
+
+	preferredCountries?: string[];
 
 	onMount?(value: PhoneNumber): void;
 
