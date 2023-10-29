@@ -84,31 +84,13 @@ const PhoneInput = ({
 					}: PhoneInputProps) => {
 	const defaultValue = getRawValue(initialValue);
 	const defaultMetadata = getMetadata(defaultValue) || countries.find(([iso]) => iso === country);
-	const defaultDialCode = defaultMetadata?.[3];
-	const defaultPhoneMask = defaultMetadata?.[4];
+	const defaultValueState = defaultValue || countries.find(([iso]) => iso === defaultMetadata?.[0])?.[3] as string;
 
-	const backRef = useRef(false);
-	const initiatedRef = useRef(false);
+	const backRef = useRef<boolean>(false);
+	const initiatedRef = useRef<boolean>(false);
 	const [query, setQuery] = useState<string>("");
-	const [value, setValue] = useState<string>(defaultValue as string);
-	const [minWidth, setMinWidth] = useState(0);
-	const [pattern, setPattern] = useState(defaultPhoneMask || "");
-
-	const metadata = useMemo(() => {
-		return getMetadata(getRawValue(value));
-	}, [value])
-
-	const first = useMemo(() => {
-		return [...pattern].findIndex(c => slots.has(c));
-	}, [pattern])
-
-	const prev = useMemo(() => {
-		return (j => Array.from(pattern, (c, i) => slots.has(c) ? j = i + 1 : j))(0);
-	}, [pattern])
-
-	const selectValue = useMemo(() => {
-		return metadata ? metadata[0] + metadata[3] : defaultDialCode;
-	}, [defaultDialCode, metadata])
+	const [value, setValue] = useState<string>(defaultValueState);
+	const [minWidth, setMinWidth] = useState<number>(0);
 
 	const countriesOnly = useMemo(() => {
 		const allowList = onlyCountries.length > 0 ? onlyCountries : countries.map(([iso]) => iso);
@@ -129,7 +111,37 @@ const PhoneInput = ({
 		];
 	}, [countriesOnly, preferredCountries, query])
 
-	const clean = useCallback((input: any) => cleanInput(input, pattern), [pattern])
+	const metadata = useMemo(() => {
+		const calculatedMetadata = getMetadata(getRawValue(value)) || defaultMetadata;
+		if (!countriesList.find(([iso]) => iso === calculatedMetadata?.[0])) {
+			return countriesList[0];
+		}
+		return calculatedMetadata;
+	}, [countriesList, defaultMetadata, value])
+
+	const pattern = useMemo(() => {
+		return metadata?.[4] || defaultMetadata?.[4] || "";
+	}, [defaultMetadata, metadata])
+
+	const clean = useCallback((input: any) => {
+		return cleanInput(input, pattern.replaceAll(/\d/g, "."));
+	}, [pattern])
+
+	const first = useMemo(() => {
+		return [...pattern].findIndex(c => slots.has(c));
+	}, [pattern])
+
+	const prev = useMemo((j = 0) => {
+		return Array.from(pattern.replaceAll(/\d/g, "."), (c, i) => {
+			return slots.has(c) ? j = i + 1 : j;
+		});
+	}, [pattern])
+
+	const selectValue = useMemo(() => {
+		const isoCode = metadata?.[0] || defaultMetadata?.[0] as string;
+		const dialCode = metadata?.[3] || defaultMetadata?.[3] as string;
+		return isoCode + dialCode;
+	}, [defaultMetadata, metadata])
 
 	const format = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {
 		const [i, j] = [target.selectionStart, target.selectionEnd].map((i: any) => {
@@ -160,7 +172,11 @@ const PhoneInput = ({
 	useEffect(() => {
 		if (initiatedRef.current) return;
 		initiatedRef.current = true;
-		const formattedNumber = displayFormat(clean(value).join(""));
+		let initialValue = getRawValue(value);
+		if (!initialValue.startsWith(metadata?.[3] as string)) {
+			initialValue = metadata?.[3] as string;
+		}
+		const formattedNumber = displayFormat(clean(initialValue).join(""));
 		const phoneMetadata = parsePhoneNumber(formattedNumber);
 		handleMount({...phoneMetadata, valid: () => checkValidity(phoneMetadata)});
 		handleChange({
@@ -168,7 +184,7 @@ const PhoneInput = ({
 			valid: () => checkValidity(phoneMetadata)
 		}, {} as ChangeEvent<HTMLInputElement>);
 		setValue(formattedNumber);
-	}, [clean, handleChange, handleMount, value])
+	}, [clean, handleChange, handleMount, metadata, value])
 
 	const countriesSelect = useMemo(() => (
 		<Select
@@ -177,7 +193,6 @@ const PhoneInput = ({
 			open={disableDropdown ? false : undefined}
 			onSelect={(_, {key: mask}) => {
 				setValue(displayFormat(cleanInput(mask, mask).join("")));
-				setPattern(mask);
 			}}
 			optionLabelProp="label"
 			dropdownStyle={{minWidth}}
