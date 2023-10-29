@@ -61,8 +61,8 @@ export default function commonTests(Form: any, FormItem: any, Button: any) {
 				}}
 				country="us"
 			/>);
-			const input = screen.getByDisplayValue("+1 (907)");
-			await userEvent.type(input, "123456789");
+			const input = screen.getByDisplayValue("+1");
+			await userEvent.type(input, "907123456789");
 			assert(input.getAttribute("value") === "+1 (907) 123 4567");
 		})
 
@@ -78,8 +78,8 @@ export default function commonTests(Form: any, FormItem: any, Button: any) {
 				</FormItem>
 				<Button data-testid="button" htmlType="submit">Submit</Button>
 			</Form>);
-			const input = screen.getByDisplayValue("+1 (907)");
-			await userEvent.type(input, "123456789");
+			const input = screen.getByDisplayValue("+1");
+			await userEvent.type(input, "907123456789");
 			assert(input.getAttribute("value") === "+1 (907) 123 4567");
 			screen.getByTestId("button").click();
 		})
@@ -170,11 +170,11 @@ export default function commonTests(Form: any, FormItem: any, Button: any) {
 			</Form>);
 
 			const form = screen.getByTestId("form");
-			const input = screen.getByDisplayValue("+1 (907)");
+			const input = screen.getByDisplayValue("+1");
 			const submit = screen.getByTestId("submit");
 			const reset = screen.getByTestId("reset");
 
-			await userEvent.type(input, "12345");
+			await userEvent.type(input, "90712345");
 			await act(async () => {
 				await new Promise(r => setTimeout(r, 100));
 			})
