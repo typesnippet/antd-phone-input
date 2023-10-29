@@ -78,7 +78,6 @@ const PhoneInput = ({
 						searchPlaceholder = "Search country",
 						onMount: handleMount = () => null,
 						onInput: handleInput = () => null,
-						onFocus: handleFocus = () => null,
 						onChange: handleChange = () => null,
 						onKeyDown: handleKeyDown = () => null,
 						...antInputProps
@@ -158,11 +157,6 @@ const PhoneInput = ({
 		format(event);
 	}, [format, handleInput])
 
-	const onFocus = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-		handleFocus(event);
-		format(event);
-	}, [format, handleFocus])
-
 	useEffect(() => {
 		if (initiatedRef.current) return;
 		initiatedRef.current = true;
@@ -221,7 +215,6 @@ const PhoneInput = ({
 				inputMode="tel"
 				value={value}
 				onInput={onInput}
-				onFocus={onFocus}
 				onChange={onChange}
 				onKeyDown={onKeyDown}
 				addonBefore={countriesSelect}
