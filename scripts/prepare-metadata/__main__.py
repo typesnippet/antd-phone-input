@@ -8,25 +8,11 @@ metadata_path = project_root / "resources" / "metadata.xml"
 patterns_path = project_root / "src" / "metadata" / "validations.json"
 countries_path = project_root / "src" / "metadata" / "countries.json"
 
-country_codes = [
-    "ad", "ae", "af", "ag", "ai", "al", "am", "ao", "ar", "as", "at", "au", "aw", "az", "ba", "bb", "bd", "be", "bf",
-    "bg", "bh", "bi", "bj", "bm", "bn", "bo", "br", "bs", "bt", "bw", "by", "bz", "ca", "cd", "cf", "cg", "ch", "ci",
-    "ck", "cl", "cm", "cn", "co", "cr", "cu", "cv", "cw", "cy", "cz", "de", "dj", "dk", "dm", "do", "dz", "ec", "ee",
-    "eg", "er", "es", "et", "fi", "fj", "fk", "fm", "fo", "fr", "ga", "gb", "gd", "ge", "gf", "gh", "gi", "gl", "gm",
-    "gn", "gp", "gq", "gr", "gt", "gu", "gw", "gy", "hk", "hn", "hr", "ht", "hu", "id", "ie", "il", "in", "io", "iq",
-    "ir", "is", "it", "je", "jm", "jo", "jp", "ke", "kg", "kh", "ki", "xk", "km", "kn", "kp", "kr", "kw", "ky", "kz",
-    "la", "lb", "lc", "li", "lk", "lr", "ls", "lt", "lu", "lv", "ly", "ma", "mc", "md", "me", "mg", "mh", "mk", "ml",
-    "mm", "mn", "mo", "mp", "mq", "mr", "ms", "mt", "mu", "mv", "mw", "mx", "my", "mz", "na", "nc", "ne", "nf", "ng",
-    "ni", "nl", "bq", "no", "np", "nr", "nu", "nz", "om", "pa", "pe", "pf", "pg", "ph", "pk", "pl", "pm", "pr", "ps",
-    "pt", "pw", "py", "qa", "re", "ro", "rs", "ru", "rw", "sa", "sb", "sc", "sd", "se", "sg", "sh", "si", "sk", "sl",
-    "sm", "sn", "so", "sr", "ss", "st", "sv", "sx", "sy", "sz", "tc", "td", "tg", "th", "tj", "tk", "tl", "tm", "tn",
-    "to", "tr", "tt", "tv", "tw", "tz", "ua", "ug", "us", "uy", "uz", "va", "vc", "ve", "vg", "vi", "vn", "vu", "wf",
-    "ws", "ye", "za", "zm", "zw"
-]
-
 tree = ElementTree.parse(metadata_path)
 territories = tree.find("territories")
-patterns = dict()
+
+with open(patterns_path) as fp:
+    patterns = json.load(fp)
 
 with open(countries_path) as fp:
     countries = json.load(fp)
@@ -51,20 +37,22 @@ def update_mask(mask, length):
 
 
 for territory in territories:
+    # Regenerate masks based on possible maximum lengths
+    possible_lengths = map(lambda e: territory.find(f"{e.tag}/possibleLengths"), territory.iter())
+    possible_lengths = map(lambda e: e.get("national"), filter(lambda e: e is not None, possible_lengths))
+    possible_lengths = list(map(int, re.findall(r"\d+", ",".join(possible_lengths))))
+    min_length, max_length = min(possible_lengths), max(possible_lengths)
+    for country in [c for c in countries if c[0] == territory.get("id").lower()]:
+        country[4] = update_mask(country[4], max_length)
+
     # Update phone validation patterns
     general_desc = territory.find("generalDesc")
     national_number_pattern = general_desc.find("nationalNumberPattern").text
     national_number_pattern = re.sub(r"[\s\n]", "", national_number_pattern)
-    iso_code = territory.get("id").lower()
-    if iso_code in country_codes:
-        patterns[iso_code] = f"^{national_number_pattern}$"
-
-    # Regenerate masks based on possible maximum lengths
-    possibleLengths = map(lambda e: territory.find(f"{e.tag}/possibleLengths"), territory.iter())
-    possibleLengths = map(lambda e: e.get("national"), filter(lambda e: e is not None, possibleLengths))
-    possibleLengths = list(map(int, re.findall(r"\d+", ",".join(possibleLengths))))
-    for country in [c for c in countries if c[0] == territory.get("id").lower()]:
-        country[4] = update_mask(country[4], max(possibleLengths))
+    patterns[territory.get("id").lower()] = [
+        f"^\\d{{{min_length},{max_length}}}$" if min_length != max_length else f"^\\d{{{max_length}}}$",
+        f"^{national_number_pattern}$"
+    ]
 
 with open(patterns_path, "w") as fp:
     json.dump(patterns, fp, indent=2)
