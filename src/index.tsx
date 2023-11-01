@@ -33,10 +33,10 @@ const cleanInput = (input: any, pattern: string) => {
 	return Array.from(pattern, c => input[0] === c || slots.has(c) ? input.shift() || c : c);
 }
 
-const checkValidity = (metadata: PhoneNumber) => {
+const checkValidity = (metadata: PhoneNumber, strict: boolean = false) => {
 	/** Checks if both the area code and phone number match the validation pattern */
-	const pattern = new RegExp((validations as any)[metadata.isoCode as keyof typeof validations]);
-	return pattern.test([metadata.areaCode, metadata.phoneNumber].filter(Boolean).join(""));
+	const pattern = (validations as any)[metadata.isoCode as keyof typeof validations][Number(strict)];
+	return new RegExp(pattern).test([metadata.areaCode, metadata.phoneNumber].filter(Boolean).join(""));
 }
 
 const getDefaultISO2Code = () => {
@@ -161,7 +161,7 @@ const PhoneInput = ({
 
 	const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		const phoneMetadata = parsePhoneNumber(displayFormat(clean(event.target.value).join("")));
-		handleChange({...phoneMetadata, valid: () => checkValidity(phoneMetadata)}, event);
+		handleChange({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)}, event);
 	}, [clean, handleChange])
 
 	const onInput = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -178,10 +178,10 @@ const PhoneInput = ({
 		}
 		const formattedNumber = displayFormat(clean(initialValue).join(""));
 		const phoneMetadata = parsePhoneNumber(formattedNumber);
-		handleMount({...phoneMetadata, valid: () => checkValidity(phoneMetadata)});
+		handleMount({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
 		handleChange({
 			...phoneMetadata,
-			valid: () => checkValidity(phoneMetadata)
+			valid: (strict: boolean) => checkValidity(phoneMetadata, strict)
 		}, {} as ChangeEvent<HTMLInputElement>);
 		setValue(formattedNumber);
 	}, [clean, handleChange, handleMount, metadata, value])

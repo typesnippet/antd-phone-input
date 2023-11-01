@@ -7,7 +7,7 @@ export interface PhoneNumber {
 	phoneNumber?: string | null;
 	isoCode?: string;
 
-	valid?(): boolean;
+	valid?(strict?: boolean): boolean;
 }
 
 export interface PhoneInputProps extends Omit<InputProps, "value" | "onChange"> {
