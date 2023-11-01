@@ -11,12 +11,6 @@ countries_path = project_root / "src" / "metadata" / "countries.json"
 tree = ElementTree.parse(metadata_path)
 territories = tree.find("territories")
 
-with open(patterns_path) as fp:
-    patterns = json.load(fp)
-
-with open(countries_path) as fp:
-    countries = json.load(fp)
-
 
 def update_mask(mask, length):
     length_without_cc = len(re.findall(r"[\d.]", re.sub(r"\+\d+\s", "", mask)))
@@ -35,6 +29,12 @@ def update_mask(mask, length):
         mask = f"{cc_mask} {ac_mask} {pn_mask}" if ac_mask else f"{cc_mask} {pn_mask}"
     return re.sub(r"\s(\.{1,2})$", r"\1", mask)
 
+
+with open(patterns_path) as fp:
+    patterns = json.load(fp)
+
+with open(countries_path) as fp:
+    countries = json.load(fp)
 
 for territory in territories:
     # Regenerate masks based on possible maximum lengths
