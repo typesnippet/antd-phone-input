@@ -13,8 +13,8 @@ styleInject("styles.css");
 
 const slots = new Set(".");
 
-const getMetadata = (rawValue: string, countriesList: typeof countries = countries) => {
-	return countriesList.find((country) => rawValue.startsWith(country[3]));
+const getMetadata = (rawValue: string, countriesList: typeof countries = countries, country: any = null) => {
+	return countriesList.find((c) => rawValue.startsWith(c[3]) && (country == null || country === c[0]));
 }
 
 const getRawValue = (value: PhoneNumber | string) => {
@@ -44,9 +44,9 @@ const getDefaultISO2Code = () => {
 	return (timezones[Intl.DateTimeFormat().resolvedOptions().timeZone as keyof typeof timezones] || "") || "us";
 }
 
-const parsePhoneNumber = (formattedNumber: string, countriesList: typeof countries = countries): PhoneNumber => {
+const parsePhoneNumber = (formattedNumber: string, countriesList: typeof countries = countries, country: any = null): PhoneNumber => {
 	const value = getRawValue(formattedNumber);
-	const isoCode = getMetadata(value, countriesList)?.[0];
+	const isoCode = getMetadata(value, countriesList, country)?.[0];
 	const countryCodePattern = /\+\d+/;
 	const areaCodePattern = /\((\d+)\)/;
 
@@ -91,6 +91,7 @@ const PhoneInput = ({
 	const [query, setQuery] = useState<string>("");
 	const [value, setValue] = useState<string>(defaultValueState);
 	const [minWidth, setMinWidth] = useState<number>(0);
+	const [countryCode, setCountryCode] = useState<string>(country);
 
 	const countriesOnly = useMemo(() => {
 		const allowList = onlyCountries.length > 0 ? onlyCountries : countries.map(([iso]) => iso);
@@ -112,12 +113,12 @@ const PhoneInput = ({
 	}, [countriesOnly, preferredCountries, query])
 
 	const metadata = useMemo(() => {
-		const calculatedMetadata = getMetadata(getRawValue(value), countriesList) || defaultMetadata;
-		if (!countriesList.find(([iso]) => iso === calculatedMetadata?.[0])) {
+		const calculatedMetadata = getMetadata(getRawValue(value), countriesList, countryCode);
+		if (!countriesList.find(([iso]) => iso === calculatedMetadata?.[0] || iso === defaultMetadata?.[0])) {
 			return countriesList[0];
 		}
-		return calculatedMetadata;
-	}, [countriesList, defaultMetadata, value])
+		return calculatedMetadata || defaultMetadata;
+	}, [countriesList, countryCode, defaultMetadata, value])
 
 	const pattern = useMemo(() => {
 		return metadata?.[4] || defaultMetadata?.[4] || "";
@@ -160,9 +161,10 @@ const PhoneInput = ({
 	}, [handleKeyDown])
 
 	const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-		const phoneMetadata = parsePhoneNumber(displayFormat(clean(event.target.value).join("")), countriesList);
+		const formattedNumber = displayFormat(clean(event.target.value).join(""));
+		const phoneMetadata = parsePhoneNumber(formattedNumber, countriesList, countryCode);
 		handleChange({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)}, event);
-	}, [clean, countriesList, handleChange])
+	}, [clean, countriesList, countryCode, handleChange])
 
 	const onInput = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		handleInput(event);
@@ -191,8 +193,9 @@ const PhoneInput = ({
 			suffixIcon={null}
 			value={selectValue}
 			open={disableDropdown ? false : undefined}
-			onSelect={(_, {key: mask}) => {
+			onSelect={(selectedOption, {key: mask}) => {
 				setValue(displayFormat(cleanInput(mask, mask).join("")));
+				setCountryCode(selectedOption.slice(0, 2));
 			}}
 			optionLabelProp="label"
 			dropdownStyle={{minWidth}}
