@@ -13,8 +13,8 @@ styleInject("styles.css");
 
 const slots = new Set(".");
 
-const getMetadata = (rawValue: string) => {
-	return countries.find((country) => rawValue.startsWith(country[3]));
+const getMetadata = (rawValue: string, countriesList: typeof countries = countries) => {
+	return countriesList.find((country) => rawValue.startsWith(country[3]));
 }
 
 const getRawValue = (value: PhoneNumber | string) => {
@@ -44,9 +44,9 @@ const getDefaultISO2Code = () => {
 	return (timezones[Intl.DateTimeFormat().resolvedOptions().timeZone as keyof typeof timezones] || "") || "us";
 }
 
-const parsePhoneNumber = (formattedNumber: string): PhoneNumber => {
+const parsePhoneNumber = (formattedNumber: string, countriesList: typeof countries = countries): PhoneNumber => {
 	const value = getRawValue(formattedNumber);
-	const isoCode = getMetadata(value)?.[0];
+	const isoCode = getMetadata(value, countriesList)?.[0];
 	const countryCodePattern = /\+\d+/;
 	const areaCodePattern = /\((\d+)\)/;
 
@@ -112,7 +112,7 @@ const PhoneInput = ({
 	}, [countriesOnly, preferredCountries, query])
 
 	const metadata = useMemo(() => {
-		const calculatedMetadata = getMetadata(getRawValue(value)) || defaultMetadata;
+		const calculatedMetadata = getMetadata(getRawValue(value), countriesList) || defaultMetadata;
 		if (!countriesList.find(([iso]) => iso === calculatedMetadata?.[0])) {
 			return countriesList[0];
 		}
@@ -160,9 +160,9 @@ const PhoneInput = ({
 	}, [handleKeyDown])
 
 	const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-		const phoneMetadata = parsePhoneNumber(displayFormat(clean(event.target.value).join("")));
+		const phoneMetadata = parsePhoneNumber(displayFormat(clean(event.target.value).join("")), countriesList);
 		handleChange({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)}, event);
-	}, [clean, handleChange])
+	}, [clean, countriesList, handleChange])
 
 	const onInput = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		handleInput(event);
@@ -177,14 +177,14 @@ const PhoneInput = ({
 			initialValue = metadata?.[3] as string;
 		}
 		const formattedNumber = displayFormat(clean(initialValue).join(""));
-		const phoneMetadata = parsePhoneNumber(formattedNumber);
+		const phoneMetadata = parsePhoneNumber(formattedNumber, countriesList);
 		handleMount({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
 		handleChange({
 			...phoneMetadata,
 			valid: (strict: boolean) => checkValidity(phoneMetadata, strict)
 		}, {} as ChangeEvent<HTMLInputElement>);
 		setValue(formattedNumber);
-	}, [clean, handleChange, handleMount, metadata, value])
+	}, [clean, countriesList, handleChange, handleMount, metadata, value])
 
 	const countriesSelect = useMemo(() => (
 		<Select
