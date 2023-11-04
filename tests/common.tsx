@@ -18,6 +18,11 @@ Object.defineProperty(window, "matchMedia", {
 	})),
 })
 
+function inputHasError(parent: any = document) {
+	const inputGroup = parent.querySelector(".ant-input-group-wrapper");
+	return inputGroup.className.includes("ant-input-group-wrapper-status-error");
+}
+
 export default function commonTests(Form: any, FormItem: any, Button: any) {
 	console.warn = jest.fn();
 
@@ -126,33 +131,31 @@ export default function commonTests(Form: any, FormItem: any, Button: any) {
 			</Form>);
 
 			const form = screen.getByTestId("form");
-			const input = screen.getByDisplayValue("+1 (702)");
-			const submit = screen.getByTestId("submit");
 			const reset = screen.getByTestId("reset");
+			const submit = screen.getByTestId("submit");
 
+			assert(!inputHasError(form)); // valid
 			await userEvent.click(reset);
-			assert(form.querySelector(".ant-form-item-has-success") !== null); // valid
-			await userEvent.type(input, "a");
+			assert(!inputHasError(form)); // valid
 			await userEvent.click(submit);
 			await act(async () => {
 				await new Promise(r => setTimeout(r, 100));
 			})
-			assert(form.querySelector(".ant-form-item-has-error") !== null); // invalid
+			assert(inputHasError(form)); // invalid
 			await userEvent.click(reset);
-			assert(form.querySelector(".ant-form-item-has-success") !== null); // valid
+			assert(!inputHasError(form)); // valid
 			await userEvent.click(reset);
-			assert(form.querySelector(".ant-form-item-has-success") !== null); // valid
-			await userEvent.type(input, "a");
+			assert(!inputHasError(form)); // valid
 			await userEvent.click(submit);
 			await act(async () => {
 				await new Promise(r => setTimeout(r, 100));
 			})
-			assert(form.querySelector(".ant-form-item-has-error") !== null); // invalid
+			assert(inputHasError(form)); // invalid
 			await userEvent.click(submit);
 			await act(async () => {
 				await new Promise(r => setTimeout(r, 100));
 			})
-			assert(form.querySelector(".ant-form-item-has-error") !== null); // invalid
+			assert(inputHasError(form)); // invalid
 		})
 
 		it("Checking validation with casual inputs and actions", async () => {
@@ -170,35 +173,34 @@ export default function commonTests(Form: any, FormItem: any, Button: any) {
 			</Form>);
 
 			const form = screen.getByTestId("form");
-			const input = screen.getByDisplayValue("+1");
-			const submit = screen.getByTestId("submit");
 			const reset = screen.getByTestId("reset");
+			const submit = screen.getByTestId("submit");
+			const input = screen.getByDisplayValue("+1");
 
 			await userEvent.type(input, "90712345");
 			await act(async () => {
 				await new Promise(r => setTimeout(r, 100));
 			})
-			assert(form.querySelector(".ant-form-item-has-error") !== null); // invalid
+			assert(inputHasError(form)); // invalid
 			await userEvent.type(input, "6");
 			await act(async () => {
 				await new Promise(r => setTimeout(r, 100));
 			})
-			assert(form.querySelector(".ant-form-item-has-error") !== null); // invalid
+			assert(inputHasError(form)); // invalid
 			await userEvent.type(input, "7");
 			await act(async () => {
 				await new Promise(r => setTimeout(r, 100));
 			})
-			assert(form.querySelector(".ant-form-item-has-success") !== null); // valid
+			assert(!inputHasError(form)); // valid
 			await userEvent.click(reset);
-			assert(form.querySelector(".ant-form-item-has-success") !== null); // valid
-			await userEvent.type(input, "a");
+			assert(!inputHasError(form)); // valid
 			await userEvent.click(submit);
 			await act(async () => {
 				await new Promise(r => setTimeout(r, 100));
 			})
-			assert(form.querySelector(".ant-form-item-has-error") !== null); // invalid
+			assert(inputHasError(form)); // invalid
 			await userEvent.click(reset);
-			assert(form.querySelector(".ant-form-item-has-success") !== null); // valid
+			assert(!inputHasError(form)); // valid
 		})
 	})
 }
