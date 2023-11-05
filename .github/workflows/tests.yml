@@ -20,6 +20,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+
+      - name: Install Tox
+        run: |
+          pip install --upgrade pip
+          pip install tox tox-gh-actions
+
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
