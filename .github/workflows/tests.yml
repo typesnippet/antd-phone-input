@@ -14,6 +14,7 @@ jobs:
     strategy:
       matrix:
         node-version: [ 16.x, 18.x, 20.x ]
+        antd-version: [ 424, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 5100, 5110 ]
 
     steps:
       - name: Checkout
@@ -28,8 +29,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
+      - name: Run Tox Jest
+        run: tox -e antd_v${{ matrix.antd-version }}_jest
 
   build:
 
@@ -37,7 +38,7 @@ jobs:
 
     strategy:
       matrix:
-        env: [ antd_v424, antd_v510, antd_v520, antd_v530, antd_v540, antd_v550, antd_v560, antd_v570, antd_v580, antd_v590 ]
+        antd-version: [ 424, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 5100, 5110 ]
 
     steps:
       - name: Checkout
@@ -64,4 +65,4 @@ jobs:
           npm pack
 
       - name: Run Tox
-        run: tox -e ${{ matrix.env }}
+        run: tox -e antd_v${{ matrix.antd-version }}
