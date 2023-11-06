@@ -146,10 +146,9 @@ const PhoneInput = ({
 	}, [pattern])
 
 	const selectValue = useMemo(() => {
-		const isoCode = metadata?.[0] || defaultMetadata?.[0] as string;
-		const dialCode = metadata?.[3] || defaultMetadata?.[3] as string;
-		return isoCode + dialCode;
-	}, [defaultMetadata, metadata])
+		const metadata = getMetadata(getRawValue(value), countries, countryCode);
+		return (metadata || defaultMetadata)?.[0] as string + (metadata || defaultMetadata)?.[2] as string;
+	}, [countryCode, defaultMetadata, value])
 
 	const setFieldValue = useCallback((value: PhoneNumber) => {
 		if (formInstance) {
