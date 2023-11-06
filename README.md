@@ -9,8 +9,8 @@
 
 Advanced phone input component for [Ant Design](https://github.com/ant-design/ant-design) that provides support for all
 countries and is compatible with [`antd`](https://github.com/ant-design/ant-design) 4 and 5 versions. It has built-in
-support for area codes and provides validation to ensure that the entered numbers are valid. This open-source project
-is designed to simplify the process of collecting phone numbers from users.
+support for area codes and provides [strict validation](#validation) to ensure the entered numbers are valid. This
+open-source project is designed to simplify the process of collecting phone numbers from users.
 
 ## Installation
 
@@ -24,10 +24,9 @@ yarn add antd-phone-input
 
 ## Usage
 
-The latest version does not require any additional actions for loading the styles as it uses
-the [`cssinjs`](https://github.com/ant-design/cssinjs) ecosystem.
-
-### Antd 5.x
+The library is designed to work with the `4.x` and `5.x` series of versions in the same way. It can be used as a regular
+Ant [Input](https://ant.design/components/input) (see the sample below). More usage examples can be found in
+the [examples](examples) directory.
 
 ```javascript
 import React from "react";
@@ -43,31 +42,10 @@ const Demo = () => {
 }
 ```
 
-![latest](https://user-images.githubusercontent.com/44609997/227775101-72b03e76-52bc-421d-8e75-a03c9d0d6d08.png)
-
-### Antd 4.x
-
-For `4.x` versions, you should use the `legacy` endpoint.
-
-```javascript
-import PhoneInput from "antd-phone-input/legacy";
-```
-
-For including the styles, you should import them in the main `less` file after importing either
-the `antd/dist/antd.less` or `antd/dist/antd.dark.less` styles.
-
-```diff
-@import "~antd/dist/antd";
-+ @import "~antd-phone-input/legacy/style";
-```
-
-![legacy](https://user-images.githubusercontent.com/44609997/227775155-9e22bc63-2148-4714-ba8a-9bb4e44c0128.png)
-
 ## Value
 
-The value of the component is an object containing the parts of a phone number. This format of value gives a wide range
-of opportunities for handling the data in your custom way. For example, you can easily merge the parts of the phone
-number into a single string.
+The value of the component is an object containing the parts of the phone number. This format of value gives a wide
+range of opportunities for handling the data in your desired way.
 
 ```javascript
 {
@@ -75,20 +53,19 @@ number into a single string.
   areaCode: 702,
   phoneNumber: "1234567",
   isoCode: "us",
-  valid: function valid()
+  valid: function valid(strict)
 }
 ```
 
 ## Validation
 
-The `valid` function of the value object returns the validity of the phone number depending on the selected country. So
-this can be used in a `validator` like this:
+The `valid` function of the value object returns the current validity of the entered phone number based on the selected
+country. So this can be used in a `validator` like this:
 
 ```javascript
 const validator = (_, {valid}) => {
-  if (valid()) {
-    return Promise.resolve();
-  }
+  // if (valid(true)) return Promise.resolve(); // strict validation
+  if (valid()) return Promise.resolve(); // non-strict validation
   return Promise.reject("Invalid phone number");
 }
 
@@ -99,32 +76,28 @@ return (
 )
 ```
 
+By default, the `valid` function validates the phone number based on the possible supported lengths of the selected
+country. But it also supports a strict validation that apart from the length also checks if the area code is valid for
+the selected country. To enable strict validation, pass `true` as the first argument of the `valid` function.
+
 ## Props
+
+Apart from the below-described phone-specific properties, all [Input](https://ant.design/components/input#input)
+properties that are supported by the used `antd` version, can be applied to the phone input component.
 
 | Property           | Description                                                                                                                                                                 | Type                      |
 |--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
-| size               | Either `large`, `middle` or `small`. Default value is `middle`. See at ant [docs][antInputProps] for more.                                                                  | string                    |
 | value              | An object containing a parsed phone number or the raw number. This also applies to the `initialValue` property of [Form.Item](https://ant.design/components/form#formitem). | [object](#value) / string |
-| style              | Applies CSS styles to the container element.                                                                                                                                | CSSProperties             |
-| className          | The value will be assigned to the container element.                                                                                                                        | string                    |
-| disabled           | Disables the whole input component.                                                                                                                                         | boolean                   |
-| enableSearch       | Enables search in the country selection dropdown menu. Default value is `false`.                                                                                            | boolean                   |
-| disableDropdown    | Disables the manual country selection through the dropdown menu.                                                                                                            | boolean                   |
-| inputProps         | [HTML properties of input][htmlInputProps] to pass into the input.  E.g. `inputProps={{autoFocus: true}}`.                                                                  | InputHTMLAttributes       |
-| searchPlaceholder  | The value is shown if `enableSearch` is `true`. Default value is `search`.                                                                                                  | string                    |
-| searchNotFound     | The value is shown if `enableSearch` is `true` and the query does not match any country. Default value is `No entries to show`.                                             | string                    |
-| placeholder        | Custom placeholder. Default placeholder is `1 (702) 123-4567`.                                                                                                              | string                    |
 | country            | Country code to be selected by default. By default, it will show the flag of the user's country.                                                                            | string                    |
+| enableSearch       | Enables search in the country selection dropdown menu. Default value is `false`.                                                                                            | boolean                   |
+| searchNotFound     | The value is shown if `enableSearch` is `true` and the query does not match any country. Default value is `No country found`.                                               | string                    |
+| searchPlaceholder  | The value is shown if `enableSearch` is `true`. Default value is `Search country`.                                                                                          | string                    |
+| disableDropdown    | Disables the manual country selection through the dropdown menu.                                                                                                            | boolean                   |
 | onlyCountries      | Country codes to be included in the list. E.g. `onlyCountries={['us', 'ca', 'uk']}`.                                                                                        | string[]                  |
 | excludeCountries   | Country codes to be excluded from the list of countries. E.g. `excludeCountries={['us', 'ca', 'uk']}`.                                                                      | string[]                  |
 | preferredCountries | Country codes to be at the top of the list. E.g. `preferredCountries={['us', 'ca', 'uk']}`.                                                                                 | string[]                  |
-| onChange           | Callback when the user is inputting. See at ant [docs][antInputProps] for more.                                                                                             | function(value, e)        |
-| onPressEnter       | The callback function that is triggered when <kbd>Enter</kbd> key is pressed.                                                                                               | function(e)               |
-| onFocus            | The callback is triggered when the input element is focused.                                                                                                                | function(e, value)        |
-| onClick            | The callback is triggered when the user clicks on the input element.                                                                                                        | function(e, value)        |
-| onBlur             | The callback is triggered when the input element gets blurred or unfocused.                                                                                                 | function(e, value)        |
-| onKeyDown          | The callback is triggered when any key is pressed down.                                                                                                                     | function(e)               |
-| onMount            | The callback is triggered once the component gets mounted.                                                                                                                  | function(e)               |
+| onChange           | The only difference from the original `onChange` is that value comes first.                                                                                                 | function(value, event)    |
+| onMount            | The callback is triggered once the component gets mounted.                                                                                                                  | function(value)           |
 
 ## Contribute
 
@@ -134,7 +107,3 @@ don't forget to add tests for your changes.
 ## License
 
 Copyright (C) 2023 Artyom Vancyan. [MIT](LICENSE)
-
-[antInputProps]:https://ant.design/components/input#input
-
-[htmlInputProps]:https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
