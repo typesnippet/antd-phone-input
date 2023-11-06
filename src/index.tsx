@@ -51,7 +51,7 @@ const getDefaultISO2Code = () => {
 
 const parsePhoneNumber = (formattedNumber: string, countriesList: typeof countries = countries, country: any = null): PhoneNumber => {
 	const value = getRawValue(formattedNumber);
-	const isoCode = getMetadata(value, countriesList, country)?.[0];
+	const isoCode = getMetadata(value, countriesList, country)?.[0] || getDefaultISO2Code();
 	const countryCodePattern = /\+\d+/;
 	const areaCodePattern = /\((\d+)\)/;
 
@@ -121,10 +121,10 @@ const PhoneInput = ({
 
 	const metadata = useMemo(() => {
 		const calculatedMetadata = getMetadata(getRawValue(value), countriesList, countryCode);
-		if (!countriesList.find(([iso]) => iso === calculatedMetadata?.[0] || iso === defaultMetadata?.[0])) {
-			return countriesList[0];
+		if (countriesList.find(([iso]) => iso === calculatedMetadata?.[0] || iso === defaultMetadata?.[0])) {
+			return calculatedMetadata || defaultMetadata;
 		}
-		return calculatedMetadata || defaultMetadata;
+		return countriesList[0];
 	}, [countriesList, countryCode, defaultMetadata, value])
 
 	const pattern = useMemo(() => {
