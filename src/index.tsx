@@ -19,9 +19,9 @@ const getMetadata = (rawValue: string, countriesList: typeof countries = countri
 	country = country == null && rawValue.startsWith("44") ? "gb" : country;
 	if (country != null) {
 		countriesList = countriesList.filter((c) => c[0] === country);
-		countriesList = countriesList.sort((a, b) => b[3].length - a[3].length);
+		countriesList = countriesList.sort((a, b) => b[2].length - a[2].length);
 	}
-	return countriesList.find((c) => rawValue.startsWith(c[3]));
+	return countriesList.find((c) => rawValue.startsWith(c[2]));
 }
 
 const getRawValue = (value: PhoneNumber | string) => {
@@ -89,7 +89,7 @@ const PhoneInput = ({
 					}: PhoneInputProps) => {
 	const defaultValue = getRawValue(initialValue);
 	const defaultMetadata = getMetadata(defaultValue) || countries.find(([iso]) => iso === country);
-	const defaultValueState = defaultValue || countries.find(([iso]) => iso === defaultMetadata?.[0])?.[3] as string;
+	const defaultValueState = defaultValue || countries.find(([iso]) => iso === defaultMetadata?.[0])?.[2] as string;
 
 	const formInstance = useFormInstance();
 	const formContext = useContext(FormContext);
@@ -128,7 +128,7 @@ const PhoneInput = ({
 	}, [countriesList, countryCode, defaultMetadata, value])
 
 	const pattern = useMemo(() => {
-		return metadata?.[4] || defaultMetadata?.[4] || "";
+		return metadata?.[3] || defaultMetadata?.[3] || "";
 	}, [defaultMetadata, metadata])
 
 	const clean = useCallback((input: any) => {
@@ -146,9 +146,9 @@ const PhoneInput = ({
 	}, [pattern])
 
 	const selectValue = useMemo(() => {
-		const metadata = getMetadata(getRawValue(value), countries, countryCode);
-		return (metadata || defaultMetadata)?.[0] as string + (metadata || defaultMetadata)?.[2] as string;
-	}, [countryCode, defaultMetadata, value])
+		const metadata = getMetadata(getRawValue(value), countriesList, countryCode);
+		return (metadata || countriesList[0])?.[0] as string + (metadata || countriesList[0])?.[2] as string;
+	}, [countriesList, countryCode, value])
 
 	const setFieldValue = useCallback((value: PhoneNumber) => {
 		if (formInstance) {
@@ -199,8 +199,8 @@ const PhoneInput = ({
 		if (initiatedRef.current) return;
 		initiatedRef.current = true;
 		let initialValue = getRawValue(value);
-		if (!initialValue.startsWith(metadata?.[3] as string)) {
-			initialValue = metadata?.[3] as string;
+		if (!initialValue.startsWith(metadata?.[2] as string)) {
+			initialValue = metadata?.[2] as string;
 		}
 		const formattedNumber = displayFormat(clean(initialValue).join(""));
 		const phoneMetadata = parsePhoneNumber(formattedNumber, countriesList);
@@ -238,7 +238,7 @@ const PhoneInput = ({
 				</div>
 			)}
 		>
-			{countriesList.map(([iso, name, _, dial, mask]) => (
+			{countriesList.map(([iso, name, dial, mask]) => (
 				<Select.Option
 					key={mask}
 					value={iso + dial}
