@@ -191,6 +191,11 @@ const PhoneInput = ({
 		format(event);
 	}, [format, handleInput])
 
+	const onMount = useCallback((value: PhoneNumber) => {
+		setFieldValue(value);
+		handleMount(value);
+	}, [handleMount, setFieldValue])
+
 	useEffect(() => {
 		if (initiatedRef.current) return;
 		initiatedRef.current = true;
@@ -200,11 +205,10 @@ const PhoneInput = ({
 		}
 		const formattedNumber = displayFormat(clean(initialValue).join(""));
 		const phoneMetadata = parsePhoneNumber(formattedNumber, countriesList);
-		setFieldValue({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
-		handleMount({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
+		onMount({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
 		setCountryCode(phoneMetadata.isoCode as keyof typeof validations);
 		setValue(formattedNumber);
-	}, [clean, countriesList, handleMount, metadata, setFieldValue, value])
+	}, [clean, countriesList, metadata, onMount, setFieldValue, value])
 
 	const countriesSelect = useMemo(() => (
 		<Select
