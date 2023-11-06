@@ -17,7 +17,7 @@ jobs:
 
       - name: Fetch third-party metadata
         run: |
-          curl -o resources/metadata.xml https://raw.githubusercontent.com/daviddrysdale/python-phonenumbers/dev/resources/PhoneNumberMetadata.xml
+          curl -o resources/metadata.xml https://raw.githubusercontent.com/google/libphonenumber/master/resources/PhoneNumberMetadata.xml
 
       - name: Update metadata
         run: |

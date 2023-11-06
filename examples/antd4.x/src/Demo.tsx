@@ -2,7 +2,7 @@ import {useState} from "react";
 import Form from "antd/es/form";
 import Button from "antd/es/button";
 import FormItem from "antd/es/form/FormItem";
-import PhoneInput from "antd-phone-input/legacy";
+import PhoneInput from "antd-phone-input";
 
 const Demo = () => {
 	const [value, setValue] = useState(null);

@@ -6,10 +6,10 @@ package-lock.json
 .idea/
 
 # Build files
-./legacy/
+./metadata/
+./styles*
+./types*
 ./index*
-
-!examples/**/index*
 
 # Pycache
 __pycache__/
