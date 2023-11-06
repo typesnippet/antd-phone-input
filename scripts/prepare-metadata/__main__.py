@@ -43,7 +43,7 @@ for territory in territories:
     possible_lengths = list(map(int, re.findall(r"\d+", ",".join(possible_lengths))))
     min_length, max_length = min(possible_lengths), max(possible_lengths)
     for country in [c for c in countries if c[0] == territory.get("id").lower()]:
-        country[4] = update_mask(country[4], max_length)
+        country[3] = update_mask(country[3], max_length)
 
     # Update phone validation patterns
     general_desc = territory.find("generalDesc")
