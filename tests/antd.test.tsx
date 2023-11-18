@@ -37,12 +37,12 @@ describe("Checking the basic rendering and functionality", () => {
 		render(<PhoneInput
 			onMount={(value: any) => {
 				assert(value.countryCode === 1);
-				assert(value.areaCode === 702);
+				assert(value.areaCode === "702");
 				assert(value.phoneNumber === "1234567");
 				assert(value.isoCode === "us");
 				assert(value.valid());
 			}}
-			value={{countryCode: 1, areaCode: 702, phoneNumber: "1234567"}}
+			value={{countryCode: 1, areaCode: "702", phoneNumber: "1234567"}}
 		/>);
 		assert(screen.getByDisplayValue("+1 (702) 123 4567"));
 	})
@@ -71,7 +71,7 @@ describe("Checking the basic rendering and functionality", () => {
 	it("Using the input with FormItem", async () => {
 		render(<Form onFinish={({phone}: any) => {
 			assert(phone.countryCode === 1);
-			assert(phone.areaCode === 907);
+			assert(phone.areaCode === "907");
 			assert(phone.phoneNumber === "1234567");
 			assert(phone.isoCode === "us");
 		}}>
@@ -87,7 +87,7 @@ describe("Checking the basic rendering and functionality", () => {
 	})
 
 	it("Checking input validation with FormItem", async () => {
-		render(<Form initialValues={{phone: {countryCode: 1, areaCode: 702, phoneNumber: "1234567"}}}>
+		render(<Form initialValues={{phone: {countryCode: 1, areaCode: "702", phoneNumber: "1234567"}}}>
 			<FormItem name="phone" rules={[{
 				validator: (_: any, {valid}: any) => {
 					assert(valid());
@@ -102,7 +102,7 @@ describe("Checking the basic rendering and functionality", () => {
 	})
 
 	it("Checking form with initial value", async () => {
-		render(<Form initialValues={{phone: {countryCode: 1, areaCode: 702}}}>
+		render(<Form initialValues={{phone: {countryCode: 1, areaCode: "702"}}}>
 			<FormItem name="phone">
 				<PhoneInput/>
 			</FormItem>
@@ -114,7 +114,7 @@ describe("Checking the basic rendering and functionality", () => {
 	})
 
 	it("Checking validation with casual form actions", async () => {
-		render(<Form data-testid="form" initialValues={{phone: {countryCode: 1, areaCode: 702, phoneNumber: ""}}}>
+		render(<Form data-testid="form" initialValues={{phone: {countryCode: 1, areaCode: "702", phoneNumber: ""}}}>
 			<FormItem name="phone" rules={[{
 				validator: (_: any, {valid}: any) => {
 					if (valid()) return Promise.resolve();
