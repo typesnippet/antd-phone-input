@@ -3,7 +3,7 @@ import {InputProps} from "antd/lib/input";
 
 export interface PhoneNumber {
 	countryCode?: number | null;
-	areaCode?: number | null;
+	areaCode?: string | null;
 	phoneNumber?: string | null;
 	isoCode?: string;
 
