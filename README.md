@@ -50,7 +50,7 @@ range of opportunities for handling the data in your desired way.
 ```javascript
 {
   countryCode: 1,
-  areaCode: 702,
+  areaCode: "702",
   phoneNumber: "1234567",
   isoCode: "us",
   valid: function valid(strict)
