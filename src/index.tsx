@@ -146,9 +146,10 @@ const PhoneInput = ({
 	}, [pattern])
 
 	const selectValue = useMemo(() => {
-		const metadata = getMetadata(getRawValue(value), countriesList);
-		return (metadata || countriesList[0])?.[0] + (metadata || countriesList[0])?.[2];
-	}, [countriesList, value])
+		let metadata = getMetadata(getRawValue(value), countriesList);
+		metadata = metadata || countries.find(([iso]) => iso === countryCode);
+		return ({...metadata})?.[0] + ({...metadata})?.[2];
+	}, [countriesList, countryCode, value])
 
 	const setFieldValue = useCallback((value: PhoneNumber) => {
 		if (formInstance) {
@@ -181,9 +182,9 @@ const PhoneInput = ({
 
 	const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		const formattedNumber = displayFormat(clean(event.target.value).join(""));
-		const phoneMetadata = parsePhoneNumber(formattedNumber, countriesList, countryCode);
+		const phoneMetadata = parsePhoneNumber(formattedNumber, countriesList);
 		handleChange({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)}, event);
-	}, [clean, countriesList, countryCode, handleChange])
+	}, [clean, countriesList, handleChange])
 
 	const onInput = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		handleInput(event);
