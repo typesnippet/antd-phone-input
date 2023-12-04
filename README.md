@@ -3,9 +3,9 @@
 [![npm](https://img.shields.io/npm/v/antd-phone-input)](https://www.npmjs.com/package/antd-phone-input)
 [![antd](https://img.shields.io/badge/antd-4.x%20%7C%205.x-blue)](https://github.com/ant-design/ant-design)
 [![types](https://img.shields.io/npm/types/antd-phone-input)](https://www.npmjs.com/package/antd-phone-input)
-[![License](https://img.shields.io/npm/l/antd-phone-input)](https://github.com/ArtyomVancyan/antd-phone-input/blob/master/LICENSE)
+[![License](https://img.shields.io/npm/l/antd-phone-input)](https://github.com/typesnippet/antd-phone-input/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
-[![Tests](https://github.com/ArtyomVancyan/antd-phone-input/actions/workflows/tests.yml/badge.svg)](https://github.com/ArtyomVancyan/antd-phone-input/actions/workflows/tests.yml)
+[![Tests](https://github.com/typesnippet/antd-phone-input/actions/workflows/tests.yml/badge.svg)](https://github.com/typesnippet/antd-phone-input/actions/workflows/tests.yml)
 
 Advanced phone input component for [Ant Design](https://github.com/ant-design/ant-design) that provides support for all
 countries and is compatible with [`antd`](https://github.com/ant-design/ant-design) 4 and 5 versions. It has built-in

@@ -16,13 +16,13 @@
     "customizable",
     "phone-number"
   ],
-  "homepage": "https://github.com/ArtyomVancyan/antd-phone-input",
+  "homepage": "https://github.com/typesnippet/antd-phone-input",
   "bugs": {
-    "url": "https://github.com/ArtyomVancyan/antd-phone-input/issues"
+    "url": "https://github.com/typesnippet/antd-phone-input/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ArtyomVancyan/antd-phone-input"
+    "url": "https://github.com/typesnippet/antd-phone-input"
   },
   "exports": {
     ".": {
