@@ -208,7 +208,7 @@ const PhoneInput = ({
 		onMount({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
 		setCountryCode(phoneMetadata.isoCode as keyof typeof validations);
 		setValue(formattedNumber);
-	}, [clean, countriesList, metadata, onMount, setFieldValue, value])
+	}, [clean, countriesList, metadata, onMount, value])
 
 	const countriesSelect = useMemo(() => (
 		<Select
@@ -241,7 +241,7 @@ const PhoneInput = ({
 		>
 			{countriesList.map(([iso, name, dial, mask]) => (
 				<Select.Option
-					key={mask}
+					key={iso + mask}
 					value={iso + dial}
 					label={<div className={`flag ${iso}`}/>}
 					children={<div className="ant-phone-input-select-item">
