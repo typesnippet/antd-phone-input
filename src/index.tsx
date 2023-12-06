@@ -215,7 +215,8 @@ const PhoneInput = ({
 			suffixIcon={null}
 			value={selectValue}
 			open={disableDropdown ? false : undefined}
-			onSelect={(selectedOption, {key: mask}) => {
+			onSelect={(selectedOption, {key}) => {
+				const [_, mask] = key.split("_");
 				if (selectValue === selectedOption) return;
 				const selectedCountryCode = selectedOption.slice(0, 2);
 				const formattedNumber = displayFormat(cleanInput(mask, mask).join(""));
@@ -241,8 +242,8 @@ const PhoneInput = ({
 		>
 			{countriesList.map(([iso, name, dial, mask]) => (
 				<Select.Option
-					key={iso + mask}
 					value={iso + dial}
+					key={`${iso}_${mask}`}
 					label={<div className={`flag ${iso}`}/>}
 					children={<div className="ant-phone-input-select-item">
 						<div className={`flag ${iso}`}/>
