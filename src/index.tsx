@@ -1,4 +1,15 @@
-import {ChangeEvent, KeyboardEvent, useCallback, useContext, useEffect, useMemo, useRef, useState} from "react";
+import {
+	ChangeEvent,
+	ForwardedRef,
+	forwardRef,
+	KeyboardEvent,
+	useCallback,
+	useContext,
+	useEffect,
+	useMemo,
+	useRef,
+	useState
+} from "react";
 import useFormInstance from "antd/lib/form/hooks/useFormInstance";
 import {FormContext} from "antd/lib/form/context";
 import Select from "antd/lib/select";
@@ -71,22 +82,22 @@ const parsePhoneNumber = (formattedNumber: string, countriesList: typeof countri
 	return {countryCode, areaCode, phoneNumber, isoCode};
 }
 
-const PhoneInput = ({
-						value: initialValue = "",
-						country = getDefaultISO2Code(),
-						enableSearch = false,
-						disableDropdown = false,
-						onlyCountries = [],
-						excludeCountries = [],
-						preferredCountries = [],
-						searchNotFound = "No country found",
-						searchPlaceholder = "Search country",
-						onMount: handleMount = () => null,
-						onInput: handleInput = () => null,
-						onChange: handleChange = () => null,
-						onKeyDown: handleKeyDown = () => null,
-						...antInputProps
-					}: PhoneInputProps) => {
+const PhoneInput = forwardRef(({
+								   value: initialValue = "",
+								   country = getDefaultISO2Code(),
+								   enableSearch = false,
+								   disableDropdown = false,
+								   onlyCountries = [],
+								   excludeCountries = [],
+								   preferredCountries = [],
+								   searchNotFound = "No country found",
+								   searchPlaceholder = "Search country",
+								   onMount: handleMount = () => null,
+								   onInput: handleInput = () => null,
+								   onChange: handleChange = () => null,
+								   onKeyDown: handleKeyDown = () => null,
+								   ...antInputProps
+							   }: PhoneInputProps, ref: ForwardedRef<any>) => {
 	const defaultValue = getRawValue(initialValue);
 	const defaultMetadata = getMetadata(defaultValue) || countries.find(([iso]) => iso === country);
 	const defaultValueState = defaultValue || countries.find(([iso]) => iso === defaultMetadata?.[0])?.[2] as string;
@@ -258,6 +269,7 @@ const PhoneInput = ({
 		<div className="ant-phone-input-wrapper"
 			 ref={node => setMinWidth(node?.offsetWidth || 0)}>
 			<Input
+				ref={ref}
 				inputMode="tel"
 				value={value}
 				onInput={onInput}
@@ -268,6 +280,6 @@ const PhoneInput = ({
 			/>
 		</div>
 	)
-}
+})
 
 export default PhoneInput;
