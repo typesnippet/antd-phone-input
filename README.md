@@ -1,10 +1,9 @@
-# Antd Phone Input
+# Antd Phone Input <img src="https://github.com/typesnippet.png" align="right" height="64" />
 
 [![npm](https://img.shields.io/npm/v/antd-phone-input)](https://www.npmjs.com/package/antd-phone-input)
 [![antd](https://img.shields.io/badge/antd-4.x%20%7C%205.x-blue)](https://github.com/ant-design/ant-design)
 [![types](https://img.shields.io/npm/types/antd-phone-input)](https://www.npmjs.com/package/antd-phone-input)
 [![License](https://img.shields.io/npm/l/antd-phone-input)](https://github.com/typesnippet/antd-phone-input/blob/master/LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
 [![Tests](https://github.com/typesnippet/antd-phone-input/actions/workflows/tests.yml/badge.svg)](https://github.com/typesnippet/antd-phone-input/actions/workflows/tests.yml)
 
 Advanced phone input component for [Ant Design](https://github.com/ant-design/ant-design) that provides support for all
