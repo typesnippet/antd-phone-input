@@ -2,7 +2,7 @@ import {
     ChangeEvent,
     ForwardedRef,
     forwardRef,
-    KeyboardEvent, MutableRefObject, RefCallback,
+    KeyboardEvent,
     useCallback,
     useContext,
     useEffect,
@@ -25,19 +25,6 @@ import validations from "./metadata/validations.json";
 styleInject("styles.css");
 
 const slots = new Set(".");
-
-type MutableRefList<T> = Array<RefCallback<T> | MutableRefObject<T> | undefined | null>;
-
-function mergeRefs<T>(...refs: MutableRefList<T>): RefCallback<T> {
-    return (val: T) => setRef(val, ...refs);
-}
-
-function setRef<T>(val: T, ...refs: MutableRefList<T>): void {
-    return refs.forEach((ref) => {
-        if (typeof ref === "function") ref(val);
-        else if (ref != null) ref.current = val;
-    })
-}
 
 const getMetadata = (rawValue: string, countriesList: typeof countries = countries, country: any = null) => {
     country = country == null && rawValue.startsWith("44") ? "gb" : country;
@@ -119,6 +106,7 @@ const PhoneInput = forwardRef(({
     const formContext = useContext(FormContext);
     const inputRef = useRef<any>(null);
     const backRef = useRef<boolean>(false);
+    const selectedRef = useRef<boolean>(false);
     const initiatedRef = useRef<boolean>(false);
     const [query, setQuery] = useState<string>("");
     const [value, setValue] = useState<string>(defaultValueState);
@@ -200,10 +188,12 @@ const PhoneInput = forwardRef(({
         setValue(target.value);
     }, [clean, first, prev])
 
-    // const ref = useCallback((node: any) => {
-    //     if (forwardedRef) (forwardedRef as any)(node);
-    //     if (inputRef.current) inputRef.current = node;
-    // }, [forwardedRef])
+    const ref = useCallback((node: any) => {
+        [forwardedRef, inputRef].forEach((ref) => {
+            if (typeof ref === "function") ref(node);
+            else if (ref != null) ref.current = node;
+        })
+    }, [forwardedRef])
 
     const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
         backRef.current = event.key === "Backspace";
@@ -211,7 +201,8 @@ const PhoneInput = forwardRef(({
     }, [handleKeyDown])
 
     const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const formattedNumber = displayFormat(clean(event.target.value).join(""));
+        const formattedNumber = selectedRef.current ? event.target.value : displayFormat(clean(event.target.value).join(""));
+        selectedRef.current = false;
         const phoneMetadata = parsePhoneNumber(formattedNumber, countriesList);
         handleChange({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)}, event);
     }, [clean, countriesList, handleChange])
@@ -252,10 +243,12 @@ const PhoneInput = forwardRef(({
                 const formattedNumber = displayFormat(cleanInput(mask, mask).join(""));
                 const phoneMetadata = parsePhoneNumber(formattedNumber, countriesList, selectedCountryCode);
                 setFieldValue({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
-                const event = {target: inputRef.current.input} as ChangeEvent<HTMLInputElement>;
-                handleChange({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)}, event);
                 setCountryCode(selectedCountryCode);
                 setValue(formattedNumber);
+                selectedRef.current = true;
+                const nativeInputValueSetter = (Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value") as any).set;
+                nativeInputValueSetter.call(inputRef.current.input, formattedNumber);
+                inputRef.current.input.dispatchEvent(new Event("change", {bubbles: true}));
             }}
             optionLabelProp="label"
             dropdownStyle={{minWidth}}
@@ -284,13 +277,13 @@ const PhoneInput = forwardRef(({
                 />
             ))}
         </Select>
-    ), [selectValue, disableDropdown, minWidth, searchNotFound, countriesList, setFieldValue, handleChange, enableSearch, searchPlaceholder])
+    ), [selectValue, disableDropdown, minWidth, searchNotFound, countriesList, setFieldValue, enableSearch, searchPlaceholder])
 
     return (
         <div className="ant-phone-input-wrapper"
              ref={node => setMinWidth(node?.offsetWidth || 0)}>
             <Input
-                ref={mergeRefs(forwardedRef, inputRef)}
+                ref={ref}
                 inputMode="tel"
                 value={value}
                 onInput={onInput}
