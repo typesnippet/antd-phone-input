@@ -5,7 +5,7 @@ const Light = lazy(() => import("./themes/Light"));
 const Dark = lazy(() => import("./themes/Dark"));
 
 const App = () => {
-	return window.location.pathname === "/dark" ? <Dark/> : <Light/>;
+    return window.location.pathname === "/dark" ? <Dark/> : <Light/>;
 }
 
 const elem = document.getElementById("root");

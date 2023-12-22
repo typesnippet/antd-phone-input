@@ -2,39 +2,39 @@ import {ChangeEvent, KeyboardEvent} from "react";
 import {InputProps} from "antd/lib/input";
 
 export interface PhoneNumber {
-	countryCode?: number | null;
-	areaCode?: string | null;
-	phoneNumber?: string | null;
-	isoCode?: string;
+    countryCode?: number | null;
+    areaCode?: string | null;
+    phoneNumber?: string | null;
+    isoCode?: string;
 
-	valid?(strict?: boolean): boolean;
+    valid?(strict?: boolean): boolean;
 }
 
 export interface PhoneInputProps extends Omit<InputProps, "value" | "onChange"> {
-	value?: PhoneNumber | string;
+    value?: PhoneNumber | string;
 
-	country?: string;
+    country?: string;
 
-	enableSearch?: boolean;
+    enableSearch?: boolean;
 
-	searchNotFound?: string;
+    searchNotFound?: string;
 
-	searchPlaceholder?: string;
+    searchPlaceholder?: string;
 
-	disableDropdown?: boolean;
+    disableDropdown?: boolean;
 
-	onlyCountries?: string[];
+    onlyCountries?: string[];
 
-	excludeCountries?: string[];
+    excludeCountries?: string[];
 
-	preferredCountries?: string[];
+    preferredCountries?: string[];
 
-	onMount?(value: PhoneNumber): void;
+    onMount?(value: PhoneNumber): void;
 
-	onInput?(event: ChangeEvent<HTMLInputElement>): void;
+    onInput?(event: ChangeEvent<HTMLInputElement>): void;
 
-	onKeyDown?(event: KeyboardEvent<HTMLInputElement>): void;
+    onKeyDown?(event: KeyboardEvent<HTMLInputElement>): void;
 
-	/** NOTE: This differs from the antd Input onChange interface */
-	onChange?(value: PhoneNumber, event: ChangeEvent<HTMLInputElement>): void;
+    /** NOTE: This differs from the antd Input onChange interface */
+    onChange?(value: PhoneNumber, event: ChangeEvent<HTMLInputElement>): void;
 }
