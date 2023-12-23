@@ -53,16 +53,16 @@
     "types*",
     "styles*",
     "LICENSE",
-    "metadata",
+    "resources",
     "README.md"
   ],
   "scripts": {
     "rename": "bash -c 'for file in *.js; do mv $file \"${file%.js}.$0.js\"; done'",
     "build": "tsc --module commonjs && npm run rename -- cjs && tsc --declaration",
-    "prebuild": "rm -r metadata index* types* styles* || true",
-    "postbuild": "tsx scripts/prepare-styles.ts",
+    "prebuild": "rm -r resources index* types* styles* || true",
     "postpack": "tsx scripts/prepare-package.ts",
-    "test": "jest --config jestconfig.json"
+    "test": "jest --config jestconfig.json",
+    "postbuild": "cp -r src/resources ."
   },
   "license": "MIT",
   "peerDependencies": {
@@ -78,7 +78,6 @@
     "@types/jest": "^29.5.7",
     "@types/react": "^18.2.34",
     "antd": "*",
-    "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "ts-jest": "^29.1.1",
