@@ -6,45 +6,11 @@
 [![License](https://img.shields.io/npm/l/antd-phone-input)](https://github.com/typesnippet/antd-phone-input/blob/master/LICENSE)
 [![Tests](https://github.com/typesnippet/antd-phone-input/actions/workflows/tests.yml/badge.svg)](https://github.com/typesnippet/antd-phone-input/actions/workflows/tests.yml)
 
-Advanced phone input component for [Ant Design](https://github.com/ant-design/ant-design) that provides support for all
-countries and is compatible with [`antd`](https://github.com/ant-design/ant-design) 4 and 5 versions. It has built-in
-support for area codes and provides [strict validation](#validation) to ensure the entered numbers are valid. This
-open-source project is designed to simplify the process of collecting phone numbers from users.
-
-## Installation
-
-```shell
-npm i antd-phone-input
-```
-
-```shell
-yarn add antd-phone-input
-```
-
-## Usage
-
-The library is designed to work with the `4.x` and `5.x` series of versions in the same way. It can be used as a regular
-Ant [Input](https://ant.design/components/input) (see the sample below). More usage examples can be found in
-the [examples](examples) directory.
-
-```javascript
-import React from "react";
-import FormItem from "antd/es/form/FormItem";
-import PhoneInput from "antd-phone-input";
-
-const Demo = () => {
-  return (
-    <FormItem name="phone">
-      <PhoneInput enableSearch/>
-    </FormItem>
-  )
-}
-```
+Advanced phone input component for Material UI that leverages the [react-phone-hooks](https://www.npmjs.com/package/react-phone-hooks) supporting all countries. The package is compatible with [antd](https://github.com/ant-design/ant-design) 4 and 5 versions. It provides built-in support for area codes and strict validation.
 
 ## Value
 
-The value of the component is an object containing the parts of the phone number. This format of value gives a wide
-range of opportunities for handling the data in your desired way.
+The value of the component is an object containing the parts of the phone number. This format of value gives a wide range of opportunities for handling the data in your desired way.
 
 ```javascript
 {
@@ -58,31 +24,35 @@ range of opportunities for handling the data in your desired way.
 
 ## Validation
 
-The `valid` function of the value object returns the current validity of the entered phone number based on the selected
-country. So this can be used in a `validator` like this:
+The validation is checked by the `valid` function of the value object that returns a boolean value. An example with the [react-hook-form](https://www.npmjs.com/package/react-hook-form) is shown below:
 
 ```javascript
+import React from "react";
+import PhoneInput from "antd-phone-input";
+import FormItem from "antd/es/form/FormItem";
+
 const validator = (_, {valid}) => {
   // if (valid(true)) return Promise.resolve(); // strict validation
   if (valid()) return Promise.resolve(); // non-strict validation
   return Promise.reject("Invalid phone number");
 }
 
-return (
-  <FormItem rules={[{validator}]}>
-    <PhoneInput/>
-  </FormItem>
-)
+const Demo = () => {
+  return (
+    <FormItem name="phone" rules={[{validator}]}>
+      <PhoneInput enableSearch/>
+    </FormItem>
+  )
+}
+
+export default Demo;
 ```
 
-By default, the `valid` function validates the phone number based on the possible supported lengths of the selected
-country. But it also supports a strict validation that apart from the length also checks if the area code is valid for
-the selected country. To enable strict validation, pass `true` as the first argument of the `valid` function.
+The `valid` function primarily checks if a phone number has a length appropriate for its specified country. In addition, a more comprehensive validation can be performed, including verifying the dial and area codes' accuracy for the selected country. To activate the strict validation, pass `true` as the first argument to the `valid` function.
 
 ## Props
 
-Apart from the below-described phone-specific properties, all [Input](https://ant.design/components/input#input)
-properties that are supported by the used `antd` version, can be applied to the phone input component.
+Apart from the phone-specific properties described below, all [Input](https://ant.design/components/input#input) properties supported by the used Ant Design version can be applied to the phone input component.
 
 | Property           | Description                                                                                                                                                                 | Type                      |
 |--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
@@ -100,8 +70,7 @@ properties that are supported by the used `antd` version, can be applied to the 
 
 ## Contribute
 
-Any contribution is welcome. If you have any ideas or suggestions, feel free to open an issue or a pull request. And
-don't forget to add tests for your changes.
+Any contribution is welcome. Don't hesitate to open an issue or discussion if you have questions about your project's usage and integration. For ideas or suggestions, please open a pull request. Your name will shine on our contributors' list. Be proud of what you build!
 
 ## License
 
