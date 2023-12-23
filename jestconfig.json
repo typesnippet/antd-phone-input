@@ -1,10 +1,10 @@
 {
   "transform": {
-    "^.+\\.(t|j)sx?$": "ts-jest"
+    "^.+\\.tsx?$": "ts-jest"
   },
-  "testRegex": "/tests/.*\\.test\\.([jt]sx?)$",
+  "testRegex": "/tests/.*\\.test\\.(tsx?)$",
   "moduleNameMapper": {
-    "^.+\\.((?:c|le|s[ca])ss)$": "identity-obj-proxy"
+    "^antd/es/(.+)$": "antd/lib/$1"
   },
   "modulePathIgnorePatterns": [
     "<rootDir>/examples"

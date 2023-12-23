@@ -21,7 +21,6 @@
   },
   "exclude": [
     "node_modules",
-    "resources",
     "examples",
     "scripts",
     "tests"

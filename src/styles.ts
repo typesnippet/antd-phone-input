@@ -1,13 +1,6 @@
-export default (cssText: string) => {
-    /** Inject the given `cssText` in the document head */
-    const style = document.createElement("style");
-    style.setAttribute("type", "text/css");
+import {injectStyles, jsonToCss} from "react-phone-hooks/styles";
+import commonStyles from "react-phone-hooks/stylesheet.json";
 
-    if ((style as any).styleSheet) {
-        (style as any).styleSheet.cssText = cssText;
-    } else {
-        style.appendChild(document.createTextNode(cssText));
-    }
+import customStyles from "./resources/stylesheet.json";
 
-    document.head.appendChild(style);
-}
+export const injectMergedStyles = () => injectStyles(jsonToCss(Object.assign(commonStyles, customStyles)));

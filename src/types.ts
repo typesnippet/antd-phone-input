@@ -1,14 +1,8 @@
 import {ChangeEvent, KeyboardEvent} from "react";
-import {InputProps} from "antd/lib/input";
+import types from "react-phone-hooks/types";
+import {InputProps} from "antd/es/input";
 
-export interface PhoneNumber {
-    countryCode?: number | null;
-    areaCode?: string | null;
-    phoneNumber?: string | null;
-    isoCode?: string;
-
-    valid?(strict?: boolean): boolean;
-}
+export type PhoneNumber = types.PhoneNumber;
 
 export interface PhoneInputProps extends Omit<InputProps, "value" | "onChange"> {
     value?: PhoneNumber | string;
