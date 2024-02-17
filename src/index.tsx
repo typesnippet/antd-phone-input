@@ -11,6 +11,7 @@ import {
 } from "react";
 import useFormInstance from "antd/es/form/hooks/useFormInstance";
 import {FormContext} from "antd/es/form/context";
+import {useWatch} from "antd/es/form/Form";
 import Select from "antd/es/select";
 import Input from "antd/es/input";
 
@@ -73,6 +74,7 @@ const PhoneInput = forwardRef(({
         excludeCountries,
         preferredCountries,
     });
+    console.log("value: ", value);
 
     const {
         onInput: onInputMaskHandler,
@@ -95,6 +97,9 @@ const PhoneInput = forwardRef(({
         }
         return path.concat(fieldName.split("_"));
     }, [antInputProps, formContext])
+
+    const phoneValue = useWatch(namePath, formInstance);
+    console.log("phoneValue: ", getRawValue(phoneValue));
 
     const setFieldValue = useCallback((value: PhoneNumber) => {
         if (formInstance) formInstance.setFieldValue(namePath, value);
