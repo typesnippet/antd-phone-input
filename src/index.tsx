@@ -85,18 +85,20 @@ const PhoneInput = forwardRef(({
         return ({...metadata})?.[0] + ({...metadata})?.[2];
     }, [countriesList, countryCode, value])
 
-    const setFieldValue = useCallback((value: PhoneNumber) => {
-        if (formInstance) {
-            let namePath = [];
-            let formName = (formContext as any)?.name || "";
-            let fieldName = (antInputProps as any)?.id || "";
-            if (formName) {
-                namePath.push(formName);
-                fieldName = fieldName.slice(formName.length + 1);
-            }
-            formInstance.setFieldValue(namePath.concat(fieldName.split("_")), value);
+    const namePath = useMemo(() => {
+        let path = [];
+        let formName = (formContext as any)?.name || "";
+        let fieldName = (antInputProps as any)?.id || "";
+        if (formName) {
+            path.push(formName);
+            fieldName = fieldName.slice(formName.length + 1);
         }
-    }, [antInputProps, formContext, formInstance])
+        return path.concat(fieldName.split("_"));
+    }, [antInputProps, formContext])
+
+    const setFieldValue = useCallback((value: PhoneNumber) => {
+        if (formInstance) formInstance.setFieldValue(namePath, value);
+    }, [formInstance])
 
     const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
         onKeyDownMaskHandler(event);
