@@ -74,7 +74,6 @@ const PhoneInput = forwardRef(({
         excludeCountries,
         preferredCountries,
     });
-    console.log("value: ", value);
 
     const {
         onInput: onInputMaskHandler,
@@ -99,11 +98,10 @@ const PhoneInput = forwardRef(({
     }, [antInputProps, formContext])
 
     const phoneValue = useWatch(namePath, formInstance);
-    console.log("phoneValue: ", getRawValue(phoneValue));
 
     const setFieldValue = useCallback((value: PhoneNumber) => {
         if (formInstance) formInstance.setFieldValue(namePath, value);
-    }, [formInstance])
+    }, [formInstance, namePath])
 
     const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
         onKeyDownMaskHandler(event);
