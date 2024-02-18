@@ -137,13 +137,14 @@ const PhoneInput = forwardRef(({
     useEffect(() => {
         const rawValue = getRawValue(phoneValue);
         const metadata = getMetadata(rawValue);
-        if (!metadata?.[3]) return;
+        // Skip if value has not been updated by `setFieldValue`.
+        if (!metadata?.[3] || rawValue === getRawValue(value)) return;
         const formattedNumber = getFormattedNumber(rawValue, metadata?.[3] as string);
         const phoneMetadata = parsePhoneNumber(formattedNumber);
         setFieldValue({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
         setCountryCode(metadata?.[0] as string);
         setValue(formattedNumber);
-    }, [phoneValue, setFieldValue, setValue])
+    }, [phoneValue, value, setFieldValue, setValue])
 
     useEffect(() => {
         if (initiatedRef.current) return;
