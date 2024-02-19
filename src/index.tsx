@@ -11,6 +11,7 @@ import {
 } from "react";
 import useFormInstance from "antd/es/form/hooks/useFormInstance";
 import {FormContext} from "antd/es/form/context";
+import {useWatch} from "antd/es/form/Form";
 import Select from "antd/es/select";
 import Input from "antd/es/input";
 
@@ -85,18 +86,22 @@ const PhoneInput = forwardRef(({
         return ({...metadata})?.[0] + ({...metadata})?.[2];
     }, [countriesList, countryCode, value])
 
-    const setFieldValue = useCallback((value: PhoneNumber) => {
-        if (formInstance) {
-            let namePath = [];
-            let formName = (formContext as any)?.name || "";
-            let fieldName = (antInputProps as any)?.id || "";
-            if (formName) {
-                namePath.push(formName);
-                fieldName = fieldName.slice(formName.length + 1);
-            }
-            formInstance.setFieldValue(namePath.concat(fieldName.split("_")), value);
+    const namePath = useMemo(() => {
+        let path = [];
+        let formName = (formContext as any)?.name || "";
+        let fieldName = (antInputProps as any)?.id || "";
+        if (formName) {
+            path.push(formName);
+            fieldName = fieldName.slice(formName.length + 1);
         }
-    }, [antInputProps, formContext, formInstance])
+        return path.concat(fieldName.split("_"));
+    }, [antInputProps, formContext])
+
+    const phoneValue = useWatch(namePath, formInstance);
+
+    const setFieldValue = useCallback((value: PhoneNumber) => {
+        if (formInstance) formInstance.setFieldValue(namePath, value);
+    }, [formInstance, namePath])
 
     const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
         onKeyDownMaskHandler(event);
@@ -128,6 +133,18 @@ const PhoneInput = forwardRef(({
             else if (ref != null) ref.current = node;
         })
     }, [forwardedRef])
+
+    useEffect(() => {
+        const rawValue = getRawValue(phoneValue);
+        const metadata = getMetadata(rawValue);
+        // Skip if value has not been updated by `setFieldValue`.
+        if (!metadata?.[3] || rawValue === getRawValue(value)) return;
+        const formattedNumber = getFormattedNumber(rawValue, metadata?.[3] as string);
+        const phoneMetadata = parsePhoneNumber(formattedNumber);
+        setFieldValue({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
+        setCountryCode(metadata?.[0] as string);
+        setValue(formattedNumber);
+    }, [phoneValue, value, setFieldValue, setValue])
 
     useEffect(() => {
         if (initiatedRef.current) return;

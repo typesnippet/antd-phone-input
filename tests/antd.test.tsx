@@ -106,11 +106,63 @@ describe("Checking the basic rendering and functionality", () => {
             <FormItem name="phone">
                 <PhoneInput/>
             </FormItem>
-            <Button data-testid="button" htmlType="submit">Submit</Button>
         </Form>);
         const input = screen.getByDisplayValue("+1 (702)");
         await userEvent.type(input, "1234567");
         assert(input.getAttribute("value") === "+1 (702) 123 4567");
+    })
+
+    it("Checking field value setters", async () => {
+        const FormWrapper = () => {
+            const [form] = Form.useForm();
+
+            const setFieldObjectValue = () => {
+                form.setFieldValue("phone", {
+                    countryCode: 48,
+                    areaCode: "111",
+                    phoneNumber: "1111111",
+                    isoCode: "pl"
+                });
+            }
+
+            const setFieldRawValue = () => {
+                form.setFieldValue("phone", "+1 (234) 234 2342");
+            }
+
+            return (
+                <Form data-testid="form" form={form} initialValues={{phone: {countryCode: 1, areaCode: "702"}}}>
+                    <FormItem name="phone">
+                        <PhoneInput/>
+                    </FormItem>
+                    <Button data-testid="submit" htmlType="submit">Submit</Button>
+                    <Button data-testid="set-string" onClick={setFieldRawValue}>Set String Value</Button>
+                    <Button data-testid="set-object" onClick={setFieldObjectValue}>Set Object Value</Button>
+                </Form>
+            )
+        }
+
+        render(<FormWrapper/>);
+        const form = screen.getByTestId("form");
+        const submit = screen.getByTestId("submit");
+        const input = screen.getByDisplayValue("+1 (702)");
+        const setString = screen.getByTestId("set-string");
+        const setObject = screen.getByTestId("set-object");
+
+        await userEvent.click(setString);
+        await userEvent.click(submit);
+        await act(async () => {
+            await new Promise(r => setTimeout(r, 100));
+        })
+        assert(!inputHasError(form)); // valid
+        assert(input.getAttribute("value") === "+1 (234) 234 2342");
+
+        await userEvent.click(setObject);
+        await userEvent.click(submit);
+        await act(async () => {
+            await new Promise(r => setTimeout(r, 100));
+        })
+        assert(!inputHasError(form)); // valid
+        assert(input.getAttribute("value") === "+48 (111) 111 1111");
     })
 
     it("Checking validation with casual form actions", async () => {
