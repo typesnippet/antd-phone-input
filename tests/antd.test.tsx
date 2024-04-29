@@ -2,6 +2,7 @@ import assert from "assert";
 import Form from "antd/lib/form";
 import Button from "antd/lib/button";
 import FormItem from "antd/lib/form/FormItem";
+import ConfigProvider from "antd/lib/config-provider";
 import userEvent from "@testing-library/user-event";
 import {act, render, screen} from "@testing-library/react";
 
@@ -110,6 +111,15 @@ describe("Checking the basic rendering and functionality", () => {
         const input = screen.getByDisplayValue("+1 (702)");
         await userEvent.type(input, "1234567");
         assert(input.getAttribute("value") === "+1 (702) 123 4567");
+    })
+
+    it("Using `prefixCls` with ConfigProvider", () => {
+        render(<ConfigProvider prefixCls="custom-prefix">
+            <PhoneInput data-testid="input"/>
+        </ConfigProvider>);
+        const input = screen.getByTestId("input");
+        assert(!input.outerHTML.includes("ant-input"));
+        assert(input.outerHTML.includes("custom-prefix-input"));
     })
 
     it("Checking field value setters", async () => {

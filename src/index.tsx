@@ -10,6 +10,7 @@ import {
     useState
 } from "react";
 import useFormInstance from "antd/es/form/hooks/useFormInstance";
+import {ConfigContext} from "antd/es/config-provider";
 import {FormContext} from "antd/es/form/context";
 import {useWatch} from "antd/es/form/Form";
 import Select from "antd/es/select";
@@ -32,8 +33,6 @@ import {
 import {injectMergedStyles} from "./styles";
 import {PhoneInputProps, PhoneNumber} from "./types";
 
-injectMergedStyles();
-
 const PhoneInput = forwardRef(({
                                    value: initialValue = "",
                                    country = getDefaultISO2Code(),
@@ -52,12 +51,16 @@ const PhoneInput = forwardRef(({
                                }: PhoneInputProps, forwardedRef: any) => {
     const formInstance = useFormInstance();
     const formContext = useContext(FormContext);
+    const {getPrefixCls} = useContext(ConfigContext);
     const inputRef = useRef<any>(null);
     const selectedRef = useRef<boolean>(false);
     const initiatedRef = useRef<boolean>(false);
     const [query, setQuery] = useState<string>("");
     const [minWidth, setMinWidth] = useState<number>(0);
     const [countryCode, setCountryCode] = useState<string>(country);
+
+    const prefixCls = getPrefixCls();
+    injectMergedStyles(prefixCls);
 
     const {
         value,
@@ -183,7 +186,7 @@ const PhoneInput = forwardRef(({
             dropdownStyle={{minWidth}}
             notFoundContent={searchNotFound}
             dropdownRender={(menu) => (
-                <div className="ant-phone-input-search-wrapper">
+                <div className={`${prefixCls}-phone-input-search-wrapper`}>
                     {enableSearch && (
                         <Input
                             placeholder={searchPlaceholder}
@@ -199,7 +202,7 @@ const PhoneInput = forwardRef(({
                     value={iso + dial}
                     key={`${iso}_${mask}`}
                     label={<div className={`flag ${iso}`}/>}
-                    children={<div className="ant-phone-input-select-item">
+                    children={<div className={`${prefixCls}-phone-input-select-item`}>
                         <div className={`flag ${iso}`}/>
                         {name}&nbsp;{displayFormat(mask)}
                     </div>}
@@ -209,7 +212,7 @@ const PhoneInput = forwardRef(({
     ), [selectValue, disableDropdown, minWidth, searchNotFound, countriesList, setFieldValue, setValue, enableSearch, searchPlaceholder])
 
     return (
-        <div className="ant-phone-input-wrapper"
+        <div className={`${prefixCls}-phone-input-wrapper`}
              ref={node => setMinWidth(node?.offsetWidth || 0)}>
             <Input
                 ref={ref}

@@ -3,4 +3,18 @@ import commonStyles from "react-phone-hooks/stylesheet.json";
 
 import customStyles from "./resources/stylesheet.json";
 
-export const injectMergedStyles = () => injectStyles(jsonToCss(Object.assign(commonStyles, customStyles)));
+let prefix: any = null;
+
+export const injectMergedStyles = (prefixCls: any = null) => {
+    const stylesheet = customStyles as { [key: string]: any };
+    if (prefixCls) {
+        if (prefix === prefixCls) return;
+        Object.entries(stylesheet).forEach(([k, value]) => {
+            const key = k.replace(/ant(?=-)/g, prefixCls);
+            stylesheet[key] = value;
+            delete stylesheet[k];
+        })
+        prefix = prefixCls;
+    }
+    return injectStyles(jsonToCss(Object.assign(commonStyles, stylesheet)));
+}
