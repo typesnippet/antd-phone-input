@@ -12,6 +12,8 @@
     "margin": "0 6px 6px 6px"
   },
   ".ant-phone-input-wrapper .ant-select-selector": {
+    "padding": "0 11px !important",
+    "height": "unset !important",
     "border": "none !important"
   },
   ".ant-phone-input-wrapper .ant-select-selection-item": {
