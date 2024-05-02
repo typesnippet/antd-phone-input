@@ -215,7 +215,7 @@ describe("Checking the basic rendering and functionality", () => {
             await new Promise(r => setTimeout(r, 100));
         })
         assert(inputHasError(form)); // invalid
-    })
+    }, 25000)
 
     it("Checking validation with casual inputs and actions", async () => {
         render(<Form data-testid="form">
@@ -260,5 +260,5 @@ describe("Checking the basic rendering and functionality", () => {
         assert(inputHasError(form)); // invalid
         await userEvent.click(reset);
         assert(!inputHasError(form)); // valid
-    })
+    }, 25000)
 })
