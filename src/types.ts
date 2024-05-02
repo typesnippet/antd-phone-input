@@ -1,4 +1,4 @@
-import {ChangeEvent, KeyboardEvent} from "react";
+import {ChangeEvent, KeyboardEvent, ReactNode} from "react";
 import types from "react-phone-hooks/types";
 import {InputProps} from "antd/es/input";
 
@@ -22,6 +22,8 @@ export interface PhoneInputProps extends Omit<InputProps, "value" | "onChange"> 
     excludeCountries?: string[];
 
     preferredCountries?: string[];
+
+    dropdownRender?: (menu: ReactNode) => ReactNode;
 
     onMount?(value: PhoneNumber): void;
 
