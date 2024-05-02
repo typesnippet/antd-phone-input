@@ -54,19 +54,20 @@ The `valid` function primarily checks if a phone number has a length appropriate
 
 Apart from the phone-specific properties described below, all [Input](https://ant.design/components/input#input) properties supported by the used Ant Design version can be applied to the phone input component.
 
-| Property           | Description                                                                                                                                                                 | Type                      |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
-| value              | An object containing a parsed phone number or the raw number. This also applies to the `initialValue` property of [Form.Item](https://ant.design/components/form#formitem). | [object](#value) / string |
-| country            | Country code to be selected by default. By default, it will show the flag of the user's country.                                                                            | string                    |
-| enableSearch       | Enables search in the country selection dropdown menu. Default value is `false`.                                                                                            | boolean                   |
-| searchNotFound     | The value is shown if `enableSearch` is `true` and the query does not match any country. Default value is `No country found`.                                               | string                    |
-| searchPlaceholder  | The value is shown if `enableSearch` is `true`. Default value is `Search country`.                                                                                          | string                    |
-| disableDropdown    | Disables the manual country selection through the dropdown menu.                                                                                                            | boolean                   |
-| onlyCountries      | Country codes to be included in the list. E.g. `onlyCountries={['us', 'ca', 'uk']}`.                                                                                        | string[]                  |
-| excludeCountries   | Country codes to be excluded from the list of countries. E.g. `excludeCountries={['us', 'ca', 'uk']}`.                                                                      | string[]                  |
-| preferredCountries | Country codes to be at the top of the list. E.g. `preferredCountries={['us', 'ca', 'uk']}`.                                                                                 | string[]                  |
-| onChange           | The only difference from the original `onChange` is that value comes first.                                                                                                 | function(value, event)    |
-| onMount            | The callback is triggered once the component gets mounted.                                                                                                                  | function(value)           |
+| Property           | Description                                                                                                                                                                 | Type                            |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------|
+| value              | An object containing a parsed phone number or the raw number. This also applies to the `initialValue` property of [Form.Item](https://ant.design/components/form#formitem). | [object](#value) / string       |
+| country            | Country code to be selected by default. By default, it will show the flag of the user's country.                                                                            | string                          |
+| enableSearch       | Enables search in the country selection dropdown menu. Default value is `false`.                                                                                            | boolean                         |
+| searchNotFound     | The value is shown if `enableSearch` is `true` and the query does not match any country. Default value is `No country found`.                                               | string                          |
+| searchPlaceholder  | The value is shown if `enableSearch` is `true`. Default value is `Search country`.                                                                                          | string                          |
+| disableDropdown    | Disables the manual country selection through the dropdown menu.                                                                                                            | boolean                         |
+| onlyCountries      | Country codes to be included in the list. E.g. `onlyCountries={['us', 'ca', 'uk']}`.                                                                                        | string[]                        |
+| excludeCountries   | Country codes to be excluded from the list of countries. E.g. `excludeCountries={['us', 'ca', 'uk']}`.                                                                      | string[]                        |
+| preferredCountries | Country codes to be at the top of the list. E.g. `preferredCountries={['us', 'ca', 'uk']}`.                                                                                 | string[]                        |
+| dropdownRender     | Customize the dropdown menu content.                                                                                                                                        | (menu: ReactNode) => ReactNode  |
+| onChange           | The only difference from the original `onChange` is that value comes first.                                                                                                 | function(value, event)          |
+| onMount            | The callback is triggered once the component gets mounted.                                                                                                                  | function(value)                 |
 
 ## Contribute
 

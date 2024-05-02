@@ -43,6 +43,7 @@ const PhoneInput = forwardRef(({
                                    preferredCountries = [],
                                    searchNotFound = "No country found",
                                    searchPlaceholder = "Search country",
+                                   dropdownRender = (node) => node,
                                    onMount: handleMount = () => null,
                                    onInput: handleInput = () => null,
                                    onChange: handleChange = () => null,
@@ -209,7 +210,7 @@ const PhoneInput = forwardRef(({
                 />
             ))}
         </Select>
-    ), [selectValue, disableDropdown, minWidth, searchNotFound, countriesList, setFieldValue, setValue, enableSearch, searchPlaceholder])
+    ), [selectValue, disableDropdown, minWidth, searchNotFound, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder])
 
     return (
         <div className={`${prefixCls}-phone-input-wrapper`}
@@ -221,7 +222,7 @@ const PhoneInput = forwardRef(({
                 onInput={onInput}
                 onChange={onChange}
                 onKeyDown={onKeyDown}
-                addonBefore={countriesSelect}
+                addonBefore={dropdownRender(countriesSelect)}
                 {...antInputProps}
             />
         </div>
