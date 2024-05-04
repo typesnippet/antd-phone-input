@@ -178,13 +178,13 @@ const PhoneInput = forwardRef(({
             open={disableDropdown ? false : undefined}
             onSelect={(selectedOption, {key}) => {
                 const [_, mask] = key.split("_");
-                if (selectValue === selectedOption) return;
                 const selectedCountryCode = selectedOption.slice(0, 2);
                 const formattedNumber = displayFormat(cleanInput(mask, mask).join(""));
                 const phoneMetadata = parsePhoneNumber(formattedNumber, countriesList, selectedCountryCode);
                 setFieldValue({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
                 setCountryCode(selectedCountryCode);
                 setValue(formattedNumber);
+                setQuery("");
                 selectedRef.current = true;
                 const nativeInputValueSetter = (Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value") as any).set;
                 nativeInputValueSetter.call(inputRef.current.input, formattedNumber);
@@ -198,6 +198,7 @@ const PhoneInput = forwardRef(({
                 <div className={`${prefixCls}-phone-input-search-wrapper`}>
                     {enableSearch && (
                         <Input
+                            value={query}
                             ref={searchRef}
                             placeholder={searchPlaceholder}
                             onInput={({target}: any) => setQuery(target.value)}
@@ -219,7 +220,7 @@ const PhoneInput = forwardRef(({
                 />
             ))}
         </Select>
-    ), [selectValue, disabled, disableDropdown, onDropdownVisibleChange, minWidth, searchNotFound, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder])
+    ), [selectValue, query, disabled, disableDropdown, onDropdownVisibleChange, minWidth, searchNotFound, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder])
 
     return (
         <div className={`${prefixCls}-phone-input-wrapper`}
