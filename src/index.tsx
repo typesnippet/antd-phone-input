@@ -55,6 +55,7 @@ const PhoneInput = forwardRef(({
     const formContext = useContext(FormContext);
     const {getPrefixCls} = useContext(ConfigContext);
     const inputRef = useRef<any>(null);
+    const searchRef = useRef<any>(null);
     const selectedRef = useRef<boolean>(false);
     const initiatedRef = useRef<boolean>(false);
     const [query, setQuery] = useState<string>("");
@@ -132,6 +133,10 @@ const PhoneInput = forwardRef(({
         handleMount(value);
     }, [handleMount, setFieldValue])
 
+    const onDropdownVisibleChange = useCallback((open: boolean) => {
+        if (open && enableSearch) setTimeout(() => searchRef.current.focus(), 100);
+    }, [enableSearch])
+
     const ref = useCallback((node: any) => {
         [forwardedRef, inputRef].forEach((ref) => {
             if (typeof ref === "function") ref(node);
@@ -188,10 +193,12 @@ const PhoneInput = forwardRef(({
             optionLabelProp="label"
             dropdownStyle={{minWidth}}
             notFoundContent={searchNotFound}
+            onDropdownVisibleChange={onDropdownVisibleChange}
             dropdownRender={(menu) => (
                 <div className={`${prefixCls}-phone-input-search-wrapper`}>
                     {enableSearch && (
                         <Input
+                            ref={searchRef}
                             placeholder={searchPlaceholder}
                             onInput={({target}: any) => setQuery(target.value)}
                         />
@@ -212,7 +219,7 @@ const PhoneInput = forwardRef(({
                 />
             ))}
         </Select>
-    ), [selectValue, disabled, disableDropdown, minWidth, searchNotFound, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder])
+    ), [selectValue, disabled, disableDropdown, onDropdownVisibleChange, minWidth, searchNotFound, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder])
 
     return (
         <div className={`${prefixCls}-phone-input-wrapper`}
