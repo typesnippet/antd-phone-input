@@ -189,6 +189,7 @@ const PhoneInput = forwardRef(({
                 const nativeInputValueSetter = (Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value") as any).set;
                 nativeInputValueSetter.call(inputRef.current.input, formattedNumber);
                 inputRef.current.input.dispatchEvent(new Event("change", {bubbles: true}));
+                inputRef.current.input.focus();
             }}
             optionLabelProp="label"
             dropdownStyle={{minWidth}}
