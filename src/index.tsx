@@ -36,6 +36,7 @@ import {PhoneInputProps, PhoneNumber} from "./types";
 const PhoneInput = forwardRef(({
                                    value: initialValue = "",
                                    country = getDefaultISO2Code(),
+                                   disabled = false,
                                    enableSearch = false,
                                    disableDropdown = false,
                                    onlyCountries = [],
@@ -168,6 +169,7 @@ const PhoneInput = forwardRef(({
         <Select
             suffixIcon={null}
             value={selectValue}
+            disabled={disabled}
             open={disableDropdown ? false : undefined}
             onSelect={(selectedOption, {key}) => {
                 const [_, mask] = key.split("_");
@@ -210,7 +212,7 @@ const PhoneInput = forwardRef(({
                 />
             ))}
         </Select>
-    ), [selectValue, disableDropdown, minWidth, searchNotFound, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder])
+    ), [selectValue, disabled, disableDropdown, minWidth, searchNotFound, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder])
 
     return (
         <div className={`${prefixCls}-phone-input-wrapper`}
@@ -223,6 +225,7 @@ const PhoneInput = forwardRef(({
                 onChange={onChange}
                 onKeyDown={onKeyDown}
                 addonBefore={dropdownRender(countriesSelect)}
+                disabled={disabled}
                 {...antInputProps}
             />
         </div>
