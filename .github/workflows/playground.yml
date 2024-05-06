@@ -1,0 +1,21 @@
+name: playground
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    environment:
+      name: Playground
+      url: https://playground.typesnippet.org/antd-phone-input-5.x
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run deployment script on server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY_ED25519 }}
+          port: ${{ secrets.PORT }}
+          script: bash ~/antd-phone-input/examples/deploy.sh
