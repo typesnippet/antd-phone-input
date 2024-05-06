@@ -1,26 +1,49 @@
-import {useState} from "react";
+import {useCallback, useMemo, useState} from "react";
+import copy from "copy-to-clipboard";
 import Form from "antd/es/form";
 import theme from "antd/es/theme";
 import Button from "antd/es/button";
+import Switch from "antd/es/switch";
 import Card from "antd/es/card/Card";
+import Divider from "antd/es/divider";
+import Alert from "antd/es/alert/Alert";
 import {useForm} from "antd/es/form/Form";
-import FormItem from "antd/es/form/FormItem";
-import ConfigProvider from "antd/es/config-provider";
 import PhoneInput from "antd-phone-input";
+import FormItem from "antd/es/form/FormItem";
+import Title from "antd/es/typography/Title";
+import Paragraph from "antd/es/typography/Paragraph";
+import ConfigProvider from "antd/es/config-provider";
+import SunOutlined from "@ant-design/icons/SunOutlined";
+import MoonOutlined from "@ant-design/icons/MoonOutlined";
+import CopyOutlined from "@ant-design/icons/CopyOutlined";
+import CheckOutlined from "@ant-design/icons/CheckOutlined";
 
 import "antd/dist/reset.css";
 
 const Demo = () => {
     const [form] = useForm();
     const [value, setValue] = useState(null);
+    const [strict, setStrict] = useState(false);
+    const [search, setSearch] = useState(false);
+    const [copied, setCopied] = useState(false);
+    const [dropdown, setDropdown] = useState(true);
+    const [disabled, setDisabled] = useState(false);
     const [algorithm, setAlgorithm] = useState("defaultAlgorithm");
 
-    const validator = (_: any, {valid}: any) => {
-        if (valid()) {
-            return Promise.resolve();
-        }
+    const validator = useCallback((_: any, {valid}: any) => {
+        if (valid(strict)) return Promise.resolve();
         return Promise.reject("Invalid phone number");
-    }
+    }, [strict])
+
+    const code = useMemo(() => {
+        let code = "<PhoneInput\n";
+        if (disabled) code += "    disabled\n";
+        if (search && dropdown) code += "    enableSearch\n";
+        if (!dropdown) code += "    disableDropdown\n";
+        if (code === "<PhoneInput\n") code = "<PhoneInput />";
+        else code += "/>";
+        return code;
+    }, [disabled, search, dropdown])
 
     const changeTheme = () => {
         if (algorithm === "defaultAlgorithm") {
@@ -30,47 +53,158 @@ const Demo = () => {
         }
     }
 
-    const setFieldObjectValue = () => {
-        form.setFieldValue("phone", {
-          "countryCode": 52,
-          "areaCode": "444",
-          "phoneNumber": "44444444",
-          "isoCode": "mx"
-        });
-    }
-
-    const setFieldRawValue = () => {
-        form.setFieldValue("phone", "+1 (234) 234 2342");
-    }
-
     const handleFinish = ({phone}: any) => setValue(phone);
 
     return (
         <ConfigProvider
             theme={{algorithm: algorithm === "defaultAlgorithm" ? theme.defaultAlgorithm : theme.darkAlgorithm}}>
-            <Card style={{height: "100%", borderRadius: 0, border: "none"}} bodyStyle={{padding: 0}}>
-                <div style={{margin: 20, maxWidth: 400}}>
-                    {value && (
+            <Card style={{height: "100%", borderRadius: 0, border: "none"}}
+                  styles={{
+                      body: {
+                          padding: 0,
+                          height: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                      }
+                  }}>
+                <div style={{
+                    minWidth: 415,
+                    maxWidth: 415,
+                    display: "flex",
+                    margin: "10px 20px",
+                    flexDirection: "column",
+                }}>
+                    <Title level={2}>
+                        Ant Phone Input Playground
+                    </Title>
+                    <Paragraph>
+                        This is a playground for the Ant Phone Input component. You can change the settings and see how
+                        the component behaves. Also, see the code for the component and the value it returns.
+                    </Paragraph>
+                    <Divider orientation="left" plain>Settings</Divider>
+                    <div style={{gap: 24, display: "flex", alignItems: "center"}}>
+                        <Form.Item label="Theme">
+                            <Switch
+                                onChange={changeTheme}
+                                checkedChildren={<MoonOutlined/>}
+                                unCheckedChildren={<SunOutlined/>}
+                            />
+                        </Form.Item>
+                        <Form.Item label="Validation">
+                            <Switch
+                                checkedChildren="strict"
+                                unCheckedChildren="default"
+                                onChange={() => setStrict(!strict)}
+                            />
+                        </Form.Item>
+                        <Form.Item label="Disabled">
+                            <Switch onChange={() => setDisabled(!disabled)}/>
+                        </Form.Item>
+                    </div>
+                    <div style={{gap: 24, display: "flex", alignItems: "center"}}>
+                        <Form.Item label="Search" style={{margin: 0}}>
+                            <Switch
+                                disabled={!dropdown}
+                                checkedChildren="enabled"
+                                unCheckedChildren="disabled"
+                                onChange={() => setSearch(!search)}
+                            />
+                        </Form.Item>
+                        <Form.Item label="Dropdown" style={{margin: 0}}>
+                            <Switch
+                                defaultChecked
+                                checkedChildren="enabled"
+                                unCheckedChildren="disabled"
+                                onChange={() => setDropdown(!dropdown)}
+                            />
+                        </Form.Item>
+                    </div>
+                    <Divider orientation="left" plain>Code</Divider>
+                    <div style={{position: "relative"}}>
+                        <Button
+                            type="text"
+                            size="small"
+                            onClick={() => {
+                                copy(code);
+                                setCopied(true);
+                                setTimeout(() => setCopied(false), 2000);
+                            }}
+                            style={{position: "absolute", top: 10, right: 10}}
+                            icon={copied ? <CheckOutlined style={{color: "green"}}/> : <CopyOutlined/>}
+                        />
                         <pre style={{
                             background: algorithm === "defaultAlgorithm" ? "#efefef" : "#1f1f1f",
                             color: algorithm === "defaultAlgorithm" ? "#1f1f1f" : "#efefef",
-                            padding: 10, marginBottom: 24,
+                            padding: 10,
                         }}>
-                            {JSON.stringify(value, null, 2)}
+                            {code}
                         </pre>
-                    )}
+                    </div>
+                    <Divider orientation="left" plain>Component</Divider>
                     <Form form={form} onFinish={handleFinish}>
                         <FormItem name="phone" rules={[{validator}]}>
-                            <PhoneInput enableSearch/>
+                            <PhoneInput
+                                disabled={disabled}
+                                enableSearch={search}
+                                disableDropdown={!dropdown}
+                            />
                         </FormItem>
-                        <div style={{display: "flex", gap: 24}}>
-                            <Button onClick={setFieldObjectValue}>Set Object Value</Button>
-                            <Button onClick={setFieldRawValue}>Set Raw Value</Button>
-                            <Button htmlType="submit">Preview Value</Button>
+                        {value && (
+                            <pre style={{
+                                background: algorithm === "defaultAlgorithm" ? "#efefef" : "#1f1f1f",
+                                color: algorithm === "defaultAlgorithm" ? "#1f1f1f" : "#efefef",
+                                padding: 10, marginBottom: 24,
+                            }}>
+                                {JSON.stringify(value, null, 2)}
+                            </pre>
+                        )}
+                        <div style={{display: "flex", gap: 24, justifyContent: "flex-start"}}>
+                            <Button htmlType="submit" type="primary">Preview Value</Button>
                             <Button htmlType="reset">Reset Value</Button>
-                            <Button onClick={changeTheme}>Change Theme</Button>
                         </div>
                     </Form>
+                    <Alert
+                        type="info"
+                        style={{marginTop: 24}}
+                        message={<>
+                            If your application uses <b>4.x</b> version of <b>Ant Design</b>, you should use this&nbsp;
+                            <a target="_blank" rel="noreferrer"
+                               href="//playground.typesnippet.org/antd-phone-input-4.x">playground</a>&nbsp;
+                            server to test the component.
+                        </>}
+                    />
+                    <div style={{marginTop: "auto"}}>
+                        <Divider style={{margin: "10px 0"}}/>
+                        <div style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                        }}>
+                            <div>
+                                &copy; Made with ❤️ by&nbsp;
+                                <a href="//github.com/typesnippet" target="_blank" rel="noreferrer author">
+                                    TypeSnippet
+                                </a>
+                            </div>
+                            <div style={{display: "flex", gap: 10}}>
+                                <a target="_blank" rel="noreferrer"
+                                   href="//github.com/typesnippet/antd-phone-input/blob/master/LICENSE">
+                                    <img src="//img.shields.io/npm/l/antd-phone-input" alt="MIT License"/>
+                                </a>
+                                <a href="//www.npmjs.com/package/antd-phone-input" target="_blank" rel="noreferrer">
+                                    <img src="//img.shields.io/npm/v/antd-phone-input" alt="NPM Package"/>
+                                </a>
+                            </div>
+                        </div>
+                        <Paragraph style={{margin: "5px 0 0 0"}}>
+                            Find the&nbsp;
+                            <a href="//github.com/typesnippet/antd-phone-input/tree/master/examples/antd5.x"
+                               target="_blank" rel="noreferrer">
+                                source code
+                            </a>
+                            &nbsp;of this playground server on our GitHub repo.
+                        </Paragraph>
+                    </div>
                 </div>
             </Card>
         </ConfigProvider>
