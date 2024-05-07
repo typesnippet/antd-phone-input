@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "@craco/craco": "^7.0.0",
     "antd": "^4.24.8",
     "antd-phone-input": "^0.3.5",
     "craco-less": "^2.0.0",
