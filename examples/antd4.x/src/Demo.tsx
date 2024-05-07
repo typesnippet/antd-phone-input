@@ -43,10 +43,11 @@ const Demo = () => {
     }, [disabled, search, dropdown])
 
     const changeTheme = () => {
-        if (window.location.pathname === "/dark") {
-            window.location.replace("/");
+        const pathname = window.location.pathname.replace(/\/$/, '');
+        if (pathname.endsWith("/dark")) {
+            window.location.replace(pathname.replace('/dark', ''));
         } else {
-            window.location.replace("/dark");
+            window.location.replace(pathname + "/dark");
         }
     }
 
@@ -81,7 +82,7 @@ const Demo = () => {
                             onChange={changeTheme}
                             checkedChildren={<MoonOutlined/>}
                             unCheckedChildren={<SunOutlined/>}
-                            defaultChecked={window.location.pathname === "/dark"}
+                            defaultChecked={window.location.pathname.endsWith("/dark")}
                         />
                     </Form.Item>
                     <Form.Item label="Validation">
@@ -127,8 +128,8 @@ const Demo = () => {
                         icon={copied ? <CheckOutlined style={{color: "green"}}/> : <CopyOutlined/>}
                     />
                     <pre style={{
-                        background: window.location.pathname === "/dark" ? "#1f1f1f" : "#efefef",
-                        color: window.location.pathname === "/dark" ? "#efefef" : "#1f1f1f",
+                        background: window.location.pathname.endsWith("/dark") ? "#1f1f1f" : "#efefef",
+                        color: window.location.pathname.endsWith("/dark") ? "#efefef" : "#1f1f1f",
                         padding: 10,
                     }}>
                         {code}
@@ -145,8 +146,8 @@ const Demo = () => {
                     </FormItem>
                     {value && (
                         <pre style={{
-                            background: window.location.pathname === "/dark" ? "#1f1f1f" : "#efefef",
-                            color: window.location.pathname === "/dark" ? "#efefef" : "#1f1f1f",
+                            background: window.location.pathname.endsWith("/dark") ? "#1f1f1f" : "#efefef",
+                            color: window.location.pathname.endsWith("/dark") ? "#efefef" : "#1f1f1f",
                             padding: 10, marginBottom: 24,
                         }}>
                             {JSON.stringify(value, null, 2)}
