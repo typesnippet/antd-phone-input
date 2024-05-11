@@ -59,13 +59,11 @@ const Demo = () => {
         <ConfigProvider
             theme={{algorithm: algorithm === "defaultAlgorithm" ? theme.defaultAlgorithm : theme.darkAlgorithm}}>
             <Card style={{height: "100%", borderRadius: 0, border: "none"}}
-                  styles={{
-                      body: {
-                          padding: 0,
-                          height: "100%",
-                          display: "flex",
-                          justifyContent: "center",
-                      }
+                  bodyStyle={{
+                      padding: 0,
+                      height: "100%",
+                      display: "flex",
+                      justifyContent: "center",
                   }}>
                 <div style={{
                     minWidth: 415,
