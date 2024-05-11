@@ -4,7 +4,7 @@ git restore .
 git pull
 
 cd ~/antd-phone-input/examples/antd4.x
-npm install && npm run build
+npm install --legacy-peer-deps && npm run build
 
 cd ~/antd-phone-input/examples/antd5.x
 npm install && npm run build
