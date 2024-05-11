@@ -3,14 +3,11 @@ cd ~/antd-phone-input/
 git restore .
 git pull
 
-nvm use 18
-npm i -g yarn
-
 cd ~/antd-phone-input/examples/antd4.x
-yarn && yarn build
+npm install && npm run build
 
 cd ~/antd-phone-input/examples/antd5.x
-yarn && yarn build
+npm install && npm run build
 
 sudo rm -r /var/www/playground/antd-phone-input/*
 sudo mkdir /var/www/playground/antd-phone-input/antd4.x
