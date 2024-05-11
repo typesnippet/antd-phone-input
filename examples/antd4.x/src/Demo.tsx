@@ -16,8 +16,6 @@ import MoonOutlined from "@ant-design/icons/MoonOutlined";
 import CopyOutlined from "@ant-design/icons/CopyOutlined";
 import CheckOutlined from "@ant-design/icons/CheckOutlined";
 
-import "antd/dist/reset.css";
-
 const Demo = () => {
     const [form] = useForm();
     const [value, setValue] = useState(null);
