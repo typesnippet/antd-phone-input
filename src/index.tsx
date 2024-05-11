@@ -36,6 +36,7 @@ import {PhoneInputProps, PhoneNumber} from "./types";
 const PhoneInput = forwardRef(({
                                    value: initialValue = "",
                                    country = getDefaultISO2Code(),
+                                   disabled = false,
                                    enableSearch = false,
                                    disableDropdown = false,
                                    onlyCountries = [],
@@ -54,6 +55,7 @@ const PhoneInput = forwardRef(({
     const formContext = useContext(FormContext);
     const {getPrefixCls} = useContext(ConfigContext);
     const inputRef = useRef<any>(null);
+    const searchRef = useRef<any>(null);
     const selectedRef = useRef<boolean>(false);
     const initiatedRef = useRef<boolean>(false);
     const [query, setQuery] = useState<string>("");
@@ -131,6 +133,10 @@ const PhoneInput = forwardRef(({
         handleMount(value);
     }, [handleMount, setFieldValue])
 
+    const onDropdownVisibleChange = useCallback((open: boolean) => {
+        if (open && enableSearch) setTimeout(() => searchRef.current.focus(), 100);
+    }, [enableSearch])
+
     const ref = useCallback((node: any) => {
         [forwardedRef, inputRef].forEach((ref) => {
             if (typeof ref === "function") ref(node);
@@ -168,28 +174,33 @@ const PhoneInput = forwardRef(({
         <Select
             suffixIcon={null}
             value={selectValue}
+            disabled={disabled}
             open={disableDropdown ? false : undefined}
             onSelect={(selectedOption, {key}) => {
                 const [_, mask] = key.split("_");
-                if (selectValue === selectedOption) return;
                 const selectedCountryCode = selectedOption.slice(0, 2);
                 const formattedNumber = displayFormat(cleanInput(mask, mask).join(""));
                 const phoneMetadata = parsePhoneNumber(formattedNumber, countriesList, selectedCountryCode);
                 setFieldValue({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
                 setCountryCode(selectedCountryCode);
                 setValue(formattedNumber);
+                setQuery("");
                 selectedRef.current = true;
                 const nativeInputValueSetter = (Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value") as any).set;
                 nativeInputValueSetter.call(inputRef.current.input, formattedNumber);
                 inputRef.current.input.dispatchEvent(new Event("change", {bubbles: true}));
+                inputRef.current.input.focus();
             }}
             optionLabelProp="label"
             dropdownStyle={{minWidth}}
             notFoundContent={searchNotFound}
+            onDropdownVisibleChange={onDropdownVisibleChange}
             dropdownRender={(menu) => (
                 <div className={`${prefixCls}-phone-input-search-wrapper`}>
                     {enableSearch && (
                         <Input
+                            value={query}
+                            ref={searchRef}
                             placeholder={searchPlaceholder}
                             onInput={({target}: any) => setQuery(target.value)}
                         />
@@ -210,7 +221,7 @@ const PhoneInput = forwardRef(({
                 />
             ))}
         </Select>
-    ), [selectValue, disableDropdown, minWidth, searchNotFound, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder])
+    ), [selectValue, query, disabled, disableDropdown, onDropdownVisibleChange, minWidth, searchNotFound, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder])
 
     return (
         <div className={`${prefixCls}-phone-input-wrapper`}
@@ -223,6 +234,7 @@ const PhoneInput = forwardRef(({
                 onChange={onChange}
                 onKeyDown={onKeyDown}
                 addonBefore={dropdownRender(countriesSelect)}
+                disabled={disabled}
                 {...antInputProps}
             />
         </div>
