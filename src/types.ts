@@ -1,3 +1,5 @@
+"use client";
+
 import {ChangeEvent, KeyboardEvent, ReactNode} from "react";
 import types from "react-phone-hooks/types";
 import {InputProps} from "antd/es/input";
