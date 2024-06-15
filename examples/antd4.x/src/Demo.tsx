@@ -24,6 +24,7 @@ const Demo = () => {
     const [copied, setCopied] = useState(false);
     const [dropdown, setDropdown] = useState(true);
     const [disabled, setDisabled] = useState(false);
+    const [parentheses, setParentheses] = useState(true);
 
     const validator = useCallback((_: any, {valid}: any) => {
         if (valid(strict)) return Promise.resolve();
@@ -35,10 +36,11 @@ const Demo = () => {
         if (disabled) code += "    disabled\n";
         if (search && dropdown) code += "    enableSearch\n";
         if (!dropdown) code += "    disableDropdown\n";
+        if (!parentheses) code += "    disableParentheses\n";
         if (code === "<PhoneInput\n") code = "<PhoneInput />";
         else code += "/>";
         return code;
-    }, [disabled, search, dropdown])
+    }, [disabled, search, dropdown, parentheses])
 
     const changeTheme = () => {
         const pathname = window.location.pathname.replace(/\/$/, '');
@@ -95,7 +97,7 @@ const Demo = () => {
                     </Form.Item>
                 </div>
                 <div style={{gap: 24, display: "flex", alignItems: "center"}}>
-                    <Form.Item label="Search" style={{margin: 0}}>
+                    <Form.Item label="Search">
                         <Switch
                             disabled={!dropdown}
                             checkedChildren="enabled"
@@ -103,12 +105,22 @@ const Demo = () => {
                             onChange={() => setSearch(!search)}
                         />
                     </Form.Item>
-                    <Form.Item label="Dropdown" style={{margin: 0}}>
+                    <Form.Item label="Dropdown">
                         <Switch
                             defaultChecked
                             checkedChildren="enabled"
                             unCheckedChildren="disabled"
                             onChange={() => setDropdown(!dropdown)}
+                        />
+                    </Form.Item>
+                </div>
+                <div style={{gap: 24, display: "flex", alignItems: "center"}}>
+                    <Form.Item label="Parentheses" style={{margin: 0}}>
+                        <Switch
+                            defaultChecked
+                            checkedChildren="enabled"
+                            unCheckedChildren="disabled"
+                            onChange={() => setParentheses(!parentheses)}
                         />
                     </Form.Item>
                 </div>
@@ -140,6 +152,7 @@ const Demo = () => {
                             disabled={disabled}
                             enableSearch={search}
                             disableDropdown={!dropdown}
+                            disableParentheses={!parentheses}
                         />
                     </FormItem>
                     {value && (
