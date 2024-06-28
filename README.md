@@ -57,6 +57,20 @@ export default Demo;
 
 The `valid` function primarily checks if a phone number has a length appropriate for its specified country. In addition, a more comprehensive validation can be performed, including verifying the dial and area codes' accuracy for the selected country. To activate the strict validation, pass `true` as the first argument to the `valid` function.
 
+## Localization
+
+The package provides a built-in localization feature that allows you to change the language of the component. The `locale` function returns the language object that can be passed to the `ConfigProvider` component of Ant Design.
+
+```javascript
+import PhoneInput, {locale} from "antd-phone-input";
+
+<ConfigProvider locale={locale("frFR")}>
+    <PhoneInput/>
+</ConfigProvider>
+```
+
+NOTE: If you use localization in the [documented](https://ant.design/docs/react/i18n) way, you should replace the object passed to the `locale` property with the `locale` function, specifying the desired language code.
+
 ## Props
 
 Apart from the phone-specific properties described below, all [Input](https://ant.design/components/input#input) properties supported by the used Ant Design version can be applied to the phone input component.
