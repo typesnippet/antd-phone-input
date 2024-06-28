@@ -65,7 +65,7 @@ The package provides a built-in localization feature that allows you to change t
 import PhoneInput, {locale} from "antd-phone-input";
 
 <ConfigProvider locale={locale("frFR")}>
-    <PhoneInput/>
+  <PhoneInput/>
 </ConfigProvider>
 ```
 
