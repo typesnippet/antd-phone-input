@@ -70,7 +70,7 @@
     "react": ">=16"
   },
   "dependencies": {
-    "react-phone-hooks": "^0.1.5"
+    "react-phone-hooks": "^0.1.6"
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
