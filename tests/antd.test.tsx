@@ -6,7 +6,7 @@ import ConfigProvider from "antd/lib/config-provider";
 import userEvent from "@testing-library/user-event";
 import {act, render, screen} from "@testing-library/react";
 
-import PhoneInput from "../src";
+import PhoneInput, {locale} from "../src";
 
 Object.defineProperty(console, "warn", {
     value: jest.fn(),
@@ -32,6 +32,16 @@ describe("Checking the basic rendering and functionality", () => {
     it("Rendering with strict raw value", () => {
         render(<PhoneInput value="17021234567"/>);
         assert(screen.getByDisplayValue("+1 (702) 123 4567"));
+    })
+
+    it("Localization support check", async () => {
+        const {container, getByText} = render(<ConfigProvider locale={locale("frFR")}>
+            <PhoneInput onlyCountries={["am"]}/>
+        </ConfigProvider>);
+        await act(async () => {
+            await userEvent.click(container.querySelector(".flag") as any);
+        });
+        assert(!!getByText(/Arménie[\S\s]+\+374/));
     })
 
     it("Rendering with an initial value", () => {
