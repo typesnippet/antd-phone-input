@@ -40,6 +40,7 @@ const PhoneInput = forwardRef(({
                                    value: initialValue = "",
                                    country = getDefaultISO2Code(),
                                    disabled = false,
+                                   enableArrow = false,
                                    enableSearch = false,
                                    disableDropdown = false,
                                    disableParentheses = false,
@@ -227,7 +228,18 @@ const PhoneInput = forwardRef(({
                     <Select.Option
                         value={iso + dial}
                         key={`${iso}_${mask}`}
-                        label={<div className={`flag ${iso}`}/>}
+                        label={<>
+                            <div className={`flag ${iso}`}/>
+                            {enableArrow && (
+                                <span role="img" className="anticon" style={{paddingLeft: 8}}>
+                                    <svg className="icon" viewBox="0 0 1024 1024"
+                                         focusable="false" fill="currentColor" width="16" height="18">
+                                        <path
+                                            d="M848 368a48 48 0 0 0-81.312-34.544l-0.016-0.016-254.784 254.784-251.488-251.488a48 48 0 1 0-71.04 64.464l-0.128 0.128 288 288 0.016-0.016a47.84 47.84 0 0 0 34.544 14.688h0.224a47.84 47.84 0 0 0 34.544-14.688l0.016 0.016 288-288-0.016-0.016c8.32-8.624 13.44-20.368 13.44-33.312z"/>
+                                    </svg>
+                                </span>
+                            )}
+                        </>}
                         children={<div className={`${prefixCls}-phone-input-select-item`}>
                             <div className={`flag ${iso}`}/>
                             {countries[name]}&nbsp;{displayFormat(mask)}
@@ -236,7 +248,7 @@ const PhoneInput = forwardRef(({
                 )
             })}
         </Select>
-    ), [selectValue, query, disabled, disableParentheses, disableDropdown, onDropdownVisibleChange, minWidth, searchNotFound, countries, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder])
+    ), [selectValue, query, enableArrow, disabled, disableParentheses, disableDropdown, onDropdownVisibleChange, minWidth, searchNotFound, countries, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder])
 
     return (
         <div className={`${prefixCls}-phone-input-wrapper`}
