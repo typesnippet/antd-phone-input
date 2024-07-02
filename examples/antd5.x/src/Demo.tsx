@@ -23,6 +23,7 @@ import "antd/dist/reset.css";
 const Demo = () => {
     const [form] = useForm();
     const [value, setValue] = useState(null);
+    const [arrow, setArrow] = useState(false);
     const [strict, setStrict] = useState(false);
     const [search, setSearch] = useState(false);
     const [copied, setCopied] = useState(false);
@@ -39,13 +40,14 @@ const Demo = () => {
     const code = useMemo(() => {
         let code = "<PhoneInput\n";
         if (disabled) code += "    disabled\n";
+        if (arrow) code += "    enableArrow\n";
         if (search && dropdown) code += "    enableSearch\n";
         if (!dropdown) code += "    disableDropdown\n";
         if (!parentheses) code += "    disableParentheses\n";
         if (code === "<PhoneInput\n") code = "<PhoneInput />";
         else code += "/>";
         return code;
-    }, [disabled, search, dropdown, parentheses])
+    }, [disabled, arrow, search, dropdown, parentheses])
 
     const changeTheme = () => {
         if (algorithm === "defaultAlgorithm") {
@@ -102,14 +104,6 @@ const Demo = () => {
                         </Form.Item>
                     </div>
                     <div style={{gap: 24, display: "flex", alignItems: "center"}}>
-                        <Form.Item label="Search">
-                            <Switch
-                                disabled={!dropdown}
-                                checkedChildren="enabled"
-                                unCheckedChildren="disabled"
-                                onChange={() => setSearch(!search)}
-                            />
-                        </Form.Item>
                         <Form.Item label="Dropdown">
                             <Switch
                                 defaultChecked
@@ -118,14 +112,29 @@ const Demo = () => {
                                 onChange={() => setDropdown(!dropdown)}
                             />
                         </Form.Item>
+                        <Form.Item label="Parentheses">
+                            <Switch
+                                defaultChecked
+                                checkedChildren="enabled"
+                                unCheckedChildren="disabled"
+                                onChange={() => setParentheses(!parentheses)}
+                            />
+                        </Form.Item>
                     </div>
                 <div style={{gap: 24, display: "flex", alignItems: "center"}}>
-                    <Form.Item label="Parentheses" style={{margin: 0}}>
+                    <Form.Item label="Search" style={{margin: 0}}>
                         <Switch
-                            defaultChecked
+                            disabled={!dropdown}
                             checkedChildren="enabled"
                             unCheckedChildren="disabled"
-                            onChange={() => setParentheses(!parentheses)}
+                            onChange={() => setSearch(!search)}
+                        />
+                    </Form.Item>
+                    <Form.Item label="Arrow" style={{margin: 0}}>
+                        <Switch
+                            checkedChildren="enabled"
+                            unCheckedChildren="disabled"
+                            onChange={() => setArrow(!arrow)}
                         />
                     </Form.Item>
                 </div>
@@ -155,6 +164,7 @@ const Demo = () => {
                         <FormItem name="phone" rules={[{validator}]}>
                             <PhoneInput
                                 disabled={disabled}
+                                enableArrow={arrow}
                                 enableSearch={search}
                                 disableDropdown={!dropdown}
                                 disableParentheses={!parentheses}
