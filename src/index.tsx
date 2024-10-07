@@ -219,7 +219,6 @@ const PhoneInput = forwardRef(({
             }}
             optionLabelProp="label"
             dropdownStyle={{minWidth}}
-            notFoundContent={searchNotFound}
             onDropdownVisibleChange={onDropdownVisibleChange}
             dropdownRender={(menu) => (
                 <div className={`${prefixCls}-phone-input-search-wrapper`}>
@@ -231,7 +230,9 @@ const PhoneInput = forwardRef(({
                             onInput={({target}: any) => setQuery(target.value)}
                         />
                     )}
-                    {menu}
+                    {countriesList.length ? menu : (
+                        <div className="ant-select-item-empty">{searchNotFound}</div>
+                    )}
                 </div>
             )}
         >
