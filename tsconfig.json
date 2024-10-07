@@ -3,7 +3,6 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitUseStrict": true,
     "strictNullChecks": true,
     "module": "esnext",
     "moduleResolution": "node",
