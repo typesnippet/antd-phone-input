@@ -140,7 +140,7 @@ describe("Checking the basic rendering and functionality", () => {
                 form.setFieldValue("phone", {
                     countryCode: 48,
                     areaCode: "111",
-                    phoneNumber: "1111111",
+                    phoneNumber: "111111",
                     isoCode: "pl"
                 });
             }
@@ -182,7 +182,7 @@ describe("Checking the basic rendering and functionality", () => {
             await new Promise(r => setTimeout(r, 100));
         })
         assert(!inputHasError(form)); // valid
-        assert(input.getAttribute("value") === "+48 (111) 111 1111");
+        assert(input.getAttribute("value") === "+48 (111) 111 111");
     })
 
     it("Checking validation with casual form actions", async () => {
