@@ -57,9 +57,8 @@ const PhoneInput = forwardRef(({
                                    ...antInputProps
                                }: PhoneInputProps, forwardedRef: any) => {
     const formInstance = useFormInstance();
-    const {locale = {}} = useContext(ConfigContext);
+    const {locale = {}, getPrefixCls} = useContext(ConfigContext);
     const formContext = useContext(FormContext);
-    const {getPrefixCls} = useContext(ConfigContext);
     const inputRef = useRef<any>(null);
     const searchRef = useRef<any>(null);
     const selectedRef = useRef<boolean>(false);
@@ -69,6 +68,7 @@ const PhoneInput = forwardRef(({
     const [countryCode, setCountryCode] = useState<string>(country);
 
     const {
+        locale: localeIdentifier,
         searchNotFound = defaultSearchNotFound,
         searchPlaceholder = defaultSearchPlaceholder,
         countries = new Proxy({}, ({get: (_: any, prop: any) => prop})),
@@ -92,6 +92,7 @@ const PhoneInput = forwardRef(({
         excludeCountries,
         preferredCountries,
         disableParentheses,
+        locale: localeIdentifier,
     });
 
     const {

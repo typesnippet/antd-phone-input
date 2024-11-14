@@ -79,5 +79,8 @@ type Locale = keyof typeof locale;
 
 export default (lang: Locale) => ({
     ...locale[lang],
-    PhoneInput: (phoneLocale as any)[lang],
+    PhoneInput: {
+        ...(phoneLocale as any)[lang],
+        locale: lang,
+    },
 })

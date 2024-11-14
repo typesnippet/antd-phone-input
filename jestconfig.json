@@ -1,11 +1,15 @@
 {
   "transform": {
-    "^.+\\.tsx?$": "ts-jest"
+    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.jsx?$": "babel-jest"
   },
   "testRegex": "/tests/.*\\.test\\.(tsx?)$",
   "moduleNameMapper": {
     "^antd/es/(.+)$": "antd/lib/$1"
   },
+  "transformIgnorePatterns": [
+    "/node_modules/(?!(react-phone-hooks)/)"
+  ],
   "modulePathIgnorePatterns": [
     "<rootDir>/examples"
   ],
