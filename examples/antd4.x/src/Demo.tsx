@@ -24,6 +24,7 @@ const Demo = () => {
     const [search, setSearch] = useState(false);
     const [copied, setCopied] = useState(false);
     const [dropdown, setDropdown] = useState(true);
+    const [distinct, setDistinct] = useState(false);
     const [disabled, setDisabled] = useState(false);
     const [parentheses, setParentheses] = useState(true);
 
@@ -35,6 +36,7 @@ const Demo = () => {
     const code = useMemo(() => {
         let code = "<PhoneInput\n";
         if (disabled) code += "    disabled\n";
+        if (distinct) code += "    distinct\n";
         if (arrow) code += "    enableArrow\n";
         if (search && dropdown) code += "    enableSearch\n";
         if (!dropdown) code += "    disableDropdown\n";
@@ -42,7 +44,7 @@ const Demo = () => {
         if (code === "<PhoneInput\n") code = "<PhoneInput />";
         else code += "/>";
         return code;
-    }, [disabled, arrow, search, dropdown, parentheses])
+    }, [distinct, disabled, arrow, search, dropdown, parentheses])
 
     const changeTheme = () => {
         const pathname = window.location.pathname.replace(/\/$/, '');
@@ -79,26 +81,6 @@ const Demo = () => {
                 </Paragraph>
                 <Divider orientation="left" plain>Settings</Divider>
                 <div style={{gap: 24, display: "flex", alignItems: "center"}}>
-                    <Form.Item label="Theme">
-                        <Switch
-                            onChange={changeTheme}
-                            checkedChildren={<MoonOutlined/>}
-                            unCheckedChildren={<SunOutlined/>}
-                            defaultChecked={window.location.pathname.endsWith("/dark")}
-                        />
-                    </Form.Item>
-                    <Form.Item label="Validation">
-                        <Switch
-                            checkedChildren="strict"
-                            unCheckedChildren="default"
-                            onChange={() => setStrict(!strict)}
-                        />
-                    </Form.Item>
-                    <Form.Item label="Disabled">
-                        <Switch onChange={() => setDisabled(!disabled)}/>
-                    </Form.Item>
-                </div>
-                <div style={{gap: 24, display: "flex", alignItems: "center"}}>
                     <Form.Item label="Dropdown">
                         <Switch
                             defaultChecked
@@ -117,7 +99,7 @@ const Demo = () => {
                     </Form.Item>
                 </div>
                 <div style={{gap: 24, display: "flex", alignItems: "center"}}>
-                    <Form.Item label="Search" style={{margin: 0}}>
+                    <Form.Item label="Search">
                         <Switch
                             disabled={!dropdown}
                             checkedChildren="enabled"
@@ -125,12 +107,37 @@ const Demo = () => {
                             onChange={() => setSearch(!search)}
                         />
                     </Form.Item>
-                    <Form.Item label="Arrow" style={{margin: 0}}>
+                    <Form.Item label="Arrow">
                         <Switch
                             checkedChildren="enabled"
                             unCheckedChildren="disabled"
                             onChange={() => setArrow(!arrow)}
                         />
+                    </Form.Item>
+                </div>
+                <div style={{gap: 24, display: "flex", alignItems: "center"}}>
+                    <Form.Item label="Theme">
+                        <Switch
+                            onChange={changeTheme}
+                            checkedChildren={<MoonOutlined/>}
+                            unCheckedChildren={<SunOutlined/>}
+                            defaultChecked={window.location.pathname.endsWith("/dark")}
+                        />
+                    </Form.Item>
+                    <Form.Item label="Validation">
+                        <Switch
+                            checkedChildren="strict"
+                            unCheckedChildren="default"
+                            onChange={() => setStrict(!strict)}
+                        />
+                    </Form.Item>
+                </div>
+                <div style={{gap: 24, display: "flex", alignItems: "center"}}>
+                    <Form.Item label="Disabled" style={{margin: 0}}>
+                        <Switch onChange={() => setDisabled(!disabled)}/>
+                    </Form.Item>
+                    <Form.Item label="Distinct" style={{margin: 0}}>
+                        <Switch onChange={() => setDistinct(!distinct)}/>
                     </Form.Item>
                 </div>
                 <Divider orientation="left" plain>Code</Divider>
