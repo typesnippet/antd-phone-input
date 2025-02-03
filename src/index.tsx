@@ -39,6 +39,7 @@ import {PhoneInputProps, PhoneNumber} from "./types";
 const PhoneInput = forwardRef(({
                                    value: initialValue = "",
                                    country = getDefaultISO2Code(),
+                                   distinct = false,
                                    disabled = false,
                                    enableArrow = false,
                                    enableSearch = false,
@@ -86,6 +87,7 @@ const PhoneInput = forwardRef(({
     } = usePhone({
         query,
         country,
+        distinct,
         countryCode,
         initialValue,
         onlyCountries,
