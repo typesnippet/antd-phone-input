@@ -1,5 +1,5 @@
 {
-  "version": "0.3.12",
+  "version": "0.3.13",
   "name": "antd-phone-input",
   "description": "Advanced, highly customizable phone input component for Ant Design.",
   "keywords": [
@@ -78,7 +78,7 @@
     "react": ">=16"
   },
   "dependencies": {
-    "react-phone-hooks": "^0.1.12"
+    "react-phone-hooks": "^0.1.14"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
