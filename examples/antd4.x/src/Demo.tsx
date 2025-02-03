@@ -165,6 +165,7 @@ const Demo = () => {
                 <Form form={form} onFinish={handleFinish}>
                     <FormItem name="phone" rules={[{validator}]}>
                         <PhoneInput
+                            distinct={distinct}
                             disabled={disabled}
                             enableArrow={arrow}
                             enableSearch={search}
