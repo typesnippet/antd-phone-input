@@ -78,7 +78,7 @@
     "react": ">=16"
   },
   "dependencies": {
-    "react-phone-hooks": "^0.1.13"
+    "react-phone-hooks": "^0.1.14"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
