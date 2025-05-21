@@ -221,9 +221,9 @@ const PhoneInput = forwardRef(({
                 inputRef.current.input.focus();
             }}
             optionLabelProp="label"
-            dropdownStyle={{minWidth}}
-            onDropdownVisibleChange={onDropdownVisibleChange}
-            dropdownRender={(menu) => (
+            styles={{popup:{root:{minWidth}}}}
+            onOpenChange={onDropdownVisibleChange}
+            popupRender={(menu) => (
                 <div className={`${prefixCls}-phone-input-search-wrapper`}>
                     {enableSearch && (
                         <Input
