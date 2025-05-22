@@ -15,6 +15,7 @@ import useFormInstance from "antd/es/form/hooks/useFormInstance";
 import {ConfigContext} from "antd/es/config-provider";
 import {FormContext} from "antd/es/form/context";
 import {useWatch} from "antd/es/form/Form";
+import version from "antd/es/version";
 import Select from "antd/es/select";
 import Input from "antd/es/input";
 
@@ -35,6 +36,10 @@ import {
 import locale from "./locale";
 import {injectMergedStyles} from "./styles";
 import {PhoneInputProps, PhoneNumber} from "./types";
+
+const [major, minor, _] = version.split(".").map(Number);
+const isV5x = major === 5;
+const isV5x25 = isV5x && minor >= 25;
 
 const PhoneInput = forwardRef(({
                                    value: initialValue = "",
@@ -221,9 +226,9 @@ const PhoneInput = forwardRef(({
                 inputRef.current.input.focus();
             }}
             optionLabelProp="label"
-            dropdownStyle={{minWidth}}
-            onDropdownVisibleChange={onDropdownVisibleChange}
-            dropdownRender={(menu) => (
+            {...(isV5x ? {onOpenChange: onDropdownVisibleChange} : {onDropdownVisibleChange})}
+            {...(isV5x25 ? {styles: {popup: {root: {minWidth}}}} : {dropdownStyle: {minWidth}})}
+            {...({[isV5x ? "popupRender" : "dropdownRender"]: (menu: any) => (
                 <div className={`${prefixCls}-phone-input-search-wrapper`}>
                     {enableSearch && (
                         <Input
@@ -237,7 +242,7 @@ const PhoneInput = forwardRef(({
                         <div className="ant-select-item-empty">{searchNotFound}</div>
                     )}
                 </div>
-            )}
+            )})}
         >
             <Select.Option
                 children={null}
