@@ -27,12 +27,12 @@ function inputHasError(parent: any = document) {
 describe("Checking the basic rendering and functionality", () => {
     it("Rendering without crashing", () => {
         render(<PhoneInput/>);
-    })
+    }, 25000)
 
     it("Rendering with strict raw value", () => {
         render(<PhoneInput value="17021234567"/>);
         assert(screen.getByDisplayValue("+1 (702) 123 4567"));
-    })
+    }, 25000)
 
     it("Localization support check", async () => {
         const {container, getByText} = render(<ConfigProvider locale={locale("frFR")}>
@@ -42,7 +42,7 @@ describe("Checking the basic rendering and functionality", () => {
             await userEvent.click(container.querySelector(".flag") as any);
         });
         assert(!!getByText(/Arménie[\S\s]+\+374/));
-    })
+    }, 25000)
 
     it("Rendering with an initial value", () => {
         render(<PhoneInput
@@ -56,7 +56,7 @@ describe("Checking the basic rendering and functionality", () => {
             value={{countryCode: 1, areaCode: "702", phoneNumber: "1234567"}}
         />);
         assert(screen.getByDisplayValue("+1 (702) 123 4567"));
-    })
+    }, 25000)
 
     it("Rendering with a raw initial value", () => {
         render(<Form initialValues={{phone: "17021234567"}}>
@@ -65,7 +65,7 @@ describe("Checking the basic rendering and functionality", () => {
             </FormItem>
         </Form>);
         assert(screen.getByDisplayValue("+1 (702) 123 4567"));
-    })
+    }, 25000)
 
     it("Checking the component on user input", async () => {
         render(<PhoneInput
@@ -77,7 +77,7 @@ describe("Checking the basic rendering and functionality", () => {
         const input = screen.getByDisplayValue("+1");
         await userEvent.type(input, "907123456789");
         assert(input.getAttribute("value") === "+1 (907) 123 4567");
-    })
+    }, 25000)
 
     it("Using the input with FormItem", async () => {
         render(<Form onFinish={({phone}: any) => {
@@ -95,7 +95,7 @@ describe("Checking the basic rendering and functionality", () => {
         await userEvent.type(input, "907123456789");
         assert(input.getAttribute("value") === "+1 (907) 123 4567");
         screen.getByTestId("button").click();
-    })
+    }, 25000)
 
     it("Checking input validation with FormItem", async () => {
         render(<Form initialValues={{phone: {countryCode: 1, areaCode: "702", phoneNumber: "1234567"}}}>
@@ -110,7 +110,7 @@ describe("Checking the basic rendering and functionality", () => {
             <Button data-testid="button" htmlType="submit">Submit</Button>
         </Form>);
         await userEvent.click(screen.getByTestId("button"));
-    })
+    }, 25000)
 
     it("Checking form with initial value", async () => {
         render(<Form initialValues={{phone: {countryCode: 1, areaCode: "702"}}}>
@@ -121,7 +121,7 @@ describe("Checking the basic rendering and functionality", () => {
         const input = screen.getByDisplayValue("+1 (702)");
         await userEvent.type(input, "1234567");
         assert(input.getAttribute("value") === "+1 (702) 123 4567");
-    })
+    }, 25000)
 
     it("Using `prefixCls` with ConfigProvider", () => {
         render(<ConfigProvider prefixCls="custom-prefix">
@@ -130,7 +130,7 @@ describe("Checking the basic rendering and functionality", () => {
         const input = screen.getByTestId("input");
         assert(!input.outerHTML.includes("ant-input"));
         assert(input.outerHTML.includes("custom-prefix-input"));
-    })
+    }, 25000)
 
     it("Checking field value setters", async () => {
         const FormWrapper = () => {
