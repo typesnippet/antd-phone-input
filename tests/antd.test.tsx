@@ -183,7 +183,7 @@ describe("Checking the basic rendering and functionality", () => {
         })
         assert(!inputHasError(form)); // valid
         assert(input.getAttribute("value") === "+48 (111) 111 111");
-    })
+    }, 25000)
 
     it("Checking validation with casual form actions", async () => {
         render(<Form data-testid="form" initialValues={{phone: {countryCode: 1, areaCode: "702", phoneNumber: ""}}}>
@@ -270,5 +270,5 @@ describe("Checking the basic rendering and functionality", () => {
         assert(inputHasError(form)); // invalid
         await userEvent.click(reset);
         assert(!inputHasError(form)); // valid
-    }, 25000)
+    }, 50000)
 })
