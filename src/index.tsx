@@ -44,6 +44,7 @@ const isV5x25 = isV5x && minor >= 25;
 const PhoneInput = forwardRef(({
                                    value: initialValue = "",
                                    country = getDefaultISO2Code(),
+                                   useSVG = false,
                                    distinct = false,
                                    disabled = false,
                                    enableArrow = false,
@@ -250,7 +251,7 @@ const PhoneInput = forwardRef(({
                 style={{display: "none"}}
                 key={`${countryCode}_default`}
                 label={<div style={{display: "flex"}}>
-                    <div className={`flag ${countryCode}`}/>
+                    <div className={`flag ${countryCode} ${useSVG ? "svg" : ""}`}/>
                     {suffixIcon}
                 </div>}
             />
@@ -261,18 +262,18 @@ const PhoneInput = forwardRef(({
                         value={iso + dial}
                         key={`${iso}_${mask}`}
                         label={<div style={{display: "flex"}}>
-                            <div className={`flag ${iso}`}/>
+                            <div className={`flag ${iso} ${useSVG ? "svg" : ""}`}/>
                             {suffixIcon}
                         </div>}
                         children={<div className={`${prefixCls}-phone-input-select-item`}>
-                            <div className={`flag ${iso}`}/>
+                            <div className={`flag ${iso} ${useSVG ? "svg" : ""}`}/>
                             {countries[name]}&nbsp;{displayFormat(mask)}
                         </div>}
                     />
                 )
             })}
         </Select>
-    ), [selectValue, suffixIcon, countryCode, query, disabled, disableParentheses, disableDropdown, onDropdownVisibleChange, minWidth, searchNotFound, countries, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder])
+    ), [selectValue, suffixIcon, countryCode, query, disabled, disableParentheses, disableDropdown, onDropdownVisibleChange, minWidth, searchNotFound, countries, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder, useSVG])
 
     return (
         <div className={`${prefixCls}-phone-input-wrapper`}

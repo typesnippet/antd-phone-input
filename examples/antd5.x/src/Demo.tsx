@@ -24,6 +24,7 @@ const Demo = () => {
     const [form] = useForm();
     const [value, setValue] = useState(null);
     const [arrow, setArrow] = useState(false);
+    const [useSvg, setUseSvg] = useState(false);
     const [strict, setStrict] = useState(false);
     const [search, setSearch] = useState(false);
     const [copied, setCopied] = useState(false);
@@ -40,6 +41,7 @@ const Demo = () => {
 
     const code = useMemo(() => {
         let code = "<PhoneInput\n";
+        if (useSvg) code += "    useSVG\n";
         if (disabled) code += "    disabled\n";
         if (distinct) code += "    distinct\n";
         if (arrow) code += "    enableArrow\n";
@@ -49,7 +51,7 @@ const Demo = () => {
         if (code === "<PhoneInput\n") code = "<PhoneInput />";
         else code += "/>";
         return code;
-    }, [distinct, disabled, arrow, search, dropdown, parentheses])
+    }, [distinct, disabled, useSvg, arrow, search, dropdown, parentheses])
 
     const changeTheme = () => {
         if (algorithm === "defaultAlgorithm") {
@@ -144,6 +146,9 @@ const Demo = () => {
                         <Form.Item label="Disabled" style={{margin: 0}}>
                             <Switch onChange={() => setDisabled(!disabled)}/>
                         </Form.Item>
+                        <Form.Item label="SVG" style={{margin: 0}}>
+                            <Switch onChange={() => setUseSvg(!useSvg)}/>
+                        </Form.Item>
                     </div>
                     <Divider orientation="left" plain>Code</Divider>
                     <div style={{position: "relative"}}>
@@ -170,6 +175,7 @@ const Demo = () => {
                     <Form form={form} onFinish={handleFinish}>
                         <FormItem name="phone" rules={[{validator}]}>
                             <PhoneInput
+                                useSVG={useSvg}
                                 distinct={distinct}
                                 disabled={disabled}
                                 enableArrow={arrow}

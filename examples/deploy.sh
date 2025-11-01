@@ -3,6 +3,9 @@ cd ~/antd-phone-input/
 git restore .
 git pull
 
+rm -r node_modules package-lock.json
+npm i && npm run build && npm pack
+
 cd ~/antd-phone-input/examples/antd4.x
 rm -r node_modules package-lock.json
 npm install --legacy-peer-deps && npm run build
