@@ -2,12 +2,12 @@
 
 [![npm](https://img.shields.io/npm/v/antd-phone-input)](https://www.npmjs.com/package/antd-phone-input)
 [![Playground](https://img.shields.io/badge/playground-blue.svg?logo=data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNzEzNTE0OTc5MTUzIiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE2MjciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PHBhdGggZD0iTTc2OCA1MDYuMDI2NjY3djExLjk0NjY2NmEzMi40MjY2NjcgMzIuNDI2NjY3IDAgMCAxLTE1Ljc4NjY2NyAyNy43MzMzMzRMMzcwLjM0NjY2NyA3NjhjLTIzLjA0IDEzLjY1MzMzMy0zNC45ODY2NjcgMTMuNjUzMzMzLTQ1LjIyNjY2NyA3LjY4bC0xMC42NjY2NjctNS45NzMzMzNhMzIuNDI2NjY3IDMyLjQyNjY2NyAwIDAgMS0xNS43ODY2NjYtMjYuODhWMjgxLjE3MzMzM2EzMi40MjY2NjcgMzIuNDI2NjY3IDAgMCAxIDE1Ljc4NjY2Ni0yNy43MzMzMzNsMTAuNjY2NjY3LTUuOTczMzMzYzEwLjI0LTUuOTczMzMzIDIyLjE4NjY2Ny01Ljk3MzMzMyA1Mi4wNTMzMzMgMTEuNTJsMzc1LjA0IDIxOS4zMDY2NjZhMzIuNDI2NjY3IDMyLjQyNjY2NyAwIDAgMSAxNS43ODY2NjcgMjcuNzMzMzM0eiIgcC1pZD0iMTYyOCIgZGF0YS1zcG0tYW5jaG9yLWlkPSJhMzEzeC5zZWFyY2hfaW5kZXguMC5pMS40NzE5M2E4MVdiYjYyWiIgY2xhc3M9IiIgZmlsbD0iI2ZmZmZmZiI+PC9wYXRoPjwvc3ZnPg==)](https://playground.typesnippet.org/antd-phone-input-5.x)
-[![antd](https://img.shields.io/badge/antd-4.x%20%7C%205.x-blue)](https://github.com/ant-design/ant-design)
+[![antd](https://img.shields.io/badge/antd-4.x%20|%205.x%20|%206.x-blue)](https://github.com/ant-design/ant-design)
 [![types](https://img.shields.io/npm/types/antd-phone-input)](https://www.npmjs.com/package/antd-phone-input)
 [![License](https://img.shields.io/npm/l/antd-phone-input)](https://github.com/typesnippet/antd-phone-input/blob/master/LICENSE)
 [![Tests](https://github.com/typesnippet/antd-phone-input/actions/workflows/tests.yml/badge.svg)](https://github.com/typesnippet/antd-phone-input/actions/workflows/tests.yml)
 
-<p>Advanced phone input component for Material UI that leverages the <a href="https://github.com/typesnippet/react-phone-hooks">react-phone-hooks</a> supporting all countries. The package is compatible with <a href="https://github.com/ant-design/ant-design">antd</a> 4 and 5 versions. It provides built-in support for area codes and strict validation.</p>
+<p>Advanced phone input component for Material UI that leverages the <a href="https://github.com/typesnippet/react-phone-hooks">react-phone-hooks</a> supporting all countries. The package is compatible with <a href="https://github.com/ant-design/ant-design">antd</a> 4, 5 and 6 versions. It provides built-in support for area codes and strict validation.</p>
 
 <p align="center">
   <a href="https://playground.typesnippet.org/antd-phone-input-5.x">

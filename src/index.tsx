@@ -17,6 +17,7 @@ import {FormContext} from "antd/es/form/context";
 import {useWatch} from "antd/es/form/Form";
 import version from "antd/es/version";
 import Select from "antd/es/select";
+import Space from "antd/es/space";
 import Input from "antd/es/input";
 
 import {
@@ -39,7 +40,8 @@ import {PhoneInputProps, PhoneNumber} from "./types";
 
 const [major, minor, _] = version.split(".").map(Number);
 const isV5x = major === 5;
-const isV5x25 = isV5x && minor >= 25;
+const isV6x = major === 6;
+const isLatest = isV6x || (isV5x && minor >= 25);
 
 const PhoneInput = forwardRef(({
                                    value: initialValue = "",
@@ -227,9 +229,10 @@ const PhoneInput = forwardRef(({
                 inputRef.current.input.focus();
             }}
             optionLabelProp="label"
-            {...(isV5x ? {onOpenChange: onDropdownVisibleChange} : {onDropdownVisibleChange})}
-            {...(isV5x25 ? {styles: {popup: {root: {minWidth}}}} : {dropdownStyle: {minWidth}})}
-            {...({[isV5x ? "popupRender" : "dropdownRender"]: (menu: any) => (
+            style={{width: 42 + (enableArrow ? 24 : 0)}}
+            {...((isV5x || isV6x) ? {onOpenChange: onDropdownVisibleChange} : {onDropdownVisibleChange})}
+            {...(isLatest ? {styles: {popup: {root: {minWidth}}}} : {dropdownStyle: {minWidth}})}
+            {...({[(isV5x || isV6x) ? "popupRender" : "dropdownRender"]: (menu: any) => (
                 <div className={`${prefixCls}-phone-input-search-wrapper`}>
                     {enableSearch && (
                         <Input
@@ -250,7 +253,7 @@ const PhoneInput = forwardRef(({
                 value={selectValue}
                 style={{display: "none"}}
                 key={`${countryCode}_default`}
-                label={<div style={{display: "flex"}}>
+                label={<div style={{display: "flex", alignItems: "center"}}>
                     <div className={`flag ${countryCode} ${useSVG ? "svg" : ""}`}/>
                     {suffixIcon}
                 </div>}
@@ -261,7 +264,7 @@ const PhoneInput = forwardRef(({
                     <Select.Option
                         value={iso + dial}
                         key={`${iso}_${mask}`}
-                        label={<div style={{display: "flex"}}>
+                        label={<div style={{display: "flex", alignItems: "center"}}>
                             <div className={`flag ${iso} ${useSVG ? "svg" : ""}`}/>
                             {suffixIcon}
                         </div>}
@@ -273,22 +276,24 @@ const PhoneInput = forwardRef(({
                 )
             })}
         </Select>
-    ), [selectValue, suffixIcon, countryCode, query, disabled, disableParentheses, disableDropdown, onDropdownVisibleChange, minWidth, searchNotFound, countries, countriesList, setFieldValue, setValue, prefixCls, enableSearch, searchPlaceholder, useSVG])
+    ), [selectValue, suffixIcon, countryCode, query, disabled, disableParentheses, disableDropdown, onDropdownVisibleChange, minWidth, searchNotFound, countries, countriesList, setFieldValue, setValue, prefixCls, enableSearch, enableArrow, searchPlaceholder, useSVG])
 
     return (
         <div className={`${prefixCls}-phone-input-wrapper`}
              ref={node => setMinWidth(node?.offsetWidth || 0)}>
-            <Input
-                ref={ref}
-                inputMode="tel"
-                value={value}
-                onInput={onInput}
-                onChange={onChange}
-                onKeyDown={onKeyDown}
-                addonBefore={dropdownRender(countriesSelect)}
-                disabled={disabled}
-                {...antInputProps}
-            />
+            <Space.Compact>
+                {dropdownRender(countriesSelect)}
+                <Input
+                    ref={ref}
+                    inputMode="tel"
+                    value={value}
+                    onInput={onInput}
+                    onChange={onChange}
+                    onKeyDown={onKeyDown}
+                    disabled={disabled}
+                    {...antInputProps}
+                />
+            </Space.Compact>
         </div>
     )
 })

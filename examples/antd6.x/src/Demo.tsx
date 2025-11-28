@@ -87,7 +87,7 @@ const Demo = () => {
                         This is a playground for the Ant Phone Input component. You can change the settings and see how
                         the component behaves. Also, see the code for the component and the value it returns.
                     </Paragraph>
-                    <Divider orientation="left" plain>Settings</Divider>
+                    <Divider plain>Settings</Divider>
                     <div style={{gap: 24, display: "flex", alignItems: "center"}}>
                         <Form.Item label="Dropdown">
                             <Switch
@@ -150,7 +150,7 @@ const Demo = () => {
                             <Switch onChange={() => setUseSvg(!useSvg)}/>
                         </Form.Item>
                     </div>
-                    <Divider orientation="left" plain>Code</Divider>
+                    <Divider plain>Code</Divider>
                     <div style={{position: "relative"}}>
                         <Button
                             type="text"
@@ -171,7 +171,7 @@ const Demo = () => {
                             {code}
                         </pre>
                     </div>
-                    <Divider orientation="left" plain>Component</Divider>
+                    <Divider plain>Component</Divider>
                     <Form form={form} onFinish={handleFinish}>
                         <FormItem name="phone" rules={[{validator}]}>
                             <PhoneInput
@@ -202,9 +202,9 @@ const Demo = () => {
                         type="info"
                         style={{marginTop: 24}}
                         message={<>
-                            If your application uses <b>6.x</b> version of <b>Ant Design</b>, you should use this&nbsp;
+                            If your application uses <b>5.x</b> version of <b>Ant Design</b>, you should use this&nbsp;
                             <a target="_blank" rel="noreferrer"
-                               href="//playground.typesnippet.org/antd-phone-input-6.x">playground</a>&nbsp;
+                               href="//playground.typesnippet.org/antd-phone-input-5.x">playground</a>&nbsp;
                             server to test the component.
                         </>}
                     />
@@ -233,7 +233,7 @@ const Demo = () => {
                         </div>
                         <Paragraph style={{margin: "5px 0 0 0"}}>
                             Find the&nbsp;
-                            <a href="//github.com/typesnippet/antd-phone-input/tree/master/examples/antd5.x"
+                            <a href="//github.com/typesnippet/antd-phone-input/tree/master/examples/antd6.x"
                                target="_blank" rel="noreferrer">
                                 source code
                             </a>
