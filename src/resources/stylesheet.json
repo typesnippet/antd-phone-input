@@ -11,13 +11,24 @@
   ".ant-phone-input-search-wrapper .ant-select-item-empty": {
     "margin": "0 6px 6px 6px"
   },
+  ".ant-phone-input-wrapper .ant-space-compact": {
+    "width": "100%"
+  },
   ".ant-phone-input-wrapper .ant-select-selector": {
     "padding": "0 11px !important",
-    "height": "unset !important",
-    "border": "none !important"
+    "height": "unset !important"
+  },
+  ".ant-phone-input-wrapper .ant-select-content input": {
+    "display": "none !important"
+  },
+  ".ant-phone-input-wrapper .ant-select-content-value": {
+    "overflow": "visible !important",
+    "display": "flex !important"
   },
   ".ant-phone-input-wrapper .ant-select-selection-item": {
-    "padding": "0 !important"
+    "padding": "0 !important",
+    "align-items": "center",
+    "display": "flex"
   },
   ".ant-phone-input-wrapper .ant-input-group-addon *": {
     "display": "flex",
