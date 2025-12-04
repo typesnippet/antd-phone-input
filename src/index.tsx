@@ -281,7 +281,7 @@ const PhoneInput = forwardRef(({
     return (
         <div className={`${prefixCls}-phone-input-wrapper`}
              ref={node => setMinWidth(node?.offsetWidth || 0)}>
-            <Space.Compact>
+            <Space.Compact size={antInputProps?.size || "middle"}>
                 {dropdownRender(countriesSelect)}
                 <Input
                     ref={ref}
