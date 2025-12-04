@@ -154,11 +154,11 @@ const Demo = () => {
                 algorithm: algorithm === "defaultAlgorithm" ? theme.defaultAlgorithm : theme.darkAlgorithm,
             }}>
             <Card style={{height: "100%", borderRadius: 0, border: "none"}}
-                  styles={{body: {
+                  bodyStyle={{
                       padding: 0,
                       display: "flex",
                       justifyContent: "center",
-                  }}}>
+                  }}>
                 <div style={{
                     margin: 10,
                     maxWidth: 415,
