@@ -292,6 +292,7 @@ const Demo = () => {
                                         {value: "middle", label: "Middle"},
                                         {value: "large", label: "Large"},
                                     ]}
+                                    dropdownMatchSelectWidth={false}
                                 />,
                             },
                             {
@@ -302,6 +303,7 @@ const Demo = () => {
                                     onChange={setLang}
                                     options={languages}
                                     style={{maxWidth: 170}}
+                                    dropdownMatchSelectWidth={false}
                                 />,
                             },
                         ]}

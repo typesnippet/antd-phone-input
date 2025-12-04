@@ -288,6 +288,7 @@ const Demo = () => {
                                         {value: "middle", label: "Middle"},
                                         {value: "large", label: "Large"},
                                     ]}
+                                    popupMatchSelectWidth={false}
                                 />,
                             },
                             {
