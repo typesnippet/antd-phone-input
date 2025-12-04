@@ -148,8 +148,8 @@ const Demo = () => {
             locale={(lang !== "enUS" ? locale(lang) : undefined) as any}
             theme={{
                 components: {
-                    Button: {defaultShadow: "none", primaryShadow: "none"},
-                    Table: {headerBorderRadius: 0, rowHoverBg: "transparent"},
+                    Button: {defaultShadow: "none", primaryShadow: "none"} as any,
+                    Table: {headerBorderRadius: 0, rowHoverBg: "transparent"} as any,
                 },
                 algorithm: algorithm === "defaultAlgorithm" ? theme.defaultAlgorithm : theme.darkAlgorithm,
             }}>
