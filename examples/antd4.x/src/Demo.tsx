@@ -140,7 +140,7 @@ const Demo = () => {
     const handleFinish = ({phone}: any) => setValue(phone);
 
     return (
-        <ConfigProvider locale={lang !== "enUS" ? locale(lang) : undefined}>
+        <ConfigProvider locale={(lang !== "enUS" ? locale(lang) : undefined) as any}>
             <Card style={{height: "100%", borderRadius: 0, border: "none"}}
                   bodyStyle={{
                       padding: 0,

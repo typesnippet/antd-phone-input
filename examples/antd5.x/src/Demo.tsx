@@ -145,7 +145,7 @@ const Demo = () => {
 
     return (
         <ConfigProvider
-            locale={lang !== "enUS" ? locale(lang) : undefined}
+            locale={(lang !== "enUS" ? locale(lang) : undefined) as any}
             theme={{
                 components: {
                     Button: {defaultShadow: "none", primaryShadow: "none"},
