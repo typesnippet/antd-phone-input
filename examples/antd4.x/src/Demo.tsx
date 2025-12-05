@@ -94,6 +94,8 @@ const languages = [
 // eslint-disable-next-line
 const [majorVersion, _1, _2] = version.split(".").map(Number);
 
+const [rootpath] = window.location.pathname.match(/\/antd-phone-input-\d+\.x/) || [""];
+
 const isSelectedLight = window.location.pathname.endsWith("/light");
 
 const Demo = () => {
@@ -132,9 +134,9 @@ const Demo = () => {
 
     const changeTheme = () => {
         if (window.location.pathname.endsWith("/dark")) {
-            window.location.replace("/light");
+            window.location.replace(`${rootpath}/light`);
         } else {
-            window.location.replace("/dark");
+            window.location.replace(`${rootpath}/dark`);
         }
     }
 
