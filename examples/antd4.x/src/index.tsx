@@ -12,7 +12,7 @@ const isSelectedLight = window.location.pathname.endsWith("/light");
 
 const App = () => {
     if (isSystemDark && !isSelectedDark && !isSelectedLight) window.location.replace(`${rootpath}/dark`);
-    else if (!isSystemDark &&  !isSelectedDark && !isSelectedLight) window.location.replace(`${rootpath}/light`);
+    else if (!isSystemDark && !isSelectedDark && !isSelectedLight) window.location.replace(`${rootpath}/light`);
 
     return isSelectedDark ? <Dark/> : <Light/>;
 }
