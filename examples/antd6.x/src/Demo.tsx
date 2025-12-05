@@ -94,6 +94,7 @@ const languages = [
     {label: "Chinese (Traditional)", value: "zhTW"}
 ]
 
+// eslint-disable-next-line
 const [majorVersion, _1, _2] = version.split(".").map(Number);
 
 const defaultMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "darkAlgorithm" : "defaultAlgorithm";
