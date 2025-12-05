@@ -131,7 +131,8 @@ const PhoneInput = forwardRef(({
 
     const setFieldValue = useCallback((value: PhoneNumber) => {
         if (formInstance) formInstance.setFieldValue(namePath, value);
-    }, [formInstance, namePath])
+        setValue(getFormattedNumber(getRawValue(value), pattern));
+    }, [formInstance, namePath, pattern, setValue])
 
     const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
         onKeyDownMaskHandler(event);
@@ -174,12 +175,14 @@ const PhoneInput = forwardRef(({
         const metadata = getMetadata(rawValue);
         // Skip if value has not been updated by `setFieldValue`.
         if (!metadata?.[3] || rawValue === getRawValue(value)) return;
-        const formattedNumber = getFormattedNumber(rawValue, metadata?.[3] as string);
+        let pattern = metadata?.[3] || "";
+        if (disableParentheses) pattern = pattern.replace(/[()]/g, "");
+        const formattedNumber = getFormattedNumber(rawValue, pattern);
         const phoneMetadata = parsePhoneNumber(formattedNumber);
         setFieldValue({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
         setCountryCode(metadata?.[0] as string);
         setValue(formattedNumber);
-    }, [phoneValue, value, setFieldValue, setValue])
+    }, [phoneValue, value, disableParentheses, setFieldValue, setValue])
 
     useEffect(() => {
         if (initiatedRef.current) return;
@@ -281,7 +284,7 @@ const PhoneInput = forwardRef(({
     return (
         <div className={`${prefixCls}-phone-input-wrapper`}
              ref={node => setMinWidth(node?.offsetWidth || 0)}>
-            <Space.Compact>
+            <Space.Compact size={antInputProps?.size || "middle"}>
                 {dropdownRender(countriesSelect)}
                 <Input
                     ref={ref}

@@ -1,27 +1,107 @@
 import {useCallback, useMemo, useState} from "react";
 import copy from "copy-to-clipboard";
+import version from "antd/es/version";
 import Form from "antd/es/form";
 import theme from "antd/es/theme";
 import Button from "antd/es/button";
-import Switch from "antd/es/switch";
+import Select from "antd/es/select";
 import Card from "antd/es/card/Card";
 import Divider from "antd/es/divider";
 import Alert from "antd/es/alert/Alert";
+import Table from "antd/es/table/Table";
 import {useForm} from "antd/es/form/Form";
-import PhoneInput from "antd-phone-input";
 import FormItem from "antd/es/form/FormItem";
 import Title from "antd/es/typography/Title";
+import Checkbox from "antd/es/checkbox/Checkbox";
+import PhoneInput, {locale} from "antd-phone-input";
 import Paragraph from "antd/es/typography/Paragraph";
 import ConfigProvider from "antd/es/config-provider";
 import SunOutlined from "@ant-design/icons/SunOutlined";
 import MoonOutlined from "@ant-design/icons/MoonOutlined";
 import CopyOutlined from "@ant-design/icons/CopyOutlined";
 import CheckOutlined from "@ant-design/icons/CheckOutlined";
+import GithubOutlined from "@ant-design/icons/GithubOutlined";
 
 import "antd/dist/reset.css";
 
+const languages = [
+    {label: "Arabic", value: "arEG"},
+    {label: "Azerbaijani", value: "azAZ"},
+    {label: "Bulgarian", value: "bgBG"},
+    {label: "Bangla (Bangladesh)", value: "bnBD"},
+    {label: "Belarusian", value: "byBY"},
+    {label: "Catalan", value: "caES"},
+    {label: "Czech", value: "csCZ"},
+    {label: "Danish", value: "daDK"},
+    {label: "German", value: "deDE"},
+    {label: "Greek", value: "elGR"},
+    {label: "English (United Kingdom)", value: "enGB"},
+    {label: "English", value: "enUS"},
+    {label: "Spanish", value: "esES"},
+    {label: "Estonian", value: "etEE"},
+    {label: "Persian", value: "faIR"},
+    {label: "Finnish", value: "fiFI"},
+    {label: "French (Belgium)", value: "frBE"},
+    {label: "French (Canada)", value: "frCA"},
+    {label: "French (France)", value: "frFR"},
+    {label: "Irish (Ireland)", value: "gaIE"},
+    {label: "Galician (Spain)", value: "glES"},
+    {label: "Hebrew", value: "heIL"},
+    {label: "Hindi", value: "hiIN"},
+    {label: "Croatian", value: "hrHR"},
+    {label: "Hungarian", value: "huHU"},
+    {label: "Armenian", value: "hyAM"},
+    {label: "Indonesian", value: "idID"},
+    {label: "Italian", value: "itIT"},
+    {label: "Icelandic", value: "isIS"},
+    {label: "Japanese", value: "jaJP"},
+    {label: "Georgian", value: "kaGE"},
+    {label: "Kurdish (Kurmanji)", value: "kmrIQ"},
+    {label: "Kannada", value: "knIN"},
+    {label: "Kazakh", value: "kkKZ"},
+    {label: "Khmer", value: "kmKH"},
+    {label: "Korean", value: "koKR"},
+    {label: "Lithuanian", value: "ltLT"},
+    {label: "Latvian", value: "lvLV"},
+    {label: "Macedonian", value: "mkMK"},
+    {label: "Malayalam (India)", value: "mlIN"},
+    {label: "Mongolian", value: "mnMN"},
+    {label: "Malay (Malaysia)", value: "msMY"},
+    {label: "Norwegian", value: "nbNO"},
+    {label: "Nepal", value: "neNP"},
+    {label: "Dutch (Belgium)", value: "nlBE"},
+    {label: "Dutch", value: "nlNL"},
+    {label: "Polish", value: "plPL"},
+    {label: "Portuguese (Brazil)", value: "ptBR"},
+    {label: "Portuguese", value: "ptPT"},
+    {label: "Romanian", value: "roRO"},
+    {label: "Russian", value: "ruRU"},
+    {label: "Sinhalese / Sinhala", value: "siLK"},
+    {label: "Slovak", value: "skSK"},
+    {label: "Serbian", value: "srRS"},
+    {label: "Slovenian", value: "slSI"},
+    {label: "Swedish", value: "svSE"},
+    {label: "Tamil", value: "taIN"},
+    {label: "Thai", value: "thTH"},
+    {label: "Turkish", value: "trTR"},
+    {label: "Turkmen", value: "tkTK"},
+    {label: "Urdu (Pakistan)", value: "urPK"},
+    {label: "Ukrainian", value: "ukUA"},
+    {label: "Uzbek", value: "uzUZ"},
+    {label: "Vietnamese", value: "viVN"},
+    {label: "Chinese (Simplified)", value: "zhCN"},
+    {label: "Chinese (Traditional)", value: "zhHK"},
+    {label: "Chinese (Traditional)", value: "zhTW"}
+]
+
+const [majorVersion, _1, _2] = version.split(".").map(Number);
+
+const defaultMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "darkAlgorithm" : "defaultAlgorithm";
+
 const Demo = () => {
     const [form] = useForm();
+    const [lang, setLang] = useState<any>("enUS");
+    const [size, setSize] = useState<any>("middle");
     const [value, setValue] = useState(null);
     const [arrow, setArrow] = useState(false);
     const [useSvg, setUseSvg] = useState(false);
@@ -32,7 +112,7 @@ const Demo = () => {
     const [distinct, setDistinct] = useState(false);
     const [disabled, setDisabled] = useState(false);
     const [parentheses, setParentheses] = useState(true);
-    const [algorithm, setAlgorithm] = useState("defaultAlgorithm");
+    const [algorithm, setAlgorithm] = useState(defaultMode);
 
     const validator = useCallback((_: any, {valid}: any) => {
         if (valid(strict)) return Promise.resolve();
@@ -65,92 +145,171 @@ const Demo = () => {
 
     return (
         <ConfigProvider
-            theme={{algorithm: algorithm === "defaultAlgorithm" ? theme.defaultAlgorithm : theme.darkAlgorithm}}>
+            locale={(lang !== "enUS" ? locale(lang) : undefined) as any}
+            theme={{
+                components: {
+                    Button: {defaultShadow: "none", primaryShadow: "none"},
+                    Table: {headerBorderRadius: 0, rowHoverBg: "transparent"},
+                },
+                algorithm: algorithm === "defaultAlgorithm" ? theme.defaultAlgorithm : theme.darkAlgorithm,
+            }}>
             <Card style={{height: "100%", borderRadius: 0, border: "none"}}
-                  bodyStyle={{
+                  styles={{body: {
                       padding: 0,
-                      height: "100%",
                       display: "flex",
                       justifyContent: "center",
-                  }}>
+                  }}}>
                 <div style={{
-                    minWidth: 415,
+                    margin: 10,
                     maxWidth: 415,
                     display: "flex",
-                    margin: "10px 20px",
                     flexDirection: "column",
                 }}>
-                    <Title level={2}>
+                    <Title level={2} style={{fontSize: "1.6rem", textAlign: "right"}}>
                         Ant Phone Input Playground
                     </Title>
-                    <Paragraph>
+                    <div style={{display: "flex", justifyContent: "flex-end", marginBottom: 15, gap: 10}}>
+                        <Button
+                            target="_blank"
+                            type={majorVersion === 4 ? "primary" : "default"}
+                            icon={<div style={{width: 22, height: 22}}>4.x</div>}
+                            style={{pointerEvents: majorVersion === 4 ? "none" : "auto"}}
+                            href="https://playground.typesnippet.org/antd-phone-input-4.x/"
+                        />
+                        <Button
+                            target="_blank"
+                            type={majorVersion === 5 ? "primary" : "default"}
+                            icon={<div style={{width: 22, height: 22}}>5.x</div>}
+                            style={{pointerEvents: majorVersion === 5 ? "none" : "auto"}}
+                            href="https://playground.typesnippet.org/antd-phone-input-5.x/"
+                        />
+                        <Button
+                            target="_blank"
+                            type={majorVersion === 6 ? "primary" : "default"}
+                            icon={<div style={{width: 22, height: 22}}>6.x</div>}
+                            style={{pointerEvents: majorVersion === 6 ? "none" : "auto"}}
+                            href="https://playground.typesnippet.org/antd-phone-input-6.x/"
+                        />
+                        <Button
+                            target="_blank"
+                            href="https://typesnippet.org"
+                            icon={<img style={{width: 22, height: 22}} src="https://github.com/typesnippet.png"
+                                       alt="Icon"/>}
+                        />
+                        <Button
+                            target="_blank"
+                            icon={<GithubOutlined/>}
+                            href="//github.com/typesnippet/antd-phone-input"
+                        />
+                        <Button
+                            onClick={changeTheme}
+                            icon={algorithm === "defaultAlgorithm" ? <MoonOutlined/> : <SunOutlined/>}
+                        />
+                    </div>
+                    <Paragraph style={{textAlign: "justify", marginBottom: 0}}>
                         This is a playground for the Ant Phone Input component. You can change the settings and see how
                         the component behaves. Also, see the code for the component and the value it returns.
                     </Paragraph>
-                    <Divider plain>Settings</Divider>
-                    <div style={{gap: 24, display: "flex", alignItems: "center"}}>
-                        <Form.Item label="Dropdown">
-                            <Switch
-                                defaultChecked
-                                checkedChildren="enabled"
-                                unCheckedChildren="disabled"
-                                onChange={() => setDropdown(!dropdown)}
-                            />
-                        </Form.Item>
-                        <Form.Item label="Parentheses">
-                            <Switch
-                                defaultChecked
-                                checkedChildren="enabled"
-                                unCheckedChildren="disabled"
-                                onChange={() => setParentheses(!parentheses)}
-                            />
-                        </Form.Item>
-                    </div>
-                    <div style={{gap: 24, display: "flex", alignItems: "center"}}>
-                        <Form.Item label="Search">
-                            <Switch
-                                disabled={!dropdown}
-                                checkedChildren="enabled"
-                                unCheckedChildren="disabled"
-                                onChange={() => setSearch(!search)}
-                            />
-                        </Form.Item>
-                        <Form.Item label="Arrow">
-                            <Switch
-                                checkedChildren="enabled"
-                                unCheckedChildren="disabled"
-                                onChange={() => setArrow(!arrow)}
-                            />
-                        </Form.Item>
-                    </div>
-                    <div style={{gap: 24, display: "flex", alignItems: "center"}}>
-                        <Form.Item label="Theme">
-                            <Switch
-                                onChange={changeTheme}
-                                checkedChildren={<MoonOutlined/>}
-                                unCheckedChildren={<SunOutlined/>}
-                            />
-                        </Form.Item>
-                        <Form.Item label="Validation">
-                            <Switch
-                                checkedChildren="strict"
-                                unCheckedChildren="default"
-                                onChange={() => setStrict(!strict)}
-                            />
-                        </Form.Item>
-                    </div>
-                    <div style={{gap: 24, display: "flex", alignItems: "center"}}>
-                        <Form.Item label="Distinct" style={{margin: 0}}>
-                            <Switch onChange={() => setDistinct(!distinct)}/>
-                        </Form.Item>
-                        <Form.Item label="Disabled" style={{margin: 0}}>
-                            <Switch onChange={() => setDisabled(!disabled)}/>
-                        </Form.Item>
-                        <Form.Item label="SVG" style={{margin: 0}}>
-                            <Switch onChange={() => setUseSvg(!useSvg)}/>
-                        </Form.Item>
-                    </div>
-                    <Divider plain>Code</Divider>
+                    <Divider titlePlacement="start" plain>Settings</Divider>
+                    <Table
+                        size="small"
+                        pagination={false}
+                        showHeader={false}
+                        columns={[
+                            {title: "", dataIndex: "title"},
+                            {title: "", dataIndex: "state", align: "right"},
+                        ]}
+                        dataSource={[
+                            {
+                                title: "Dropdown",
+                                state: <Checkbox
+                                    checked={dropdown}
+                                    onChange={() => setDropdown(!dropdown)}
+                                />,
+                            },
+                            {
+                                title: "Parentheses",
+                                state: <Checkbox
+                                    checked={parentheses}
+                                    onChange={() => setParentheses(!parentheses)}
+                                />,
+                            },
+                            {
+                                title: "Strict Validation",
+                                state: <Checkbox
+                                    checked={strict}
+                                    onChange={() => setStrict(!strict)}
+                                />,
+                            },
+                            {
+                                title: "SVG Icons",
+                                state: <Checkbox
+                                    checked={useSvg}
+                                    onChange={() => setUseSvg(!useSvg)}
+                                />,
+                            },
+                            {
+                                title: "Disabled",
+                                state: <Checkbox
+                                    checked={disabled}
+                                    onChange={() => setDisabled(!disabled)}
+                                />,
+                            },
+                            {
+                                title: "Distinct",
+                                state: <Checkbox
+                                    checked={distinct}
+                                    onChange={() => setDistinct(!distinct)}
+                                />,
+                            },
+                            {
+                                title: "Search",
+                                state: <Checkbox
+                                    checked={search}
+                                    disabled={!dropdown}
+                                    onChange={() => setSearch(!search)}
+                                />,
+                            },
+                            {
+                                title: "Arrow",
+                                state: <Checkbox
+                                    checked={arrow}
+                                    onChange={() => setArrow(!arrow)}
+                                />,
+                            },
+                            {
+                                title: "Size",
+                                state: <Select
+                                    size="small"
+                                    value={size}
+                                    onChange={setSize}
+                                    options={[
+                                        {value: "small", label: "Small"},
+                                        {value: "middle", label: "Middle"},
+                                        {value: "large", label: "Large"},
+                                    ]}
+                                    popupMatchSelectWidth={false}
+                                />,
+                            },
+                            {
+                                title: "Localization",
+                                state: <Select
+                                    size="small"
+                                    value={lang}
+                                    onChange={setLang}
+                                    options={languages}
+                                    style={{maxWidth: 170}}
+                                    popupMatchSelectWidth={false}
+                                />,
+                            },
+                        ]}
+                        style={{
+                            border: `1px solid ${algorithm === "defaultAlgorithm" ? "#f0f0f0" : "#303030"}`,
+                            background: algorithm === "defaultAlgorithm" ? "#efefef" : "#1f1f1f",
+                            borderRadius: 4, borderBottom: "none", overflow: "hidden",
+                        }}
+                    />
+                    <Divider titlePlacement="start" plain>Code</Divider>
                     <div style={{position: "relative"}}>
                         <Button
                             type="text"
@@ -166,15 +325,16 @@ const Demo = () => {
                         <pre style={{
                             background: algorithm === "defaultAlgorithm" ? "#efefef" : "#1f1f1f",
                             color: algorithm === "defaultAlgorithm" ? "#1f1f1f" : "#efefef",
-                            padding: 10,
+                            padding: 10, marginBottom: 0, borderRadius: 4,
                         }}>
                             {code}
                         </pre>
                     </div>
-                    <Divider plain>Component</Divider>
+                    <Divider titlePlacement="start" plain>Component</Divider>
                     <Form form={form} onFinish={handleFinish}>
                         <FormItem name="phone" rules={[{validator}]}>
                             <PhoneInput
+                                size={size}
                                 useSVG={useSvg}
                                 distinct={distinct}
                                 disabled={disabled}
@@ -188,24 +348,24 @@ const Demo = () => {
                             <pre style={{
                                 background: algorithm === "defaultAlgorithm" ? "#efefef" : "#1f1f1f",
                                 color: algorithm === "defaultAlgorithm" ? "#1f1f1f" : "#efefef",
-                                padding: 10, marginBottom: 24,
+                                padding: 10, marginBottom: 24, borderRadius: 4,
                             }}>
                                 {JSON.stringify(value, null, 2)}
                             </pre>
                         )}
                         <div style={{display: "flex", gap: 24, justifyContent: "flex-start"}}>
-                            <Button htmlType="submit" type="primary">Preview Value</Button>
-                            <Button htmlType="reset">Reset Value</Button>
+                            <Button htmlType="submit" type="primary" style={{width: "50%"}}>Preview Value</Button>
+                            <Button htmlType="reset" style={{width: "50%"}}>Reset Value</Button>
                         </div>
                     </Form>
                     <Alert
                         type="info"
-                        style={{marginTop: 24}}
-                        message={<>
-                            If your application uses <b>5.x</b> version of <b>Ant Design</b>, you should use this&nbsp;
-                            <a target="_blank" rel="noreferrer"
-                               href="//playground.typesnippet.org/antd-phone-input-5.x">playground</a>&nbsp;
-                            server to test the component.
+                        style={{margin: "24px 0 14px 0"}}
+                        title={<>
+                            If your application uses a different version of <b>Ant Design</b>, you should check out
+                            the&nbsp;<a target="_blank" rel="noreferrer"
+                                         href="//github.com/typesnippet/antd-phone-input/tree/master/examples">examples</a>&nbsp;to
+                            test the component.
                         </>}
                     />
                     <div style={{marginTop: "auto"}}>
@@ -231,14 +391,6 @@ const Demo = () => {
                                 </a>
                             </div>
                         </div>
-                        <Paragraph style={{margin: "5px 0 0 0"}}>
-                            Find the&nbsp;
-                            <a href="//github.com/typesnippet/antd-phone-input/tree/master/examples/antd6.x"
-                               target="_blank" rel="noreferrer">
-                                source code
-                            </a>
-                            &nbsp;of this playground server on our GitHub repo.
-                        </Paragraph>
                     </div>
                 </div>
             </Card>
