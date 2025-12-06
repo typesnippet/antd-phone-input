@@ -1,14 +1,14 @@
 {
-  ".ant-phone-input-wrapper .ant-phone-input-select-item": {
+  ".ant-phone-input-select-item": {
     "display": "flex",
     "column-gap": "10px",
     "align-items": "center"
   },
-  ".ant-phone-input-wrapper .ant-phone-input-search-wrapper .ant-input": {
+  ".ant-phone-input-search-wrapper .ant-input": {
     "margin": "0 3px 6px 3px",
     "width": "calc(100% - 6px)"
   },
-  ".ant-phone-input-wrapper .ant-phone-input-search-wrapper .ant-select-item-empty": {
+  ".ant-phone-input-search-wrapper .ant-select-item-empty": {
     "margin": "0 6px 6px 6px"
   },
   ".ant-phone-input-wrapper .ant-space-compact": {
