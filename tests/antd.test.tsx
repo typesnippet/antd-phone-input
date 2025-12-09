@@ -12,6 +12,10 @@ Object.defineProperty(console, "warn", {
     value: jest.fn(),
 })
 
+Object.defineProperty(console, "error", {
+    value: jest.fn(),
+})
+
 Object.defineProperty(window, "matchMedia", {
     value: jest.fn().mockImplementation((): any => ({
         addListener: jest.fn(),
@@ -26,6 +30,28 @@ Object.defineProperty(window, "ResizeObserver", {
         unobserve: jest.fn(),
         disconnect: jest.fn(),
     })),
+})
+
+Object.defineProperty(global, "MessageChannel", {
+    writable: true,
+    value: class MessageChannel {
+        port1 = {
+            onmessage: null as any,
+            postMessage: (data: any) => {
+                if (this.port2.onmessage) {
+                    setTimeout(() => this.port2.onmessage({data}), 0);
+                }
+            },
+        };
+        port2 = {
+            onmessage: null as any,
+            postMessage: (data: any) => {
+                if (this.port1.onmessage) {
+                    setTimeout(() => this.port1.onmessage({data}), 0);
+                }
+            },
+        };
+    },
 })
 
 function inputHasError(parent: any = document) {
