@@ -4,15 +4,11 @@ import Button from "antd/lib/button";
 import FormItem from "antd/lib/form/FormItem";
 import ConfigProvider from "antd/lib/config-provider";
 import userEvent from "@testing-library/user-event";
-import {act, render, screen} from "@testing-library/react";
+import {render, screen, waitFor} from "@testing-library/react";
 
 import PhoneInput, {locale} from "../src";
 
 Object.defineProperty(console, "warn", {
-    value: jest.fn(),
-})
-
-Object.defineProperty(console, "error", {
     value: jest.fn(),
 })
 
@@ -70,12 +66,11 @@ describe("Checking the basic rendering and functionality", () => {
     })
 
     it("Localization support check", async () => {
+        const user = userEvent.setup();
         const {container, getByText} = render(<ConfigProvider locale={locale("frFR")}>
             <PhoneInput onlyCountries={["am"]}/>
         </ConfigProvider>);
-        await act(async () => {
-            await userEvent.click(container.querySelector(".flag") as any);
-        });
+        await user.click(container.querySelector(".flag") as any);
         assert(!!getByText(/Arménie[\S\s]+\+374/));
     })
 
@@ -103,6 +98,7 @@ describe("Checking the basic rendering and functionality", () => {
     })
 
     it("Checking the component on user input", async () => {
+        const user = userEvent.setup();
         render(<PhoneInput
             onChange={(value: any) => {
                 assert(value.isoCode === "us");
@@ -110,11 +106,14 @@ describe("Checking the basic rendering and functionality", () => {
             country="us"
         />);
         const input = screen.getByDisplayValue("+1");
-        await userEvent.type(input, "907123456789");
-        assert(input.getAttribute("value") === "+1 (907) 123 4567");
+        await user.type(input, "907123456789");
+        await waitFor(() => {
+            assert(input.getAttribute("value") === "+1 (907) 123 4567");
+        });
     })
 
     it("Using the input with FormItem", async () => {
+        const user = userEvent.setup();
         render(<Form onFinish={({phone}: any) => {
             assert(phone.countryCode === 1);
             assert(phone.areaCode === "907");
@@ -127,12 +126,15 @@ describe("Checking the basic rendering and functionality", () => {
             <Button data-testid="button" htmlType="submit">Submit</Button>
         </Form>);
         const input = screen.getByDisplayValue("+1");
-        await userEvent.type(input, "907123456789");
-        assert(input.getAttribute("value") === "+1 (907) 123 4567");
-        screen.getByTestId("button").click();
+        await user.type(input, "907123456789");
+        await waitFor(() => {
+            assert(input.getAttribute("value") === "+1 (907) 123 4567");
+        });
+        await user.click(screen.getByTestId("button"));
     })
 
     it("Checking input validation with FormItem", async () => {
+        const user = userEvent.setup();
         render(<Form initialValues={{phone: {countryCode: 1, areaCode: "702", phoneNumber: "1234567"}}}>
             <FormItem name="phone" rules={[{
                 validator: (_: any, {valid}: any) => {
@@ -144,18 +146,21 @@ describe("Checking the basic rendering and functionality", () => {
             </FormItem>
             <Button data-testid="button" htmlType="submit">Submit</Button>
         </Form>);
-        await userEvent.click(screen.getByTestId("button"));
+        await user.click(screen.getByTestId("button"));
     })
 
     it("Checking form with initial value", async () => {
+        const user = userEvent.setup();
         render(<Form initialValues={{phone: {countryCode: 1, areaCode: "702"}}}>
             <FormItem name="phone">
                 <PhoneInput/>
             </FormItem>
         </Form>);
         const input = screen.getByDisplayValue("+1 (702)");
-        await userEvent.type(input, "1234567");
-        assert(input.getAttribute("value") === "+1 (702) 123 4567");
+        await user.type(input, "1234567");
+        await waitFor(() => {
+            assert(input.getAttribute("value") === "+1 (702) 123 4567");
+        });
     })
 
     it("Using `prefixCls` with ConfigProvider", () => {
@@ -168,6 +173,7 @@ describe("Checking the basic rendering and functionality", () => {
     })
 
     it("Checking field value setters", async () => {
+        const user = userEvent.setup();
         const FormWrapper = () => {
             const [form] = Form.useForm();
 
@@ -203,24 +209,23 @@ describe("Checking the basic rendering and functionality", () => {
         const setString = screen.getByTestId("set-string");
         const setObject = screen.getByTestId("set-object");
 
-        await userEvent.click(setString);
-        await userEvent.click(submit);
-        await act(async () => {
-            await new Promise(r => setTimeout(r, 100));
-        })
-        assert(!inputHasError(form)); // valid
-        assert(input.getAttribute("value") === "+1 (234) 234 2342");
+        await user.click(setString);
+        await user.click(submit);
+        await waitFor(() => {
+            assert(!inputHasError(form));
+            assert(input.getAttribute("value") === "+1 (234) 234 2342");
+        });
 
-        await userEvent.click(setObject);
-        await userEvent.click(submit);
-        await act(async () => {
-            await new Promise(r => setTimeout(r, 100));
-        })
-        assert(!inputHasError(form)); // valid
-        assert(input.getAttribute("value") === "+48 (111) 111 111");
+        await user.click(setObject);
+        await user.click(submit);
+        await waitFor(() => {
+            assert(!inputHasError(form));
+            assert(input.getAttribute("value") === "+48 (111) 111 111");
+        });
     })
 
     it("Checking validation with casual form actions", async () => {
+        const user = userEvent.setup();
         render(<Form data-testid="form" initialValues={{phone: {countryCode: 1, areaCode: "702", phoneNumber: ""}}}>
             <FormItem name="phone" rules={[{
                 validator: (_: any, {valid}: any) => {
@@ -238,31 +243,29 @@ describe("Checking the basic rendering and functionality", () => {
         const reset = screen.getByTestId("reset");
         const submit = screen.getByTestId("submit");
 
-        assert(!inputHasError(form)); // valid
-        await userEvent.click(reset);
-        assert(!inputHasError(form)); // valid
-        await userEvent.click(submit);
-        await act(async () => {
-            await new Promise(r => setTimeout(r, 100));
-        })
-        assert(inputHasError(form)); // invalid
-        await userEvent.click(reset);
-        assert(!inputHasError(form)); // valid
-        await userEvent.click(reset);
-        assert(!inputHasError(form)); // valid
-        await userEvent.click(submit);
-        await act(async () => {
-            await new Promise(r => setTimeout(r, 100));
-        })
-        assert(inputHasError(form)); // invalid
-        await userEvent.click(submit);
-        await act(async () => {
-            await new Promise(r => setTimeout(r, 100));
-        })
-        assert(inputHasError(form)); // invalid
+        assert(!inputHasError(form));
+        await user.click(reset);
+        assert(!inputHasError(form));
+        await user.click(submit);
+        await waitFor(() => {
+            assert(inputHasError(form));
+        });
+        await user.click(reset);
+        assert(!inputHasError(form));
+        await user.click(reset);
+        assert(!inputHasError(form));
+        await user.click(submit);
+        await waitFor(() => {
+            assert(inputHasError(form));
+        });
+        await user.click(submit);
+        await waitFor(() => {
+            assert(inputHasError(form));
+        });
     })
 
     it("Checking validation with casual inputs and actions", async () => {
+        const user = userEvent.setup();
         render(<Form data-testid="form">
             <FormItem name="phone" rules={[{
                 validator: (_: any, {valid}: any) => {
@@ -281,29 +284,25 @@ describe("Checking the basic rendering and functionality", () => {
         const submit = screen.getByTestId("submit");
         const input = screen.getByDisplayValue("+1");
 
-        await userEvent.type(input, "90712345");
-        await act(async () => {
-            await new Promise(r => setTimeout(r, 100));
-        })
-        assert(inputHasError(form)); // invalid
-        await userEvent.type(input, "6");
-        await act(async () => {
-            await new Promise(r => setTimeout(r, 100));
-        })
-        assert(inputHasError(form)); // invalid
-        await userEvent.type(input, "7");
-        await act(async () => {
-            await new Promise(r => setTimeout(r, 100));
-        })
-        assert(!inputHasError(form)); // valid
-        await userEvent.click(reset);
-        assert(!inputHasError(form)); // valid
-        await userEvent.click(submit);
-        await act(async () => {
-            await new Promise(r => setTimeout(r, 100));
-        })
-        assert(inputHasError(form)); // invalid
-        await userEvent.click(reset);
-        assert(!inputHasError(form)); // valid
+        await user.type(input, "90712345");
+        await waitFor(() => {
+            assert(inputHasError(form));
+        });
+        await user.type(input, "6");
+        await waitFor(() => {
+            assert(inputHasError(form));
+        });
+        await user.type(input, "7");
+        await waitFor(() => {
+            assert(!inputHasError(form));
+        });
+        await user.click(reset);
+        assert(!inputHasError(form));
+        await user.click(submit);
+        await waitFor(() => {
+            assert(inputHasError(form));
+        });
+        await user.click(reset);
+        assert(!inputHasError(form));
     })
 })

@@ -10,7 +10,6 @@ package-lock.json
 ./styles*
 ./types*
 ./index*
-babel.config.cjs.js
 
 # Pycache
 __pycache__/
