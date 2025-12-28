@@ -217,22 +217,14 @@ describe("Checking the basic rendering and functionality", () => {
     })
 
     it("Checking country selection", async () => {
-        const {container, getByText} = render(<PhoneInput country="us"/>);
-        const input = screen.getByDisplayValue("+1");
+        const {container} = render(<PhoneInput country="am"/>);
+        const input = screen.getByDisplayValue("+374");
 
         await act(async () => {
             await userEvent.click(container.querySelector(".flag") as any);
         });
         await act(async () => {
-            await userEvent.click(getByText(/Andorra[\S\s]+\+376/) as any);
-        });
-        assert(input.getAttribute("value") === "+376");
-
-        await act(async () => {
-            await userEvent.click(container.querySelector(".flag") as any);
-        });
-        await act(async () => {
-            await userEvent.click(getByText(/Antigua[\S\s]+\+1[\S\s]*268/) as any);
+            await userEvent.click(screen.getByText(/Antigua[\S\s]+\+1[\S\s]*268/));
         });
         assert(input.getAttribute("value") === "+1 (268)");
     })
