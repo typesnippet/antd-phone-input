@@ -216,6 +216,57 @@ describe("Checking the basic rendering and functionality", () => {
         assert(input.getAttribute("value") === "+48 (111) 111 111");
     })
 
+    it("Checking country selection", async () => {
+        const {container} = render(<PhoneInput country="am"/>);
+        const input = screen.getByDisplayValue("+374");
+
+        await act(async () => {
+            await userEvent.click(container.querySelector(".flag") as any);
+        });
+        await act(async () => {
+            await userEvent.click(screen.getByText(/Antigua[\S\s]+\+1[\S\s]*268/));
+        });
+        assert(input.getAttribute("value") === "+1 (268)");
+    })
+
+    it("Checking backspace and input with country change", async () => {
+        let currentCountry: string = "";
+        render(<PhoneInput
+            value="+374"
+            onChange={(value: any) => {
+                currentCountry = value.isoCode;
+            }}
+        />);
+        const input = screen.getByDisplayValue("+374");
+
+        input.focus();
+        await userEvent.keyboard("{Backspace}");
+        await act(async () => {
+            await new Promise(r => setTimeout(r, 100));
+        });
+        assert(input.getAttribute("value") === "+37");
+
+        input.focus();
+        await userEvent.keyboard("{Backspace}");
+        await act(async () => {
+            await new Promise(r => setTimeout(r, 100));
+        });
+        assert(input.getAttribute("value") === "+3");
+
+        await userEvent.type(input, "8");
+        await act(async () => {
+            await new Promise(r => setTimeout(r, 100));
+        });
+        assert(input.getAttribute("value") === "+38");
+
+        await userEvent.type(input, "0");
+        await act(async () => {
+            await new Promise(r => setTimeout(r, 100));
+        });
+        assert(input.getAttribute("value") === "+380");
+        assert(currentCountry === "ua");
+    })
+
     it("Checking validation with casual form actions", async () => {
         render(<Form data-testid="form" initialValues={{phone: {countryCode: 1, areaCode: "702", phoneNumber: ""}}}>
             <FormItem name="phone" rules={[{

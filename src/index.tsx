@@ -72,6 +72,7 @@ const PhoneInput = forwardRef(({
     const searchRef = useRef<any>(null);
     const selectedRef = useRef<boolean>(false);
     const initiatedRef = useRef<boolean>(false);
+    const lastInternalValueRef = useRef<any>(null);
     const [query, setQuery] = useState<string>("");
     const [minWidth, setMinWidth] = useState<number>(0);
     const [countryCode, setCountryCode] = useState<string>(country);
@@ -129,9 +130,10 @@ const PhoneInput = forwardRef(({
 
     const phoneValue = useWatch(namePath, formInstance);
 
-    const setFieldValue = useCallback((value: PhoneNumber) => {
+    const setFieldValue = useCallback((value: PhoneNumber, forcePattern?: string) => {
+        setValue(getFormattedNumber(getRawValue(value), forcePattern || pattern));
         if (formInstance) formInstance.setFieldValue(namePath, value);
-        setValue(getFormattedNumber(getRawValue(value), pattern));
+        lastInternalValueRef.current = value;
     }, [formInstance, namePath, pattern, setValue])
 
     const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
@@ -171,6 +173,23 @@ const PhoneInput = forwardRef(({
     }, [forwardedRef])
 
     useEffect(() => {
+        if (formInstance) {
+            const currentFormValue = formInstance.getFieldValue(namePath);
+            const currentFormRawValue = getRawValue(currentFormValue);
+            const currentLocalRawValue = getRawValue(value);
+
+            if (lastInternalValueRef.current) {
+                if (JSON.stringify(currentFormValue) === JSON.stringify(lastInternalValueRef.current)) {
+                    const phoneValueRaw = getRawValue(phoneValue);
+                    if (phoneValueRaw === currentFormRawValue || phoneValueRaw === currentLocalRawValue) {
+                        lastInternalValueRef.current = null;
+                    }
+                    return;
+                }
+            }
+
+            if (currentFormRawValue === currentLocalRawValue) return;
+        }
         const rawValue = getRawValue(phoneValue);
         const metadata = getMetadata(rawValue);
         // Skip if value has not been updated by `setFieldValue`.
@@ -179,10 +198,9 @@ const PhoneInput = forwardRef(({
         if (disableParentheses) pattern = pattern.replace(/[()]/g, "");
         const formattedNumber = getFormattedNumber(rawValue, pattern);
         const phoneMetadata = parsePhoneNumber(formattedNumber);
-        setFieldValue({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
+        setFieldValue({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)}, pattern);
         setCountryCode(metadata?.[0] as string);
-        setValue(formattedNumber);
-    }, [phoneValue, value, disableParentheses, setFieldValue, setValue])
+    }, [phoneValue, value, disableParentheses, setFieldValue, formInstance, namePath])
 
     useEffect(() => {
         if (initiatedRef.current) return;
