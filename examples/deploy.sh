@@ -4,19 +4,19 @@ git restore .
 git pull
 
 rm -r node_modules package-lock.json
-npm i && npm run build && npm pack
+nvm use 20 && npm i && npm run build && npm pack
 
 cd ~/antd-phone-input/examples/antd4.x
 rm -r node_modules package-lock.json
-npm install --legacy-peer-deps && npm run build
+nvm use 14 && npm install && npm run build
 
 cd ~/antd-phone-input/examples/antd5.x
 rm -r node_modules package-lock.json
-npm install && npm run build
+nvm use 20 && npm install && npm run build
 
 cd ~/antd-phone-input/examples/antd6.x
 rm -r node_modules package-lock.json
-npm install && npm run build
+nvm use 20 && npm install && npm run build
 
 sudo rm -r /var/www/playground/antd-phone-input/*
 sudo mkdir /var/www/playground/antd-phone-input/antd4.x
