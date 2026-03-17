@@ -81,8 +81,8 @@ describe("Checking locale loading", () => {
 
     it("esUS requires antd >= 6.3.2, throws on older versions", async () => {
         const [major, minor, patch] = antdVersion.split(".").map(Number);
-        if (major > 6 || (major === 6 && minor > 3) || (major === 6 && minor === 3 && patch >= 2)) {
-            const {default: esUS} = await import("antd/es/locale/es_US");
+        if (major === 6 && minor === 3 && patch >= 2) {
+            const {default: esUS} = await import("antd/es/locale/es_US" as any);
             const {container, getByText} = render(<ConfigProvider locale={esUS}>
                 <PhoneInput onlyCountries={["am"]}/>
             </ConfigProvider>);
