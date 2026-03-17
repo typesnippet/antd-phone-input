@@ -1,6 +1,14 @@
 import {useCallback, useMemo, useState} from "react";
 import copy from "copy-to-clipboard";
 import version from "antd/es/version";
+import enUS from "antd/es/locale/en_US";
+import arEG from "antd/es/locale/ar_EG";
+import esES from "antd/es/locale/es_ES";
+import deDE from "antd/es/locale/de_DE";
+import frFR from "antd/es/locale/fr_FR";
+import jaJP from "antd/es/locale/ja_JP";
+import zhCN from "antd/es/locale/zh_CN";
+import PhoneInput from "antd-phone-input";
 import Form from "antd/es/form";
 import Alert from "antd/es/alert";
 import Button from "antd/es/button";
@@ -12,7 +20,6 @@ import {useForm} from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
 import Title from "antd/es/typography/Title";
 import Checkbox from "antd/es/checkbox/Checkbox";
-import PhoneInput, {locale} from "antd-phone-input";
 import Paragraph from "antd/es/typography/Paragraph";
 import ConfigProvider from "antd/es/config-provider";
 import SunOutlined from "@ant-design/icons/SunOutlined";
@@ -22,73 +29,13 @@ import CheckOutlined from "@ant-design/icons/CheckOutlined";
 import GithubOutlined from "@ant-design/icons/GithubOutlined";
 
 const languages = [
-    {label: "Arabic", value: "arEG"},
-    {label: "Azerbaijani", value: "azAZ"},
-    {label: "Bulgarian", value: "bgBG"},
-    {label: "Bangla (Bangladesh)", value: "bnBD"},
-    {label: "Belarusian", value: "byBY"},
-    {label: "Catalan", value: "caES"},
-    {label: "Czech", value: "csCZ"},
-    {label: "Danish", value: "daDK"},
-    {label: "German", value: "deDE"},
-    {label: "Greek", value: "elGR"},
-    {label: "English (United Kingdom)", value: "enGB"},
     {label: "English", value: "enUS"},
+    {label: "Arabic", value: "arEG"},
     {label: "Spanish", value: "esES"},
-    {label: "Estonian", value: "etEE"},
-    {label: "Persian", value: "faIR"},
-    {label: "Finnish", value: "fiFI"},
-    {label: "French (Belgium)", value: "frBE"},
-    {label: "French (Canada)", value: "frCA"},
-    {label: "French (France)", value: "frFR"},
-    {label: "Irish (Ireland)", value: "gaIE"},
-    {label: "Galician (Spain)", value: "glES"},
-    {label: "Hebrew", value: "heIL"},
-    {label: "Hindi", value: "hiIN"},
-    {label: "Croatian", value: "hrHR"},
-    {label: "Hungarian", value: "huHU"},
-    {label: "Armenian", value: "hyAM"},
-    {label: "Indonesian", value: "idID"},
-    {label: "Italian", value: "itIT"},
-    {label: "Icelandic", value: "isIS"},
+    {label: "German", value: "deDE"},
+    {label: "French", value: "frFR"},
     {label: "Japanese", value: "jaJP"},
-    {label: "Georgian", value: "kaGE"},
-    {label: "Kurdish (Kurmanji)", value: "kmrIQ"},
-    {label: "Kannada", value: "knIN"},
-    {label: "Kazakh", value: "kkKZ"},
-    {label: "Khmer", value: "kmKH"},
-    {label: "Korean", value: "koKR"},
-    {label: "Lithuanian", value: "ltLT"},
-    {label: "Latvian", value: "lvLV"},
-    {label: "Macedonian", value: "mkMK"},
-    {label: "Malayalam (India)", value: "mlIN"},
-    {label: "Mongolian", value: "mnMN"},
-    {label: "Malay (Malaysia)", value: "msMY"},
-    {label: "Norwegian", value: "nbNO"},
-    {label: "Nepal", value: "neNP"},
-    {label: "Dutch (Belgium)", value: "nlBE"},
-    {label: "Dutch", value: "nlNL"},
-    {label: "Polish", value: "plPL"},
-    {label: "Portuguese (Brazil)", value: "ptBR"},
-    {label: "Portuguese", value: "ptPT"},
-    {label: "Romanian", value: "roRO"},
-    {label: "Russian", value: "ruRU"},
-    {label: "Sinhalese / Sinhala", value: "siLK"},
-    {label: "Slovak", value: "skSK"},
-    {label: "Serbian", value: "srRS"},
-    {label: "Slovenian", value: "slSI"},
-    {label: "Swedish", value: "svSE"},
-    {label: "Tamil", value: "taIN"},
-    {label: "Thai", value: "thTH"},
-    {label: "Turkish", value: "trTR"},
-    {label: "Turkmen", value: "tkTK"},
-    {label: "Urdu (Pakistan)", value: "urPK"},
-    {label: "Ukrainian", value: "ukUA"},
-    {label: "Uzbek", value: "uzUZ"},
-    {label: "Vietnamese", value: "viVN"},
-    {label: "Chinese (Simplified)", value: "zhCN"},
-    {label: "Chinese (Traditional)", value: "zhHK"},
-    {label: "Chinese (Traditional)", value: "zhTW"}
+    {label: "Chinese", value: "zhCN"},
 ]
 
 // eslint-disable-next-line
@@ -143,7 +90,7 @@ const Demo = () => {
     const handleFinish = ({phone}: any) => setValue(phone);
 
     return (
-        <ConfigProvider locale={(lang !== "enUS" ? locale(lang) : undefined) as any}>
+        <ConfigProvider locale={({enUS, arEG, esES, deDE, frFR, jaJP, zhCN} as any)[lang]}>
             <Card style={{height: "100%", borderRadius: 0, border: "none"}}
                   bodyStyle={{
                       padding: 0,
