@@ -1,101 +1,1 @@
-{
-  "version": "0.3.19",
-  "name": "antd-phone-input",
-  "description": "Advanced, highly customizable phone input component for Ant Design.",
-  "keywords": [
-    "ant",
-    "antd",
-    "react",
-    "phone",
-    "input",
-    "number",
-    "design",
-    "advanced",
-    "component",
-    "ant-design",
-    "customizable",
-    "phone-number"
-  ],
-  "homepage": "https://github.com/typesnippet/antd-phone-input",
-  "bugs": {
-    "url": "https://github.com/typesnippet/antd-phone-input/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/typesnippet/antd-phone-input"
-  },
-  "exports": {
-    ".": {
-      "import": "./index.js",
-      "require": "./index.cjs.js",
-      "types": {
-        "default": "./index.d.ts"
-      }
-    },
-    "./types": {
-      "import": "./types.js",
-      "require": "./types.cjs.js",
-      "types": {
-        "default": "./types.d.ts"
-      }
-    },
-    "./styles": {
-      "import": "./styles.js",
-      "require": "./styles.cjs.js",
-      "types": {
-        "default": "./styles.d.ts"
-      }
-    },
-    "./locale": {
-      "import": "./locale.js",
-      "require": "./locale.cjs.js",
-      "types": {
-        "default": "./locale.d.ts"
-      }
-    },
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "index*",
-    "types*",
-    "styles*",
-    "locale*",
-    "LICENSE",
-    "resources",
-    "README.md"
-  ],
-  "scripts": {
-    "rename": "bash -c 'for file in *.js; do mv $file \"${file%.js}.$0.js\"; done'",
-    "build": "tsc --module commonjs && npm run rename -- cjs && tsc --declaration",
-    "prebuild": "rm -r resources index* locale* types* styles* || true",
-    "postpack": "tsx scripts/prepare-package.ts",
-    "test": "jest --config jestconfig.json",
-    "postbuild": "cp -r src/resources ."
-  },
-  "license": "MIT",
-  "peerDependencies": {
-    "antd": ">=4",
-    "react": ">=16"
-  },
-  "dependencies": {
-    "react-phone-hooks": "^0.1.18"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.26.0",
-    "@babel/preset-env": "^7.26.0",
-    "@testing-library/react": "^14.0.0",
-    "@testing-library/user-event": "^14.5.1",
-    "@types/jest": "^29.5.7",
-    "@types/react": "^18.2.34",
-    "antd": "*",
-    "babel-jest": "^29.7.0",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "ts-jest": "^29.1.1",
-    "tslib": "^2.6.2",
-    "tsx": "^3.12.10",
-    "typescript": "^5.2.2"
-  }
-}
+{  "version": "0.3.20",  "name": "antd-phone-input",  "description": "Advanced, highly customizable phone input component for Ant Design.",  "keywords": [    "ant",    "antd",    "react",    "phone",    "input",    "number",    "design",    "advanced",    "component",    "ant-design",    "customizable",    "phone-number"  ],  "homepage": "https://github.com/typesnippet/antd-phone-input",  "bugs": {    "url": "https://github.com/typesnippet/antd-phone-input/issues"  },  "repository": {    "type": "git",    "url": "https://github.com/typesnippet/antd-phone-input"  },  "exports": {    ".": {      "import": "./index.js",      "require": "./index.cjs.js",      "types": {        "default": "./index.d.ts"      }    },    "./types": {      "import": "./types.js",      "require": "./types.cjs.js",      "types": {        "default": "./types.d.ts"      }    },    "./styles": {      "import": "./styles.js",      "require": "./styles.cjs.js",      "types": {        "default": "./styles.d.ts"      }    },    "./locale": {      "import": "./locale.js",      "require": "./locale.cjs.js",      "types": {        "default": "./locale.d.ts"      }    },    "./package.json": "./package.json"  },  "files": [    "index*",    "types*",    "styles*",    "locale*",    "LICENSE",    "resources",    "README.md"  ],  "scripts": {    "rename": "bash -c 'for file in *.js; do mv $file \"${file%.js}.$0.js\"; done'",    "build": "tsc --module commonjs && npm run rename -- cjs && tsc --declaration",    "prebuild": "rm -r resources index* locale* types* styles* || true",    "postpack": "tsx scripts/prepare-package.ts",    "test": "jest --config jestconfig.json",    "postbuild": "cp -r src/resources ."  },  "license": "MIT",  "peerDependencies": {    "antd": ">=4",    "react": ">=16"  },  "dependencies": {    "react-phone-hooks": "^0.1.22"  },  "devDependencies": {    "@babel/core": "^7.26.0",    "@babel/preset-env": "^7.26.0",    "@testing-library/react": "^14.0.0",    "@testing-library/user-event": "^14.5.1",    "@types/jest": "^29.5.7",    "@types/react": "^18.2.34",    "antd": "*",    "babel-jest": "^29.7.0",    "jest": "^29.7.0",    "jest-environment-jsdom": "^29.7.0",    "react": "^18.0.0",    "react-dom": "^18.0.0",    "ts-jest": "^29.1.1",    "tslib": "^2.6.2",    "tsx": "^3.12.10",    "typescript": "^5.2.2"  }}

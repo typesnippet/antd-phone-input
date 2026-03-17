@@ -34,9 +34,10 @@ import {
     usePhone,
 } from "react-phone-hooks";
 
-import locale from "./locale";
 import {injectMergedStyles} from "./styles";
+import locale, {Locale, phoneLocale} from "./locale";
 import {PhoneInputProps, PhoneNumber} from "./types";
+import localization from "./resources/localization.json";
 
 const [major, minor, _] = version.split(".").map(Number);
 const isV5x = major === 5;
@@ -77,15 +78,19 @@ const PhoneInput = forwardRef(({
     const [minWidth, setMinWidth] = useState<number>(0);
     const [countryCode, setCountryCode] = useState<string>(country);
 
+    const prefixCls = getPrefixCls();
+    injectMergedStyles(prefixCls);
+
     const {
         locale: localeIdentifier,
         searchNotFound = defaultSearchNotFound,
         searchPlaceholder = defaultSearchPlaceholder,
         countries = new Proxy({}, ({get: (_: any, prop: any) => prop})),
-    } = (locale as any).PhoneInput || {};
-
-    const prefixCls = getPrefixCls();
-    injectMergedStyles(prefixCls);
+    } = useMemo(() => {
+        const key = (localization as any)[(locale as any)?.locale || "en"];
+        const obj = (phoneLocale as any)[key] || phoneLocale.enUS;
+        return {locale: key || "enUS", ...obj};
+    }, [locale]);
 
     const {
         value,
@@ -320,4 +325,4 @@ const PhoneInput = forwardRef(({
 })
 
 export default PhoneInput;
-export {PhoneInputProps, PhoneNumber, locale};
+export {PhoneInputProps, PhoneNumber, Locale, locale};
