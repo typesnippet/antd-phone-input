@@ -6,7 +6,7 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "antd": "^6.0.0",
-    "antd-phone-input": "^0.3.16",
+    "antd-phone-input": "^0.3.20",
     "copy-to-clipboard": "^3.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
