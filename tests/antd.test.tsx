@@ -55,6 +55,45 @@ function inputHasError(parent: any = document) {
         && parent.querySelector(".ant-select").className.includes("ant-select-status-error");
 }
 
+const antdVersion: string = require("antd/package.json").version;
+
+describe("Checking locale loading", () => {
+    it("Localization support check", async () => {
+        const {default: frFR} = await import("antd/es/locale/fr_FR");
+        const {container, getByText} = render(<ConfigProvider locale={frFR}>
+            <PhoneInput onlyCountries={["am"]}/>
+        </ConfigProvider>);
+        await act(async () => {
+            await userEvent.click(container.querySelector(".flag") as any);
+        });
+        assert(!!getByText(/Arménie[\S\s]+\+374/));
+    })
+
+    it("Deprecated `locale` function shouldn't affect", async () => {
+        const {container, getByText} = render(<ConfigProvider locale={locale("frFR")}>
+            <PhoneInput onlyCountries={["am"]}/>
+        </ConfigProvider>);
+        await act(async () => {
+            await userEvent.click(container.querySelector(".flag") as any);
+        });
+        assert(!!getByText(/Armenia[\S\s]+\+374/));
+    })
+
+    it("esUS requires antd >= 6.3.2, throws on older versions", async () => {
+        const [major, minor, patch] = antdVersion.split(".").map(Number);
+        if (major > 6 || (major === 6 && minor > 3) || (major === 6 && minor === 3 && patch >= 2)) {
+            const {default: esUS} = await import("antd/es/locale/es_US");
+            const {container, getByText} = render(<ConfigProvider locale={esUS}>
+                <PhoneInput onlyCountries={["am"]}/>
+            </ConfigProvider>);
+            await act(async () => {
+                await userEvent.click(container.querySelector(".flag") as any);
+            });
+            assert(!!getByText(/Armenia[\S\s]+\+374/));
+        }
+    })
+})
+
 describe("Checking the basic rendering and functionality", () => {
     it("Rendering without crashing", () => {
         render(<PhoneInput/>);
@@ -63,16 +102,6 @@ describe("Checking the basic rendering and functionality", () => {
     it("Rendering with strict raw value", () => {
         render(<PhoneInput value="17021234567"/>);
         assert(screen.getByDisplayValue("+1 (702) 123 4567"));
-    })
-
-    it("Localization support check", async () => {
-        const {container, getByText} = render(<ConfigProvider locale={locale("frFR")}>
-            <PhoneInput onlyCountries={["am"]}/>
-        </ConfigProvider>);
-        await act(async () => {
-            await userEvent.click(container.querySelector(".flag") as any);
-        });
-        assert(!!getByText(/Arménie[\S\s]+\+374/));
     })
 
     it("Rendering with an initial value", () => {
