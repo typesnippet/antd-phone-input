@@ -1,0 +1,51 @@
+name: locales
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install dependencies
+        run: yarn && yarn install
+
+      - name: Setup Python
+        uses: actions/setup-python@v3
+
+      - name: Check locales
+        continue-on-error: true
+        run: python scripts/check-locales
+
+      - name: Compare models metadata
+        id: compare
+        run: |
+          git diff --exit-code src\resources\localization.json || echo "::set-output name=differs::true"
+
+      - name: Create Pull Request
+        if: steps.compare.outputs.differs == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          base: master
+          token: ${{ secrets.GH_TOKEN }}
+          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          branch: update-locales-metadata
+          branch-suffix: short-commit-hash
+          title: Update the locales metadata
+          commit-message: Update the locales metadata
+          body: This PR updates the locales metadata to keep the repository up-to-date with the upstream locales.
