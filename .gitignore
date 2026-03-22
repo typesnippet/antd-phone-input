@@ -1,6 +1,7 @@
 # Node artifact files
 node_modules/
 package-lock.json
+yarn.lock
 
 # JetBrains IDE
 .idea/
