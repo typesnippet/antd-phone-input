@@ -54,6 +54,7 @@ const PhoneInput = forwardRef(({
                                    enableSearch = false,
                                    disableDropdown = false,
                                    disableParentheses = false,
+                                   disableDefaultCountry = false,
                                    onlyCountries = [],
                                    excludeCountries = [],
                                    preferredCountries = [],
@@ -77,6 +78,8 @@ const PhoneInput = forwardRef(({
     const [query, setQuery] = useState<string>("");
     const [minWidth, setMinWidth] = useState<number>(0);
     const [countryCode, setCountryCode] = useState<string>(country);
+    // With `disableDefaultCountry`, an empty value shows an empty input and no country instead of a default one.
+    const [isEmpty, setIsEmpty] = useState<boolean>(() => disableDefaultCountry && !getRawValue(initialValue));
 
     const prefixCls = getPrefixCls();
     injectMergedStyles(prefixCls);
@@ -151,10 +154,11 @@ const PhoneInput = forwardRef(({
         selectedRef.current = false;
         const phoneMetadata = parsePhoneNumber(formattedNumber, countriesList);
         setCountryCode(phoneMetadata.isoCode as any);
+        setIsEmpty(disableDefaultCountry && !getRawValue(formattedNumber));
         setValue(formattedNumber);
         setQuery("");
         handleChange({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)}, event);
-    }, [countriesList, handleChange, pattern, setValue])
+    }, [countriesList, disableDefaultCountry, handleChange, pattern, setValue])
 
     const onInput = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         onInputMaskHandler(event);
@@ -205,11 +209,18 @@ const PhoneInput = forwardRef(({
         const phoneMetadata = parsePhoneNumber(formattedNumber);
         setFieldValue({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)}, pattern);
         setCountryCode(metadata?.[0] as string);
+        setIsEmpty(false);
     }, [phoneValue, value, disableParentheses, setFieldValue, formInstance, namePath])
 
     useEffect(() => {
         if (initiatedRef.current) return;
         initiatedRef.current = true;
+        if (isEmpty) {
+            // Keep the input and the form field empty instead of prefilling the default country code.
+            setValue("");
+            handleMount({countryCode: null, areaCode: null, phoneNumber: null, valid: () => false});
+            return;
+        }
         let initialValue = getRawValue(value);
         if (!initialValue.startsWith(metadata?.[2] as string)) {
             initialValue = metadata?.[2] as string;
@@ -219,7 +230,7 @@ const PhoneInput = forwardRef(({
         onMount({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
         setCountryCode(phoneMetadata.isoCode as any);
         setValue(formattedNumber);
-    }, [countriesList, metadata, onMount, pattern, setValue, value])
+    }, [countriesList, handleMount, isEmpty, metadata, onMount, pattern, setValue, value])
 
     const suffixIcon = useMemo(() => {
         return enableArrow && (
@@ -233,10 +244,23 @@ const PhoneInput = forwardRef(({
         );
     }, [enableArrow])
 
+    const placeholder = useMemo(() => (
+        <div style={{display: "flex", alignItems: "center"}}>
+            <svg className={`${prefixCls}-phone-input-placeholder`} viewBox="0 0 16 16" focusable="false"
+                 width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.2">
+                <circle cx="8" cy="8" r="6.5"/>
+                <ellipse cx="8" cy="8" rx="2.75" ry="6.5"/>
+                <path d="M1.5 8h13"/>
+            </svg>
+            {suffixIcon}
+        </div>
+    ), [prefixCls, suffixIcon])
+
     const countriesSelect = useMemo(() => (
         <Select
             suffixIcon={null}
-            value={selectValue}
+            value={isEmpty ? undefined : selectValue}
+            placeholder={placeholder}
             disabled={disabled}
             open={disableDropdown ? false : undefined}
             onSelect={(selectedOption, {key}) => {
@@ -246,6 +270,7 @@ const PhoneInput = forwardRef(({
                 const phoneMetadata = parsePhoneNumber(formattedNumber, countriesList, selectedCountryCode);
                 setFieldValue({...phoneMetadata, valid: (strict: boolean) => checkValidity(phoneMetadata, strict)});
                 setCountryCode(selectedCountryCode);
+                setIsEmpty(false);
                 setValue(formattedNumber);
                 setQuery("");
                 selectedRef.current = true;
@@ -302,7 +327,7 @@ const PhoneInput = forwardRef(({
                 )
             })}
         </Select>
-    ), [selectValue, suffixIcon, countryCode, query, disabled, disableParentheses, disableDropdown, onDropdownVisibleChange, minWidth, searchNotFound, countries, countriesList, setFieldValue, setValue, prefixCls, enableSearch, enableArrow, searchPlaceholder, useSVG])
+    ), [isEmpty, placeholder, selectValue, suffixIcon, countryCode, query, disabled, disableParentheses, disableDropdown, onDropdownVisibleChange, minWidth, searchNotFound, countries, countriesList, setFieldValue, setValue, prefixCls, enableSearch, enableArrow, searchPlaceholder, useSVG])
 
     return (
         <div className={`${prefixCls}-phone-input-wrapper`}
@@ -312,7 +337,7 @@ const PhoneInput = forwardRef(({
                 <Input
                     ref={ref}
                     inputMode="tel"
-                    value={value}
+                    value={isEmpty ? "" : value}
                     onInput={onInput}
                     onChange={onChange}
                     onKeyDown={onKeyDown}

@@ -383,3 +383,137 @@ describe("Checking the basic rendering and functionality", () => {
         assert(!inputHasError(form)); // valid
     })
 })
+
+describe("Checking the `disableDefaultCountry` property", () => {
+    const placeholderOf = (container: any) => container.querySelector(".ant-phone-input-placeholder");
+
+    const submitForm = async () => {
+        await act(async () => {
+            screen.getByTestId("button").click();
+            await new Promise(r => setTimeout(r, 100));
+        });
+    }
+
+    it("Prefills the default country code without the property", async () => {
+        let submitted: any = null;
+        const {container} = render(<Form onFinish={(values: any) => submitted = values}>
+            <FormItem name="phone">
+                <PhoneInput country="fr" onlyCountries={["fr", "br"]}/>
+            </FormItem>
+            <Button data-testid="button" htmlType="submit">Submit</Button>
+        </Form>);
+        assert(screen.getByDisplayValue("+33"));
+        assert(container.querySelector(".flag.fr"));
+        assert(!placeholderOf(container));
+        await submitForm();
+        assert(submitted.phone.countryCode === 33);
+        assert(submitted.phone.isoCode === "fr");
+    })
+
+    it("Keeps the input and the form field empty", async () => {
+        let submitted: any = null;
+        const onMount = jest.fn();
+        const {container} = render(<Form onFinish={(values: any) => submitted = values}>
+            <FormItem name="phone">
+                <PhoneInput country="fr" onlyCountries={["fr", "br"]} onMount={onMount} disableDefaultCountry/>
+            </FormItem>
+            <Button data-testid="button" htmlType="submit">Submit</Button>
+        </Form>);
+        const input = container.querySelector(".ant-input") as HTMLInputElement;
+        assert(input.value === "");
+        assert(!container.querySelector(".flag"));
+        assert(placeholderOf(container));
+        assert(onMount.mock.calls.length === 1);
+        const [mounted] = onMount.mock.calls[0];
+        assert(mounted.countryCode === null && mounted.areaCode === null && mounted.phoneNumber === null);
+        assert(mounted.valid() === false);
+        await submitForm();
+        assert(submitted.phone === undefined);
+    })
+
+    it("Detects the country from the typed number", async () => {
+        let submitted: any = null;
+        const {container} = render(<Form onFinish={(values: any) => submitted = values}>
+            <FormItem name="phone">
+                <PhoneInput country="fr" onlyCountries={["fr", "br"]} disableDefaultCountry/>
+            </FormItem>
+            <Button data-testid="button" htmlType="submit">Submit</Button>
+        </Form>);
+        const input = container.querySelector(".ant-input") as HTMLInputElement;
+        await userEvent.type(input, "5511912345678");
+        assert(input.value === "+55 (11) 91234 5678");
+        assert(container.querySelector(".flag.br"));
+        assert(!placeholderOf(container));
+        await submitForm();
+        assert(submitted.phone.countryCode === 55);
+        assert(submitted.phone.areaCode === "11");
+        assert(submitted.phone.phoneNumber === "912345678");
+        assert(submitted.phone.isoCode === "br");
+        assert(submitted.phone.valid());
+    })
+
+    it("Prefills the selected country code", async () => {
+        const {container} = render(<PhoneInput country="fr" onlyCountries={["fr", "br"]} disableDefaultCountry/>);
+        const input = container.querySelector(".ant-input") as HTMLInputElement;
+        // The placeholder has `pointer-events: none`, so clicks reach the select behind it.
+        let target = placeholderOf(container);
+        for (let node = target; node && node !== container; node = node.parentElement) {
+            if (getComputedStyle(node).pointerEvents === "none") target = node.parentElement;
+        }
+        await act(async () => {
+            await userEvent.click(target);
+        });
+        await act(async () => {
+            await userEvent.click(screen.getByText(/Brazil/));
+        });
+        assert(input.value === "+55");
+        assert(container.querySelector(".flag.br"));
+        assert(!placeholderOf(container));
+    })
+
+    it("Keeps a given initial value as is", () => {
+        const {container} = render(<Form initialValues={{phone: {countryCode: 1, areaCode: "702", phoneNumber: "1234567"}}}>
+            <FormItem name="phone">
+                <PhoneInput disableDefaultCountry/>
+            </FormItem>
+        </Form>);
+        assert(screen.getByDisplayValue("+1 (702) 123 4567"));
+        assert(container.querySelector(".flag.us"));
+        assert(!placeholderOf(container));
+    })
+
+    it("Shows a value that is set after mounting", async () => {
+        const FormWrapper = () => {
+            const [form] = Form.useForm();
+            return <Form form={form}>
+                <FormItem name="phone">
+                    <PhoneInput disableDefaultCountry/>
+                </FormItem>
+                <Button data-testid="button" onClick={() => {
+                    form.setFieldValue("phone", {countryCode: 33, areaCode: "6", phoneNumber: "12345678"});
+                }}/>
+            </Form>
+        }
+        const {container} = render(<FormWrapper/>);
+        assert(placeholderOf(container));
+        await act(async () => {
+            await userEvent.click(screen.getByTestId("button"));
+            await new Promise(r => setTimeout(r, 100));
+        });
+        assert(screen.getByDisplayValue("+33 (6) 12 34 56 78"));
+        assert(container.querySelector(".flag.fr"));
+        assert(!placeholderOf(container));
+    })
+
+    it("Shows the placeholder again after clearing the input", async () => {
+        const {container} = render(<PhoneInput country="fr" onlyCountries={["fr", "br"]} disableDefaultCountry/>);
+        const input = container.querySelector(".ant-input") as HTMLInputElement;
+        const inputValue = () => input.value;
+        await userEvent.type(input, "55");
+        assert(inputValue() === "+55");
+        assert(!placeholderOf(container));
+        await userEvent.clear(input);
+        assert(inputValue() === "");
+        assert(placeholderOf(container));
+    })
+})
