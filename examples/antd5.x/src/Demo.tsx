@@ -60,10 +60,11 @@ const Demo = () => {
     const [distinct, setDistinct] = useState(false);
     const [disabled, setDisabled] = useState(false);
     const [parentheses, setParentheses] = useState(true);
+    const [defaultCountry, setDefaultCountry] = useState(true);
     const [algorithm, setAlgorithm] = useState(defaultMode);
 
-    const validator = useCallback((_: any, {valid}: any) => {
-        if (valid(strict)) return Promise.resolve();
+    const validator = useCallback((_: any, value: any) => {
+        if (!value || value.valid(strict)) return Promise.resolve();
         return Promise.reject("Invalid phone number");
     }, [strict])
 
@@ -76,10 +77,11 @@ const Demo = () => {
         if (search && dropdown) code += "    enableSearch\n";
         if (!dropdown) code += "    disableDropdown\n";
         if (!parentheses) code += "    disableParentheses\n";
+        if (!defaultCountry) code += "    disableDefaultCountry\n";
         if (code === "<PhoneInput\n") code = "<PhoneInput />";
         else code += "/>";
         return code;
-    }, [distinct, disabled, useSvg, arrow, search, dropdown, parentheses])
+    }, [distinct, disabled, useSvg, arrow, search, dropdown, parentheses, defaultCountry])
 
     const changeTheme = () => {
         if (algorithm === "defaultAlgorithm") {
@@ -183,6 +185,18 @@ const Demo = () => {
                                 />,
                             },
                             {
+                                title: "Default Country",
+                                state: <Checkbox
+                                    checked={defaultCountry}
+                                    onChange={() => {
+                                        // The option applies to an empty value on mount, so start over
+                                        form.resetFields();
+                                        setValue(null);
+                                        setDefaultCountry(!defaultCountry);
+                                    }}
+                                />,
+                            },
+                            {
                                 title: "Strict Validation",
                                 state: <Checkbox
                                     checked={strict}
@@ -282,6 +296,7 @@ const Demo = () => {
                     <Form form={form} onFinish={handleFinish}>
                         <FormItem name="phone" rules={[{validator}]}>
                             <PhoneInput
+                                key={String(defaultCountry)}
                                 size={size}
                                 useSVG={useSvg}
                                 distinct={distinct}
@@ -290,6 +305,7 @@ const Demo = () => {
                                 enableSearch={search}
                                 disableDropdown={!dropdown}
                                 disableParentheses={!parentheses}
+                                disableDefaultCountry={!defaultCountry}
                             />
                         </FormItem>
                         {value && (
