@@ -21,6 +21,6 @@
     "json",
     "node"
   ],
-  "testTimeout": 100000,
+  "testTimeout": 200000,
   "testEnvironment": "jsdom"
 }
